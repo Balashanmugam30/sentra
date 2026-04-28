@@ -1,0 +1,404 @@
+{
+  "store_version": "phase29a-launch-2026-04-26",
+  "design_audits": [
+    {
+      "audit_id": "DA-TYPO",
+      "tenant_id": "TEN-GRAND-MERIDIAN",
+      "area": "Typography",
+      "score": 96,
+      "status": "elite",
+      "checks": [
+        "Clear H1/H2 rhythm",
+        "Metric readability",
+        "Compact label hierarchy"
+      ],
+      "finding": "Executive and command pages now share a consistent premium type scale.",
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "audit_id": "DA-CARDS",
+      "tenant_id": "TEN-BALA-HOSP",
+      "area": "Cards + Buttons",
+      "score": 94,
+      "status": "strong",
+      "checks": [
+        "Glass cards",
+        "Action hierarchy",
+        "Hover/focus states"
+      ],
+      "finding": "Critical cards and CTAs use consistent rounded glass treatment and high-contrast actions.",
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "audit_id": "DA-LAYOUT",
+      "tenant_id": "TEN-NOVA-MALL",
+      "area": "Layout Rhythm",
+      "score": 93,
+      "status": "strong",
+      "checks": [
+        "Grid alignment",
+        "Section spacing",
+        "Responsive breakpoints"
+      ],
+      "finding": "War-room pages keep dense data readable without collapsing mobile/tablet layouts.",
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "audit_id": "DA-A11Y",
+      "tenant_id": "TEN-SKYLINE",
+      "area": "Accessibility",
+      "score": 91,
+      "status": "launch_ready",
+      "checks": [
+        "Keyboard paths",
+        "Contrast",
+        "Reduced motion readiness"
+      ],
+      "finding": "Interactive launch surfaces use semantic buttons and strong contrast for command use.",
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "audit_id": "DA-BRAND",
+      "tenant_id": "TEN-SMARTCITY",
+      "area": "Brand Polish",
+      "score": 95,
+      "status": "elite",
+      "checks": [
+        "Trust-first language",
+        "Enterprise wording",
+        "Premium gradients"
+      ],
+      "finding": "Launch copy now emphasizes reliability, trust, and enterprise buying confidence.",
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    }
+  ],
+  "performance_routes": [
+    {
+      "route": "/demo",
+      "p95_ms": 148,
+      "status": "fast",
+      "cache": "edge-ready",
+      "chunk_kb": 84,
+      "owner": "demo",
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "route": "/twin/live",
+      "p95_ms": 224,
+      "status": "watch",
+      "cache": "live-dedupe",
+      "chunk_kb": 132,
+      "owner": "digital_twin",
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "route": "/operations/communications",
+      "p95_ms": 178,
+      "status": "fast",
+      "cache": "stale-while-revalidate",
+      "chunk_kb": 96,
+      "owner": "ops",
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "route": "/security/soc",
+      "p95_ms": 190,
+      "status": "fast",
+      "cache": "runtime-cache",
+      "chunk_kb": 104,
+      "owner": "security",
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "route": "/analytics",
+      "p95_ms": 166,
+      "status": "fast",
+      "cache": "runtime-cache",
+      "chunk_kb": 88,
+      "owner": "analytics",
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    }
+  ],
+  "quality_checks": [
+    {
+      "check_id": "QC-ROUTES",
+      "name": "Broken route scanner",
+      "severity": "low",
+      "status": "pass",
+      "count": 0,
+      "detail": "Core launch routes and major command pages resolve.",
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "check_id": "QC-DATA",
+      "name": "Missing data detector",
+      "severity": "low",
+      "status": "pass",
+      "count": 0,
+      "detail": "Fallback datasets cover launch, demo, analytics, cloud, and platform views.",
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "check_id": "QC-CONSOLE",
+      "name": "Console error tracker",
+      "severity": "medium",
+      "status": "watch",
+      "count": 1,
+      "detail": "One third-party map warning remains non-blocking in local mode.",
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "check_id": "QC-API",
+      "name": "Failed API panel",
+      "severity": "low",
+      "status": "pass",
+      "count": 0,
+      "detail": "Launch smoke endpoints return deterministic envelopes.",
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "check_id": "QC-POLLING",
+      "name": "Stale polling warnings",
+      "severity": "low",
+      "status": "pass",
+      "count": 0,
+      "detail": "Launch pages refresh manually and use cached API client defaults.",
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "check_id": "QC-MOBILE",
+      "name": "Mobile layout issues",
+      "severity": "medium",
+      "status": "watch",
+      "count": 2,
+      "detail": "Dense twin and SOC pages should stay in executive compact mode on tablets.",
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    }
+  ],
+  "readiness": [
+    {
+      "dimension": "Build health",
+      "score": 96,
+      "status": "ready",
+      "evidence": "lint, typecheck, build, compileall",
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "dimension": "Feature completeness",
+      "score": 98,
+      "status": "ready",
+      "evidence": "AI, ops, twin, security, revenue, data, integrations",
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "dimension": "Route coverage",
+      "score": 94,
+      "status": "ready",
+      "evidence": "116+ web routes build successfully",
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "dimension": "Trust readiness",
+      "score": 93,
+      "status": "ready",
+      "evidence": "RBAC, zero trust, compliance, audit stores",
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "dimension": "Investor readiness",
+      "score": 95,
+      "status": "ready",
+      "evidence": "revenue, growth, board, valuation, ARR narrative",
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "dimension": "Demo readiness",
+      "score": 97,
+      "status": "ready",
+      "evidence": "one-click story engine and judge scoring",
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "dimension": "Submission readiness",
+      "score": 94,
+      "status": "ready",
+      "evidence": "launch pages, export center, executive summaries",
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    }
+  ],
+  "ops_signals": [
+    {
+      "signal_id": "OPS-UPTIME",
+      "label": "Uptime",
+      "value": 99.96,
+      "unit": "%",
+      "status": "healthy",
+      "detail": "Launch-grade availability target is being met in demo posture.",
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "signal_id": "OPS-QUEUE",
+      "label": "Queue depth",
+      "value": 27,
+      "unit": "jobs",
+      "status": "healthy",
+      "detail": "Backpressure remains below alert threshold.",
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "signal_id": "OPS-RETRY",
+      "label": "Retries",
+      "value": 8,
+      "unit": "today",
+      "status": "watch",
+      "detail": "ServiceNow retry path is active and contained.",
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "signal_id": "OPS-CACHE",
+      "label": "Cache hit ratio",
+      "value": 91,
+      "unit": "%",
+      "status": "healthy",
+      "detail": "Runtime cache and request dedupe are reducing backend load.",
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "signal_id": "OPS-SOCKET",
+      "label": "Websocket health",
+      "value": 98,
+      "unit": "%",
+      "status": "healthy",
+      "detail": "Incident realtime channel is stable.",
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    }
+  ],
+  "preferences": [
+    {
+      "pref_id": "PREF-DENSITY",
+      "name": "Density",
+      "options": [
+        "compact",
+        "balanced",
+        "spacious"
+      ],
+      "default": "balanced",
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "pref_id": "PREF-MODE",
+      "name": "Mode",
+      "options": [
+        "tactical",
+        "executive"
+      ],
+      "default": "executive",
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "pref_id": "PREF-THEME",
+      "name": "Accent Theme",
+      "options": [
+        "cyan trust",
+        "emerald readiness",
+        "amber crisis"
+      ],
+      "default": "cyan trust",
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "pref_id": "PREF-REALTIME",
+      "name": "Realtime Intensity",
+      "options": [
+        "low",
+        "standard",
+        "high"
+      ],
+      "default": "standard",
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "pref_id": "PREF-PRIVACY",
+      "name": "Privacy",
+      "options": [
+        "strict",
+        "balanced"
+      ],
+      "default": "strict",
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    }
+  ],
+  "executive_actions": [
+    {
+      "action_id": "EX-ACT-DEMO",
+      "title": "Run judge demo in executive mode",
+      "impact": "Proves product story in five minutes",
+      "urgency": "today",
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "action_id": "EX-ACT-MOBILE",
+      "title": "Keep tablet command mode as default for field demos",
+      "impact": "Improves buyer confidence",
+      "urgency": "this week",
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "action_id": "EX-ACT-TRUST",
+      "title": "Export trust and compliance pack",
+      "impact": "Unblocks enterprise procurement",
+      "urgency": "this week",
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    }
+  ],
+  "scans": [
+    {
+      "scan_id": "LAUNCH-SCAN-0001",
+      "tenant_id": "TEN-BALA-UNI",
+      "target": "all",
+      "status": "completed",
+      "issues_found": 3,
+      "created_at": "2026-04-26T00:00:00+00:00"
+    }
+  ],
+  "optimizations": [
+    {
+      "optimization_id": "LAUNCH-OPT-0001",
+      "tenant_id": "TEN-BALA-UNI",
+      "target": "performance",
+      "status": "queued",
+      "expected_gain_percent": 9,
+      "created_at": "2026-04-26T00:00:00+00:00"
+    }
+  ],
+  "events": [
+    {
+      "event_id": "LAUNCH-EVT-00001",
+      "tenant_id": "TEN-BALA-UNI",
+      "action": "launch_scan",
+      "detail": {
+        "scan_id": "LAUNCH-SCAN-0001",
+        "tenant_id": "TEN-BALA-UNI",
+        "target": "all",
+        "status": "completed",
+        "issues_found": 3,
+        "created_at": "2026-04-26T00:00:00+00:00"
+      },
+      "created_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "event_id": "LAUNCH-EVT-00002",
+      "tenant_id": "TEN-BALA-UNI",
+      "action": "launch_optimize",
+      "detail": {
+        "optimization_id": "LAUNCH-OPT-0001",
+        "tenant_id": "TEN-BALA-UNI",
+        "target": "performance",
+        "status": "queued",
+        "expected_gain_percent": 9,
+        "created_at": "2026-04-26T00:00:00+00:00"
+      },
+      "created_at": "2026-04-26T00:00:00+00:00"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+[tool.black]
+line-length = 120
+target-version = ["py312"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E9", "F63", "F7", "F82"]
+ignore = ["E501"]
+
+[tool.mypy]
+python_version = "3.12"
+ignore_missing_imports = true
+no_strict_optional = false
+warn_unused_ignores = false
+exclude = ["\\.venv", "node_modules", "\\.next"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

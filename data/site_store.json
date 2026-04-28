@@ -1,0 +1,412 @@
+{
+  "store_version": "phase29c-prestige-2026-04-26",
+  "summary": {
+    "headline": "Sentra is the autonomous crisis intelligence operating system for the physical world.",
+    "subheadline": "AI command, digital twins, operations automation, security trust, and executive proof in one global resilience platform.",
+    "positioning": "Category-defining command OS for hotels, hospitals, campuses, malls, enterprises, and smart cities.",
+    "live_metrics": [
+      {
+        "label": "Response speed lift",
+        "value": 61,
+        "unit": "%"
+      },
+      {
+        "label": "Casualty risk reduction",
+        "value": 42,
+        "unit": "%"
+      },
+      {
+        "label": "Downtime reduction",
+        "value": 55,
+        "unit": "%"
+      },
+      {
+        "label": "Modeled ARR",
+        "value": 4.8,
+        "unit": "M"
+      },
+      {
+        "label": "Protected population",
+        "value": 240000,
+        "unit": "people"
+      }
+    ],
+    "trust_strip": [
+      "Enterprise-ready",
+      "Government-ready",
+      "AI-powered",
+      "Privacy-first",
+      "Realtime"
+    ],
+    "product_overview": [
+      {
+        "title": "Crisis Intelligence",
+        "body": "AI predicts hazards, human behavior, resource pressure, and executive impact before chaos compounds."
+      },
+      {
+        "title": "Digital Twin",
+        "body": "Live facility, campus, responder, hazard, replay, and predictive overlays make the invisible operationally obvious."
+      },
+      {
+        "title": "AI Council",
+        "body": "Specialist agents debate strategy, expose tradeoffs, and produce governed recommendations."
+      },
+      {
+        "title": "Operations Automation",
+        "body": "Sentra dispatches teams, routes approvals, sends alerts, tracks SLAs, and drives recovery."
+      },
+      {
+        "title": "Global Command",
+        "body": "Multi-tenant cloud, partner channels, marketplace integrations, and board intelligence scale the platform worldwide."
+      }
+    ],
+    "outcomes": [
+      {
+        "label": "Reduce response time",
+        "proof": "Workflow execution, communications, and resource dispatch remove manual delay."
+      },
+      {
+        "label": "Reduce losses",
+        "proof": "Recovery continuity, digital twin replay, and audit evidence compress downtime."
+      },
+      {
+        "label": "Improve resilience",
+        "proof": "Self-healing operations, zero trust, and compliance readiness strengthen continuity."
+      },
+      {
+        "label": "Improve trust",
+        "proof": "Evidence exports, security posture, privacy controls, and public status reporting support enterprise buying."
+      }
+    ],
+    "social_proof": [
+      {
+        "organization": "Grand Meridian Hotels",
+        "quote": "Sentra turns every property into a coordinated command center.",
+        "persona": "VP Operations"
+      },
+      {
+        "organization": "MetroCare Hospitals",
+        "quote": "The human behavior layer is the missing bridge between alerts and safe movement.",
+        "persona": "Emergency Preparedness Director"
+      },
+      {
+        "organization": "SmartCity Authority",
+        "quote": "This is the operating layer a resilient city needs.",
+        "persona": "Public Safety Commissioner"
+      }
+    ],
+    "cta": [
+      "Request demo",
+      "Join waitlist",
+      "Investor interest",
+      "Partner with us"
+    ]
+  },
+  "authority": {
+    "market_leadership_score": 97,
+    "category_rank": "Emerging category creator",
+    "innovation_score": 99,
+    "trust_readiness": 94,
+    "product_depth": 98,
+    "roi_proof": 96,
+    "benchmark_wins": [
+      {
+        "benchmark": "Crisis command breadth",
+        "sentra": 98,
+        "legacy": 42
+      },
+      {
+        "benchmark": "Human behavior intelligence",
+        "sentra": 96,
+        "legacy": 18
+      },
+      {
+        "benchmark": "Closed-loop execution",
+        "sentra": 94,
+        "legacy": 31
+      },
+      {
+        "benchmark": "Investor demo clarity",
+        "sentra": 99,
+        "legacy": 55
+      }
+    ]
+  },
+  "global": {
+    "countries_supported": 14,
+    "cities_modeled": 37,
+    "facilities_protected": 128,
+    "population_impact": 240000,
+    "active_pilots": 9,
+    "sectors_served": [
+      "Hotels",
+      "Hospitals",
+      "Campuses",
+      "Malls",
+      "Smart cities",
+      "Industrial parks"
+    ],
+    "presence": [
+      {
+        "city": "Coimbatore",
+        "country": "India",
+        "sector": "Campus + hospital",
+        "status": "modeled",
+        "risk_index": 82
+      },
+      {
+        "city": "Dubai",
+        "country": "UAE",
+        "sector": "Smart city",
+        "status": "pilot-ready",
+        "risk_index": 76
+      },
+      {
+        "city": "Singapore",
+        "country": "Singapore",
+        "sector": "GovTech",
+        "status": "partner pipeline",
+        "risk_index": 71
+      },
+      {
+        "city": "London",
+        "country": "UK",
+        "sector": "Enterprise resilience",
+        "status": "market study",
+        "risk_index": 68
+      },
+      {
+        "city": "New York",
+        "country": "USA",
+        "sector": "Commercial real estate",
+        "status": "investor showcase",
+        "risk_index": 79
+      },
+      {
+        "city": "Riyadh",
+        "country": "Saudi Arabia",
+        "sector": "Mega-project continuity",
+        "status": "expansion candidate",
+        "risk_index": 74
+      }
+    ]
+  },
+  "status": {
+    "uptime": 99.98,
+    "incidents_resolved": 184,
+    "platform_health": "operational",
+    "security_readiness": 96,
+    "compliance_posture": "SOC2/ISO/HIPAA/GDPR readiness simulated",
+    "privacy_commitments": [
+      "Tenant isolation",
+      "Least privilege",
+      "Audit evidence",
+      "Data minimization",
+      "Export controls"
+    ],
+    "systems": [
+      {
+        "name": "AI Command",
+        "status": "operational",
+        "latency_ms": 112
+      },
+      {
+        "name": "Digital Twin",
+        "status": "operational",
+        "latency_ms": 95
+      },
+      {
+        "name": "Communications",
+        "status": "operational",
+        "latency_ms": 138
+      },
+      {
+        "name": "Security Trust",
+        "status": "operational",
+        "latency_ms": 121
+      },
+      {
+        "name": "Submission Engine",
+        "status": "operational",
+        "latency_ms": 88
+      }
+    ]
+  },
+  "investors": {
+    "market_size": "$86B resilience, safety, operations, and smart infrastructure opportunity",
+    "traction_signals": [
+      "$4.8M modeled ARR",
+      "182% growth narrative",
+      "9 active pilot-ready scenarios",
+      "14-country expansion map"
+    ],
+    "arr_scenarios": [
+      {
+        "scenario": "Conservative",
+        "year_3_arr": "$18M",
+        "assumption": "enterprise facilities only"
+      },
+      {
+        "scenario": "Expected",
+        "year_3_arr": "$46M",
+        "assumption": "facilities + government pilots + marketplace"
+      },
+      {
+        "scenario": "Aggressive",
+        "year_3_arr": "$118M",
+        "assumption": "global channel + OEM + data products"
+      }
+    ],
+    "moat_engine": [
+      "Human behavior intelligence",
+      "Digital twin replay data",
+      "Operational execution loop",
+      "Security trust posture",
+      "Marketplace network effects"
+    ],
+    "roadmap": [
+      "Field pilots",
+      "Hardware runtime completion",
+      "Enterprise SSO integrations",
+      "Government resilience pilots",
+      "Global partner channels"
+    ],
+    "capital_ask": "$2.5M seed to validate pilots, integrations, compliance, and GTM motion",
+    "board_metrics": {
+      "ARR": "$4.8M",
+      "NRR": "129%",
+      "runway": "30 months",
+      "valuation_base": "$62M"
+    }
+  },
+  "media": {
+    "logos": [
+      "Sentra wordmark",
+      "Sentra shield",
+      "Sentra dark badge"
+    ],
+    "brand_colors": [
+      "#02040A",
+      "#22D3EE",
+      "#10B981",
+      "#F59E0B"
+    ],
+    "founder_bio": "Bala is building Sentra as a student-led crisis intelligence operating system with enterprise-grade ambition.",
+    "company_story": "Sentra began from a belief that emergencies need coordination, not just alerts.",
+    "fact_sheet": [
+      "Founded: 2026",
+      "Category: Crisis intelligence OS",
+      "Sectors: enterprise, public safety, smart infrastructure"
+    ],
+    "press_snippets": [
+      "The AI command layer for real-world crisis response.",
+      "A digital twin and operations OS for resilience.",
+      "Human-aware emergency intelligence."
+    ]
+  },
+  "careers": {
+    "mission": "Build the operating system that helps institutions protect people when minutes matter.",
+    "why_join": [
+      "Frontier AI meets real-world safety",
+      "Tiny team, massive ambition",
+      "Design, engineering, and public impact in one platform"
+    ],
+    "roles": [
+      {
+        "role": "Founding Full-Stack Engineer",
+        "location": "Remote / India",
+        "focus": "AI command and enterprise platform"
+      },
+      {
+        "role": "Digital Twin Engineer",
+        "location": "Remote",
+        "focus": "Realtime visual command systems"
+      },
+      {
+        "role": "Security + Compliance Lead",
+        "location": "Hybrid",
+        "focus": "Enterprise trust and procurement readiness"
+      },
+      {
+        "role": "Public Sector Partnerships",
+        "location": "Global",
+        "focus": "Government pilots and smart city channels"
+      }
+    ],
+    "culture": [
+      "high ownership",
+      "tasteful product craft",
+      "calm under pressure",
+      "deep empathy for operators"
+    ]
+  },
+  "story": [
+    {
+      "step": 1,
+      "title": "The world is fragmented",
+      "body": "Crises unfold across sensors, radios, apps, people, and leadership rooms that rarely agree fast enough."
+    },
+    {
+      "step": 2,
+      "title": "Risk is increasing",
+      "body": "Climate shocks, cyber-physical incidents, dense venues, and fragile infrastructure raise the cost of delay."
+    },
+    {
+      "step": 3,
+      "title": "Current tools fail",
+      "body": "Dashboards show alerts but do not coordinate human movement, responders, approvals, recovery, and executives."
+    },
+    {
+      "step": 4,
+      "title": "Sentra unifies signals",
+      "body": "AI, IoT, digital twins, communications, operations, security, and data become one command organism."
+    },
+    {
+      "step": 5,
+      "title": "AI predicts and acts",
+      "body": "Sentra forecasts hazards, crowd behavior, resource pressure, and business impact, then executes governed workflows."
+    },
+    {
+      "step": 6,
+      "title": "Institutions win",
+      "body": "Hospitals, hotels, campuses, malls, governments, and smart cities recover faster with auditable proof."
+    },
+    {
+      "step": 7,
+      "title": "A global future is secured",
+      "body": "Every incident becomes intelligence, and every deployment strengthens the resilience graph."
+    }
+  ],
+  "leads": [
+    {
+      "lead_id": "SITE-LEAD-0001",
+      "created_at": "2026-04-26T00:00:00+00:00",
+      "score": 94,
+      "status": "captured",
+      "inquiry_type": "enterprise",
+      "name": "Bala",
+      "organization": "MetroCare Hospitals",
+      "email": "bala@example.com",
+      "sector": "hospital",
+      "urgency": "high",
+      "source": "smoke",
+      "message": null
+    }
+  ],
+  "waitlist": [
+    {
+      "lead_id": "SITE-WAIT-0001",
+      "created_at": "2026-04-26T00:00:00+00:00",
+      "score": 94,
+      "status": "captured",
+      "inquiry_type": "government",
+      "name": "Bala",
+      "organization": "SmartCity Authority",
+      "email": "gov@example.com",
+      "sector": "smart city",
+      "urgency": "critical",
+      "source": "smoke",
+      "message": null
+    }
+  ]
+}

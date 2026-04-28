@@ -1,0 +1,105 @@
+{
+  "api_keys": [
+    {
+      "key_id": "KEY-9954245B",
+      "tenant_id": "TEN-BALA-UNI",
+      "label": "Demo Operations API",
+      "masked_key": "sk_s\u2022\u2022\u2022\u2022\u2022\u202248d6",
+      "created_at": "2026-04-24T17:08:55.542192+00:00",
+      "last_used": null,
+      "scopes": [
+        "read:incidents",
+        "read:soc",
+        "write:webhooks"
+      ],
+      "rate_limit": 100000,
+      "status": "active"
+    },
+    {
+      "key_id": "KEY-8FF25980",
+      "tenant_id": "TEN-BALA-MFG",
+      "label": "Manufacturing Telemetry API",
+      "masked_key": "sk_s\u2022\u2022\u2022\u2022\u2022\u20221f03",
+      "created_at": "2026-04-24T17:08:55.542242+00:00",
+      "last_used": null,
+      "scopes": [
+        "read:geo",
+        "read:facility"
+      ],
+      "rate_limit": 80000,
+      "status": "active"
+    }
+  ],
+  "webhooks": [
+    {
+      "webhook_id": "WH-091FEFDA",
+      "tenant_id": "TEN-BALA-UNI",
+      "endpoint": "https://hooks.example.com/sentra",
+      "events": [
+        "incident.created",
+        "alert.critical"
+      ],
+      "status": "active",
+      "last_delivery": null,
+      "failure_count": 0,
+      "secret_masked": "whse\u2022\u2022\u2022\u2022\u2022\u2022C0F9",
+      "created_at": "2026-04-24T17:08:55.542274+00:00"
+    },
+    {
+      "webhook_id": "WH-70271617",
+      "tenant_id": "TEN-BALA-HOSP",
+      "endpoint": "https://hospital.example.com/sentra",
+      "events": [
+        "success.churn_risk_high",
+        "ai.recommendation_created"
+      ],
+      "status": "active",
+      "last_delivery": null,
+      "failure_count": 0,
+      "secret_masked": "whse\u2022\u2022\u2022\u2022\u2022\u20228055",
+      "created_at": "2026-04-24T17:08:55.542283+00:00"
+    }
+  ],
+  "oauth_apps": [
+    {
+      "client_id": "app_2d1a17c3941d44",
+      "tenant_id": "TEN-BALA-UNI",
+      "name": "Bala Command Portal",
+      "redirect_uri": "https://bala.example.com/oauth/callback",
+      "owner": "admin@sentra.local",
+      "status": "active",
+      "created_at": "2026-04-24T17:08:55.542290+00:00"
+    }
+  ],
+  "widgets": [
+    {
+      "widget_id": "WID-E5240F8D",
+      "tenant_id": "TEN-BALA-UNI",
+      "widget_type": "readiness_meter",
+      "name": "Readiness Meter",
+      "theme": "dark",
+      "allowed_domains": [
+        "localhost",
+        "bala.example.com"
+      ],
+      "refresh_interval": 30,
+      "public_token": "emb__OKUenANc4W9V61bLXHJvnnF-_A_kHYb",
+      "created_at": "2026-04-24T17:08:55.542309+00:00"
+    },
+    {
+      "widget_id": "WID-139C0406",
+      "tenant_id": "TEN-BALA-UNI",
+      "widget_type": "live_incident",
+      "name": "Live Incident Widget",
+      "theme": "dark",
+      "allowed_domains": [
+        "localhost",
+        "status.bala.example.com"
+      ],
+      "refresh_interval": 30,
+      "public_token": "emb_dA4YJ_qCJKA-9hFaoSazEW9yoJh6HWlz",
+      "created_at": "2026-04-24T17:08:55.542315+00:00"
+    }
+  ],
+  "deliveries": []
+}

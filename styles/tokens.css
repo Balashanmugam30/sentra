@@ -1,0 +1,548 @@
+:root,
+[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0b0f14;
+  --surface: rgba(255, 255, 255, 0.05);
+  --surface-strong: rgba(255, 255, 255, 0.08);
+  --surface-soft: rgba(255, 255, 255, 0.04);
+  --border: rgba(255, 255, 255, 0.08);
+  --text: #e5e7eb;
+  --text-muted: rgba(229, 231, 235, 0.65);
+  --text-soft: rgba(229, 231, 235, 0.45);
+  --color-background: var(--bg);
+  --color-canvas: transparent;
+  --color-surface: var(--surface);
+  --color-surface-strong: var(--surface-strong);
+  --color-foreground: var(--text);
+  --color-muted-foreground: var(--text-muted);
+  --color-border: var(--border);
+  --color-primary: rgba(255, 255, 255, 0.9);
+  --color-primary-foreground: #0b0f1a;
+  --color-success: #6cc7a6;
+  --color-success-foreground: #08120d;
+  --color-danger: #d69aa1;
+  --color-danger-foreground: #180809;
+  --color-warning: #d7b06a;
+  --color-warning-foreground: #171005;
+  --background-primary: #060a12;
+  --background-surface: rgba(8, 13, 26, 0.72);
+  --surface-elevated: rgba(16, 24, 44, 0.72);
+  --border-soft: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.16);
+  --text-primary: #f8fafc;
+  --text-secondary: rgba(226, 232, 240, 0.78);
+  --text-muted: rgba(203, 213, 225, 0.56);
+  --success: #76d9b2;
+  --warning: #f3c879;
+  --danger: #ef8f9b;
+  --info: #89d8ff;
+  --executive-gold: #f5d58a;
+  --critical-red: #ff6f7d;
+  --premium-cyan: #76e4ff;
+  --shadow-soft: 0 2px 8px rgba(0, 0, 0, 0.2);
+  --shadow-floating: 0 2px 8px rgba(0, 0, 0, 0.2);
+  --radius-xs: 0.375rem;
+  --radius-sm: 0.75rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 0.75rem;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-4xl: 2.5rem;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --sentra-shell-background: var(--bg);
+  --sentra-shell-background-soft: rgba(11, 15, 20, 0.92);
+  --sentra-shell-gradient: none;
+  --sentra-surface: var(--surface);
+  --sentra-surface-strong: var(--surface-strong);
+  --sentra-surface-hover: rgba(255, 255, 255, 0.12);
+  --sentra-panel-background: var(--surface);
+  --sentra-panel-strong: rgba(255, 255, 255, 0.06);
+  --sentra-panel-muted: var(--surface-soft);
+  --sentra-grid-line: var(--border);
+  --sentra-glow-purple: rgba(255, 255, 255, 0.04);
+  --sentra-glow-blue: rgba(255, 255, 255, 0.03);
+  --sentra-glow-cyan: rgba(255, 255, 255, 0.025);
+  --sentra-accent-gradient:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.08));
+  --sentra-accent-gradient-soft:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+  --sentra-border-subtle: var(--border);
+  --sentra-border-strong: rgba(255, 255, 255, 0.12);
+  --sentra-text-muted: var(--text-muted);
+  --sentra-text-soft: var(--text-soft);
+  --sentra-shadow-panel: 0 22px 60px rgba(2, 6, 12, 0.28);
+  --sentra-shadow-floating: 0 18px 40px rgba(2, 6, 12, 0.24);
+  --sentra-shadow-glow: 0 0 18px rgba(255, 255, 255, 0.05);
+  --sentra-shadow-fab: 0 18px 42px rgba(7, 10, 19, 0.38), 0 0 18px rgba(255, 255, 255, 0.06);
+  --sentra-shadow-soft: 0 14px 38px rgba(2, 6, 12, 0.2);
+  --sentra-shadow-medium: 0 24px 70px rgba(0, 0, 0, 0.28);
+  --sentra-shadow-command: 0 34px 110px rgba(0, 0, 0, 0.42), 0 0 48px rgba(103, 232, 249, 0.08);
+  --sentra-shadow-modal: 0 42px 140px rgba(0, 0, 0, 0.58);
+  --sentra-radius-12: 0.75rem;
+  --sentra-radius-18: 1.125rem;
+  --sentra-radius-24: 1.5rem;
+  --sentra-radius-32: 2rem;
+  --sentra-space-4: 0.25rem;
+  --sentra-space-8: 0.5rem;
+  --sentra-space-12: 0.75rem;
+  --sentra-space-16: 1rem;
+  --sentra-space-20: 1.25rem;
+  --sentra-space-24: 1.5rem;
+  --sentra-space-32: 2rem;
+  --sentra-space-40: 2.5rem;
+  --sentra-motion-fast: 140ms;
+  --sentra-motion-normal: 220ms;
+  --sentra-motion-slow: 340ms;
+  --sentra-overlay: rgba(0, 0, 0, 0.4);
+  --sentra-input-surface: rgba(255, 255, 255, 0.05);
+  --sentra-input-surface-strong: rgba(255, 255, 255, 0.08);
+  --sentra-input-readonly: rgba(255, 255, 255, 0.04);
+}
+
+[data-theme="light"],
+.light {
+  color-scheme: light;
+  --bg: #f5f7fb;
+  --surface: rgba(0, 0, 0, 0.04);
+  --surface-strong: rgba(0, 0, 0, 0.06);
+  --surface-soft: rgba(0, 0, 0, 0.03);
+  --border: rgba(0, 0, 0, 0.08);
+  --text: #0f172a;
+  --text-muted: rgba(15, 23, 42, 0.6);
+  --text-soft: rgba(15, 23, 42, 0.45);
+  --color-background: var(--bg);
+  --color-canvas: transparent;
+  --color-surface: var(--surface);
+  --color-surface-strong: var(--surface-strong);
+  --color-foreground: var(--text);
+  --color-muted-foreground: var(--text-muted);
+  --color-border: var(--border);
+  --color-primary: rgba(15, 23, 42, 0.86);
+  --color-primary-foreground: #ffffff;
+  --color-success: #2f855a;
+  --color-success-foreground: #f0fdf4;
+  --color-danger: #b45359;
+  --color-danger-foreground: #fef2f2;
+  --color-warning: #b7791f;
+  --color-warning-foreground: #fffbeb;
+  --background-primary: #f5f7fb;
+  --background-surface: rgba(255, 255, 255, 0.72);
+  --surface-elevated: rgba(255, 255, 255, 0.92);
+  --border-soft: rgba(15, 23, 42, 0.1);
+  --border-strong: rgba(15, 23, 42, 0.18);
+  --text-primary: #0f172a;
+  --text-secondary: rgba(15, 23, 42, 0.72);
+  --text-muted: rgba(51, 65, 85, 0.56);
+  --success: #2f855a;
+  --warning: #b7791f;
+  --danger: #b45359;
+  --info: #0369a1;
+  --executive-gold: #9a6700;
+  --critical-red: #b4232f;
+  --premium-cyan: #047c9f;
+  --sentra-shell-background: var(--bg);
+  --sentra-shell-background-soft: rgba(245, 247, 251, 0.9);
+  --sentra-shell-gradient:
+    linear-gradient(180deg, rgba(245, 247, 252, 0.98) 0%, rgba(239, 243, 249, 0.94) 100%);
+  --sentra-surface: var(--surface);
+  --sentra-surface-strong: var(--surface-strong);
+  --sentra-surface-hover: rgba(0, 0, 0, 0.08);
+  --sentra-panel-background: var(--surface);
+  --sentra-panel-strong: var(--surface-strong);
+  --sentra-panel-muted: var(--surface-soft);
+  --sentra-grid-line: var(--border);
+  --sentra-glow-purple: rgba(15, 23, 42, 0.04);
+  --sentra-glow-blue: rgba(15, 23, 42, 0.03);
+  --sentra-glow-cyan: rgba(15, 23, 42, 0.025);
+  --sentra-accent-gradient:
+    linear-gradient(135deg, rgba(15, 23, 42, 0.14), rgba(15, 23, 42, 0.08));
+  --sentra-accent-gradient-soft:
+    linear-gradient(135deg, rgba(15, 23, 42, 0.08), rgba(15, 23, 42, 0.03));
+  --sentra-border-subtle: var(--border);
+  --sentra-border-strong: rgba(0, 0, 0, 0.12);
+  --sentra-text-muted: var(--text-muted);
+  --sentra-text-soft: var(--text-soft);
+  --sentra-shadow-panel: 0 22px 60px rgba(15, 23, 42, 0.1);
+  --sentra-shadow-floating: 0 18px 40px rgba(15, 23, 42, 0.08);
+  --sentra-shadow-glow: 0 0 18px rgba(15, 23, 42, 0.06);
+  --sentra-shadow-fab: 0 18px 42px rgba(15, 23, 42, 0.12), 0 0 18px rgba(15, 23, 42, 0.06);
+  --sentra-shadow-soft: 0 14px 38px rgba(15, 23, 42, 0.08);
+  --sentra-shadow-medium: 0 24px 70px rgba(15, 23, 42, 0.12);
+  --sentra-shadow-command: 0 34px 110px rgba(15, 23, 42, 0.18), 0 0 48px rgba(3, 105, 161, 0.08);
+  --sentra-shadow-modal: 0 42px 140px rgba(15, 23, 42, 0.24);
+  --sentra-radius-12: 0.75rem;
+  --sentra-radius-18: 1.125rem;
+  --sentra-radius-24: 1.5rem;
+  --sentra-radius-32: 2rem;
+  --sentra-space-4: 0.25rem;
+  --sentra-space-8: 0.5rem;
+  --sentra-space-12: 0.75rem;
+  --sentra-space-16: 1rem;
+  --sentra-space-20: 1.25rem;
+  --sentra-space-24: 1.5rem;
+  --sentra-space-32: 2rem;
+  --sentra-space-40: 2.5rem;
+  --sentra-motion-fast: 140ms;
+  --sentra-motion-normal: 220ms;
+  --sentra-motion-slow: 340ms;
+  --sentra-overlay: rgba(15, 23, 42, 0.2);
+  --sentra-input-surface: rgba(0, 0, 0, 0.04);
+  --sentra-input-surface-strong: rgba(0, 0, 0, 0.06);
+  --sentra-input-readonly: rgba(0, 0, 0, 0.03);
+}
+
+/*
+ * Sentra Visual Foundation 1.0
+ * Canonical product tokens. These aliases intentionally sit after the legacy
+ * theme blocks so existing modules inherit the new landing-page visual DNA
+ * without touching feature logic or data flow.
+ */
+:root,
+[data-theme="dark"],
+.dark {
+  color-scheme: dark;
+
+  --bg-primary: #05070b;
+  --bg-secondary: #0b1020;
+  --bg-tertiary: rgba(255, 255, 255, 0.03);
+  --surface-glass: rgba(255, 255, 255, 0.08);
+  --surface-glass-strong: rgba(255, 255, 255, 0.14);
+  --border-soft: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.16);
+  --text-primary: #f8fafc;
+  --text-secondary: rgba(248, 250, 252, 0.72);
+  --text-muted: rgba(248, 250, 252, 0.48);
+  --accent-1: #8b5cf6;
+  --accent-2: #3b82f6;
+  --accent-3: #22d3ee;
+  --accent-danger: #ef4444;
+  --accent-warning: #f59e0b;
+  --accent-success: #10b981;
+
+  --bg: var(--bg-primary);
+  --surface: var(--surface-glass);
+  --surface-strong: var(--surface-glass-strong);
+  --surface-soft: var(--bg-tertiary);
+  --border: var(--border-soft);
+  --text: var(--text-primary);
+  --text-soft: rgba(248, 250, 252, 0.36);
+
+  --color-background: var(--bg-primary);
+  --color-canvas: transparent;
+  --color-surface: var(--surface-glass);
+  --color-surface-strong: var(--surface-glass-strong);
+  --color-foreground: var(--text-primary);
+  --color-muted-foreground: var(--text-secondary);
+  --color-border: var(--border-soft);
+  --color-primary: var(--accent-3);
+  --color-primary-foreground: #031018;
+  --color-success: var(--accent-success);
+  --color-success-foreground: #04110d;
+  --color-danger: var(--accent-danger);
+  --color-danger-foreground: #fff1f2;
+  --color-warning: var(--accent-warning);
+  --color-warning-foreground: #140d02;
+
+  --background-primary: var(--bg-primary);
+  --background-surface: rgba(11, 16, 32, 0.72);
+  --surface-elevated: rgba(255, 255, 255, 0.1);
+  --success: var(--accent-success);
+  --warning: var(--accent-warning);
+  --danger: var(--accent-danger);
+  --info: var(--accent-3);
+  --executive-gold: #f7c948;
+  --critical-red: var(--accent-danger);
+  --premium-cyan: var(--accent-3);
+
+  --font-display:
+    var(--font-sans), "Geist", "SF Pro Display", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  --font-body:
+    var(--font-sans), "Inter", "Geist", "SF Pro Text", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  --font-mono: "SF Mono", "Geist Mono", "Roboto Mono", ui-monospace, monospace;
+
+  --type-display-xl: clamp(3.5rem, 8vw, 7rem);
+  --type-h1: clamp(2.5rem, 5vw, 4.75rem);
+  --type-h2: clamp(2rem, 3.2vw, 3.25rem);
+  --type-h3: clamp(1.5rem, 2vw, 2rem);
+  --type-title: clamp(1.125rem, 1.4vw, 1.375rem);
+  --type-body: 1rem;
+  --type-small: 0.875rem;
+  --type-caption: 0.75rem;
+
+  --space-4: 0.25rem;
+  --space-8: 0.5rem;
+  --space-12: 0.75rem;
+  --space-16: 1rem;
+  --space-20: 1.25rem;
+  --space-24: 1.5rem;
+  --space-32: 2rem;
+  --space-40: 2.5rem;
+  --space-48: 3rem;
+  --space-64: 4rem;
+
+  --radius-small: 12px;
+  --radius-medium: 18px;
+  --radius-large: 24px;
+  --radius-xl: 32px;
+  --radius-sm: var(--radius-small);
+  --radius-md: var(--radius-medium);
+  --radius-lg: var(--radius-large);
+  --radius-xs: 10px;
+
+  --sentra-shell-background: var(--bg-primary);
+  --sentra-shell-background-soft: rgba(5, 7, 11, 0.92);
+  --sentra-shell-gradient:
+    radial-gradient(circle at 16% 8%, rgba(139, 92, 246, 0.26), transparent 30rem),
+    radial-gradient(circle at 72% 10%, rgba(59, 130, 246, 0.2), transparent 28rem),
+    radial-gradient(circle at 86% 62%, rgba(34, 211, 238, 0.13), transparent 30rem),
+    linear-gradient(180deg, #05070b 0%, #070b14 48%, #05070b 100%);
+  --sentra-surface: var(--surface-glass);
+  --sentra-surface-strong: var(--surface-glass-strong);
+  --sentra-surface-hover: rgba(255, 255, 255, 0.16);
+  --sentra-panel-background: rgba(255, 255, 255, 0.06);
+  --sentra-panel-strong: rgba(255, 255, 255, 0.1);
+  --sentra-panel-muted: rgba(255, 255, 255, 0.035);
+  --sentra-grid-line: rgba(255, 255, 255, 0.055);
+  --sentra-glow-purple: rgba(139, 92, 246, 0.28);
+  --sentra-glow-blue: rgba(59, 130, 246, 0.22);
+  --sentra-glow-cyan: rgba(34, 211, 238, 0.18);
+  --sentra-accent-gradient: linear-gradient(135deg, var(--accent-1), var(--accent-2), var(--accent-3));
+  --sentra-accent-gradient-soft:
+    linear-gradient(135deg, rgba(139, 92, 246, 0.18), rgba(59, 130, 246, 0.12), rgba(34, 211, 238, 0.12));
+  --sentra-border-subtle: var(--border-soft);
+  --sentra-border-strong: var(--border-strong);
+  --sentra-text-muted: var(--text-muted);
+  --sentra-text-soft: rgba(248, 250, 252, 0.36);
+  --sentra-shadow-panel: 0 8px 32px rgba(0, 0, 0, 0.35);
+  --sentra-shadow-floating: 0 18px 54px rgba(0, 0, 0, 0.38);
+  --sentra-shadow-glow: 0 0 34px rgba(34, 211, 238, 0.12);
+  --sentra-shadow-fab: 0 22px 54px rgba(0, 0, 0, 0.42), 0 0 32px rgba(139, 92, 246, 0.18);
+  --sentra-shadow-soft: 0 14px 38px rgba(0, 0, 0, 0.24);
+  --sentra-shadow-medium: 0 24px 76px rgba(0, 0, 0, 0.34);
+  --sentra-shadow-command:
+    0 34px 110px rgba(0, 0, 0, 0.46), 0 0 58px rgba(34, 211, 238, 0.1);
+  --sentra-shadow-modal: 0 42px 140px rgba(0, 0, 0, 0.62);
+  --sentra-radius-12: var(--radius-small);
+  --sentra-radius-18: var(--radius-medium);
+  --sentra-radius-24: var(--radius-large);
+  --sentra-radius-32: var(--radius-xl);
+  --sentra-space-4: var(--space-4);
+  --sentra-space-8: var(--space-8);
+  --sentra-space-12: var(--space-12);
+  --sentra-space-16: var(--space-16);
+  --sentra-space-20: var(--space-20);
+  --sentra-space-24: var(--space-24);
+  --sentra-space-32: var(--space-32);
+  --sentra-space-40: var(--space-40);
+  --sentra-space-48: var(--space-48);
+  --sentra-space-64: var(--space-64);
+  --sentra-input-surface: rgba(255, 255, 255, 0.07);
+  --sentra-input-surface-strong: rgba(255, 255, 255, 0.11);
+  --sentra-input-readonly: rgba(255, 255, 255, 0.04);
+}
+
+[data-theme="light"],
+.light {
+  --bg-primary: #f6f8ff;
+  --bg-secondary: #eef3ff;
+  --bg-tertiary: rgba(15, 23, 42, 0.03);
+  --surface-glass: rgba(255, 255, 255, 0.76);
+  --surface-glass-strong: rgba(255, 255, 255, 0.92);
+  --border-soft: rgba(15, 23, 42, 0.1);
+  --border-strong: rgba(15, 23, 42, 0.18);
+  --text-primary: #08111f;
+  --text-secondary: rgba(8, 17, 31, 0.72);
+  --text-muted: rgba(8, 17, 31, 0.5);
+  --bg: var(--bg-primary);
+  --surface: var(--surface-glass);
+  --surface-strong: var(--surface-glass-strong);
+  --border: var(--border-soft);
+  --text: var(--text-primary);
+  --color-background: var(--bg-primary);
+  --color-surface: var(--surface-glass);
+  --color-surface-strong: var(--surface-glass-strong);
+  --color-foreground: var(--text-primary);
+  --color-muted-foreground: var(--text-secondary);
+  --color-border: var(--border-soft);
+  --sentra-shell-gradient:
+    radial-gradient(circle at 18% 8%, rgba(139, 92, 246, 0.14), transparent 30rem),
+    radial-gradient(circle at 76% 6%, rgba(59, 130, 246, 0.12), transparent 28rem),
+    linear-gradient(180deg, #f6f8ff 0%, #eef3ff 100%);
+}
+
+/*
+ * Sentra Premium System 2.0
+ * Restrained enterprise theme: Apple-level dark materials, one blue accent,
+ * semantic state colors, and quieter surfaces for dense command screens.
+ */
+:root,
+[data-theme="dark"],
+.dark {
+  color-scheme: dark;
+
+  --bg-primary: #05070b;
+  --bg-secondary: #0a0f17;
+  --bg-tertiary: #0f1724;
+  --surface-glass: rgba(255, 255, 255, 0.06);
+  --surface-glass-raised: rgba(255, 255, 255, 0.08);
+  --surface-glass-strong: rgba(255, 255, 255, 0.12);
+  --border-soft: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.14);
+  --text-primary: #f5f7fa;
+  --text-secondary: #9ca3af;
+  --text-muted: #6b7280;
+  --accent-1: #6ea8ff;
+  --accent-2: #8aa7ff;
+  --accent-3: #6ea8ff;
+  --accent-success: #34d399;
+  --accent-warning: #fbbf24;
+  --accent-danger: #f87171;
+
+  --bg: var(--bg-primary);
+  --surface: var(--surface-glass);
+  --surface-strong: var(--surface-glass-raised);
+  --surface-soft: rgba(255, 255, 255, 0.035);
+  --border: var(--border-soft);
+  --text: var(--text-primary);
+  --text-soft: rgba(245, 247, 250, 0.4);
+
+  --color-background: var(--bg-primary);
+  --color-canvas: transparent;
+  --color-surface: var(--surface-glass);
+  --color-surface-strong: var(--surface-glass-raised);
+  --color-foreground: var(--text-primary);
+  --color-muted-foreground: var(--text-secondary);
+  --color-border: var(--border-soft);
+  --color-primary: var(--accent-1);
+  --color-primary-foreground: #06111f;
+  --color-success: var(--accent-success);
+  --color-warning: var(--accent-warning);
+  --color-danger: var(--accent-danger);
+
+  --background-primary: var(--bg-primary);
+  --background-surface: rgba(10, 15, 23, 0.72);
+  --surface-elevated: rgba(255, 255, 255, 0.08);
+  --success: var(--accent-success);
+  --warning: var(--accent-warning);
+  --danger: var(--accent-danger);
+  --info: var(--accent-1);
+  --executive-gold: var(--accent-warning);
+  --critical-red: var(--accent-danger);
+  --premium-cyan: var(--accent-1);
+
+  --font-display:
+    var(--font-sans), "Inter", "Geist", "SF Pro Display", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  --font-body:
+    var(--font-sans), "Inter", "Geist", "SF Pro Text", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+
+  --type-display-xl: clamp(3rem, 6.4vw, 5.8rem);
+  --type-h1: clamp(2.15rem, 4vw, 3.6rem);
+  --type-h2: clamp(1.7rem, 2.7vw, 2.55rem);
+  --type-h3: clamp(1.35rem, 1.7vw, 1.75rem);
+  --type-title: 1rem;
+  --type-body: 0.9375rem;
+  --type-small: 0.875rem;
+  --type-caption: 0.6875rem;
+
+  --radius-small: 14px;
+  --radius-medium: 18px;
+  --radius-large: 24px;
+  --radius-xl: 28px;
+  --radius-sm: var(--radius-small);
+  --radius-md: var(--radius-medium);
+  --radius-lg: var(--radius-large);
+
+  --sentra-shell-background: var(--bg-primary);
+  --sentra-shell-background-soft: rgba(5, 7, 11, 0.9);
+  --sentra-shell-gradient:
+    radial-gradient(circle at 18% -8%, rgba(110, 168, 255, 0.18), transparent 30rem),
+    radial-gradient(circle at 70% 0%, rgba(135, 115, 255, 0.1), transparent 28rem),
+    linear-gradient(180deg, #05070b 0%, #0a0f17 54%, #05070b 100%);
+  --sentra-surface: var(--surface-glass);
+  --sentra-surface-strong: var(--surface-glass-raised);
+  --sentra-surface-hover: rgba(255, 255, 255, 0.1);
+  --sentra-panel-background: rgba(255, 255, 255, 0.055);
+  --sentra-panel-strong: rgba(255, 255, 255, 0.08);
+  --sentra-panel-muted: rgba(255, 255, 255, 0.035);
+  --sentra-grid-line: rgba(255, 255, 255, 0.045);
+  --sentra-glow-purple: rgba(110, 168, 255, 0.08);
+  --sentra-glow-blue: rgba(110, 168, 255, 0.14);
+  --sentra-glow-cyan: rgba(110, 168, 255, 0.1);
+  --sentra-accent-gradient: linear-gradient(135deg, #6ea8ff, #8aa7ff);
+  --sentra-accent-gradient-soft:
+    linear-gradient(135deg, rgba(110, 168, 255, 0.16), rgba(138, 167, 255, 0.08));
+  --sentra-border-subtle: var(--border-soft);
+  --sentra-border-strong: var(--border-strong);
+  --sentra-text-muted: var(--text-muted);
+  --sentra-text-soft: rgba(245, 247, 250, 0.38);
+  --sentra-shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.24);
+  --sentra-shadow-panel: 0 10px 30px rgba(0, 0, 0, 0.24);
+  --sentra-shadow-medium: 0 20px 60px rgba(0, 0, 0, 0.34);
+  --sentra-shadow-floating: 0 18px 50px rgba(0, 0, 0, 0.34);
+  --sentra-shadow-command: 0 28px 90px rgba(0, 0, 0, 0.42);
+  --sentra-shadow-modal: 0 42px 140px rgba(0, 0, 0, 0.6);
+  --sentra-shadow-glow: 0 0 26px rgba(110, 168, 255, 0.1);
+  --sentra-shadow-fab: 0 18px 48px rgba(0, 0, 0, 0.36), 0 0 22px rgba(110, 168, 255, 0.12);
+  --sentra-radius-12: 14px;
+  --sentra-radius-18: 18px;
+  --sentra-radius-24: 24px;
+  --sentra-radius-32: 28px;
+  --sentra-motion-fast: 200ms;
+  --sentra-motion-normal: 300ms;
+  --sentra-motion-slow: 360ms;
+  --sentra-input-surface: rgba(255, 255, 255, 0.055);
+  --sentra-input-surface-strong: rgba(255, 255, 255, 0.085);
+}
+
+/* Sentra authenticated product system: one final token layer for app workspaces. */
+:root,
+[data-theme="dark"],
+.dark {
+  --sentra-os-bg: #050505;
+  --sentra-os-panel: #0b0b0b;
+  --sentra-os-card: #111111;
+  --sentra-os-soft: #171717;
+  --sentra-os-hover: #181818;
+  --sentra-os-active: #232323;
+  --sentra-os-border: rgba(255, 255, 255, 0.06);
+  --sentra-os-border-strong: rgba(255, 255, 255, 0.12);
+  --sentra-os-text: #ffffff;
+  --sentra-os-muted: #a1a1aa;
+  --sentra-os-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+}
+
+[data-theme="light"],
+.light {
+  --sentra-os-bg: #f5f5f5;
+  --sentra-os-panel: #ffffff;
+  --sentra-os-card: #fafafa;
+  --sentra-os-soft: #f1f1f2;
+  --sentra-os-hover: #f1f1f2;
+  --sentra-os-active: #eaeaea;
+  --sentra-os-border: #dddddd;
+  --sentra-os-border-strong: rgba(0, 0, 0, 0.18);
+  --sentra-os-text: #111111;
+  --sentra-os-muted: #52525b;
+  --sentra-os-shadow: 0 12px 34px rgba(15, 15, 15, 0.08);
+}

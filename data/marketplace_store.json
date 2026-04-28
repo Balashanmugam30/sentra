@@ -1,0 +1,704 @@
+{
+  "store_version": "phase27b-2026-04-26",
+  "installations": [
+    {
+      "installation_id": "INT-BALA-UNI-SLACK-CRISIS",
+      "tenant_id": "TEN-BALA-UNI",
+      "app_id": "APP-SLACK-CRISIS",
+      "app_name": "Slack Crisis Bridge",
+      "category": "communication",
+      "installed_at": "2026-04-26T00:00:00+00:00",
+      "installed_by": "system",
+      "status": "connected",
+      "version": "4.2.0",
+      "config_masked": {
+        "workspace": "TEN-BALA-UNI",
+        "mode": "demo_safe"
+      },
+      "last_health_check": "2026-04-26T00:00:00+00:00",
+      "usage_count": 264,
+      "billing_addon_value": 129,
+      "enabled": true,
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "installation_id": "INT-BALA-UNI-GMAPS-EVAC",
+      "tenant_id": "TEN-BALA-UNI",
+      "app_id": "APP-GMAPS-EVAC",
+      "app_name": "Google Maps Evac Layer",
+      "category": "maps_location",
+      "installed_at": "2026-04-26T00:00:00+00:00",
+      "installed_by": "system",
+      "status": "connected",
+      "version": "5.4.0",
+      "config_masked": {
+        "workspace": "TEN-BALA-UNI",
+        "mode": "demo_safe"
+      },
+      "last_health_check": "2026-04-26T00:00:00+00:00",
+      "usage_count": 246,
+      "billing_addon_value": 249,
+      "enabled": true,
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "installation_id": "INT-BALA-UNI-BOARD-PDF",
+      "tenant_id": "TEN-BALA-UNI",
+      "app_id": "APP-BOARD-PDF",
+      "app_name": "Board PDF Exporter",
+      "category": "business_systems",
+      "installed_at": "2026-04-26T00:00:00+00:00",
+      "installed_by": "system",
+      "status": "connected",
+      "version": "1.5.0",
+      "config_masked": {
+        "workspace": "TEN-BALA-UNI",
+        "mode": "demo_safe"
+      },
+      "last_health_check": "2026-04-26T00:00:00+00:00",
+      "usage_count": 237,
+      "billing_addon_value": 79,
+      "enabled": true,
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "installation_id": "INT-BALA-MFG-SAP-INCIDENT",
+      "tenant_id": "TEN-BALA-MFG",
+      "app_id": "APP-SAP-INCIDENT",
+      "app_name": "SAP Incident Sync",
+      "category": "business_systems",
+      "installed_at": "2026-04-26T00:00:00+00:00",
+      "installed_by": "system",
+      "status": "connected",
+      "version": "3.8.0",
+      "config_masked": {
+        "workspace": "TEN-BALA-MFG",
+        "mode": "demo_safe"
+      },
+      "last_health_check": "2026-04-26T00:00:00+00:00",
+      "usage_count": 264,
+      "billing_addon_value": 649,
+      "enabled": true,
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "installation_id": "INT-BALA-MFG-POWER-GRID",
+      "tenant_id": "TEN-BALA-MFG",
+      "app_id": "APP-POWER-GRID",
+      "app_name": "Power Grid Watch",
+      "category": "field_facility_iot",
+      "installed_at": "2026-04-26T00:00:00+00:00",
+      "installed_by": "system",
+      "status": "connected",
+      "version": "2.2.0",
+      "config_masked": {
+        "workspace": "TEN-BALA-MFG",
+        "mode": "demo_safe"
+      },
+      "last_health_check": "2026-04-26T00:00:00+00:00",
+      "usage_count": 246,
+      "billing_addon_value": 379,
+      "enabled": true,
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "installation_id": "INT-BALA-MFG-SNOW-RESPONSE",
+      "tenant_id": "TEN-BALA-MFG",
+      "app_id": "APP-SNOW-RESPONSE",
+      "app_name": "ServiceNow Response Flow",
+      "category": "itsm_ticketing",
+      "installed_at": "2026-04-26T00:00:00+00:00",
+      "installed_by": "system",
+      "status": "connected",
+      "version": "4.8.2",
+      "config_masked": {
+        "workspace": "TEN-BALA-MFG",
+        "mode": "demo_safe"
+      },
+      "last_health_check": "2026-04-26T00:00:00+00:00",
+      "usage_count": 273,
+      "billing_addon_value": 399,
+      "enabled": true,
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "installation_id": "INT-BALA-HOSP-TEAMS-COMMAND",
+      "tenant_id": "TEN-BALA-HOSP",
+      "app_id": "APP-TEAMS-COMMAND",
+      "app_name": "Microsoft Teams Command Alerts",
+      "category": "communication",
+      "installed_at": "2026-04-26T00:00:00+00:00",
+      "installed_by": "system",
+      "status": "connected",
+      "version": "3.1.0",
+      "config_masked": {
+        "workspace": "TEN-BALA-HOSP",
+        "mode": "demo_safe"
+      },
+      "last_health_check": "2026-04-26T00:00:00+00:00",
+      "usage_count": 273,
+      "billing_addon_value": 99,
+      "enabled": true,
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "installation_id": "INT-BALA-HOSP-WHATSPRO",
+      "tenant_id": "TEN-BALA-HOSP",
+      "app_id": "APP-WHATSAPP-PRO",
+      "app_name": "WhatsApp Broadcast Pro",
+      "category": "communication",
+      "installed_at": "2026-04-26T00:00:00+00:00",
+      "installed_by": "system",
+      "status": "connected",
+      "version": "2.4.1",
+      "config_masked": {
+        "workspace": "TEN-BALA-HOSP",
+        "mode": "demo_safe"
+      },
+      "last_health_check": "2026-04-26T00:00:00+00:00",
+      "usage_count": 264,
+      "billing_addon_value": 159,
+      "enabled": true,
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "installation_id": "INT-BALA-HOSP-AI-VOICE",
+      "tenant_id": "TEN-BALA-HOSP",
+      "app_id": "APP-AI-VOICE",
+      "app_name": "AI Voice Call Escalation",
+      "category": "communication",
+      "installed_at": "2026-04-26T00:00:00+00:00",
+      "installed_by": "system",
+      "status": "connected",
+      "version": "2.0.1",
+      "config_masked": {
+        "workspace": "TEN-BALA-HOSP",
+        "mode": "demo_safe"
+      },
+      "last_health_check": "2026-04-26T00:00:00+00:00",
+      "usage_count": 228,
+      "billing_addon_value": 219,
+      "enabled": true,
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "installation_id": "INT-GOVSECURE-VISITOR-SHIELD",
+      "tenant_id": "TEN-GOVSECURE",
+      "app_id": "APP-VISITOR-SHIELD",
+      "app_name": "Visitor Access Shield",
+      "category": "security",
+      "installed_at": "2026-04-26T00:00:00+00:00",
+      "installed_by": "system",
+      "status": "connected",
+      "version": "2.6.3",
+      "config_masked": {
+        "workspace": "TEN-GOVSECURE",
+        "mode": "demo_safe"
+      },
+      "last_health_check": "2026-04-26T00:00:00+00:00",
+      "usage_count": 282,
+      "billing_addon_value": 299,
+      "enabled": true,
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "installation_id": "INT-GOVSECURE-DRONE-FLEET",
+      "tenant_id": "TEN-GOVSECURE",
+      "app_id": "APP-DRONE-FLEET",
+      "app_name": "Drone Fleet Control",
+      "category": "field_facility_iot",
+      "installed_at": "2026-04-26T00:00:00+00:00",
+      "installed_by": "system",
+      "status": "connected",
+      "version": "1.9.0",
+      "config_masked": {
+        "workspace": "TEN-GOVSECURE",
+        "mode": "demo_safe"
+      },
+      "last_health_check": "2026-04-26T00:00:00+00:00",
+      "usage_count": 255,
+      "billing_addon_value": 699,
+      "enabled": true,
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "installation_id": "INT-GOVSECURE-SNOW-RESPONSE",
+      "tenant_id": "TEN-GOVSECURE",
+      "app_id": "APP-SNOW-RESPONSE",
+      "app_name": "ServiceNow Response Flow",
+      "category": "itsm_ticketing",
+      "installed_at": "2026-04-26T00:00:00+00:00",
+      "installed_by": "system",
+      "status": "connected",
+      "version": "4.8.2",
+      "config_masked": {
+        "workspace": "TEN-GOVSECURE",
+        "mode": "demo_safe"
+      },
+      "last_health_check": "2026-04-26T00:00:00+00:00",
+      "usage_count": 273,
+      "billing_addon_value": 399,
+      "enabled": true,
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "installation_id": "INT-GRAND-MERIDIAN-SLACK-CRISIS",
+      "tenant_id": "TEN-GRAND-MERIDIAN",
+      "app_id": "APP-SLACK-CRISIS",
+      "app_name": "Slack Crisis Bridge",
+      "category": "communication",
+      "installed_at": "2026-04-26T00:00:00+00:00",
+      "installed_by": "system",
+      "status": "connected",
+      "version": "4.2.0",
+      "config_masked": {
+        "workspace": "TEN-GRAND-MERIDIAN",
+        "mode": "demo_safe"
+      },
+      "last_health_check": "2026-04-26T00:00:00+00:00",
+      "usage_count": 264,
+      "billing_addon_value": 129,
+      "enabled": true,
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "installation_id": "INT-GRAND-MERIDIAN-GMAPS-EVAC",
+      "tenant_id": "TEN-GRAND-MERIDIAN",
+      "app_id": "APP-GMAPS-EVAC",
+      "app_name": "Google Maps Evac Layer",
+      "category": "maps_location",
+      "installed_at": "2026-04-26T00:00:00+00:00",
+      "installed_by": "system",
+      "status": "connected",
+      "version": "5.4.0",
+      "config_masked": {
+        "workspace": "TEN-GRAND-MERIDIAN",
+        "mode": "demo_safe"
+      },
+      "last_health_check": "2026-04-26T00:00:00+00:00",
+      "usage_count": 246,
+      "billing_addon_value": 249,
+      "enabled": true,
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "installation_id": "INT-GRAND-MERIDIAN-WHATSPRO",
+      "tenant_id": "TEN-GRAND-MERIDIAN",
+      "app_id": "APP-WHATSAPP-PRO",
+      "app_name": "WhatsApp Broadcast Pro",
+      "category": "communication",
+      "installed_at": "2026-04-26T00:00:00+00:00",
+      "installed_by": "system",
+      "status": "connected",
+      "version": "2.4.1",
+      "config_masked": {
+        "workspace": "TEN-GRAND-MERIDIAN",
+        "mode": "demo_safe"
+      },
+      "last_health_check": "2026-04-26T00:00:00+00:00",
+      "usage_count": 264,
+      "billing_addon_value": 159,
+      "enabled": true,
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    }
+  ],
+  "vendors": [
+    {
+      "vendor_id": "VEN-SALESFORCE",
+      "tenant_id": "TEN-GRAND-MERIDIAN",
+      "name": "Salesforce",
+      "category": "business systems",
+      "support_score": 96,
+      "revenue_generated": 184000,
+      "certification_badge": "verified enterprise",
+      "response_sla_hours": 4,
+      "trust_score": 94,
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "vendor_id": "VEN-MICROSOFT",
+      "tenant_id": "TEN-BALA-HOSP",
+      "name": "Microsoft",
+      "category": "communication + identity",
+      "support_score": 97,
+      "revenue_generated": 216000,
+      "certification_badge": "verified government",
+      "response_sla_hours": 3,
+      "trust_score": 96,
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "vendor_id": "VEN-SERVICENOW",
+      "tenant_id": "TEN-GOVSECURE",
+      "name": "ServiceNow",
+      "category": "workflow automation",
+      "support_score": 94,
+      "revenue_generated": 142000,
+      "certification_badge": "certified partner",
+      "response_sla_hours": 5,
+      "trust_score": 92,
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "vendor_id": "VEN-SKYOPS",
+      "tenant_id": "TEN-BALA-MFG",
+      "name": "SkyOps Robotics",
+      "category": "field robotics",
+      "support_score": 88,
+      "revenue_generated": 96000,
+      "certification_badge": "security reviewed",
+      "response_sla_hours": 8,
+      "trust_score": 86,
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    }
+  ],
+  "partners": [
+    {
+      "partner_id": "PAR-ACCENTURE",
+      "tenant_id": "TEN-GRAND-MERIDIAN",
+      "name": "Accenture Safety Cloud",
+      "type": "implementation firm",
+      "region": "global",
+      "certified_consultants": 84,
+      "co_sell_pipeline": 2400000,
+      "response_sla_hours": 6,
+      "partner_score": 95,
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "partner_id": "PAR-TCS",
+      "tenant_id": "TEN-BALA-HOSP",
+      "name": "TCS Smart Facilities",
+      "type": "channel partner",
+      "region": "India",
+      "certified_consultants": 62,
+      "co_sell_pipeline": 1280000,
+      "response_sla_hours": 8,
+      "partner_score": 91,
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "partner_id": "PAR-GOVTECH",
+      "tenant_id": "TEN-GOVSECURE",
+      "name": "Strategic GovTech Fund",
+      "type": "government partner",
+      "region": "APAC Gov",
+      "certified_consultants": 22,
+      "co_sell_pipeline": 3400000,
+      "response_sla_hours": 4,
+      "partner_score": 93,
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "partner_id": "PAR-SAFETYOPS",
+      "tenant_id": "TEN-BALA-MFG",
+      "name": "SafetyOps Integrators",
+      "type": "implementation firm",
+      "region": "industrial",
+      "certified_consultants": 31,
+      "co_sell_pipeline": 780000,
+      "response_sla_hours": 10,
+      "partner_score": 87,
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    }
+  ],
+  "reviews": [
+    {
+      "review_id": "REV-001",
+      "tenant_id": "TEN-GRAND-MERIDIAN",
+      "app_id": "APP-SLACK-CRISIS",
+      "author": "Grand Meridian Ops",
+      "rating": 5,
+      "title": "Incident rooms feel native",
+      "body": "Slack Crisis Bridge shortened executive escalation during drills.",
+      "created_at": "2026-04-20T10:00:00+00:00",
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "review_id": "REV-002",
+      "tenant_id": "TEN-BALA-HOSP",
+      "app_id": "APP-WHATSAPP-PRO",
+      "author": "Hospital Command",
+      "rating": 4,
+      "title": "Reliable broadcast fallback",
+      "body": "Template approvals and retries make regulated communications cleaner.",
+      "created_at": "2026-04-21T12:00:00+00:00",
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "review_id": "REV-003",
+      "tenant_id": "TEN-GOVSECURE",
+      "app_id": "APP-SNOW-RESPONSE",
+      "author": "Gov Response Lead",
+      "rating": 5,
+      "title": "Workflow audit trail is excellent",
+      "body": "ServiceNow Response Flow gives procurement a clean control story.",
+      "created_at": "2026-04-22T14:00:00+00:00",
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    }
+  ],
+  "billing_addons": [
+    {
+      "addon_id": "ADDON-AI-VOICE",
+      "tenant_id": "TEN-BALA-HOSP",
+      "app_id": "APP-AI-VOICE",
+      "name": "AI Voice Call Escalation",
+      "mrr": 8200,
+      "status": "active",
+      "plan_fit": "Enterprise",
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "addon_id": "ADDON-EVAC-MAPS",
+      "tenant_id": "TEN-GRAND-MERIDIAN",
+      "app_id": "APP-GMAPS-EVAC",
+      "name": "Google Maps Evac Layer",
+      "mrr": 12400,
+      "status": "active",
+      "plan_fit": "Enterprise",
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "addon_id": "ADDON-DRONES",
+      "tenant_id": "TEN-GOVSECURE",
+      "app_id": "APP-DRONE-FLEET",
+      "name": "Drone Fleet Control",
+      "mrr": 15600,
+      "status": "trial",
+      "plan_fit": "Government",
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    }
+  ],
+  "revenue_share": [
+    {
+      "share_id": "REVSH-001",
+      "tenant_id": "TEN-GRAND-MERIDIAN",
+      "vendor": "Google",
+      "app_id": "APP-GMAPS-EVAC",
+      "gross_mrr": 12400,
+      "take_rate": 22,
+      "partner_payout": 9672,
+      "sentra_revenue": 2728,
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "share_id": "REVSH-002",
+      "tenant_id": "TEN-BALA-HOSP",
+      "vendor": "VoiceOps AI",
+      "app_id": "APP-AI-VOICE",
+      "gross_mrr": 8200,
+      "take_rate": 25,
+      "partner_payout": 6150,
+      "sentra_revenue": 2050,
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "share_id": "REVSH-003",
+      "tenant_id": "TEN-GOVSECURE",
+      "vendor": "SkyOps Robotics",
+      "app_id": "APP-DRONE-FLEET",
+      "gross_mrr": 15600,
+      "take_rate": 18,
+      "partner_payout": 12792,
+      "sentra_revenue": 2808,
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    }
+  ],
+  "trials": [
+    {
+      "trial_id": "TRL-001",
+      "tenant_id": "TEN-BALA-HOSP",
+      "app_id": "APP-AI-VOICE",
+      "stage": "active",
+      "days_left": 11,
+      "conversion_probability": 71,
+      "expansion_mrr": 8200,
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "trial_id": "TRL-002",
+      "tenant_id": "TEN-GOVSECURE",
+      "app_id": "APP-DRONE-FLEET",
+      "stage": "security review",
+      "days_left": 18,
+      "conversion_probability": 64,
+      "expansion_mrr": 15600,
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "trial_id": "TRL-003",
+      "tenant_id": "TEN-BALA-UNI",
+      "app_id": "APP-BOARD-PDF",
+      "stage": "converted",
+      "days_left": 0,
+      "conversion_probability": 100,
+      "expansion_mrr": 2400,
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    }
+  ],
+  "failed_sync_alerts": [
+    {
+      "alert_id": "SYNC-001",
+      "tenant_id": "TEN-BALA-HOSP",
+      "app_id": "APP-WHATSAPP-PRO",
+      "severity": "medium",
+      "title": "WhatsApp template sync delayed",
+      "status": "retrying",
+      "last_seen": "2026-04-26T07:30:00+00:00",
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "alert_id": "SYNC-002",
+      "tenant_id": "TEN-BALA-MFG",
+      "app_id": "APP-POWER-GRID",
+      "severity": "low",
+      "title": "Power telemetry lag above SLA",
+      "status": "watch",
+      "last_seen": "2026-04-26T06:55:00+00:00",
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    }
+  ],
+  "automation_templates": [
+    {
+      "template_id": "AUTO-N8N-FIRE",
+      "tenant_id": "TEN-GRAND-MERIDIAN",
+      "name": "n8n fire response connector",
+      "provider": "n8n",
+      "trigger": "incident.created",
+      "actions": [
+        "open workflow",
+        "notify responders",
+        "export evidence"
+      ],
+      "installs": 44,
+      "success_rate": 98,
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "template_id": "AUTO-SLACK-ROOM",
+      "tenant_id": "TEN-BALA-UNI",
+      "name": "Slack emergency room automation",
+      "provider": "Slack",
+      "trigger": "alert.critical",
+      "actions": [
+        "create channel",
+        "pin checklist",
+        "page lead"
+      ],
+      "installs": 72,
+      "success_rate": 99,
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "template_id": "AUTO-TEAMS-APPROVAL",
+      "tenant_id": "TEN-BALA-HOSP",
+      "name": "Teams executive approval workflow",
+      "provider": "Teams",
+      "trigger": "approval.required",
+      "actions": [
+        "send card",
+        "collect decision",
+        "audit result"
+      ],
+      "installs": 51,
+      "success_rate": 97,
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "template_id": "AUTO-SMS-FLOW",
+      "tenant_id": "TEN-GOVSECURE",
+      "name": "SMS silent-zone retry flow",
+      "provider": "SMS",
+      "trigger": "communications.silent",
+      "actions": [
+        "retry alternate channel",
+        "notify manager"
+      ],
+      "installs": 38,
+      "success_rate": 96,
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "template_id": "AUTO-BOARD-REPORT",
+      "tenant_id": "TEN-GRAND-MERIDIAN",
+      "name": "Executive report auto-export",
+      "provider": "Board PDF Exporter",
+      "trigger": "incident.closed",
+      "actions": [
+        "generate PDF",
+        "send to board room"
+      ],
+      "installs": 29,
+      "success_rate": 99,
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    }
+  ],
+  "security_approvals": [
+    {
+      "approval_id": "SEC-APP-001",
+      "tenant_id": "TEN-GRAND-MERIDIAN",
+      "app_id": "APP-SLACK-CRISIS",
+      "trust_score": 94,
+      "permission_risk": 18,
+      "data_access_class": "Internal",
+      "status": "approved",
+      "reviewer": "Security Admin",
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "approval_id": "SEC-APP-002",
+      "tenant_id": "TEN-GOVSECURE",
+      "app_id": "APP-DRONE-FLEET",
+      "trust_score": 86,
+      "permission_risk": 36,
+      "data_access_class": "Sensitive facility",
+      "status": "pending",
+      "reviewer": "Gov CISO",
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "approval_id": "SEC-APP-003",
+      "tenant_id": "TEN-BALA-HOSP",
+      "app_id": "APP-AI-VOICE",
+      "trust_score": 89,
+      "permission_risk": 28,
+      "data_access_class": "PII",
+      "status": "approved",
+      "reviewer": "Privacy Officer",
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    }
+  ],
+  "usage_stats": [
+    {
+      "usage_id": "MKT-USG-001",
+      "tenant_id": "TEN-GRAND-MERIDIAN",
+      "app_id": "APP-GMAPS-EVAC",
+      "monthly_events": 184200,
+      "active_users": 420,
+      "health": 98,
+      "expansion_signal": "high",
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "usage_id": "MKT-USG-002",
+      "tenant_id": "TEN-BALA-HOSP",
+      "app_id": "APP-AI-VOICE",
+      "monthly_events": 64200,
+      "active_users": 180,
+      "health": 96,
+      "expansion_signal": "medium",
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "usage_id": "MKT-USG-003",
+      "tenant_id": "TEN-GOVSECURE",
+      "app_id": "APP-DRONE-FLEET",
+      "monthly_events": 31200,
+      "active_users": 48,
+      "health": 92,
+      "expansion_signal": "high",
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    }
+  ],
+  "events": []
+}

@@ -1,0 +1,219 @@
+{
+  "metrics": [
+    {
+      "tenant_id": "TEN-BALA-UNI",
+      "decision_supremacy": 94,
+      "trust_score": 88,
+      "learning_improvement_percent": 14,
+      "accepted_decisions_percent": 71,
+      "rejected_decisions_percent": 12,
+      "override_rate_percent": 17,
+      "best_objective": "fastest recovery",
+      "avg_recovery_eta_minutes": 11,
+      "playbooks_learned": 37,
+      "prediction_accuracy_percent": 89,
+      "self_heal_success_percent": 96,
+      "human_confidence": 91,
+      "board_confidence": 86,
+      "current_objective": "fastest recovery",
+      "autonomy_mode": "approval_required",
+      "updated_at": "2026-04-24T18:45:01.586491+00:00"
+    },
+    {
+      "tenant_id": "TEN-BALA-MFG",
+      "decision_supremacy": 94,
+      "trust_score": 88,
+      "learning_improvement_percent": 14,
+      "accepted_decisions_percent": 71,
+      "rejected_decisions_percent": 12,
+      "override_rate_percent": 17,
+      "best_objective": "fastest recovery",
+      "avg_recovery_eta_minutes": 11,
+      "playbooks_learned": 37,
+      "prediction_accuracy_percent": 89,
+      "self_heal_success_percent": 96,
+      "human_confidence": 91,
+      "board_confidence": 86,
+      "current_objective": "fastest recovery",
+      "autonomy_mode": "approval_required",
+      "updated_at": "2026-04-24T18:43:43.148204+00:00"
+    },
+    {
+      "tenant_id": "TEN-BALA-HOSPITAL",
+      "decision_supremacy": 94,
+      "trust_score": 88,
+      "learning_improvement_percent": 14,
+      "accepted_decisions_percent": 71,
+      "rejected_decisions_percent": 12,
+      "override_rate_percent": 17,
+      "best_objective": "fastest recovery",
+      "avg_recovery_eta_minutes": 11,
+      "playbooks_learned": 37,
+      "prediction_accuracy_percent": 89,
+      "self_heal_success_percent": 96,
+      "human_confidence": 91,
+      "board_confidence": 86,
+      "current_objective": "fastest recovery",
+      "autonomy_mode": "approval_required",
+      "updated_at": "2026-04-24T18:43:43.148213+00:00"
+    },
+    {
+      "tenant_id": "TEN-GOVSEC-SOUTH",
+      "decision_supremacy": 94,
+      "trust_score": 88,
+      "learning_improvement_percent": 14,
+      "accepted_decisions_percent": 71,
+      "rejected_decisions_percent": 12,
+      "override_rate_percent": 17,
+      "best_objective": "fastest recovery",
+      "avg_recovery_eta_minutes": 11,
+      "playbooks_learned": 37,
+      "prediction_accuracy_percent": 89,
+      "self_heal_success_percent": 96,
+      "human_confidence": 91,
+      "board_confidence": 86,
+      "current_objective": "fastest recovery",
+      "autonomy_mode": "approval_required",
+      "updated_at": "2026-04-24T18:43:43.148218+00:00"
+    }
+  ],
+  "events": [
+    {
+      "event_id": "AUTO-EVT-B4F4AC93",
+      "tenant_id": "TEN-BALA-UNI",
+      "action": "learning_cycle_run",
+      "actor": "system",
+      "summary": "Initial autonomy memory weights seeded from accepted crisis outcomes.",
+      "risk_score": 18,
+      "created_at": "2026-04-24T18:43:43.148271+00:00",
+      "metadata": {}
+    },
+    {
+      "event_id": "AUTO-EVT-7363EC56",
+      "tenant_id": "TEN-BALA-UNI",
+      "action": "objective_set",
+      "actor": "admin@sentra.local",
+      "summary": "Autonomy objective set to protect reputation.",
+      "risk_score": 24,
+      "created_at": "2026-04-24T18:43:59.877533+00:00",
+      "metadata": {
+        "reason": "smoke test"
+      }
+    },
+    {
+      "event_id": "AUTO-EVT-9112F3FE",
+      "tenant_id": "TEN-BALA-UNI",
+      "action": "learning_cycle_run",
+      "actor": "admin@sentra.local",
+      "summary": "Learning cycle completed and playbook weights improved.",
+      "risk_score": 12,
+      "created_at": "2026-04-24T18:44:00.000674+00:00",
+      "metadata": {
+        "playbooks_learned": 38
+      }
+    },
+    {
+      "event_id": "AUTO-EVT-42E458A9",
+      "tenant_id": "TEN-BALA-UNI",
+      "action": "self_heal_run",
+      "actor": "admin@sentra.local",
+      "summary": "Self-healing core refreshed stale guards, sockets, and cache posture.",
+      "risk_score": 16,
+      "created_at": "2026-04-24T18:44:00.120419+00:00",
+      "metadata": {
+        "self_heal_success_percent": 97
+      }
+    },
+    {
+      "event_id": "AUTO-EVT-E95AC5C4",
+      "tenant_id": "TEN-BALA-UNI",
+      "action": "autonomy_mode_set",
+      "actor": "admin@sentra.local",
+      "summary": "Autonomy governance mode set to semi_auto.",
+      "risk_score": 28,
+      "created_at": "2026-04-24T18:44:00.202628+00:00",
+      "metadata": {
+        "override_id": "AUTO-OVR-7C9CA6E3",
+        "reason": "smoke test"
+      }
+    },
+    {
+      "event_id": "AUTO-EVT-D6298281",
+      "tenant_id": "TEN-BALA-UNI",
+      "action": "objective_set",
+      "actor": "admin@sentra.local",
+      "summary": "Autonomy objective set to protect reputation.",
+      "risk_score": 24,
+      "created_at": "2026-04-24T18:45:01.328589+00:00",
+      "metadata": {
+        "reason": "smoke test"
+      }
+    },
+    {
+      "event_id": "AUTO-EVT-3CBB201C",
+      "tenant_id": "TEN-BALA-UNI",
+      "action": "learning_cycle_run",
+      "actor": "admin@sentra.local",
+      "summary": "Learning cycle completed and playbook weights improved.",
+      "risk_score": 12,
+      "created_at": "2026-04-24T18:45:01.412224+00:00",
+      "metadata": {
+        "playbooks_learned": 38
+      }
+    },
+    {
+      "event_id": "AUTO-EVT-81C568CA",
+      "tenant_id": "TEN-BALA-UNI",
+      "action": "self_heal_run",
+      "actor": "admin@sentra.local",
+      "summary": "Self-healing core refreshed stale guards, sockets, and cache posture.",
+      "risk_score": 16,
+      "created_at": "2026-04-24T18:45:01.493637+00:00",
+      "metadata": {
+        "self_heal_success_percent": 97
+      }
+    },
+    {
+      "event_id": "AUTO-EVT-8E4E67DC",
+      "tenant_id": "TEN-BALA-UNI",
+      "action": "autonomy_mode_set",
+      "actor": "admin@sentra.local",
+      "summary": "Autonomy governance mode set to semi_auto.",
+      "risk_score": 28,
+      "created_at": "2026-04-24T18:45:01.586548+00:00",
+      "metadata": {
+        "override_id": "AUTO-OVR-6FDB2840",
+        "reason": "smoke test"
+      }
+    }
+  ],
+  "overrides": [
+    {
+      "override_id": "AUTO-OVR-DB68EB93",
+      "tenant_id": "TEN-BALA-UNI",
+      "actor": "operations_commander",
+      "reason": "Kept evacuation corridor open during crowd pressure drill.",
+      "risk_score": 42,
+      "mode": "approval_required",
+      "timestamp": "2026-04-24T18:43:43.148297+00:00"
+    },
+    {
+      "override_id": "AUTO-OVR-7C9CA6E3",
+      "tenant_id": "TEN-BALA-UNI",
+      "actor": "admin@sentra.local",
+      "reason": "smoke test",
+      "risk_score": 28,
+      "mode": "semi_auto",
+      "timestamp": "2026-04-24T18:44:00.202618+00:00"
+    },
+    {
+      "override_id": "AUTO-OVR-6FDB2840",
+      "tenant_id": "TEN-BALA-UNI",
+      "actor": "admin@sentra.local",
+      "reason": "smoke test",
+      "risk_score": 28,
+      "mode": "semi_auto",
+      "timestamp": "2026-04-24T18:45:01.586533+00:00"
+    }
+  ]
+}

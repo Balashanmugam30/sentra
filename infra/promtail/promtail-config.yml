@@ -1,0 +1,30 @@
+server:
+  http_listen_port: 9080
+  grpc_listen_port: 0
+
+positions:
+  filename: /tmp/positions.yaml
+
+clients:
+  - url: http://loki:3100/loki/api/v1/push
+
+scrape_configs:
+  - job_name: sentra-backend-json
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: sentra-backend
+          service: sentra-backend
+          __path__: /data/logs/*.jsonl
+    pipeline_stages:
+      - json:
+          expressions:
+            level: level
+            trace_id: trace_id
+            route: route
+            status: status
+      - labels:
+          level:
+          route:
+          status:

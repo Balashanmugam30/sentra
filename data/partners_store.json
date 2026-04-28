@@ -1,0 +1,117 @@
+{
+  "partners": [
+    {
+      "partner_id": "PAR-SHIELD-GLOBAL",
+      "name": "ShieldGrid Global",
+      "country": "United States",
+      "partner_type": "systems_integrator",
+      "tier": "platinum",
+      "specialization": "SOC transformation and critical infrastructure deployments",
+      "certifications": [
+        "Sentra SOC Architect",
+        "Zero Trust Integration",
+        "Public Safety Command"
+      ],
+      "revenue_generated": 840000,
+      "leads_sent": 34,
+      "win_rate": 41,
+      "commission_due": 68400,
+      "health_score": 92,
+      "status": "approved",
+      "created_at": "2026-04-24T16:43:37.085845+00:00",
+      "updated_at": "2026-04-24T16:43:37.085845+00:00"
+    },
+    {
+      "partner_id": "PAR-BHARAT-OPS",
+      "name": "Bharat Ops Consulting",
+      "country": "India",
+      "partner_type": "implementation_partner",
+      "tier": "gold",
+      "specialization": "University, hospital, and smart campus rollout programs",
+      "certifications": [
+        "Sentra Implementation Lead",
+        "GIS Command Specialist"
+      ],
+      "revenue_generated": 420000,
+      "leads_sent": 27,
+      "win_rate": 37,
+      "commission_due": 31500,
+      "health_score": 86,
+      "status": "approved",
+      "created_at": "2026-04-24T16:43:37.085858+00:00",
+      "updated_at": "2026-04-24T16:43:37.085858+00:00"
+    },
+    {
+      "partner_id": "PAR-CIVIC-GOV",
+      "name": "CivicSecure Alliance",
+      "country": "Singapore",
+      "partner_type": "government_partner",
+      "tier": "platinum",
+      "specialization": "Government crisis command and sovereign deployments",
+      "certifications": [
+        "Government Hardened Audit",
+        "Partner Revenue Elite"
+      ],
+      "revenue_generated": 1240000,
+      "leads_sent": 19,
+      "win_rate": 52,
+      "commission_due": 124000,
+      "health_score": 95,
+      "status": "approved",
+      "created_at": "2026-04-24T16:43:37.085861+00:00",
+      "updated_at": "2026-04-24T16:43:37.085861+00:00"
+    },
+    {
+      "partner_id": "PAR-MEDFLOW",
+      "name": "MedFlow Systems",
+      "country": "United Kingdom",
+      "partner_type": "reseller",
+      "tier": "silver",
+      "specialization": "Hospital command centers and clinical safety operations",
+      "certifications": [
+        "Healthcare Response Partner"
+      ],
+      "revenue_generated": 210000,
+      "leads_sent": 16,
+      "win_rate": 29,
+      "commission_due": 18900,
+      "health_score": 78,
+      "status": "approved",
+      "created_at": "2026-04-24T16:43:37.085864+00:00",
+      "updated_at": "2026-04-24T16:43:37.085864+00:00"
+    }
+  ],
+  "referrals": [
+    {
+      "referral_id": "REF-FF6B8C45",
+      "tenant_id": "TEN-BALA-UNI",
+      "partner_id": "PAR-BHARAT-OPS",
+      "company_name": "Metro Campus Group",
+      "contact_email": "ops@metrocampus.example",
+      "deal_value": 180000,
+      "status": "proposal",
+      "created_at": "2026-04-24T16:43:37.085888+00:00"
+    },
+    {
+      "referral_id": "REF-20A90989",
+      "tenant_id": "TEN-BALA-MFG",
+      "partner_id": "PAR-SHIELD-GLOBAL",
+      "company_name": "Titan Industrial",
+      "contact_email": "security@titan.example",
+      "deal_value": 260000,
+      "status": "demo",
+      "created_at": "2026-04-24T16:43:37.085895+00:00"
+    },
+    {
+      "referral_id": "REF-99ACF1EA",
+      "tenant_id": "TEN-BALA-HOSP",
+      "partner_id": "PAR-MEDFLOW",
+      "company_name": "SmartCare Network",
+      "contact_email": "cxo@smartcare.example",
+      "deal_value": 140000,
+      "status": "qualified",
+      "created_at": "2026-04-24T16:43:37.085900+00:00"
+    }
+  ],
+  "payouts": []
+}

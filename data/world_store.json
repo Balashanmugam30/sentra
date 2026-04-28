@@ -1,0 +1,118 @@
+{
+  "metrics": [
+    {
+      "tenant_id": "TEN-BALA-UNI",
+      "countries_live": 52,
+      "threats_active": 7,
+      "global_stability": 84,
+      "continuity_score": 88,
+      "supremacy_score": 97,
+      "forecast_accuracy": 93,
+      "economic_pressure": "moderate",
+      "pandemic_watch_zones": 3,
+      "climate_alerts": 5,
+      "supply_chain_chokepoints": 4,
+      "diplomacy_index": 86,
+      "satellite_resilience": 91,
+      "generated_mode": "global_sentience",
+      "updated_at": "2026-04-25T04:55:12.533471+00:00"
+    },
+    {
+      "tenant_id": "TEN-BALA-MFG",
+      "countries_live": 52,
+      "threats_active": 7,
+      "global_stability": 84,
+      "continuity_score": 88,
+      "supremacy_score": 97,
+      "forecast_accuracy": 93,
+      "economic_pressure": "moderate",
+      "pandemic_watch_zones": 3,
+      "climate_alerts": 5,
+      "supply_chain_chokepoints": 4,
+      "diplomacy_index": 86,
+      "satellite_resilience": 91,
+      "generated_mode": "global_sentience",
+      "updated_at": "2026-04-25T04:55:11.848303+00:00"
+    },
+    {
+      "tenant_id": "TEN-BALA-HOSPITAL",
+      "countries_live": 52,
+      "threats_active": 7,
+      "global_stability": 84,
+      "continuity_score": 88,
+      "supremacy_score": 97,
+      "forecast_accuracy": 93,
+      "economic_pressure": "moderate",
+      "pandemic_watch_zones": 3,
+      "climate_alerts": 5,
+      "supply_chain_chokepoints": 4,
+      "diplomacy_index": 86,
+      "satellite_resilience": 91,
+      "generated_mode": "global_sentience",
+      "updated_at": "2026-04-25T04:55:11.848307+00:00"
+    },
+    {
+      "tenant_id": "TEN-GOVSEC-SOUTH",
+      "countries_live": 52,
+      "threats_active": 7,
+      "global_stability": 84,
+      "continuity_score": 88,
+      "supremacy_score": 97,
+      "forecast_accuracy": 93,
+      "economic_pressure": "moderate",
+      "pandemic_watch_zones": 3,
+      "climate_alerts": 5,
+      "supply_chain_chokepoints": 4,
+      "diplomacy_index": 86,
+      "satellite_resilience": 91,
+      "generated_mode": "global_sentience",
+      "updated_at": "2026-04-25T04:55:11.848310+00:00"
+    }
+  ],
+  "events": [
+    {
+      "event_id": "WORLD-EVT-9EE202D7",
+      "tenant_id": "TEN-BALA-UNI",
+      "action": "global_demo_started",
+      "actor": "system",
+      "summary": "World Command Grid demo posture initialized with 52 live countries.",
+      "severity": "low",
+      "created_at": "2026-04-25T04:55:11.848353+00:00",
+      "metadata": {}
+    },
+    {
+      "event_id": "WORLD-EVT-DE8F1094",
+      "tenant_id": "TEN-BALA-UNI",
+      "action": "world_simulation_run",
+      "actor": "admin@sentra.local",
+      "summary": "Global simulation executed for economic shock test.",
+      "severity": "medium",
+      "created_at": "2026-04-25T04:55:12.439601+00:00",
+      "metadata": {
+        "scenario": "economic shock test"
+      }
+    },
+    {
+      "event_id": "WORLD-EVT-ACB6B058",
+      "tenant_id": "TEN-BALA-UNI",
+      "action": "global_demo_started",
+      "actor": "admin@sentra.local",
+      "summary": "Prestige global demo mode launched.",
+      "severity": "low",
+      "created_at": "2026-04-25T04:55:12.489035+00:00",
+      "metadata": {
+        "supremacy_score": 97
+      }
+    },
+    {
+      "event_id": "WORLD-EVT-E4417534",
+      "tenant_id": "TEN-BALA-UNI",
+      "action": "world_grid_reset",
+      "actor": "admin@sentra.local",
+      "summary": "World Command Grid reset to seeded global posture.",
+      "severity": "low",
+      "created_at": "2026-04-25T04:55:12.533514+00:00",
+      "metadata": {}
+    }
+  ]
+}

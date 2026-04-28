@@ -1,0 +1,30 @@
+{
+  "tenants": [
+    "TEN-BALA-UNI",
+    "TEN-BALA-MFG",
+    "TEN-BALA-HOSP",
+    "TEN-GOV-SOUTH"
+  ],
+  "events": [
+    {
+      "event_id": "CIV-EVT-9CEEBC693C",
+      "tenant_id": "TEN-BALA-UNI",
+      "action": "continuity_sim_executed",
+      "target": "CONT-EE7D8DE6C8",
+      "created_at": "2026-04-25T06:56:32.945892+00:00"
+    }
+  ],
+  "continuity_sims": [
+    {
+      "simulation_id": "CONT-EE7D8DE6C8",
+      "tenant_id": "TEN-BALA-UNI",
+      "created_at": "2026-04-25T06:56:32.944693+00:00",
+      "population_protected": 428000000,
+      "recovery_eta_minutes": 24,
+      "coordination_score_after": 98,
+      "recommendation": "activate cross-sector continuity bridge across grid, health, transport, and water command."
+    }
+  ],
+  "disaster_models": [],
+  "briefs": []
+}

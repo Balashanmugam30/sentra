@@ -1,0 +1,219 @@
+{
+  "organizations": [
+    {
+      "id": "TEN-BALA-UNI",
+      "slug": "bala-university",
+      "name": "Bala University",
+      "industry": "university",
+      "size": "12,000 students",
+      "country": "India",
+      "timezone": "Asia/Calcutta",
+      "logo_url": "",
+      "primary_color": "#67e8f9",
+      "status": "active",
+      "plan": "enterprise",
+      "created_at": "2026-04-25T04:55:11.735715+00:00"
+    },
+    {
+      "id": "TEN-BALA-MFG",
+      "slug": "bala-manufacturing",
+      "name": "Bala Manufacturing",
+      "industry": "factory",
+      "size": "4,500 staff",
+      "country": "India",
+      "timezone": "Asia/Calcutta",
+      "logo_url": "",
+      "primary_color": "#f59e0b",
+      "status": "active",
+      "plan": "business",
+      "created_at": "2026-04-25T04:55:11.735760+00:00"
+    },
+    {
+      "id": "TEN-BALA-HOSP",
+      "slug": "bala-hospital-demo",
+      "name": "Bala Hospital Demo",
+      "industry": "hospital",
+      "size": "900 beds",
+      "country": "India",
+      "timezone": "Asia/Calcutta",
+      "logo_url": "",
+      "primary_color": "#38bdf8",
+      "status": "active",
+      "plan": "government",
+      "created_at": "2026-04-25T04:55:11.735773+00:00"
+    }
+  ],
+  "plans": [
+    {
+      "tenant_id": "TEN-BALA-UNI",
+      "plan_name": "Enterprise",
+      "seats_limit": 10000,
+      "modules_enabled": [
+        "full_command_center",
+        "custom_branding",
+        "sso_ready",
+        "advanced_ai"
+      ],
+      "api_limit": 1000000,
+      "storage_limit_gb": 2000,
+      "description": "Unlimited command center with custom branding and SSO-ready posture."
+    },
+    {
+      "tenant_id": "TEN-BALA-MFG",
+      "plan_name": "Business",
+      "seats_limit": 50,
+      "modules_enabled": [
+        "dashboard",
+        "soc",
+        "ai",
+        "reports",
+        "field",
+        "geo"
+      ],
+      "api_limit": 100000,
+      "storage_limit_gb": 250,
+      "description": "AI modules, reports, and operational workflows."
+    },
+    {
+      "tenant_id": "TEN-BALA-HOSP",
+      "plan_name": "Government",
+      "seats_limit": 50000,
+      "modules_enabled": [
+        "isolated_deployment",
+        "audit_hardened",
+        "premium_support",
+        "full_command_center"
+      ],
+      "api_limit": 5000000,
+      "storage_limit_gb": 10000,
+      "description": "Isolated deployment mode with hardened audit and premium support."
+    }
+  ],
+  "memberships": [
+    {
+      "user_id": "USR-202006275b",
+      "tenant_id": "TEN-BALA-UNI",
+      "email": "admin@sentra.local",
+      "name": "Sentra Admin",
+      "role": "owner",
+      "department": "Command",
+      "invited_by": "system",
+      "joined_at": "2026-04-25T04:55:12.141869+00:00",
+      "active": true
+    },
+    {
+      "user_id": "USR-202006275b",
+      "tenant_id": "TEN-BALA-MFG",
+      "email": "admin@sentra.local",
+      "name": "Sentra Admin",
+      "role": "owner",
+      "department": "Command",
+      "invited_by": "system",
+      "joined_at": "2026-04-25T04:55:12.141899+00:00",
+      "active": true
+    },
+    {
+      "user_id": "USR-202006275b",
+      "tenant_id": "TEN-BALA-HOSP",
+      "email": "admin@sentra.local",
+      "name": "Sentra Admin",
+      "role": "owner",
+      "department": "Command",
+      "invited_by": "system",
+      "joined_at": "2026-04-25T04:55:12.141908+00:00",
+      "active": true
+    },
+    {
+      "user_id": "USR-c925c83585",
+      "tenant_id": "TEN-BALA-UNI",
+      "email": "admin@sentra.demo",
+      "name": "Sentra Admin",
+      "role": "owner",
+      "department": "Command",
+      "invited_by": "system",
+      "joined_at": "2026-04-25T11:41:49.501095+00:00",
+      "active": true
+    },
+    {
+      "user_id": "USR-c925c83585",
+      "tenant_id": "TEN-BALA-MFG",
+      "email": "admin@sentra.demo",
+      "name": "Sentra Admin",
+      "role": "owner",
+      "department": "Command",
+      "invited_by": "system",
+      "joined_at": "2026-04-25T11:41:49.501120+00:00",
+      "active": true
+    },
+    {
+      "user_id": "USR-c925c83585",
+      "tenant_id": "TEN-BALA-HOSP",
+      "email": "admin@sentra.demo",
+      "name": "Sentra Admin",
+      "role": "owner",
+      "department": "Command",
+      "invited_by": "system",
+      "joined_at": "2026-04-25T11:41:49.501130+00:00",
+      "active": true
+    },
+    {
+      "user_id": "LiyiRAwF8yfUGStrjKip9VvDKqK2",
+      "tenant_id": "TEN-BALA-UNI",
+      "email": "harshabala47@gmail.com",
+      "name": "Bala",
+      "role": "viewer",
+      "department": "Observers",
+      "invited_by": "system",
+      "joined_at": "2026-04-26T15:34:24.093341+00:00",
+      "active": true
+    },
+    {
+      "user_id": "USR-a40972ee79",
+      "tenant_id": "TEN-BALA-UNI",
+      "email": "staff@sentra.demo",
+      "name": "Zone Staff",
+      "role": "operator",
+      "department": "Zone 3",
+      "invited_by": "system",
+      "joined_at": "2026-04-28T11:50:10.664723+00:00",
+      "active": true
+    }
+  ],
+  "usage": [
+    {
+      "tenant_id": "TEN-BALA-UNI",
+      "active_users": 4,
+      "incidents_month": 21,
+      "ai_actions_month": 106,
+      "reports_generated": 16,
+      "api_calls_month": 7003,
+      "storage_used_gb": 15.4
+    },
+    {
+      "tenant_id": "TEN-BALA-MFG",
+      "active_users": 10,
+      "incidents_month": 20,
+      "ai_actions_month": 88,
+      "reports_generated": 19,
+      "api_calls_month": 6877,
+      "storage_used_gb": 13.6
+    },
+    {
+      "tenant_id": "TEN-BALA-HOSP",
+      "active_users": 10,
+      "incidents_month": 14,
+      "ai_actions_month": 99,
+      "reports_generated": 10,
+      "api_calls_month": 7549,
+      "storage_used_gb": 11.2
+    }
+  ],
+  "active_tenant_by_user": {
+    "USR-202006275b": "TEN-BALA-UNI",
+    "USR-c925c83585": "TEN-BALA-UNI",
+    "LiyiRAwF8yfUGStrjKip9VvDKqK2": "TEN-BALA-UNI",
+    "USR-a40972ee79": "TEN-BALA-UNI"
+  },
+  "invites": [],
+  "events": []
+}

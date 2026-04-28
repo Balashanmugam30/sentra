@@ -1,0 +1,647 @@
+{
+  "lead_sources": [
+    {
+      "source_id": "website",
+      "tenant_id": "TEN-BALA-UNI",
+      "name": "Website",
+      "leads": 3460,
+      "conversion_rate": 5.2,
+      "cac": 124,
+      "pipeline_value": 5577520,
+      "status": "scaling"
+    },
+    {
+      "source_id": "referral",
+      "tenant_id": "TEN-BALA-UNI",
+      "name": "Referral",
+      "leads": 1180,
+      "conversion_rate": 11.8,
+      "cac": 64,
+      "pipeline_value": 4316440,
+      "status": "dominant"
+    },
+    {
+      "source_id": "linkedin",
+      "tenant_id": "TEN-BALA-UNI",
+      "name": "LinkedIn",
+      "leads": 1040,
+      "conversion_rate": 6.9,
+      "cac": 146,
+      "pipeline_value": 2224560,
+      "status": "scaling"
+    },
+    {
+      "source_id": "cold_outbound",
+      "tenant_id": "TEN-BALA-UNI",
+      "name": "Cold outbound",
+      "leads": 920,
+      "conversion_rate": 3.6,
+      "cac": 192,
+      "pipeline_value": 1026720,
+      "status": "scaling"
+    },
+    {
+      "source_id": "demo_request",
+      "tenant_id": "TEN-BALA-UNI",
+      "name": "Demo request",
+      "leads": 641,
+      "conversion_rate": 18.4,
+      "cac": 82,
+      "pipeline_value": 3818560,
+      "status": "dominant"
+    },
+    {
+      "source_id": "partnership",
+      "tenant_id": "TEN-BALA-UNI",
+      "name": "Partnership",
+      "leads": 520,
+      "conversion_rate": 13.1,
+      "cac": 70,
+      "pipeline_value": 2111720,
+      "status": "dominant"
+    },
+    {
+      "source_id": "organic_search",
+      "tenant_id": "TEN-BALA-UNI",
+      "name": "Organic search",
+      "leads": 360,
+      "conversion_rate": 7.4,
+      "cac": 108,
+      "pipeline_value": 825840,
+      "status": "scaling"
+    },
+    {
+      "source_id": "waitlist",
+      "tenant_id": "TEN-BALA-UNI",
+      "name": "Waitlist",
+      "leads": 120,
+      "conversion_rate": 9.2,
+      "cac": 56,
+      "pipeline_value": 342240,
+      "status": "scaling"
+    },
+    {
+      "source_id": "website",
+      "tenant_id": "TEN-BALA-MFG",
+      "name": "Website",
+      "leads": 3460,
+      "conversion_rate": 5.2,
+      "cac": 124,
+      "pipeline_value": 5577520,
+      "status": "scaling"
+    },
+    {
+      "source_id": "referral",
+      "tenant_id": "TEN-BALA-MFG",
+      "name": "Referral",
+      "leads": 1180,
+      "conversion_rate": 11.8,
+      "cac": 64,
+      "pipeline_value": 4316440,
+      "status": "dominant"
+    },
+    {
+      "source_id": "linkedin",
+      "tenant_id": "TEN-BALA-MFG",
+      "name": "LinkedIn",
+      "leads": 1040,
+      "conversion_rate": 6.9,
+      "cac": 146,
+      "pipeline_value": 2224560,
+      "status": "scaling"
+    },
+    {
+      "source_id": "cold_outbound",
+      "tenant_id": "TEN-BALA-MFG",
+      "name": "Cold outbound",
+      "leads": 920,
+      "conversion_rate": 3.6,
+      "cac": 192,
+      "pipeline_value": 1026720,
+      "status": "scaling"
+    },
+    {
+      "source_id": "demo_request",
+      "tenant_id": "TEN-BALA-MFG",
+      "name": "Demo request",
+      "leads": 640,
+      "conversion_rate": 18.4,
+      "cac": 82,
+      "pipeline_value": 3650560,
+      "status": "dominant"
+    },
+    {
+      "source_id": "partnership",
+      "tenant_id": "TEN-BALA-MFG",
+      "name": "Partnership",
+      "leads": 520,
+      "conversion_rate": 13.1,
+      "cac": 70,
+      "pipeline_value": 2111720,
+      "status": "dominant"
+    },
+    {
+      "source_id": "organic_search",
+      "tenant_id": "TEN-BALA-MFG",
+      "name": "Organic search",
+      "leads": 360,
+      "conversion_rate": 7.4,
+      "cac": 108,
+      "pipeline_value": 825840,
+      "status": "scaling"
+    },
+    {
+      "source_id": "waitlist",
+      "tenant_id": "TEN-BALA-MFG",
+      "name": "Waitlist",
+      "leads": 120,
+      "conversion_rate": 9.2,
+      "cac": 56,
+      "pipeline_value": 342240,
+      "status": "scaling"
+    },
+    {
+      "source_id": "website",
+      "tenant_id": "TEN-BALA-HOSP",
+      "name": "Website",
+      "leads": 3460,
+      "conversion_rate": 5.2,
+      "cac": 124,
+      "pipeline_value": 5577520,
+      "status": "scaling"
+    },
+    {
+      "source_id": "referral",
+      "tenant_id": "TEN-BALA-HOSP",
+      "name": "Referral",
+      "leads": 1180,
+      "conversion_rate": 11.8,
+      "cac": 64,
+      "pipeline_value": 4316440,
+      "status": "dominant"
+    },
+    {
+      "source_id": "linkedin",
+      "tenant_id": "TEN-BALA-HOSP",
+      "name": "LinkedIn",
+      "leads": 1040,
+      "conversion_rate": 6.9,
+      "cac": 146,
+      "pipeline_value": 2224560,
+      "status": "scaling"
+    },
+    {
+      "source_id": "cold_outbound",
+      "tenant_id": "TEN-BALA-HOSP",
+      "name": "Cold outbound",
+      "leads": 920,
+      "conversion_rate": 3.6,
+      "cac": 192,
+      "pipeline_value": 1026720,
+      "status": "scaling"
+    },
+    {
+      "source_id": "demo_request",
+      "tenant_id": "TEN-BALA-HOSP",
+      "name": "Demo request",
+      "leads": 640,
+      "conversion_rate": 18.4,
+      "cac": 82,
+      "pipeline_value": 3650560,
+      "status": "dominant"
+    },
+    {
+      "source_id": "partnership",
+      "tenant_id": "TEN-BALA-HOSP",
+      "name": "Partnership",
+      "leads": 520,
+      "conversion_rate": 13.1,
+      "cac": 70,
+      "pipeline_value": 2111720,
+      "status": "dominant"
+    },
+    {
+      "source_id": "organic_search",
+      "tenant_id": "TEN-BALA-HOSP",
+      "name": "Organic search",
+      "leads": 360,
+      "conversion_rate": 7.4,
+      "cac": 108,
+      "pipeline_value": 825840,
+      "status": "scaling"
+    },
+    {
+      "source_id": "waitlist",
+      "tenant_id": "TEN-BALA-HOSP",
+      "name": "Waitlist",
+      "leads": 120,
+      "conversion_rate": 9.2,
+      "cac": 56,
+      "pipeline_value": 342240,
+      "status": "scaling"
+    }
+  ],
+  "referral_programs": [
+    {
+      "program_id": "REF-386E620508",
+      "tenant_id": "TEN-BALA-HOSP",
+      "name": "Crisis Leader Referral",
+      "tier": "invite_friend",
+      "referrals_sent": 940,
+      "referrals_accepted": 245,
+      "revenue_generated": 70000,
+      "top_ambassador": "Bala University Safety Office",
+      "reward": "1 free executive report pack"
+    },
+    {
+      "program_id": "REF-45F4B3DBED",
+      "tenant_id": "TEN-BALA-HOSP",
+      "name": "Enterprise Partner Loop",
+      "tier": "partner_referral",
+      "referrals_sent": 480,
+      "referrals_accepted": 123,
+      "revenue_generated": 124000,
+      "top_ambassador": "CivicSecure Alliance",
+      "reward": "12% first-year commission"
+    },
+    {
+      "program_id": "REF-FC07008CE6",
+      "tenant_id": "TEN-BALA-HOSP",
+      "name": "Government Continuity Network",
+      "tier": "enterprise_referral",
+      "referrals_sent": 214,
+      "referrals_accepted": 58,
+      "revenue_generated": 212000,
+      "top_ambassador": "GovSecure South",
+      "reward": "priority sovereign onboarding"
+    },
+    {
+      "program_id": "REF-BE1C1D8C13",
+      "tenant_id": "TEN-BALA-MFG",
+      "name": "Crisis Leader Referral",
+      "tier": "invite_friend",
+      "referrals_sent": 940,
+      "referrals_accepted": 245,
+      "revenue_generated": 70000,
+      "top_ambassador": "Bala University Safety Office",
+      "reward": "1 free executive report pack"
+    },
+    {
+      "program_id": "REF-3B8212F161",
+      "tenant_id": "TEN-BALA-MFG",
+      "name": "Enterprise Partner Loop",
+      "tier": "partner_referral",
+      "referrals_sent": 480,
+      "referrals_accepted": 123,
+      "revenue_generated": 124000,
+      "top_ambassador": "CivicSecure Alliance",
+      "reward": "12% first-year commission"
+    },
+    {
+      "program_id": "REF-DFDB6024EA",
+      "tenant_id": "TEN-BALA-MFG",
+      "name": "Government Continuity Network",
+      "tier": "enterprise_referral",
+      "referrals_sent": 214,
+      "referrals_accepted": 58,
+      "revenue_generated": 212000,
+      "top_ambassador": "GovSecure South",
+      "reward": "priority sovereign onboarding"
+    },
+    {
+      "program_id": "REF-C4E0C5A547",
+      "tenant_id": "TEN-BALA-UNI",
+      "name": "Crisis Leader Referral",
+      "tier": "invite_friend",
+      "referrals_sent": 940,
+      "referrals_accepted": 245,
+      "revenue_generated": 70000,
+      "top_ambassador": "Bala University Safety Office",
+      "reward": "1 free executive report pack"
+    },
+    {
+      "program_id": "REF-FA3707F0C0",
+      "tenant_id": "TEN-BALA-UNI",
+      "name": "Enterprise Partner Loop",
+      "tier": "partner_referral",
+      "referrals_sent": 480,
+      "referrals_accepted": 123,
+      "revenue_generated": 124000,
+      "top_ambassador": "CivicSecure Alliance",
+      "reward": "12% first-year commission"
+    },
+    {
+      "program_id": "REF-598DC4D60F",
+      "tenant_id": "TEN-BALA-UNI",
+      "name": "Government Continuity Network",
+      "tier": "enterprise_referral",
+      "referrals_sent": 214,
+      "referrals_accepted": 58,
+      "revenue_generated": 212000,
+      "top_ambassador": "GovSecure South",
+      "reward": "priority sovereign onboarding"
+    }
+  ],
+  "sales_actions": [
+    {
+      "action_id": "SDR-D657D7BA89",
+      "tenant_id": "TEN-BALA-UNI",
+      "title": "Call 41 demo-request leads before 11:00",
+      "segment": "Hot leads",
+      "priority": "critical",
+      "expected_revenue": 128000,
+      "confidence": 92,
+      "next_step": "Assign founder + senior AE sequence."
+    },
+    {
+      "action_id": "SDR-9ACA4FF1EC",
+      "tenant_id": "TEN-BALA-UNI",
+      "title": "Unblock 7 procurement reviews",
+      "segment": "Stalled deals",
+      "priority": "high",
+      "expected_revenue": 244000,
+      "confidence": 86,
+      "next_step": "Send security packet and board ROI memo."
+    },
+    {
+      "action_id": "SDR-B65A387484",
+      "tenant_id": "TEN-BALA-UNI",
+      "title": "Expand 12 crisis command tenants",
+      "segment": "Upsell accounts",
+      "priority": "high",
+      "expected_revenue": 172000,
+      "confidence": 84,
+      "next_step": "Offer Executive + Autonomy bundle."
+    },
+    {
+      "action_id": "SDR-FC2B494AF8",
+      "tenant_id": "TEN-BALA-UNI",
+      "title": "Save 3 delayed annual renewals",
+      "segment": "Renewal rescue",
+      "priority": "high",
+      "expected_revenue": 96000,
+      "confidence": 81,
+      "next_step": "Schedule CSM + executive risk review."
+    },
+    {
+      "action_id": "SDR-82D4494EE7",
+      "tenant_id": "TEN-BALA-UNI",
+      "title": "Engage 5 airport and smart-city accounts",
+      "segment": "Enterprise whales",
+      "priority": "critical",
+      "expected_revenue": 520000,
+      "confidence": 78,
+      "next_step": "Launch multi-threaded executive outreach."
+    },
+    {
+      "action_id": "SDR-B42D91B67E",
+      "tenant_id": "TEN-BALA-MFG",
+      "title": "Call 41 demo-request leads before 11:00",
+      "segment": "Hot leads",
+      "priority": "critical",
+      "expected_revenue": 128000,
+      "confidence": 92,
+      "next_step": "Assign founder + senior AE sequence."
+    },
+    {
+      "action_id": "SDR-8513A51A4D",
+      "tenant_id": "TEN-BALA-MFG",
+      "title": "Unblock 7 procurement reviews",
+      "segment": "Stalled deals",
+      "priority": "high",
+      "expected_revenue": 244000,
+      "confidence": 86,
+      "next_step": "Send security packet and board ROI memo."
+    },
+    {
+      "action_id": "SDR-2A7FCF91F5",
+      "tenant_id": "TEN-BALA-MFG",
+      "title": "Expand 12 crisis command tenants",
+      "segment": "Upsell accounts",
+      "priority": "high",
+      "expected_revenue": 172000,
+      "confidence": 84,
+      "next_step": "Offer Executive + Autonomy bundle."
+    },
+    {
+      "action_id": "SDR-588C463068",
+      "tenant_id": "TEN-BALA-MFG",
+      "title": "Save 3 delayed annual renewals",
+      "segment": "Renewal rescue",
+      "priority": "high",
+      "expected_revenue": 96000,
+      "confidence": 81,
+      "next_step": "Schedule CSM + executive risk review."
+    },
+    {
+      "action_id": "SDR-21F7316FA1",
+      "tenant_id": "TEN-BALA-MFG",
+      "title": "Engage 5 airport and smart-city accounts",
+      "segment": "Enterprise whales",
+      "priority": "critical",
+      "expected_revenue": 520000,
+      "confidence": 78,
+      "next_step": "Launch multi-threaded executive outreach."
+    },
+    {
+      "action_id": "SDR-8CBB2229B7",
+      "tenant_id": "TEN-BALA-HOSP",
+      "title": "Call 41 demo-request leads before 11:00",
+      "segment": "Hot leads",
+      "priority": "critical",
+      "expected_revenue": 128000,
+      "confidence": 92,
+      "next_step": "Assign founder + senior AE sequence."
+    },
+    {
+      "action_id": "SDR-667A91CADB",
+      "tenant_id": "TEN-BALA-HOSP",
+      "title": "Unblock 7 procurement reviews",
+      "segment": "Stalled deals",
+      "priority": "high",
+      "expected_revenue": 244000,
+      "confidence": 86,
+      "next_step": "Send security packet and board ROI memo."
+    },
+    {
+      "action_id": "SDR-D46EF8A692",
+      "tenant_id": "TEN-BALA-HOSP",
+      "title": "Expand 12 crisis command tenants",
+      "segment": "Upsell accounts",
+      "priority": "high",
+      "expected_revenue": 172000,
+      "confidence": 84,
+      "next_step": "Offer Executive + Autonomy bundle."
+    },
+    {
+      "action_id": "SDR-D79266933E",
+      "tenant_id": "TEN-BALA-HOSP",
+      "title": "Save 3 delayed annual renewals",
+      "segment": "Renewal rescue",
+      "priority": "high",
+      "expected_revenue": 96000,
+      "confidence": 81,
+      "next_step": "Schedule CSM + executive risk review."
+    },
+    {
+      "action_id": "SDR-7409A7152B",
+      "tenant_id": "TEN-BALA-HOSP",
+      "title": "Engage 5 airport and smart-city accounts",
+      "segment": "Enterprise whales",
+      "priority": "critical",
+      "expected_revenue": 520000,
+      "confidence": 78,
+      "next_step": "Launch multi-threaded executive outreach."
+    },
+    {
+      "action_id": "LEAD-28CFD02A2B",
+      "tenant_id": "TEN-BALA-UNI",
+      "title": "New high-intent lead: Atlas Airport Authority",
+      "segment": "demo_request",
+      "priority": "high",
+      "expected_revenue": 168000,
+      "confidence": 83,
+      "next_step": "Book crisis readiness demo and generate buyer risk memo."
+    }
+  ],
+  "custom_leads": [
+    {
+      "lead_id": "RLEAD-AAB38E8919",
+      "tenant_id": "TEN-BALA-UNI",
+      "company_name": "Atlas Airport Authority",
+      "contact_name": "Mira Stone",
+      "email": "mira@apexcontinuity.example",
+      "source": "demo_request",
+      "expected_value": 168000,
+      "score": 88,
+      "status": "qualified",
+      "created_at": "2026-04-25T05:23:30.034622+00:00"
+    }
+  ],
+  "pricing_tests": [
+    {
+      "test_id": "PTEST-15CA596F9B",
+      "tenant_id": "TEN-BALA-UNI",
+      "winner": {
+        "experiment_id": "annual_badge",
+        "tenant_id": "TEN-BALA-UNI",
+        "name": "Annual with most-popular badge",
+        "plan": "Growth",
+        "variant": "Annual discount + social proof",
+        "conversion_rate": 9.8,
+        "arpu": 412,
+        "confidence": 80,
+        "winner": false
+      },
+      "projected_mrr_lift": 18600,
+      "pricing_message": "Annual executive continuity anchor outperforms monthly self-serve for high-trust buyers.",
+      "recommended_rollout": "Route public-sector and enterprise traffic to demo-gated annual plans.",
+      "created_at": "2026-04-25T05:23:03.598900+00:00"
+    },
+    {
+      "test_id": "PTEST-594C0B0F60",
+      "tenant_id": "TEN-BALA-UNI",
+      "winner": {
+        "experiment_id": "annual_badge",
+        "tenant_id": "TEN-BALA-UNI",
+        "name": "Annual with most-popular badge",
+        "plan": "Growth",
+        "variant": "Annual discount + social proof",
+        "conversion_rate": 9.8,
+        "arpu": 412,
+        "confidence": 80,
+        "winner": false
+      },
+      "projected_mrr_lift": 18600,
+      "pricing_message": "Annual executive continuity anchor outperforms monthly self-serve for high-trust buyers.",
+      "recommended_rollout": "Route public-sector and enterprise traffic to demo-gated annual plans.",
+      "created_at": "2026-04-25T05:23:29.988716+00:00"
+    }
+  ],
+  "campaigns": [
+    {
+      "campaign_id": "RCAMP-F2D2BFE79F",
+      "tenant_id": "TEN-BALA-HOSP",
+      "name": "executive_referral_sprint",
+      "created_at": "2026-04-25T05:23:30.111104+00:00",
+      "status": "active"
+    },
+    {
+      "campaign_id": "RCAMP-E93A94855F",
+      "tenant_id": "TEN-BALA-MFG",
+      "name": "executive_referral_sprint",
+      "created_at": "2026-04-25T05:23:30.111200+00:00",
+      "status": "active"
+    },
+    {
+      "campaign_id": "RCAMP-69B2279378",
+      "tenant_id": "TEN-BALA-UNI",
+      "name": "executive_referral_sprint",
+      "created_at": "2026-04-25T05:23:30.111214+00:00",
+      "status": "active"
+    }
+  ],
+  "simulations": [
+    {
+      "simulation_id": "RSIM-264BF9A147",
+      "tenant_id": "TEN-BALA-HOSP",
+      "scenario": "boardroom_viral_loop",
+      "new_growth_score": 97,
+      "organic_coefficient": 1.34,
+      "projected_incremental_arr": 214000,
+      "recommended_loop": "executive report export -> board share -> demo request",
+      "created_at": "2026-04-25T05:23:30.196380+00:00"
+    }
+  ],
+  "events": [
+    {
+      "event_id": "RGEVT-0E7BB49958",
+      "tenant_id": "TEN-BALA-UNI",
+      "action": "pricing_test_launched",
+      "target": "annual_badge",
+      "created_at": "2026-04-25T05:23:03.598918+00:00"
+    },
+    {
+      "event_id": "RGEVT-08239DC9A2",
+      "tenant_id": "TEN-BALA-UNI",
+      "action": "pricing_test_launched",
+      "target": "annual_badge",
+      "created_at": "2026-04-25T05:23:29.988733+00:00"
+    },
+    {
+      "event_id": "RGEVT-A8726DC1AA",
+      "tenant_id": "TEN-BALA-UNI",
+      "action": "lead_created",
+      "target": "RLEAD-AAB38E8919",
+      "created_at": "2026-04-25T05:23:30.046646+00:00"
+    },
+    {
+      "event_id": "RGEVT-9FD68143D0",
+      "tenant_id": "TEN-BALA-HOSP",
+      "action": "campaign_started",
+      "target": "executive_referral_sprint",
+      "created_at": "2026-04-25T05:23:30.111178+00:00"
+    },
+    {
+      "event_id": "RGEVT-FAE631F4A3",
+      "tenant_id": "TEN-BALA-MFG",
+      "action": "campaign_started",
+      "target": "executive_referral_sprint",
+      "created_at": "2026-04-25T05:23:30.111205+00:00"
+    },
+    {
+      "event_id": "RGEVT-1E4E1943D1",
+      "tenant_id": "TEN-BALA-UNI",
+      "action": "campaign_started",
+      "target": "executive_referral_sprint",
+      "created_at": "2026-04-25T05:23:30.111218+00:00"
+    },
+    {
+      "event_id": "RGEVT-8DFBCD5CD0",
+      "tenant_id": "TEN-BALA-HOSP",
+      "action": "simulation_run",
+      "target": "boardroom_viral_loop",
+      "created_at": "2026-04-25T05:23:30.196391+00:00"
+    }
+  ]
+}

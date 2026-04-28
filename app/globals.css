@@ -1,0 +1,5073 @@
+@import "tailwindcss";
+@import "leaflet/dist/leaflet.css";
+@import "../styles/tokens.css";
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scroll-behavior: auto;
+}
+
+body {
+  min-height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  margin: 0;
+  background: #05070b;
+  color: #ffffff;
+  font-family: var(--font-body), var(--font-sans), system-ui, sans-serif;
+  letter-spacing: -0.011em;
+  text-rendering: geometricPrecision;
+}
+
+.app-container {
+  height: 100vh;
+  overflow: hidden;
+}
+
+.main-content {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.settings-container {
+  height: 100%;
+  overflow-y: auto;
+}
+
+.cursor-glow {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  background: radial-gradient(
+    180px circle at var(--x, 50%) var(--y, 50%),
+    color-mix(in srgb, var(--text) 5%, transparent),
+    transparent 70%
+  );
+}
+
+.grid-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: radial-gradient(var(--border) 1px, transparent 1px);
+  background-size: 12px 12px;
+  transition: transform 0.2s ease-out;
+}
+
+.depth-glow {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 20% 30%, color-mix(in srgb, var(--text) 3%, transparent), transparent 40%),
+    radial-gradient(circle at 80% 70%, color-mix(in srgb, var(--text) 2%, transparent), transparent 50%);
+}
+
+.level-1 {
+  background: var(--surface);
+  backdrop-filter: blur(10px);
+}
+
+.level-2 {
+  background: var(--surface-strong);
+  backdrop-filter: blur(14px);
+}
+
+.level-3 {
+  background: var(--surface-strong);
+  backdrop-filter: blur(18px);
+}
+
+.app-container button,
+.app-container a,
+.app-container [role="button"] {
+  position: relative;
+  overflow: hidden;
+}
+
+.app-container button::after,
+.app-container a::after,
+.app-container [role="button"]::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at var(--x, 50%) var(--y, 50%),
+    color-mix(in srgb, var(--text) 8%, transparent),
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+}
+
+.app-container button:hover::after,
+.app-container a:hover::after,
+.app-container [role="button"]:hover::after {
+  opacity: 1;
+}
+
+@keyframes sentra-route-flow {
+  0% {
+    stroke-dashoffset: 0;
+  }
+
+  100% {
+    stroke-dashoffset: -36;
+  }
+}
+
+@keyframes sentra-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0.42;
+  }
+
+  50% {
+    transform: translate3d(10px, -6px, 0);
+    opacity: 0.9;
+  }
+}
+
+@keyframes sentra-toast-in {
+  0% {
+    opacity: 0;
+    transform: translate3d(-50%, 12px, 0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes sentra-auth-fade {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 8px, 0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes sentra-panel-pulse {
+  0%,
+  100% {
+    opacity: 0.34;
+    transform: scale(0.985);
+  }
+
+  50% {
+    opacity: 0.6;
+    transform: scale(1.015);
+  }
+}
+
+@keyframes sentra-fab-breathe {
+  0%,
+  100% {
+    box-shadow: var(--sentra-shadow-fab);
+    transform: translate3d(0, 0, 0);
+  }
+
+  50% {
+    box-shadow:
+      0 20px 48px rgba(7, 10, 19, 0.42),
+      0 0 30px rgba(121, 94, 235, 0.22);
+    transform: translate3d(0, -2px, 0);
+  }
+}
+
+@keyframes sentra-grid-shimmer {
+  0% {
+    opacity: 0.12;
+  }
+
+  50% {
+    opacity: 0.18;
+  }
+
+  100% {
+    opacity: 0.12;
+  }
+}
+
+@keyframes sentra-surface-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  50% {
+    transform: translate3d(0, -2px, 0);
+  }
+}
+
+@keyframes sentra-premium-sheen {
+  0% {
+    transform: translateX(-120%);
+  }
+
+  100% {
+    transform: translateX(120%);
+  }
+}
+
+@keyframes sentra-live-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(103, 232, 249, 0.18);
+  }
+
+  50% {
+    box-shadow: 0 0 0 8px rgba(103, 232, 249, 0);
+  }
+}
+
+@keyframes sentra-panel-rise {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 10px, 0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes sentra-dashboard-entry {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 8px, 0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes sentra-warning-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.16);
+  }
+
+  50% {
+    box-shadow: 0 0 0 8px rgba(245, 158, 11, 0);
+  }
+}
+
+@keyframes sentra-critical-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(244, 63, 94, 0.2);
+  }
+
+  50% {
+    box-shadow: 0 0 0 10px rgba(244, 63, 94, 0);
+  }
+}
+
+::selection {
+  background: rgba(103, 232, 249, 0.22);
+  color: #ffffff;
+}
+
+:focus-visible {
+  outline: 2px solid rgba(103, 232, 249, 0.76);
+  outline-offset: 3px;
+}
+
+[id] {
+  scroll-margin-top: 6rem;
+}
+
+.sentra-skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 100;
+  transform: translateY(-160%);
+  border: 1px solid rgba(125, 211, 252, 0.3);
+  border-radius: 999px;
+  background: rgba(5, 7, 11, 0.92);
+  padding: 0.75rem 1rem;
+  color: #ffffff;
+  font-size: 0.875rem;
+  font-weight: 700;
+  box-shadow: 0 18px 54px rgba(0, 0, 0, 0.34);
+  backdrop-filter: blur(18px);
+  transition:
+    transform 180ms ease,
+    background 180ms ease;
+}
+
+.sentra-skip-link:focus-visible {
+  transform: translateY(0);
+}
+
+.sentra-copilot-root {
+  right: max(1rem, env(safe-area-inset-right));
+  bottom: max(1rem, env(safe-area-inset-bottom));
+}
+
+.sentra-premium-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background:
+    radial-gradient(circle at top left, rgba(103, 232, 249, 0.12), transparent 36%),
+    rgba(255, 255, 255, 0.045);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.24);
+  backdrop-filter: blur(20px);
+}
+
+.sentra-premium-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+  opacity: 0;
+  transform: translateX(-120%);
+  pointer-events: none;
+}
+
+.sentra-premium-card:hover::before {
+  animation: sentra-premium-sheen 1.2s ease;
+  opacity: 1;
+}
+
+.sentra-live-dot {
+  animation: sentra-live-pulse 1.8s ease-in-out infinite;
+}
+
+.sentra-status-warning {
+  animation: sentra-warning-pulse 2.7s ease-in-out infinite;
+}
+
+.sentra-status-critical {
+  animation: sentra-critical-pulse 1.7s ease-in-out infinite;
+}
+
+.sentra-dashboard-shell {
+  isolation: isolate;
+  background:
+    radial-gradient(circle at 18% 10%, rgba(103, 232, 249, 0.12), transparent 28rem),
+    radial-gradient(circle at 88% 4%, rgba(245, 213, 138, 0.08), transparent 24rem),
+    linear-gradient(180deg, rgba(2, 6, 23, 0.08), transparent 18rem);
+  animation: sentra-dashboard-entry var(--sentra-motion-slow, 340ms) ease-out both;
+}
+
+.sentra-dashboard-shell::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.18;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 46px 46px;
+  mask-image: linear-gradient(to bottom, black, rgba(0, 0, 0, 0.52), transparent);
+}
+
+.sentra-dashboard-stack {
+  gap: clamp(1rem, 1.6vw, 1.75rem);
+  min-width: 0;
+}
+
+.sentra-command-section {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--sentra-radius-32);
+  border: 1px solid var(--border-soft);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.072), rgba(255, 255, 255, 0.032)),
+    var(--background-surface);
+  box-shadow: var(--sentra-shadow-medium);
+  backdrop-filter: blur(24px);
+  min-width: 0;
+}
+
+.sentra-command-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background:
+    radial-gradient(circle at 8% 0%, rgba(103, 232, 249, 0.13), transparent 22rem),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.055), transparent 8rem);
+}
+
+.sentra-section-header {
+  position: relative;
+  z-index: 1;
+  border-radius: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.075);
+  background: rgba(255, 255, 255, 0.035);
+  padding: clamp(1rem, 1.4vw, 1.25rem);
+  min-width: 0;
+}
+
+.sentra-section-eyebrow {
+  color: color-mix(in srgb, var(--premium-cyan) 72%, white 12%);
+  letter-spacing: 0.24em;
+}
+
+.sentra-panel-frame {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+  opacity: 0;
+  transform: translate3d(0, 10px, 0);
+  animation: sentra-panel-rise 320ms ease-out forwards;
+  animation-delay: var(--sentra-stagger, 0ms);
+  transition:
+    transform var(--sentra-motion-normal, 220ms) ease,
+    filter var(--sentra-motion-normal, 220ms) ease;
+}
+
+.sentra-panel-frame > * {
+  min-width: 0;
+}
+
+.sentra-panel-frame :is(h1, h2, h3, h4, p, span, div) {
+  overflow-wrap: break-word;
+}
+
+.sentra-panel-frame:hover {
+  transform: translate3d(0, -2px, 0);
+  filter: drop-shadow(0 18px 42px rgba(0, 0, 0, 0.18));
+}
+
+.sentra-panel-frame :is(section, article, aside):first-child,
+.sentra-panel-frame > div:first-child {
+  border-color: color-mix(in srgb, var(--border-soft) 72%, white 6%);
+}
+
+.sentra-panel-skeleton {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--sentra-radius-24);
+  border: 1px solid var(--border-soft);
+  background:
+    linear-gradient(110deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.04)),
+    var(--background-surface);
+  color: var(--text-muted);
+  box-shadow: var(--sentra-shadow-soft);
+}
+
+.sentra-panel-skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent, rgba(255, 255, 255, 0.12), transparent);
+  animation: sentra-premium-sheen 1.35s ease-in-out infinite;
+}
+
+.sentra-command-input {
+  min-height: 3rem;
+  border: 1px solid var(--border-soft);
+  background: var(--sentra-input-surface);
+  color: var(--text-primary);
+  transition:
+    border-color var(--sentra-motion-fast, 140ms) ease,
+    background var(--sentra-motion-fast, 140ms) ease,
+    box-shadow var(--sentra-motion-fast, 140ms) ease;
+}
+
+.sentra-command-input:focus {
+  border-color: color-mix(in srgb, var(--premium-cyan) 44%, white 10%);
+  background: var(--sentra-input-surface-strong);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--premium-cyan) 14%, transparent);
+}
+
+.sentra-auth-primary-button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(110deg, transparent 0%, rgba(255, 255, 255, 0.32) 44%, transparent 58%);
+  opacity: 0;
+  transform: translateX(-120%);
+  transition: opacity 180ms ease;
+}
+
+.sentra-auth-primary-button:hover::before {
+  animation: sentra-premium-sheen 1.05s ease;
+  opacity: 0.72;
+}
+
+.sentra-public-landing {
+  overflow-x: hidden;
+  background: #010101;
+}
+
+.sentra-public-background {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  height: 100svh;
+  min-height: 720px;
+  overflow: hidden;
+  pointer-events: none;
+  background: #010101;
+}
+
+.sentra-public-background--auth {
+  height: 100dvh;
+  min-height: 100dvh;
+}
+
+.sentra-public-dots {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  opacity: 0.31;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.66) 1.25px, transparent 1.25px);
+  background-size: 18px 18px;
+  mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 68%, rgba(0, 0, 0, 0.48) 78%, transparent 100%);
+}
+
+.landing-hero-dot-mask {
+  mask-image: linear-gradient(to bottom, black 0%, black 62%, rgba(0, 0, 0, 0.18) 78%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 62%, rgba(0, 0, 0, 0.18) 78%, transparent 100%);
+}
+
+.sentra-public-vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  background:
+    radial-gradient(circle at 50% 42%, transparent 0 18rem, rgba(0, 0, 0, 0.08) 34rem),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.12), transparent 34%, rgba(0, 0, 0, 0.16));
+}
+
+.sentra-public-aurora {
+  position: absolute;
+  inset-inline: -17vw;
+  bottom: -22vh;
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+  opacity: 0.95;
+  transform: translate3d(0, 0, 0);
+}
+
+.sentra-public-background--auth .sentra-public-aurora {
+  bottom: -26vh;
+  opacity: 0.8;
+}
+
+.sentra-public-aurora-image {
+  width: 142vw;
+  max-width: none;
+  min-width: 1800px;
+  height: auto;
+  mix-blend-mode: screen;
+  filter: brightness(1.16) contrast(1.08) saturate(1.15) blur(4px);
+  mask-image: linear-gradient(to top, black 22%, black 70%, transparent 100%);
+}
+
+.sentra-login-page {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  width: 100%;
+  height: 100dvh;
+  min-height: 100dvh;
+  place-items: center;
+  overflow: hidden;
+  padding: 20px;
+  color: #f7f8fb;
+  background: #010101;
+}
+
+.sentra-login-card {
+  width: min(420px, calc(100vw - 32px)) !important;
+  max-width: 420px !important;
+  max-height: calc(100dvh - 40px);
+  padding: clamp(24px, 3vh, 32px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 28px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.075), transparent 36%),
+    linear-gradient(145deg, rgba(22, 22, 27, 0.86), rgba(8, 9, 13, 0.76));
+  box-shadow:
+    0 34px 110px rgba(0, 0, 0, 0.58),
+    0 0 80px rgba(116, 96, 255, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(26px);
+}
+
+@media (max-height: 780px) and (min-width: 768px) {
+  .sentra-login-page {
+    padding: 16px;
+  }
+
+  .sentra-login-card {
+    width: min(410px, calc(100vw - 32px)) !important;
+    max-width: 410px !important;
+    padding: 20px;
+    border-radius: 26px;
+  }
+}
+
+html {
+  scrollbar-color: color-mix(in srgb, var(--premium-cyan) 34%, transparent) transparent;
+  scrollbar-width: thin;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  border: 3px solid transparent;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--premium-cyan) 34%, transparent);
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in srgb, var(--premium-cyan) 54%, transparent);
+  background-clip: content-box;
+}
+
+@media (max-width: 768px) {
+  .sentra-dashboard-shell {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .sentra-command-section {
+    border-radius: 1.5rem;
+    padding: 0.85rem;
+  }
+
+  .sentra-section-header {
+    border-radius: 1.125rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+body[data-lenis-prevent] {
+  overflow: hidden;
+}
+
+.lenis.lenis-smooth,
+html.lenis {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth body {
+  height: auto;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-smooth {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+@layer utilities {
+  .bg-canvas {
+    background: transparent !important;
+  }
+
+  .bg-surface {
+    background: transparent !important;
+  }
+
+  .text-foreground {
+    color: var(--text);
+  }
+
+  .text-muted {
+    color: var(--text-muted);
+  }
+
+  .border-subtle {
+    border-color: var(--border);
+  }
+
+  .ring-brand {
+    --tw-ring-color: color-mix(in srgb, var(--text) 18%, transparent);
+  }
+}
+
+/* Sentra UI Foundation 1.0 */
+.sentra-display-xl,
+.text-display-xl {
+  font-family: var(--font-display);
+  font-size: var(--type-display-xl);
+  line-height: 0.92;
+  letter-spacing: -0.075em;
+}
+
+.sentra-h1,
+.text-h1 {
+  font-family: var(--font-display);
+  font-size: var(--type-h1);
+  line-height: 0.98;
+  letter-spacing: -0.06em;
+}
+
+.sentra-h2,
+.text-h2 {
+  font-family: var(--font-display);
+  font-size: var(--type-h2);
+  line-height: 1.03;
+  letter-spacing: -0.05em;
+}
+
+.sentra-h3,
+.text-h3 {
+  font-family: var(--font-display);
+  font-size: var(--type-h3);
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+}
+
+.sentra-title,
+.text-title {
+  font-size: var(--type-title);
+  line-height: 1.22;
+  letter-spacing: -0.025em;
+}
+
+.sentra-body,
+.text-body {
+  font-size: var(--type-body);
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+.sentra-small,
+.text-small {
+  font-size: var(--type-small);
+  line-height: 1.55;
+}
+
+.sentra-caption,
+.text-caption,
+.sentra-label {
+  font-size: var(--type-caption);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.container-sm,
+.container-md,
+.container-xl,
+.container-full,
+.sentra-container-sm,
+.sentra-container-md,
+.sentra-container-xl,
+.sentra-container-full {
+  width: min(100% - 2rem, var(--container-size, 80rem));
+  margin-inline: auto;
+}
+
+.container-sm,
+.sentra-container-sm {
+  --container-size: 30rem;
+}
+
+.container-md,
+.sentra-container-md {
+  --container-size: 58rem;
+}
+
+.container-xl,
+.sentra-container-xl {
+  --container-size: 86rem;
+}
+
+.container-full,
+.sentra-container-full {
+  width: min(100% - 1rem, 100rem);
+}
+
+.grid-2,
+.grid-3,
+.grid-4,
+.grid-auto-fit {
+  display: grid;
+  gap: var(--space-24);
+}
+
+.grid-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.grid-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.grid-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.grid-auto-fit {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+}
+
+.glass-card,
+.glass-panel,
+.glass-nav,
+.glass-modal,
+.metric-card,
+.section-card {
+  position: relative;
+  border: 1px solid var(--border-soft);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.035)),
+    var(--surface-glass);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  transition:
+    transform var(--sentra-motion-normal) ease,
+    border-color var(--sentra-motion-normal) ease,
+    box-shadow var(--sentra-motion-normal) ease,
+    background var(--sentra-motion-normal) ease;
+}
+
+.glass-card,
+.metric-card,
+.section-card {
+  border-radius: var(--radius-large);
+}
+
+.glass-panel {
+  border-radius: var(--radius-xl);
+}
+
+.glass-nav {
+  border-radius: 999px;
+}
+
+.glass-modal {
+  border-radius: var(--radius-xl);
+  box-shadow: var(--sentra-shadow-modal);
+}
+
+.glass-card:hover,
+.glass-panel:hover,
+.metric-card:hover,
+.section-card:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--accent-3) 36%, var(--border-strong));
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.048)),
+    var(--surface-glass-strong);
+  box-shadow:
+    0 14px 44px rgba(0, 0, 0, 0.42),
+    0 0 30px rgba(34, 211, 238, 0.08);
+}
+
+.metric-card {
+  padding: var(--space-24);
+}
+
+.section-card {
+  padding: clamp(var(--space-20), 2vw, var(--space-32));
+}
+
+.sentra-premium-card,
+.sentra-command-section {
+  border-color: var(--border-soft);
+  background:
+    radial-gradient(circle at top left, rgba(139, 92, 246, 0.11), transparent 28rem),
+    radial-gradient(circle at top right, rgba(34, 211, 238, 0.09), transparent 24rem),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.035)),
+    rgba(5, 7, 11, 0.72);
+  box-shadow: var(--sentra-shadow-command);
+}
+
+.sentra-section-header,
+.sentra-panel-skeleton {
+  border-color: var(--border-soft);
+  background: rgba(255, 255, 255, 0.055);
+  backdrop-filter: blur(18px);
+}
+
+.btn-primary,
+.btn-secondary,
+.btn-ghost,
+.btn-danger,
+.sentra-button {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 999px;
+  padding: 0.75rem 1.1rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  transition:
+    transform var(--sentra-motion-fast) ease,
+    border-color var(--sentra-motion-fast) ease,
+    background var(--sentra-motion-fast) ease,
+    box-shadow var(--sentra-motion-fast) ease;
+}
+
+.btn-primary {
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: var(--sentra-accent-gradient);
+  color: white;
+  box-shadow: 0 12px 34px rgba(59, 130, 246, 0.22);
+}
+
+.btn-secondary {
+  border: 1px solid var(--border-soft);
+  background: var(--surface-glass);
+  color: var(--text-primary);
+}
+
+.btn-ghost {
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-secondary);
+}
+
+.btn-danger {
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  background: rgba(239, 68, 68, 0.14);
+  color: #fecaca;
+}
+
+.btn-primary:hover,
+.btn-secondary:hover,
+.btn-ghost:hover,
+.btn-danger:hover,
+.sentra-button:hover {
+  transform: translateY(-1px);
+}
+
+.glass-input,
+input:not([type="checkbox"]):not([type="radio"]),
+textarea,
+select {
+  border-color: var(--border-soft);
+  background: var(--sentra-input-surface);
+  color: var(--text-primary);
+}
+
+.glass-input:focus,
+input:not([type="checkbox"]):not([type="radio"]):focus,
+textarea:focus,
+select:focus {
+  border-color: color-mix(in srgb, var(--accent-3) 54%, white 8%);
+  box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.14);
+}
+
+.badge-live,
+.badge-success,
+.badge-warning,
+.badge-danger,
+.badge-neutral {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border-radius: 999px;
+  border: 1px solid var(--border-soft);
+  padding: 0.35rem 0.7rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.badge-live {
+  border-color: rgba(34, 211, 238, 0.22);
+  background: rgba(34, 211, 238, 0.1);
+  color: #a5f3fc;
+}
+
+.badge-success {
+  border-color: rgba(16, 185, 129, 0.24);
+  background: rgba(16, 185, 129, 0.12);
+  color: #a7f3d0;
+}
+
+.badge-warning {
+  border-color: rgba(245, 158, 11, 0.26);
+  background: rgba(245, 158, 11, 0.12);
+  color: #fde68a;
+}
+
+.badge-danger {
+  border-color: rgba(239, 68, 68, 0.28);
+  background: rgba(239, 68, 68, 0.13);
+  color: #fecaca;
+}
+
+.badge-neutral {
+  background: rgba(255, 255, 255, 0.07);
+  color: var(--text-secondary);
+}
+
+.premium-tabs {
+  display: inline-flex;
+  gap: 0.35rem;
+  border-radius: 999px;
+  border: 1px solid var(--border-soft);
+  background: rgba(255, 255, 255, 0.055);
+  padding: 0.35rem;
+  backdrop-filter: blur(18px);
+}
+
+.premium-tab {
+  border-radius: 999px;
+  padding: 0.55rem 0.9rem;
+  color: var(--text-secondary);
+  transition: all var(--sentra-motion-fast) ease;
+}
+
+.premium-tab[data-active="true"],
+.premium-tab[aria-selected="true"] {
+  background: var(--sentra-accent-gradient);
+  color: white;
+  box-shadow: 0 10px 24px rgba(59, 130, 246, 0.2);
+}
+
+/* Sentra UI Foundation Phase 2: authenticated shell */
+
+.sentra-shell-scroll {
+  scroll-padding-top: 7rem;
+}
+
+.sentra-app-sidebar {
+  position: fixed;
+  inset: 16px auto 16px 16px;
+  z-index: 60;
+  display: flex;
+  width: 264px;
+  min-width: 0;
+  flex-direction: column;
+  gap: 1rem;
+  overflow: hidden;
+  padding: 1rem;
+  border-radius: 32px;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(139, 92, 246, 0.14), transparent 18rem),
+    radial-gradient(circle at 100% 12%, rgba(34, 211, 238, 0.11), transparent 16rem),
+    rgba(5, 7, 11, 0.76);
+  box-shadow:
+    0 24px 70px rgba(0, 0, 0, 0.42),
+    inset 1px 0 0 rgba(34, 211, 238, 0.12);
+  transition:
+    width 260ms ease,
+    transform 260ms ease,
+    border-color 220ms ease;
+}
+
+.sentra-app-sidebar::after {
+  content: "";
+  position: absolute;
+  inset: 18px 0 18px auto;
+  width: 1px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, transparent, rgba(34, 211, 238, 0.46), transparent);
+  opacity: 0.72;
+}
+
+.sentra-app-sidebar.is-collapsed {
+  width: 72px;
+  padding-inline: 0.7rem;
+}
+
+.sentra-sidebar-brand {
+  display: flex;
+  min-height: 3.25rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sentra-sidebar-mark {
+  display: inline-flex;
+  height: 2.9rem;
+  width: 2.9rem;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 1.15rem;
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.78), rgba(59, 130, 246, 0.64), rgba(34, 211, 238, 0.55));
+  color: white;
+  font-size: 1.15rem;
+  font-weight: 800;
+  box-shadow: 0 14px 34px rgba(59, 130, 246, 0.2);
+}
+
+.sentra-global-search {
+  display: flex;
+  min-height: 3rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.055);
+  padding: 0.75rem 0.85rem;
+  color: rgba(248, 250, 252, 0.7);
+  font-size: 0.82rem;
+  font-weight: 700;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    background 180ms ease;
+}
+
+.sentra-global-search:hover {
+  transform: translateY(-1px);
+  border-color: rgba(34, 211, 238, 0.26);
+  background: rgba(255, 255, 255, 0.085);
+}
+
+.sentra-global-search kbd {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 0.25rem 0.45rem;
+  color: rgba(248, 250, 252, 0.46);
+  font-size: 0.62rem;
+  font-weight: 800;
+}
+
+.sentra-sidebar-section {
+  min-width: 0;
+}
+
+.sentra-sidebar-section-label {
+  margin: 0 0 0.55rem 0.6rem;
+  color: rgba(207, 250, 254, 0.44);
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+.sentra-shell-nav-item {
+  position: relative;
+  display: flex;
+  min-height: 2.95rem;
+  width: 100%;
+  align-items: center;
+  gap: 0.78rem;
+  border: 1px solid transparent;
+  border-radius: 1.05rem;
+  padding: 0.75rem 0.78rem;
+  color: rgba(248, 250, 252, 0.62);
+  font-size: 0.9rem;
+  font-weight: 700;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    background 180ms ease,
+    color 180ms ease;
+}
+
+.sentra-shell-nav-item:hover {
+  transform: translateY(-1px);
+  border-color: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.065);
+  color: white;
+}
+
+.sentra-shell-nav-item.is-active {
+  border-color: rgba(34, 211, 238, 0.22);
+  background:
+    linear-gradient(135deg, rgba(139, 92, 246, 0.17), rgba(34, 211, 238, 0.1)),
+    rgba(255, 255, 255, 0.075);
+  color: white;
+  box-shadow: 0 12px 34px rgba(34, 211, 238, 0.08);
+}
+
+.sentra-shell-nav-item.is-collapsed {
+  padding-inline: 0;
+}
+
+.sentra-shell-nav-icon {
+  display: inline-flex;
+  height: 1.45rem;
+  width: 1.45rem;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  color: currentColor;
+}
+
+.sentra-shell-nav-label {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sentra-shell-active-indicator {
+  position: absolute;
+  inset: 0.7rem auto 0.7rem 0;
+  width: 3px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, var(--accent-1), var(--accent-3));
+  box-shadow: 0 0 18px rgba(34, 211, 238, 0.46);
+}
+
+.sentra-sidebar-bottom {
+  display: grid;
+  gap: 0.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 0.75rem;
+}
+
+.sentra-shell-collapse {
+  display: flex;
+  min-height: 2.8rem;
+  align-items: center;
+  gap: 0.7rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.055);
+  padding: 0.65rem 0.85rem;
+  color: rgba(248, 250, 252, 0.64);
+  font-size: 0.82rem;
+  font-weight: 800;
+  transition:
+    border-color 180ms ease,
+    background 180ms ease,
+    color 180ms ease;
+}
+
+.sentra-shell-collapse:hover {
+  border-color: rgba(34, 211, 238, 0.24);
+  background: rgba(255, 255, 255, 0.08);
+  color: white;
+}
+
+.sentra-mobile-nav-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 55;
+  pointer-events: none;
+  background: rgba(0, 0, 0, 0);
+  transition: background 220ms ease;
+}
+
+.sentra-topbar {
+  background: linear-gradient(180deg, rgba(5, 7, 11, 0.84), rgba(5, 7, 11, 0.36), transparent);
+  backdrop-filter: blur(10px);
+}
+
+.sentra-command-search {
+  min-width: 0;
+}
+
+.sentra-mode-switcher {
+  display: flex;
+  justify-content: center;
+}
+
+.sentra-kpi-tile {
+  position: relative;
+  overflow: hidden;
+  min-height: 8.3rem;
+  border: 1px solid var(--border-soft);
+  border-radius: 1.6rem;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.032)),
+    rgba(5, 7, 11, 0.68);
+  padding: 1.1rem;
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.24);
+  backdrop-filter: blur(18px);
+}
+
+.sentra-kpi-tile::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.9;
+}
+
+.sentra-kpi-tile > * {
+  position: relative;
+  z-index: 1;
+}
+
+.sentra-kpi-cyan::before {
+  background: radial-gradient(circle at 85% 0%, rgba(34, 211, 238, 0.15), transparent 12rem);
+}
+
+.sentra-kpi-blue::before {
+  background: radial-gradient(circle at 85% 0%, rgba(59, 130, 246, 0.15), transparent 12rem);
+}
+
+.sentra-kpi-amber::before {
+  background: radial-gradient(circle at 85% 0%, rgba(245, 158, 11, 0.16), transparent 12rem);
+}
+
+.sentra-kpi-emerald::before {
+  background: radial-gradient(circle at 85% 0%, rgba(16, 185, 129, 0.15), transparent 12rem);
+}
+
+.sentra-kpi-violet::before {
+  background: radial-gradient(circle at 85% 0%, rgba(139, 92, 246, 0.17), transparent 12rem);
+}
+
+@media (max-width: 1024px) {
+  .sentra-shell-main {
+    margin-left: 0;
+  }
+
+  .sentra-app-sidebar {
+    inset: 12px auto 12px 12px;
+    width: min(280px, calc(100vw - 24px));
+    transform: translateX(calc(-100% - 18px));
+  }
+
+  .sentra-app-sidebar.is-mobile-open {
+    transform: translateX(0);
+  }
+
+  .sentra-mobile-nav-backdrop.is-open {
+    pointer-events: auto;
+    background: rgba(0, 0, 0, 0.52);
+    backdrop-filter: blur(5px);
+  }
+
+  .grid-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .grid-3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .sentra-topbar {
+    padding-inline: 0.75rem;
+  }
+
+  .sentra-dashboard-shell {
+    padding-inline: 0.75rem;
+  }
+
+  .container-sm,
+  .container-md,
+  .container-xl,
+  .container-full,
+  .sentra-container-sm,
+  .sentra-container-md,
+  .sentra-container-xl,
+  .sentra-container-full {
+    width: min(100% - 1rem, var(--container-size, 80rem));
+  }
+
+  .grid-2,
+  .grid-3,
+  .grid-4 {
+    grid-template-columns: 1fr;
+  }
+
+  .glass-card,
+  .glass-panel,
+  .metric-card,
+  .section-card {
+    border-radius: var(--radius-medium);
+  }
+}
+
+/* Sentra Premium System 2.0: restraint layer */
+
+::selection {
+  background: rgba(110, 168, 255, 0.24);
+  color: #ffffff;
+}
+
+:focus-visible {
+  outline-color: rgba(110, 168, 255, 0.72);
+}
+
+.cursor-glow {
+  background: radial-gradient(
+    220px circle at var(--x, 50%) var(--y, 50%),
+    rgba(110, 168, 255, 0.055),
+    transparent 72%
+  );
+}
+
+.grid-layer {
+  opacity: 0.38;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.06) 0.75px, transparent 0.75px);
+  background-size: 18px 18px;
+}
+
+.depth-glow {
+  background:
+    radial-gradient(circle at 18% 22%, rgba(110, 168, 255, 0.08), transparent 36%),
+    radial-gradient(circle at 82% 14%, rgba(138, 167, 255, 0.055), transparent 40%);
+}
+
+.sentra-display-xl,
+.text-display-xl {
+  font-size: var(--type-display-xl);
+  font-weight: 600;
+  letter-spacing: -0.065em;
+}
+
+.sentra-h1,
+.text-h1 {
+  font-size: var(--type-h1);
+  font-weight: 600;
+  letter-spacing: -0.052em;
+}
+
+.sentra-h2,
+.text-h2 {
+  font-size: var(--type-h2);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+}
+
+.sentra-h3,
+.text-h3 {
+  font-size: var(--type-h3);
+  font-weight: 600;
+  letter-spacing: -0.028em;
+}
+
+.sentra-caption,
+.text-caption,
+.sentra-label {
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+}
+
+.glass-card,
+.glass-panel,
+.glass-nav,
+.glass-modal,
+.metric-card,
+.section-card,
+.sentra-card {
+  border-color: var(--border-soft);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.028)),
+    rgba(10, 15, 23, 0.58);
+  box-shadow: var(--sentra-shadow-panel);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+}
+
+.glass-card:hover,
+.glass-panel:hover,
+.metric-card:hover,
+.section-card:hover,
+.sentra-card:hover {
+  transform: translateY(-1px);
+  border-color: rgba(255, 255, 255, 0.13);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.085), rgba(255, 255, 255, 0.038)),
+    rgba(10, 15, 23, 0.68);
+  box-shadow: var(--sentra-shadow-medium);
+}
+
+.sentra-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-xl);
+  padding: 1.25rem;
+  transition:
+    transform var(--sentra-motion-fast) ease,
+    border-color var(--sentra-motion-fast) ease,
+    background var(--sentra-motion-fast) ease,
+    box-shadow var(--sentra-motion-fast) ease;
+}
+
+.sentra-card-hero {
+  padding: clamp(1.5rem, 2vw, 1.75rem);
+  background:
+    radial-gradient(circle at 12% 0%, rgba(110, 168, 255, 0.13), transparent 23rem),
+    linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.032)),
+    rgba(10, 15, 23, 0.7);
+  box-shadow: var(--sentra-shadow-glass, var(--sentra-shadow-command));
+}
+
+.sentra-card-standard {
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.065), rgba(255, 255, 255, 0.027)),
+    rgba(10, 15, 23, 0.62);
+}
+
+.sentra-card-quiet {
+  background: rgba(255, 255, 255, 0.038);
+  box-shadow: var(--sentra-shadow-soft);
+}
+
+.sentra-card-danger {
+  border-color: rgba(248, 113, 113, 0.24);
+  background:
+    linear-gradient(90deg, rgba(248, 113, 113, 0.12), transparent 14rem),
+    rgba(10, 15, 23, 0.62);
+}
+
+.sentra-premium-card,
+.sentra-command-section {
+  border-color: rgba(255, 255, 255, 0.08);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.062), rgba(255, 255, 255, 0.028)),
+    rgba(10, 15, 23, 0.68);
+  box-shadow: var(--sentra-shadow-medium);
+}
+
+.sentra-premium-card::before,
+.sentra-command-section::before {
+  opacity: 0.65;
+  background:
+    radial-gradient(circle at 10% 0%, rgba(110, 168, 255, 0.08), transparent 20rem),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent 8rem);
+}
+
+.sentra-section-header,
+.sentra-panel-skeleton {
+  background: rgba(255, 255, 255, 0.045);
+}
+
+.sentra-panel-frame:hover {
+  transform: translate3d(0, -1px, 0);
+  filter: none;
+}
+
+.sentra-app-sidebar {
+  inset: 16px auto 16px 16px;
+  width: 280px;
+  gap: 1.1rem;
+  padding: 1rem;
+  border-radius: 28px;
+  border-color: rgba(255, 255, 255, 0.08);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.035)),
+    rgba(5, 7, 11, 0.78);
+  box-shadow: var(--sentra-shadow-glass, 0 28px 90px rgba(0, 0, 0, 0.42));
+}
+
+.sentra-app-sidebar::after {
+  background: linear-gradient(180deg, transparent, rgba(110, 168, 255, 0.28), transparent);
+  opacity: 0.58;
+}
+
+.sentra-app-sidebar.is-collapsed {
+  width: 72px;
+  padding-inline: 0.65rem;
+}
+
+.sentra-sidebar-mark {
+  height: 2.65rem;
+  width: 2.65rem;
+  border-radius: 18px;
+  background: linear-gradient(145deg, rgba(110, 168, 255, 0.88), rgba(138, 167, 255, 0.58));
+  box-shadow: 0 12px 28px rgba(110, 168, 255, 0.16);
+}
+
+.sentra-sidebar-section-label {
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+}
+
+.sentra-global-search,
+.sentra-shell-collapse,
+.sentra-shell-nav-item {
+  font-weight: 500;
+}
+
+.sentra-shell-nav-item {
+  min-height: 2.8rem;
+  border-radius: 18px;
+  color: var(--text-secondary);
+}
+
+.sentra-shell-nav-item:hover {
+  transform: translateY(-1px);
+  border-color: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.sentra-shell-nav-item.is-active {
+  border-color: rgba(110, 168, 255, 0.22);
+  background:
+    linear-gradient(135deg, rgba(110, 168, 255, 0.14), rgba(255, 255, 255, 0.055)),
+    rgba(255, 255, 255, 0.05);
+  box-shadow: 0 10px 28px rgba(110, 168, 255, 0.08);
+}
+
+.sentra-shell-active-indicator {
+  background: var(--accent-1);
+  box-shadow: 0 0 16px rgba(110, 168, 255, 0.38);
+}
+
+.sentra-topbar {
+  min-height: 72px;
+  background: linear-gradient(180deg, rgba(5, 7, 11, 0.88), rgba(5, 7, 11, 0.46), transparent);
+  backdrop-filter: blur(18px);
+}
+
+.sentra-topbar .glass-panel {
+  min-height: 72px;
+  border-radius: 28px;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.03)),
+    rgba(5, 7, 11, 0.68);
+  box-shadow: var(--sentra-shadow-soft);
+}
+
+.sentra-command-search {
+  min-height: 44px;
+  border-color: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.048);
+}
+
+.btn-primary {
+  border-color: rgba(110, 168, 255, 0.34);
+  background: linear-gradient(135deg, rgba(110, 168, 255, 0.95), rgba(138, 167, 255, 0.82));
+  box-shadow: 0 12px 28px rgba(110, 168, 255, 0.16);
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.055);
+}
+
+.badge-live {
+  border-color: rgba(110, 168, 255, 0.24);
+  background: rgba(110, 168, 255, 0.11);
+  color: #cfe2ff;
+}
+
+.badge-success {
+  border-color: rgba(52, 211, 153, 0.24);
+  background: rgba(52, 211, 153, 0.11);
+  color: #bbf7d0;
+}
+
+.badge-warning {
+  border-color: rgba(251, 191, 36, 0.26);
+  background: rgba(251, 191, 36, 0.1);
+  color: #fde68a;
+}
+
+.badge-danger {
+  border-color: rgba(248, 113, 113, 0.26);
+  background: rgba(248, 113, 113, 0.1);
+  color: #fecaca;
+}
+
+.sentra-kpi-tile {
+  border-radius: 24px;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.028)),
+    rgba(10, 15, 23, 0.62);
+  box-shadow: var(--sentra-shadow-soft);
+}
+
+.sentra-kpi-cyan::before,
+.sentra-kpi-blue::before,
+.sentra-kpi-violet::before {
+  background: radial-gradient(circle at 84% 0%, rgba(110, 168, 255, 0.11), transparent 12rem);
+}
+
+.sentra-kpi-amber::before {
+  background: radial-gradient(circle at 84% 0%, rgba(251, 191, 36, 0.12), transparent 12rem);
+}
+
+.sentra-kpi-emerald::before {
+  background: radial-gradient(circle at 84% 0%, rgba(52, 211, 153, 0.1), transparent 12rem);
+}
+
+@media (max-width: 1024px) {
+  .sentra-shell-main {
+    margin-left: 0;
+  }
+
+  .sentra-app-sidebar {
+    width: min(280px, calc(100vw - 24px));
+  }
+}
+
+.sentra-workspace-hero {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 12% 12%, rgba(110, 168, 255, 0.16), transparent 30rem),
+    radial-gradient(circle at 86% 0%, rgba(139, 92, 246, 0.12), transparent 24rem),
+    linear-gradient(145deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.028)),
+    rgba(5, 7, 11, 0.68);
+}
+
+.sentra-workspace-hero::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  pointer-events: none;
+  border-radius: 35px;
+  background:
+    linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.09), transparent) top / 100% 1px no-repeat,
+    radial-gradient(circle at var(--x, 50%) var(--y, 0%), rgba(110, 168, 255, 0.09), transparent 18rem);
+}
+
+.sentra-workspace-enter {
+  animation: sentraWorkspaceEnter 320ms ease both;
+}
+
+@keyframes sentraWorkspaceEnter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.sentra-command-link {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.055);
+  padding: 0.75rem 1rem;
+  color: rgba(248, 250, 252, 0.86);
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition:
+    transform 200ms ease,
+    border-color 200ms ease,
+    background 200ms ease,
+    box-shadow 200ms ease;
+}
+
+.sentra-command-link:hover {
+  transform: translateY(-1px);
+  border-color: rgba(110, 168, 255, 0.28);
+  background: rgba(110, 168, 255, 0.11);
+  box-shadow: 0 14px 30px rgba(110, 168, 255, 0.1);
+}
+
+.sentra-command-link-danger {
+  border-color: rgba(248, 113, 113, 0.22);
+  background: rgba(248, 113, 113, 0.1);
+  color: #ffe4e6;
+}
+
+.sentra-command-link-danger:hover {
+  border-color: rgba(248, 113, 113, 0.34);
+  background: rgba(248, 113, 113, 0.16);
+  box-shadow: 0 14px 30px rgba(248, 113, 113, 0.1);
+}
+
+.sentra-crisis-command-bar {
+  position: sticky;
+  bottom: 1rem;
+  z-index: 30;
+  display: grid;
+  gap: 0.75rem;
+  border-radius: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background:
+    linear-gradient(145deg, rgba(127, 29, 29, 0.22), rgba(255, 255, 255, 0.045)),
+    rgba(5, 7, 11, 0.84);
+  padding: 0.75rem;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.36);
+  backdrop-filter: blur(20px);
+}
+
+@media (min-width: 768px) {
+  .sentra-crisis-command-bar {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sentra-workspace-enter {
+    animation: none;
+  }
+
+  .sentra-command-link,
+  .sentra-command-link:hover {
+    transform: none;
+  }
+}
+
+.sentra-luxury-sidebar {
+  width: 280px;
+  gap: 0.9rem;
+  border-color: rgba(255, 255, 255, 0.085);
+  background:
+    radial-gradient(circle at 28% 0%, rgba(110, 168, 255, 0.12), transparent 16rem),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.028)),
+    rgba(5, 7, 11, 0.86);
+  box-shadow:
+    0 34px 110px rgba(0, 0, 0, 0.42),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.sentra-luxury-sidebar.is-collapsed {
+  width: 88px;
+  padding-inline: 0.8rem;
+}
+
+.sentra-luxury-brand {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.075);
+  padding-bottom: 0.8rem;
+}
+
+.sentra-workspace-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.075);
+  background:
+    radial-gradient(circle at 0% 0%, rgba(110, 168, 255, 0.13), transparent 8rem),
+    rgba(255, 255, 255, 0.04);
+  padding: 0.9rem;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.055);
+}
+
+.sentra-luxury-search {
+  min-height: 2.8rem;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.045);
+}
+
+.sentra-sidebar-nav-scroll {
+  display: flex;
+  min-height: 0;
+  flex: 1;
+  flex-direction: column;
+  gap: 1rem;
+  overflow-y: auto;
+  padding-right: 0.15rem;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.18) transparent;
+}
+
+.sentra-luxury-nav-group {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.sentra-luxury-nav-item {
+  min-height: 3.15rem;
+  align-items: center;
+  border-color: transparent;
+  background: transparent;
+  color: rgba(248, 250, 252, 0.62);
+}
+
+.sentra-luxury-nav-item:hover {
+  border-color: rgba(255, 255, 255, 0.09);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.035)),
+    rgba(255, 255, 255, 0.02);
+  box-shadow:
+    0 14px 34px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.075);
+}
+
+.sentra-luxury-nav-item.is-active {
+  border-color: rgba(110, 168, 255, 0.24);
+  background:
+    radial-gradient(circle at 0% 50%, rgba(110, 168, 255, 0.18), transparent 9rem),
+    linear-gradient(135deg, rgba(110, 168, 255, 0.13), rgba(255, 255, 255, 0.052)),
+    rgba(255, 255, 255, 0.04);
+  color: white;
+  box-shadow:
+    0 18px 44px rgba(34, 211, 238, 0.07),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.sentra-luxury-nav-item.is-locked {
+  cursor: pointer;
+  color: rgba(248, 250, 252, 0.38);
+}
+
+.sentra-luxury-nav-item.is-locked:hover {
+  border-color: rgba(251, 191, 36, 0.16);
+  background: rgba(251, 191, 36, 0.055);
+  color: rgba(254, 243, 199, 0.82);
+}
+
+.sentra-nav-lock {
+  margin-left: auto;
+  display: inline-flex;
+  height: 1.45rem;
+  width: 1.45rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 1px solid rgba(251, 191, 36, 0.18);
+  background: rgba(251, 191, 36, 0.08);
+  color: rgba(254, 243, 199, 0.82);
+}
+
+.sentra-nav-lock svg {
+  height: 0.75rem;
+  width: 0.75rem;
+}
+
+.sentra-luxury-bottom {
+  border-top-color: rgba(255, 255, 255, 0.08);
+  padding-top: 0.85rem;
+}
+
+.sentra-luxury-collapse {
+  min-height: 2.8rem;
+  border-radius: 18px;
+}
+
+.sentra-access-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(2, 6, 23, 0.62);
+  padding: 1.25rem;
+  backdrop-filter: blur(18px);
+}
+
+.sentra-access-modal {
+  width: min(100%, 560px);
+  overflow: hidden;
+  border-radius: 34px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background:
+    radial-gradient(circle at 12% 0%, rgba(110, 168, 255, 0.15), transparent 14rem),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.035)),
+    rgba(5, 7, 11, 0.94);
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 34px 110px rgba(0, 0, 0, 0.48);
+}
+
+.sentra-access-button {
+  display: inline-flex;
+  min-height: 2.8rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.055);
+  padding: 0.75rem 1rem;
+  color: rgba(248, 250, 252, 0.76);
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition:
+    transform 200ms ease,
+    background 200ms ease,
+    border-color 200ms ease;
+}
+
+.sentra-access-button:hover {
+  transform: translateY(-1px);
+  border-color: rgba(110, 168, 255, 0.24);
+  background: rgba(110, 168, 255, 0.11);
+  color: white;
+}
+
+.sentra-access-button.is-primary {
+  border-color: rgba(110, 168, 255, 0.28);
+  background: rgba(110, 168, 255, 0.16);
+  color: #eff6ff;
+}
+
+.sentra-card,
+.sentra-premium-card,
+.glass-card,
+.glass-panel {
+  box-shadow:
+    0 24px 70px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.065);
+}
+
+.sentra-card:hover,
+.sentra-premium-card:hover,
+.glass-card:hover {
+  transform: translateY(-1px);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+@media (max-width: 1024px) {
+  .sentra-luxury-sidebar,
+  .sentra-luxury-sidebar.is-collapsed {
+    width: min(280px, calc(100vw - 24px));
+  }
+}
+
+/* Sentra UI Phase 6: Apple-level minimal luxury restraint layer */
+:root {
+  --bg-primary: #07090d;
+  --bg-secondary: #0b1020;
+  --bg-tertiary: #101522;
+  --surface-glass: rgba(255, 255, 255, 0.06);
+  --surface-glass-strong: rgba(255, 255, 255, 0.08);
+  --border-soft: rgba(255, 255, 255, 0.1);
+  --border-strong: rgba(255, 255, 255, 0.14);
+  --text-primary: #f5f7fa;
+  --text-secondary: rgba(255, 255, 255, 0.62);
+  --text-muted: rgba(255, 255, 255, 0.42);
+  --accent-1: #8ab4ff;
+  --accent-2: #9e8cff;
+  --accent-3: #8ab4ff;
+  --accent-success: #7ce7b2;
+  --accent-warning: #f4c56a;
+  --accent-danger: #ff7d7d;
+  --sentra-shadow-soft: 0 18px 52px rgba(0, 0, 0, 0.24);
+  --sentra-shadow-medium: 0 26px 76px rgba(0, 0, 0, 0.3);
+  --sentra-shadow-panel: 0 22px 64px rgba(0, 0, 0, 0.26);
+  --sentra-shadow-glass: 0 30px 90px rgba(0, 0, 0, 0.36);
+}
+
+.depth-glow {
+  opacity: 0.028;
+}
+
+.cursor-glow {
+  background: radial-gradient(
+    220px circle at var(--x, 50%) var(--y, 50%),
+    rgba(138, 180, 255, 0.04),
+    transparent 72%
+  );
+}
+
+.grid-layer {
+  opacity: 0.18;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.042) 0.7px, transparent 0.7px);
+  background-size: 22px 22px;
+}
+
+.sentra-luxury-sidebar,
+.sentra-app-sidebar {
+  width: 300px;
+  border-radius: 32px;
+  border-color: rgba(255, 255, 255, 0.09);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.065), rgba(255, 255, 255, 0.026)),
+    rgba(7, 9, 13, 0.88);
+  box-shadow:
+    0 30px 90px rgba(0, 0, 0, 0.38),
+    inset 0 1px 0 rgba(255, 255, 255, 0.075);
+}
+
+.sentra-luxury-sidebar.is-collapsed,
+.sentra-app-sidebar.is-collapsed {
+  width: 88px;
+  padding-inline: 0.78rem;
+}
+
+.sentra-luxury-sidebar::after,
+.sentra-app-sidebar::after {
+  background: linear-gradient(180deg, transparent, rgba(138, 180, 255, 0.22), transparent);
+  opacity: 0.42;
+}
+
+.sentra-sidebar-mark {
+  background: linear-gradient(145deg, rgba(138, 180, 255, 0.82), rgba(158, 140, 255, 0.52));
+  box-shadow: 0 14px 34px rgba(138, 180, 255, 0.12);
+}
+
+.sentra-workspace-card,
+.sentra-luxury-search,
+.sentra-global-search {
+  border-color: rgba(255, 255, 255, 0.09);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.052), rgba(255, 255, 255, 0.022)),
+    rgba(255, 255, 255, 0.018);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.055);
+}
+
+.sentra-sidebar-section-label,
+.sentra-phase6-label {
+  color: rgba(255, 255, 255, 0.42);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.sentra-luxury-nav-item {
+  min-height: 52px;
+  border-radius: 18px;
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.sentra-luxury-nav-item:hover {
+  transform: translateY(-1px);
+  border-color: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.052);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.055);
+}
+
+.sentra-luxury-nav-item.is-active {
+  border-color: rgba(138, 180, 255, 0.24);
+  background:
+    linear-gradient(135deg, rgba(138, 180, 255, 0.13), rgba(255, 255, 255, 0.045)),
+    rgba(255, 255, 255, 0.035);
+  box-shadow: 0 16px 42px rgba(138, 180, 255, 0.065);
+}
+
+.sentra-shell-active-indicator {
+  inset: 0.75rem auto 0.75rem 0;
+  width: 3px;
+  background: #8ab4ff;
+  box-shadow: 0 0 14px rgba(138, 180, 255, 0.32);
+}
+
+.sentra-sidebar-profile-card {
+  align-items: center;
+  gap: 0.75rem;
+  border-radius: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.085);
+  background: rgba(255, 255, 255, 0.035);
+  padding: 0.75rem;
+}
+
+.glass-panel,
+.glass-card,
+.sentra-card,
+.sentra-premium-card,
+.sentra-phase6-glass-card,
+.sentra-phase6-metric-card {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.062), rgba(255, 255, 255, 0.024)),
+    rgba(16, 21, 34, 0.56);
+  box-shadow:
+    0 22px 64px rgba(0, 0, 0, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
+
+.sentra-phase6-glass-card,
+.sentra-phase6-metric-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 28px;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    background 180ms ease;
+}
+
+.sentra-phase6-glass-card:hover,
+.sentra-phase6-metric-card:hover,
+.sentra-card:hover,
+.glass-card:hover {
+  transform: translateY(-1px);
+  border-color: rgba(255, 255, 255, 0.13);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.072), rgba(255, 255, 255, 0.03)),
+    rgba(16, 21, 34, 0.62);
+  box-shadow:
+    0 24px 72px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.07);
+}
+
+.sentra-premium-card::before,
+.sentra-premium-card:hover::before,
+.sentra-command-section::before {
+  animation: none;
+  opacity: 0;
+}
+
+.sentra-card {
+  border-radius: 28px;
+  padding: 1.5rem;
+}
+
+.sentra-card .sentra-caption,
+.sentra-caption,
+.text-caption {
+  color: rgba(255, 255, 255, 0.42);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+}
+
+.sentra-workspace-hero {
+  border-radius: 34px;
+  background:
+    radial-gradient(circle at 12% 0%, rgba(138, 180, 255, 0.1), transparent 28rem),
+    linear-gradient(145deg, rgba(255, 255, 255, 0.064), rgba(255, 255, 255, 0.024)),
+    rgba(16, 21, 34, 0.58);
+}
+
+.sentra-workspace-hero::after {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent) top / 100% 1px no-repeat;
+}
+
+.sentra-topbar {
+  min-height: 72px;
+  background: linear-gradient(180deg, rgba(7, 9, 13, 0.9), rgba(7, 9, 13, 0.44), transparent);
+}
+
+.sentra-topbar .glass-panel {
+  border-radius: 30px;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.062), rgba(255, 255, 255, 0.024)),
+    rgba(7, 9, 13, 0.72);
+}
+
+.sentra-command-search {
+  background: rgba(255, 255, 255, 0.045);
+}
+
+.sentra-mode-capsule {
+  border-radius: 999px;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.022)),
+    rgba(7, 9, 13, 0.52);
+}
+
+.sentra-mode-active {
+  background: rgba(255, 255, 255, 0.095);
+  box-shadow:
+    0 10px 28px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.sentra-mode-active-command {
+  border-color: rgba(138, 180, 255, 0.2);
+}
+
+.sentra-mode-active-executive {
+  border-color: rgba(255, 255, 255, 0.16);
+}
+
+.sentra-mode-active-demo {
+  border-color: rgba(158, 140, 255, 0.22);
+}
+
+.sentra-mode-active-crisis {
+  border-color: rgba(255, 125, 125, 0.22);
+}
+
+.btn-primary,
+.sentra-command-link,
+.sentra-access-button,
+.sentra-shell-collapse {
+  border-radius: 999px;
+}
+
+.btn-primary {
+  border-color: rgba(138, 180, 255, 0.26);
+  background: linear-gradient(135deg, rgba(138, 180, 255, 0.9), rgba(158, 140, 255, 0.72));
+  box-shadow: 0 14px 34px rgba(138, 180, 255, 0.12);
+}
+
+.btn-secondary,
+.sentra-command-link {
+  background: rgba(255, 255, 255, 0.055);
+}
+
+.badge-live,
+.badge-success {
+  border-color: rgba(124, 231, 178, 0.22);
+  background: rgba(124, 231, 178, 0.09);
+  color: #d9fbe8;
+}
+
+.badge-warning {
+  border-color: rgba(244, 197, 106, 0.22);
+  background: rgba(244, 197, 106, 0.09);
+  color: #ffe8b0;
+}
+
+.badge-danger {
+  border-color: rgba(255, 125, 125, 0.22);
+  background: rgba(255, 125, 125, 0.09);
+  color: #ffd1d1;
+}
+
+.sentra-phase6-section-header {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.sentra-phase6-status-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border-width: 1px;
+  padding: 0.5rem 0.8rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.sentra-phase6-page-shell {
+  width: min(100% - 2rem, 1600px);
+  margin-inline: auto;
+  padding-block: 1.5rem 3rem;
+}
+
+.sentra-crisis-command-bar {
+  background:
+    linear-gradient(145deg, rgba(255, 125, 125, 0.12), rgba(255, 255, 255, 0.035)),
+    rgba(7, 9, 13, 0.84);
+}
+
+@media (min-width: 768px) {
+  .sentra-phase6-section-header {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 1024px) {
+  .sentra-shell-main {
+    margin-left: 0;
+  }
+
+  .sentra-luxury-sidebar,
+  .sentra-luxury-sidebar.is-collapsed,
+  .sentra-app-sidebar,
+  .sentra-app-sidebar.is-collapsed {
+    width: min(300px, calc(100vw - 24px));
+  }
+}
+
+/* Sentra UI Phase 7: luxury simplification, Apple motion, hero dashboard */
+:root {
+  --bg-primary: #05070b;
+  --background: #05070b;
+  --background-canvas: #05070b;
+  --background-surface: rgba(18, 22, 32, 0.72);
+  --surface-glass: rgba(255, 255, 255, 0.05);
+  --surface-glass-strong: rgba(255, 255, 255, 0.08);
+  --border-soft: rgba(255, 255, 255, 0.08);
+  --text-primary: #f5f7fa;
+  --text-secondary: rgba(255, 255, 255, 0.62);
+  --text-muted: rgba(255, 255, 255, 0.42);
+  --accent-1: #7dd3fc;
+  --accent-2: #8b5cf6;
+  --accent-danger: #ef4444;
+  --accent-success: #22c55e;
+  --sentra-sidebar-width: 288px;
+}
+
+.sentra-luxury-sidebar,
+.sentra-app-sidebar {
+  width: 288px;
+  border-radius: 30px;
+  background:
+    radial-gradient(circle at 26% 0%, rgba(125, 211, 252, 0.09), transparent 18rem),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.024)),
+    rgba(5, 7, 11, 0.88);
+  box-shadow:
+    0 28px 78px rgba(0, 0, 0, 0.34),
+    inset 0 1px 0 rgba(255, 255, 255, 0.07);
+}
+
+.sentra-luxury-sidebar.is-collapsed,
+.sentra-app-sidebar.is-collapsed {
+  width: 88px;
+}
+
+.sentra-phase7-hero {
+  isolation: isolate;
+  min-height: 330px;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.024)),
+    rgba(18, 22, 32, 0.72);
+  box-shadow:
+    0 28px 84px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.072);
+}
+
+.sentra-phase7-hero::before {
+  content: "";
+  position: absolute;
+  inset: -30% -8% auto;
+  z-index: -1;
+  height: 18rem;
+  pointer-events: none;
+  opacity: 0.72;
+  filter: blur(18px);
+  background: radial-gradient(circle at 30% 0%, rgba(125, 211, 252, 0.16), transparent 32rem);
+}
+
+.sentra-phase7-hero-command::before {
+  background:
+    radial-gradient(circle at 24% 0%, rgba(125, 211, 252, 0.18), transparent 34rem),
+    radial-gradient(circle at 76% 10%, rgba(59, 130, 246, 0.08), transparent 28rem);
+}
+
+.sentra-phase7-hero-executive::before {
+  background:
+    radial-gradient(circle at 26% 0%, rgba(244, 197, 106, 0.12), transparent 30rem),
+    radial-gradient(circle at 72% 10%, rgba(148, 163, 184, 0.1), transparent 28rem);
+}
+
+.sentra-phase7-hero-demo::before {
+  background:
+    radial-gradient(circle at 25% 0%, rgba(139, 92, 246, 0.18), transparent 34rem),
+    radial-gradient(circle at 72% 8%, rgba(125, 211, 252, 0.1), transparent 28rem);
+}
+
+.sentra-phase7-hero-crisis::before {
+  background:
+    radial-gradient(circle at 24% 0%, rgba(239, 68, 68, 0.16), transparent 34rem),
+    radial-gradient(circle at 76% 12%, rgba(251, 146, 60, 0.08), transparent 28rem);
+}
+
+.sentra-phase7-hero h1 {
+  max-width: 820px;
+  text-wrap: balance;
+}
+
+.sentra-phase7-hero p {
+  text-wrap: pretty;
+}
+
+.sentra-phase7-kpi-grid {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.sentra-phase7-kpi-pill {
+  min-height: 84px;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.026)),
+    rgba(255, 255, 255, 0.028);
+  padding: 1rem;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(22px);
+}
+
+.sentra-phase7-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 1.4rem;
+}
+
+.sentra-phase7-hero-action {
+  display: inline-flex;
+  min-height: 46px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.052);
+  padding: 0.78rem 1.05rem;
+  color: rgba(245, 247, 250, 0.76);
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    background 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.sentra-phase7-hero-action:hover {
+  transform: translateY(-1px);
+  border-color: rgba(125, 211, 252, 0.28);
+  background: rgba(125, 211, 252, 0.1);
+  color: white;
+  box-shadow: 0 14px 34px rgba(125, 211, 252, 0.09);
+}
+
+.sentra-phase7-hero-action.is-primary {
+  border-color: rgba(125, 211, 252, 0.28);
+  background: linear-gradient(135deg, rgba(125, 211, 252, 0.2), rgba(139, 92, 246, 0.16));
+  color: #f8fafc;
+}
+
+.sentra-mode-capsule {
+  position: relative;
+  max-width: 680px;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.052), rgba(255, 255, 255, 0.018)),
+    rgba(5, 7, 11, 0.5);
+}
+
+.sentra-mode-active {
+  background: transparent;
+  box-shadow: none;
+}
+
+.sentra-mode-active-pill {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.095), rgba(255, 255, 255, 0.045)),
+    rgba(255, 255, 255, 0.04);
+  box-shadow:
+    0 12px 28px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.sentra-mode-active-pill-command {
+  box-shadow:
+    0 12px 28px rgba(125, 211, 252, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.sentra-mode-active-pill-executive {
+  box-shadow:
+    0 12px 28px rgba(244, 197, 106, 0.07),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.sentra-mode-active-pill-demo {
+  box-shadow:
+    0 12px 28px rgba(139, 92, 246, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.sentra-mode-active-pill-crisis {
+  box-shadow:
+    0 12px 28px rgba(239, 68, 68, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.sentra-phase7-content {
+  animation: none;
+}
+
+.sentra-phase7-grid-row {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.sentra-phase7-grid-row > :only-child {
+  grid-column: 1 / -1;
+}
+
+.sentra-phase7-mini-stat {
+  border-radius: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.022)),
+    rgba(255, 255, 255, 0.025);
+  padding: 1rem;
+}
+
+.glass-panel,
+.glass-card,
+.sentra-card,
+.sentra-premium-card,
+.sentra-phase6-glass-card,
+.sentra-phase6-metric-card {
+  border-color: rgba(255, 255, 255, 0.08);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.022)),
+    rgba(18, 22, 32, 0.72);
+  box-shadow:
+    0 20px 56px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.glass-panel:hover,
+.glass-card:hover,
+.sentra-card:hover,
+.sentra-phase6-glass-card:hover,
+.sentra-phase6-metric-card:hover {
+  transform: translateY(-1px);
+  border-color: rgba(255, 255, 255, 0.11);
+  box-shadow:
+    0 22px 62px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.07);
+}
+
+.sentra-panel-frame {
+  animation-duration: 260ms;
+}
+
+.sentra-panel-frame:hover {
+  filter: none;
+}
+
+.sentra-panel-skeleton,
+.sentra-loading-skeleton {
+  background:
+    linear-gradient(110deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.035)),
+    rgba(18, 22, 32, 0.72);
+}
+
+@media (min-width: 1280px) {
+  .sentra-phase7-grid-row {
+    grid-template-columns: minmax(0, 1.05fr) minmax(360px, 0.95fr);
+  }
+}
+
+@media (max-width: 1024px) {
+  .sentra-shell-main {
+    margin-left: 0;
+  }
+
+  .sentra-luxury-sidebar,
+  .sentra-luxury-sidebar.is-collapsed,
+  .sentra-app-sidebar,
+  .sentra-app-sidebar.is-collapsed {
+    width: min(288px, calc(100vw - 24px));
+  }
+}
+
+@media (max-width: 640px) {
+  .sentra-phase7-hero {
+    min-height: auto;
+    border-radius: 28px;
+  }
+
+  .sentra-phase7-kpi-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sentra-phase7-cta-row {
+    justify-content: stretch;
+  }
+
+  .sentra-phase7-hero-action {
+    flex: 1 1 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sentra-phase7-hero-action,
+  .sentra-phase7-hero-action:hover,
+  .glass-panel:hover,
+  .glass-card:hover,
+  .sentra-card:hover {
+    transform: none;
+  }
+}
+
+/* Sentra UI Phase 8: premium analytics, maps, and data storytelling */
+.sentra-analytics-shell {
+  background:
+    radial-gradient(circle at 14% -10%, rgba(125, 211, 252, 0.12), transparent 34rem),
+    radial-gradient(circle at 82% 0%, rgba(139, 92, 246, 0.1), transparent 30rem),
+    linear-gradient(180deg, #05070b 0%, #080d16 54%, #05070b 100%);
+}
+
+.sentra-analytics-hero,
+.sentra-analytics-panel,
+.sentra-analytics-kpi {
+  position: relative;
+  overflow: hidden;
+}
+
+.sentra-analytics-hero::after,
+.sentra-analytics-panel::after,
+.sentra-analytics-kpi::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background:
+    linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.075), transparent) top / 100% 1px no-repeat,
+    radial-gradient(circle at var(--x, 50%) var(--y, 0%), rgba(125, 211, 252, 0.055), transparent 18rem);
+}
+
+.sentra-analytics-hero {
+  isolation: isolate;
+  background:
+    radial-gradient(circle at 12% 0%, rgba(125, 211, 252, 0.13), transparent 28rem),
+    radial-gradient(circle at 82% 4%, rgba(139, 92, 246, 0.11), transparent 26rem),
+    linear-gradient(145deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.024)),
+    rgba(18, 22, 32, 0.72);
+}
+
+.sentra-analytics-panel,
+.sentra-analytics-kpi {
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.022)),
+    rgba(18, 22, 32, 0.72);
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.sentra-analytics-panel:hover,
+.sentra-analytics-kpi:hover {
+  transform: translateY(-1px);
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow:
+    0 26px 76px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.072);
+}
+
+.sentra-analytics-command canvas {
+  filter: saturate(0.95);
+}
+
+.sentra-analytics-command :is(h1, h2, h3) {
+  text-wrap: balance;
+}
+
+.sentra-analytics-command :is(p, li) {
+  text-wrap: pretty;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sentra-analytics-panel:hover,
+  .sentra-analytics-kpi:hover {
+    transform: none;
+  }
+}
+
+/* Sentra UI Phase 11: unicorn-grade polish, quiet luxury, product motion */
+:root,
+[data-theme="dark"],
+.dark {
+  --phase11-bg: #050812;
+  --phase11-bg-deep: #03050a;
+  --phase11-surface: rgba(17, 23, 36, 0.74);
+  --phase11-surface-soft: rgba(255, 255, 255, 0.046);
+  --phase11-surface-strong: rgba(255, 255, 255, 0.086);
+  --phase11-border: rgba(255, 255, 255, 0.082);
+  --phase11-border-strong: rgba(255, 255, 255, 0.15);
+  --phase11-text: #f7f9fc;
+  --phase11-muted: rgba(226, 232, 240, 0.64);
+  --phase11-soft: rgba(226, 232, 240, 0.42);
+  --phase11-cyan: #7dd3fc;
+  --phase11-violet: #8b5cf6;
+  --phase11-emerald: #34d399;
+  --phase11-amber: #f6c667;
+  --phase11-crimson: #fb7185;
+  --phase11-shadow: 0 30px 90px rgba(0, 0, 0, 0.38), inset 0 1px 0 rgba(255, 255, 255, 0.07);
+}
+
+.sentra-phase11-hero,
+.sentra-phase11-chart-panel,
+.sentra-empty-state-premium {
+  position: relative;
+  overflow: hidden;
+  border-color: var(--phase11-border);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.065), rgba(255, 255, 255, 0.024)),
+    var(--phase11-surface);
+  box-shadow: var(--phase11-shadow);
+}
+
+.sentra-phase11-hero::after,
+.sentra-phase11-chart-panel::after,
+.sentra-empty-state-premium::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background:
+    linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.075), transparent) top / 100% 1px no-repeat,
+    radial-gradient(circle at 18% 0%, rgba(125, 211, 252, 0.07), transparent 26rem);
+}
+
+.sentra-phase11-hero h1,
+.sentra-analytics-hero h1 {
+  font-weight: 650;
+  letter-spacing: -0.068em;
+}
+
+.sentra-phase11-kpi-pill {
+  transition:
+    transform 260ms ease,
+    border-color 260ms ease,
+    background 260ms ease,
+    box-shadow 260ms ease;
+}
+
+.sentra-phase11-kpi-pill:hover {
+  transform: translateY(-2px);
+  border-color: var(--phase11-border-strong);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.032)),
+    rgba(255, 255, 255, 0.035);
+}
+
+.sentra-phase11-kpi-success {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.062), 0 0 24px rgba(52, 211, 153, 0.045);
+}
+
+.sentra-phase11-kpi-warning {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.062), 0 0 24px rgba(246, 198, 103, 0.048);
+}
+
+.sentra-phase11-kpi-danger {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.062), 0 0 26px rgba(251, 113, 133, 0.055);
+}
+
+.sentra-phase11-mode-switcher {
+  box-shadow:
+    0 18px 48px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.sentra-button-premium,
+.sentra-phase7-hero-action,
+.sentra-command-link,
+.sentra-access-button {
+  will-change: transform;
+}
+
+.sentra-button-premium::before,
+.sentra-phase7-hero-action::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background: linear-gradient(110deg, transparent, rgba(255, 255, 255, 0.16), transparent);
+  transform: translateX(-120%);
+}
+
+.sentra-button-premium:hover::before,
+.sentra-phase7-hero-action:hover::before {
+  animation: sentra-premium-sheen 950ms ease;
+  opacity: 1;
+}
+
+.sentra-topbar-mode-switcher {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.065);
+}
+
+.sentra-topbar-mode-pill {
+  min-height: 2.25rem;
+  border-radius: 999px;
+  padding: 0.52rem 0.78rem;
+  color: rgba(245, 247, 250, 0.54);
+  font-size: 0.72rem;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  transition:
+    color 200ms ease,
+    background 200ms ease,
+    transform 200ms ease;
+}
+
+.sentra-topbar-mode-pill:hover {
+  color: white;
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.sentra-topbar-mode-pill.is-active {
+  color: white;
+  background:
+    linear-gradient(135deg, rgba(125, 211, 252, 0.15), rgba(139, 92, 246, 0.1)),
+    rgba(255, 255, 255, 0.075);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.16);
+}
+
+.sentra-sidebar-live-chip,
+.sentra-sidebar-micro-stat {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.38rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.045);
+  padding: 0.32rem 0.52rem;
+  color: rgba(245, 247, 250, 0.64);
+  font-size: 0.65rem;
+  font-weight: 650;
+  letter-spacing: 0.02em;
+}
+
+.sentra-sidebar-live-chip {
+  border-color: rgba(52, 211, 153, 0.18);
+  color: #d7fae9;
+}
+
+.sentra-sidebar-live-dot {
+  width: 0.42rem;
+  height: 0.42rem;
+  border-radius: 999px;
+  background: var(--phase11-emerald);
+  box-shadow: 0 0 14px rgba(52, 211, 153, 0.48);
+  animation: sentra-live-pulse 1.8s ease-in-out infinite;
+}
+
+.sentra-luxury-sidebar {
+  background:
+    radial-gradient(circle at 18% 0%, rgba(125, 211, 252, 0.075), transparent 17rem),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.058), rgba(255, 255, 255, 0.022)),
+    rgba(4, 7, 13, 0.9);
+}
+
+.sentra-luxury-nav-item {
+  letter-spacing: -0.01em;
+}
+
+.sentra-luxury-nav-item.is-active {
+  background:
+    linear-gradient(135deg, rgba(125, 211, 252, 0.13), rgba(139, 92, 246, 0.07)),
+    rgba(255, 255, 255, 0.04);
+}
+
+.sentra-empty-state-orb {
+  width: 2.8rem;
+  height: 2.8rem;
+  border-radius: 999px;
+  border: 1px solid rgba(125, 211, 252, 0.18);
+  background:
+    radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.24), transparent 26%),
+    linear-gradient(135deg, rgba(125, 211, 252, 0.16), rgba(139, 92, 246, 0.1));
+  box-shadow: 0 0 36px rgba(125, 211, 252, 0.09);
+}
+
+.sentra-phase11-chart-panel canvas {
+  filter: saturate(0.94) contrast(1.02);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sentra-phase11-kpi-pill:hover,
+  .sentra-topbar-mode-pill:hover {
+    transform: none;
+  }
+}
+
+/* Sentra UI Phase 12: premium demo readiness, quieter hierarchy, favicon-era polish */
+:root,
+[data-theme="dark"],
+.dark {
+  --phase12-ink: #f8fbff;
+  --phase12-muted: rgba(226, 232, 240, 0.66);
+  --phase12-soft: rgba(226, 232, 240, 0.44);
+  --phase12-panel: rgba(13, 18, 30, 0.74);
+  --phase12-border: rgba(255, 255, 255, 0.088);
+  --phase12-cyan: #7dd3fc;
+  --phase12-violet: #8b5cf6;
+  --phase12-shadow: 0 34px 110px rgba(0, 0, 0, 0.42), inset 0 1px 0 rgba(255, 255, 255, 0.074);
+}
+
+.sentra-phase12-hero {
+  isolation: isolate;
+  min-height: 340px;
+  background:
+    radial-gradient(circle at 8% 0%, rgba(125, 211, 252, 0.16), transparent 28rem),
+    radial-gradient(circle at 78% 4%, rgba(139, 92, 246, 0.12), transparent 30rem),
+    linear-gradient(145deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.025)),
+    rgba(7, 10, 18, 0.78);
+  box-shadow: var(--phase12-shadow);
+}
+
+.sentra-phase12-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.34;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: radial-gradient(circle at 20% 8%, black, transparent 72%);
+}
+
+.sentra-phase12-hero-orb {
+  position: absolute;
+  z-index: -1;
+  border-radius: 999px;
+  filter: blur(24px);
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.sentra-phase12-hero-orb-one {
+  top: -5rem;
+  right: 16%;
+  width: 16rem;
+  height: 16rem;
+  background: rgba(125, 211, 252, 0.13);
+}
+
+.sentra-phase12-hero-orb-two {
+  bottom: -7rem;
+  left: 10%;
+  width: 18rem;
+  height: 18rem;
+  background: rgba(139, 92, 246, 0.11);
+}
+
+.sentra-phase12-hero-scanline {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(110deg, transparent 28%, rgba(255, 255, 255, 0.075), transparent 42%);
+  transform: translateX(-70%);
+  animation: sentra-phase12-scan 9s ease-in-out infinite;
+}
+
+.sentra-phase12-eyebrow {
+  color: rgba(186, 230, 253, 0.68);
+  text-shadow: 0 0 28px rgba(125, 211, 252, 0.14);
+}
+
+.sentra-phase12-hero-title {
+  max-width: 13ch;
+  line-height: 0.92;
+  text-wrap: balance;
+}
+
+.sentra-phase12-hero-copy {
+  max-width: 58rem;
+  color: var(--phase12-muted);
+  text-wrap: pretty;
+}
+
+.sentra-phase12-status-panel {
+  align-self: stretch;
+}
+
+.sentra-phase12-kpi-pill {
+  position: relative;
+  overflow: hidden;
+  min-height: 104px;
+  border-color: var(--phase12-border);
+  background:
+    linear-gradient(150deg, rgba(255, 255, 255, 0.076), rgba(255, 255, 255, 0.026)),
+    rgba(8, 13, 24, 0.64);
+  box-shadow:
+    0 18px 46px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.07);
+}
+
+.sentra-phase12-kpi-pill::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at 88% 0%, rgba(125, 211, 252, 0.12), transparent 9rem);
+}
+
+.sentra-phase12-kpi-pill > * {
+  position: relative;
+  z-index: 1;
+}
+
+.sentra-phase12-kpi-dot {
+  display: inline-flex;
+  width: 0.52rem;
+  height: 0.52rem;
+  margin-top: 0.18rem;
+  border-radius: 999px;
+  background: var(--phase12-cyan);
+  box-shadow: 0 0 18px rgba(125, 211, 252, 0.46);
+}
+
+.sentra-phase12-kpi-dot.is-success,
+.sentra-phase12-kpi-progress.is-success {
+  background: #34d399;
+}
+
+.sentra-phase12-kpi-dot.is-warning,
+.sentra-phase12-kpi-progress.is-warning {
+  background: #f6c667;
+}
+
+.sentra-phase12-kpi-dot.is-danger,
+.sentra-phase12-kpi-progress.is-danger {
+  background: #fb7185;
+}
+
+.sentra-phase12-kpi-progress {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--phase12-cyan), var(--phase12-violet));
+  box-shadow: 0 0 18px rgba(125, 211, 252, 0.26);
+  transition: width 620ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.sentra-phase12-panel,
+.sentra-phase12-chart-panel,
+.sentra-phase12-kpi-card {
+  border-color: var(--phase12-border);
+  box-shadow:
+    0 26px 82px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.07);
+}
+
+.sentra-phase12-panel:hover,
+.sentra-phase12-chart-panel:hover,
+.sentra-phase12-kpi-card:hover {
+  transform: translateY(-1px);
+  border-color: rgba(255, 255, 255, 0.135);
+}
+
+.sentra-phase12-mode-switcher {
+  max-width: 760px;
+  border-color: rgba(255, 255, 255, 0.095);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.022)),
+    rgba(3, 6, 12, 0.42);
+}
+
+.sentra-phase12-mode-button {
+  min-height: 50px;
+}
+
+.sentra-phase12-sidebar {
+  border-color: rgba(255, 255, 255, 0.082);
+  background:
+    radial-gradient(circle at 20% 0%, rgba(125, 211, 252, 0.08), transparent 16rem),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.052), rgba(255, 255, 255, 0.018)),
+    rgba(3, 7, 14, 0.92);
+}
+
+.sentra-phase12-workspace-card {
+  border-color: rgba(255, 255, 255, 0.078);
+  background:
+    radial-gradient(circle at 0% 0%, rgba(125, 211, 252, 0.075), transparent 10rem),
+    rgba(255, 255, 255, 0.035);
+}
+
+.sentra-phase12-sidebar .sentra-luxury-nav-item {
+  gap: 0.72rem;
+}
+
+.sentra-phase12-sidebar .sentra-luxury-nav-item.is-active {
+  border-color: rgba(125, 211, 252, 0.22);
+  box-shadow:
+    inset 3px 0 0 rgba(125, 211, 252, 0.72),
+    0 12px 30px rgba(0, 0, 0, 0.16);
+}
+
+.sentra-phase12-sidebar .sentra-shell-nav-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sentra-phase7-hero-action,
+.sentra-command-link {
+  min-height: 2.85rem;
+}
+
+.sentra-analytics-shell {
+  background:
+    radial-gradient(circle at 12% -8%, rgba(125, 211, 252, 0.12), transparent 34rem),
+    radial-gradient(circle at 84% 0%, rgba(246, 198, 103, 0.075), transparent 30rem),
+    linear-gradient(180deg, #03050a 0%, #070b14 100%);
+}
+
+@keyframes sentra-phase12-scan {
+  0%,
+  46% {
+    transform: translateX(-82%);
+    opacity: 0;
+  }
+  55% {
+    opacity: 0.5;
+  }
+  72%,
+  100% {
+    transform: translateX(72%);
+    opacity: 0;
+  }
+}
+
+@media (max-width: 900px) {
+  .sentra-phase12-hero {
+    min-height: auto;
+    border-radius: 28px;
+  }
+
+  .sentra-phase12-hero-title {
+    max-width: 100%;
+    font-size: clamp(2.45rem, 14vw, 4rem);
+  }
+
+  .sentra-phase12-status-panel {
+    width: 100%;
+  }
+
+  .sentra-phase12-kpi-pill {
+    min-height: 96px;
+  }
+}
+
+@media (max-width: 640px) {
+  .sentra-phase12-mode-switcher {
+    border-radius: 24px;
+  }
+
+  .sentra-phase12-mode-button {
+    border-radius: 20px;
+  }
+
+  .sentra-phase7-hero-action,
+  .sentra-command-link {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sentra-phase12-hero-scanline,
+  .sentra-sidebar-live-dot {
+    animation: none;
+  }
+
+  .sentra-phase12-panel:hover,
+  .sentra-phase12-chart-panel:hover,
+  .sentra-phase12-kpi-card:hover,
+  .sentra-phase12-kpi-pill:hover {
+    transform: none;
+  }
+}
+/* Final authenticated app theme: premium black enterprise OS. */
+.sentra-auth-shell {
+  --sentra-sidebar-width: 280px;
+  --sentra-app-bg: #050505;
+  --sentra-app-bg-secondary: #070707;
+  --sentra-app-panel: #0b0b0b;
+  --sentra-app-panel-elevated: #111111;
+  --sentra-app-hover: #181818;
+  --sentra-app-active: #232323;
+  --sentra-app-border: rgba(255, 255, 255, 0.06);
+  --sentra-app-border-strong: rgba(255, 255, 255, 0.12);
+  --sentra-app-text: #ffffff;
+  --sentra-app-muted: #a1a1aa;
+  --sentra-app-soft: #71717a;
+  --sentra-app-faint: rgba(255, 255, 255, 0.24);
+  --sentra-app-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+  --sentra-app-shadow-lg: 0 24px 70px rgba(0, 0, 0, 0.56);
+  --sentra-app-radius: 28px;
+  --sentra-app-radius-sm: 18px;
+  --sentra-app-ease: 220ms cubic-bezier(0.22, 1, 0.36, 1);
+  --sentra-app-danger: #ff7d7d;
+  --sentra-app-warning: #f4c56a;
+  --sentra-app-success: #d7f6df;
+  --text: var(--sentra-app-text);
+  --foreground: var(--sentra-app-text);
+  --surface: var(--sentra-app-panel);
+  --surface-strong: var(--sentra-app-panel-elevated);
+  --border: var(--sentra-app-border);
+  --sentra-text-muted: var(--sentra-app-muted);
+  --sentra-shadow-panel: var(--sentra-app-shadow);
+  --sentra-shadow-floating: var(--sentra-app-shadow);
+  background: var(--sentra-app-bg);
+  color: var(--sentra-app-text);
+}
+
+html[data-theme="light"] .sentra-auth-shell {
+  --sentra-app-bg: #f7f7f8;
+  --sentra-app-bg-secondary: #f1f1f2;
+  --sentra-app-panel: #ffffff;
+  --sentra-app-panel-elevated: #fafafa;
+  --sentra-app-hover: #f1f1f2;
+  --sentra-app-active: #eaeaea;
+  --sentra-app-border: rgba(0, 0, 0, 0.08);
+  --sentra-app-border-strong: rgba(0, 0, 0, 0.14);
+  --sentra-app-text: #111111;
+  --sentra-app-muted: #52525b;
+  --sentra-app-soft: #71717a;
+  --sentra-app-faint: rgba(0, 0, 0, 0.22);
+  --sentra-app-shadow: 0 12px 34px rgba(15, 23, 42, 0.08);
+  --sentra-app-shadow-lg: 0 24px 60px rgba(15, 23, 42, 0.11);
+  --sentra-app-danger: #b4232f;
+  --sentra-app-warning: #8a5b00;
+  --sentra-app-success: #166534;
+}
+
+.app-container.sentra-auth-shell {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 54% -18%, rgba(255, 255, 255, 0.045), transparent 30rem),
+    linear-gradient(180deg, var(--sentra-app-bg-secondary), var(--sentra-app-bg) 42%);
+  color: var(--sentra-app-text);
+}
+
+.sentra-auth-shell .grid-layer,
+.sentra-auth-shell .depth-glow,
+.sentra-auth-shell .cursor-glow {
+  display: none !important;
+}
+
+.sentra-auth-shell .sentra-shell-main {
+  min-width: 0;
+  margin-left: calc(var(--sentra-sidebar-width) + 24px);
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+.sentra-auth-shell .sentra-shell-scroll {
+  padding-bottom: 2rem;
+  background: transparent;
+  scroll-padding-top: 6.5rem;
+}
+
+.sentra-auth-shell .main-content,
+.sentra-auth-shell [data-dashboard-mode],
+.sentra-auth-shell .sentra-workspace-enter,
+.sentra-auth-shell .sentra-phase7-content {
+  min-width: 0;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+.sentra-auth-shell .sentra-topbar {
+  min-height: 92px;
+  background: color-mix(in srgb, var(--sentra-app-bg) 94%, transparent);
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.sentra-auth-shell .sentra-topbar-inner {
+  min-height: 76px;
+  border: 1px solid var(--sentra-app-border) !important;
+  border-radius: 28px !important;
+  background: var(--sentra-app-panel) !important;
+  box-shadow: var(--sentra-app-shadow) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.sentra-auth-shell .sentra-topbar-breadcrumb {
+  flex: 0 1 300px;
+}
+
+.sentra-auth-shell .sentra-command-search {
+  display: flex;
+  width: 420px;
+  max-width: 420px;
+  height: 52px;
+  flex: 0 1 420px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.85rem;
+  border: 1px solid var(--sentra-app-border) !important;
+  border-radius: 16px !important;
+  background: var(--sentra-app-panel-elevated) !important;
+  padding: 0 0.95rem;
+  color: var(--sentra-app-muted) !important;
+  text-align: left;
+  box-shadow: none !important;
+  transition: background var(--sentra-app-ease), border-color var(--sentra-app-ease), transform var(--sentra-app-ease);
+}
+
+.sentra-auth-shell .sentra-command-search:hover {
+  border-color: var(--sentra-app-border-strong) !important;
+  background: var(--sentra-app-hover) !important;
+  transform: translateY(-1px);
+}
+
+.sentra-auth-shell .sentra-search-icon {
+  display: inline-flex;
+  color: var(--sentra-app-soft);
+}
+
+.sentra-auth-shell .sentra-command-search-placeholder {
+  min-width: 0;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--sentra-app-muted);
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.sentra-auth-shell .sentra-command-search kbd,
+.sentra-auth-shell kbd {
+  border: 1px solid var(--sentra-app-border) !important;
+  border-radius: 999px !important;
+  background: var(--sentra-app-bg) !important;
+  color: var(--sentra-app-soft) !important;
+  padding: 0.36rem 0.58rem;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.sentra-auth-shell .sentra-topbar-right {
+  align-items: center;
+}
+
+.sentra-auth-shell .sentra-topbar-mode-switcher,
+.sentra-auth-shell .sentra-phase12-mode-switcher,
+.sentra-auth-shell .sentra-mode-capsule {
+  min-height: 46px;
+  border: 1px solid var(--sentra-app-border) !important;
+  border-radius: 999px !important;
+  background: var(--sentra-app-panel-elevated) !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.sentra-auth-shell .sentra-topbar-mode-pill,
+.sentra-auth-shell .sentra-phase12-mode-button {
+  min-height: 38px;
+  border-radius: 999px !important;
+  padding-inline: 1rem;
+  color: var(--sentra-app-muted) !important;
+  font-size: 0.84rem;
+  font-weight: 700;
+  transition: background var(--sentra-app-ease), color var(--sentra-app-ease), transform var(--sentra-app-ease);
+}
+
+.sentra-auth-shell .sentra-topbar-mode-pill:hover,
+.sentra-auth-shell .sentra-phase12-mode-button:hover {
+  background: var(--sentra-app-hover) !important;
+  color: var(--sentra-app-text) !important;
+}
+
+.sentra-auth-shell .sentra-topbar-mode-pill.is-active,
+.sentra-auth-shell .sentra-mode-active,
+.sentra-auth-shell .sentra-mode-active-pill,
+.sentra-auth-shell .sentra-phase12-mode-button.is-active {
+  color: var(--sentra-app-text) !important;
+  border-color: var(--sentra-app-border-strong) !important;
+  background: var(--sentra-app-active) !important;
+  box-shadow: none !important;
+}
+
+.sentra-auth-shell .sentra-app-sidebar,
+.sentra-auth-shell .sentra-luxury-sidebar,
+.sentra-auth-shell .sentra-phase12-sidebar {
+  inset: 20px auto 20px 20px;
+  width: var(--sentra-sidebar-width);
+  gap: 1.05rem;
+  padding: 1.15rem;
+  border: 1px solid var(--sentra-app-border) !important;
+  border-radius: 30px;
+  background: var(--sentra-app-panel) !important;
+  box-shadow: var(--sentra-app-shadow-lg) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.sentra-auth-shell .sentra-app-sidebar.is-collapsed,
+.sentra-auth-shell .sentra-luxury-sidebar.is-collapsed,
+.sentra-auth-shell .sentra-phase12-sidebar.is-collapsed {
+  width: 88px;
+  padding-inline: 0.8rem;
+}
+
+.sentra-auth-shell .sentra-app-sidebar::after,
+.sentra-auth-shell .sentra-luxury-sidebar::after,
+.sentra-auth-shell .sentra-phase12-sidebar::after {
+  display: none !important;
+  content: none !important;
+}
+
+.sentra-auth-shell .sentra-sidebar-brand {
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--sentra-app-border);
+}
+
+.sentra-auth-shell .sentra-sidebar-mark {
+  border: 1px solid var(--sentra-app-border-strong) !important;
+  background: var(--sentra-app-active) !important;
+  color: var(--sentra-app-text) !important;
+  box-shadow: none !important;
+}
+
+.sentra-auth-shell .sentra-workspace-card,
+.sentra-auth-shell .sentra-shell-collapse,
+.sentra-auth-shell .sentra-sidebar-profile-card {
+  border: 1px solid var(--sentra-app-border) !important;
+  background: var(--sentra-app-panel-elevated) !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.sentra-auth-shell .sentra-workspace-card {
+  border-radius: 24px;
+  padding: 1.05rem;
+}
+
+.sentra-auth-shell .sentra-sidebar-nav-scroll {
+  display: flex;
+  min-height: 0;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.9rem;
+  overflow-y: auto;
+  padding-right: 0.15rem;
+}
+
+.sentra-auth-shell .sentra-sidebar-bottom {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--sentra-app-border);
+}
+
+.sentra-auth-shell .sentra-sidebar-section-label,
+.sentra-auth-shell .sentra-ui-label,
+.sentra-auth-shell .sentra-phase12-eyebrow,
+.sentra-auth-shell .sentra-obsidian-eyebrow {
+  color: var(--sentra-app-soft) !important;
+  letter-spacing: 0.24em;
+  text-shadow: none !important;
+}
+
+.sentra-auth-shell .sentra-luxury-nav-item,
+.sentra-auth-shell .sentra-shell-nav-item {
+  min-height: 52px;
+  border: 1px solid transparent !important;
+  border-radius: 16px !important;
+  color: var(--sentra-app-muted) !important;
+  transition: background var(--sentra-app-ease), border-color var(--sentra-app-ease), color var(--sentra-app-ease), transform var(--sentra-app-ease);
+}
+
+.sentra-auth-shell .sentra-luxury-nav-item:hover,
+.sentra-auth-shell .sentra-shell-nav-item:hover,
+.sentra-auth-shell .sentra-shell-collapse:hover {
+  transform: translateY(-1px);
+  color: var(--sentra-app-text) !important;
+  border-color: var(--sentra-app-border) !important;
+  background: var(--sentra-app-hover) !important;
+  box-shadow: none !important;
+}
+
+.sentra-auth-shell .sentra-luxury-nav-item.is-active,
+.sentra-auth-shell .sentra-shell-nav-item.is-active {
+  color: var(--sentra-app-text) !important;
+  border-color: var(--sentra-app-border-strong) !important;
+  background: var(--sentra-app-active) !important;
+  box-shadow: inset 3px 0 0 var(--sentra-app-text) !important;
+}
+
+.sentra-auth-shell .sentra-shell-active-indicator {
+  display: none !important;
+}
+
+.sentra-auth-shell .sentra-shell-nav-label span:last-child,
+.sentra-auth-shell .sentra-phase12-hero-copy {
+  color: var(--sentra-app-muted) !important;
+}
+
+.sentra-auth-shell .sentra-sidebar-live-chip,
+.sentra-auth-shell .sentra-sidebar-micro-stat,
+.sentra-auth-shell .sentra-topbar-mode-chip,
+.sentra-auth-shell .sentra-decision-chip {
+  color: var(--sentra-app-muted) !important;
+  border-color: var(--sentra-app-border) !important;
+  background: var(--sentra-app-panel) !important;
+}
+
+.sentra-auth-shell .sentra-sidebar-live-dot,
+.sentra-auth-shell .sentra-phase12-kpi-dot {
+  background: var(--sentra-app-text) !important;
+  box-shadow: none !important;
+}
+
+.sentra-auth-shell .glass-panel,
+.sentra-auth-shell .glass-nav,
+.sentra-auth-shell .sentra-phase12-hero,
+.sentra-auth-shell .sentra-workspace-hero,
+.sentra-auth-shell .sentra-phase12-panel,
+.sentra-auth-shell .sentra-phase12-chart-panel,
+.sentra-auth-shell .sentra-phase12-kpi-card,
+.sentra-auth-shell .sentra-obsidian-panel,
+.sentra-auth-shell .sentra-empty-state-premium,
+.sentra-auth-shell .sentra-ai-recommendations-feed,
+.sentra-auth-shell .sentra-crisis-command-bar,
+.sentra-auth-shell .sentra-obsidian-command-bar {
+  border: 1px solid var(--sentra-app-border) !important;
+  background: var(--sentra-app-panel) !important;
+  box-shadow: var(--sentra-app-shadow) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.sentra-auth-shell .sentra-workspace-hero {
+  min-height: 390px;
+  border-radius: 32px;
+  padding: clamp(2rem, 3.6vw, 3rem) !important;
+}
+
+.sentra-auth-shell .sentra-phase12-hero-title {
+  max-width: 780px;
+  font-weight: 680;
+  letter-spacing: -0.075em;
+  line-height: 0.96;
+}
+
+.sentra-auth-shell .sentra-workspace-hero-actions {
+  align-items: center;
+}
+
+.sentra-auth-shell .sentra-hero-action-button,
+.sentra-auth-shell .sentra-command-link,
+.sentra-auth-shell .sentra-crisis-command-bar button,
+.sentra-auth-shell .sentra-decision-button {
+  display: inline-flex;
+  min-height: 46px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 18px;
+  border: 1px solid var(--sentra-app-border) !important;
+  background: var(--sentra-app-panel-elevated) !important;
+  padding: 0.8rem 1.1rem;
+  color: var(--sentra-app-text) !important;
+  font-size: 0.9rem;
+  font-weight: 650;
+  text-decoration: none;
+  transition: background var(--sentra-app-ease), border-color var(--sentra-app-ease), transform var(--sentra-app-ease);
+}
+
+.sentra-auth-shell .sentra-hero-action-button.is-primary,
+.sentra-auth-shell .sentra-decision-button.is-approve {
+  background: var(--sentra-app-text) !important;
+  color: var(--sentra-app-bg) !important;
+  border-color: var(--sentra-app-text) !important;
+  box-shadow: none !important;
+}
+
+.sentra-auth-shell .sentra-hero-action-button:hover,
+.sentra-auth-shell .sentra-command-link:hover,
+.sentra-auth-shell .sentra-crisis-command-bar button:hover,
+.sentra-auth-shell .sentra-decision-button:hover {
+  transform: translateY(-1px);
+  border-color: var(--sentra-app-border-strong) !important;
+  background: var(--sentra-app-hover) !important;
+}
+
+.sentra-auth-shell .sentra-hero-action-button.is-primary:hover,
+.sentra-auth-shell .sentra-decision-button.is-approve:hover {
+  background: color-mix(in srgb, var(--sentra-app-text) 88%, var(--sentra-app-panel)) !important;
+}
+
+.sentra-auth-shell .sentra-command-link-danger,
+.sentra-auth-shell .sentra-crisis-command-bar button:first-child {
+  border-color: color-mix(in srgb, var(--sentra-app-danger) 38%, var(--sentra-app-border)) !important;
+  background: color-mix(in srgb, var(--sentra-app-danger) 13%, var(--sentra-app-panel-elevated)) !important;
+  color: var(--sentra-app-text) !important;
+}
+
+.sentra-auth-shell .sentra-phase7-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.sentra-auth-shell .sentra-phase12-kpi-pill,
+.sentra-auth-shell .sentra-obsidian-stat,
+.sentra-auth-shell .sentra-obsidian-list-card,
+.sentra-auth-shell .sentra-incident-row,
+.sentra-auth-shell .sentra-ai-recommendation-card,
+.sentra-auth-shell .sentra-decision-chip {
+  border: 1px solid var(--sentra-app-border) !important;
+  background: var(--sentra-app-panel-elevated) !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.sentra-auth-shell .sentra-phase12-kpi-pill {
+  min-height: 112px;
+  border-radius: 24px;
+  padding: 1.1rem;
+}
+
+.sentra-auth-shell .sentra-phase12-kpi-pill::before {
+  background: none !important;
+}
+
+.sentra-auth-shell .sentra-phase12-kpi-progress,
+.sentra-auth-shell .sentra-phase12-kpi-progress.is-success,
+.sentra-auth-shell .sentra-phase12-kpi-progress.is-warning,
+.sentra-auth-shell .sentra-phase12-kpi-progress.is-calm {
+  background: var(--sentra-app-text) !important;
+  box-shadow: none !important;
+}
+
+.sentra-auth-shell .sentra-phase12-kpi-dot.is-danger,
+.sentra-auth-shell .sentra-phase12-kpi-progress.is-danger,
+.sentra-auth-shell .sentra-severity-chip[class*="rose"] {
+  background: var(--sentra-app-danger) !important;
+}
+
+.sentra-auth-shell .sentra-phase7-grid-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.5rem;
+}
+
+.sentra-auth-shell .sentra-phase7-grid-row > * {
+  min-width: 0;
+}
+
+.sentra-auth-shell .sentra-ai-recommendations-feed,
+.sentra-auth-shell [data-section-id="command-incidents"] {
+  min-height: 500px;
+}
+
+.sentra-auth-shell .sentra-incident-row,
+.sentra-auth-shell .sentra-ai-recommendation-card {
+  transition: background var(--sentra-app-ease), border-color var(--sentra-app-ease), transform var(--sentra-app-ease);
+}
+
+.sentra-auth-shell .sentra-incident-row:hover,
+.sentra-auth-shell .sentra-ai-recommendation-card:hover {
+  transform: translateY(-1px);
+  border-color: var(--sentra-app-border-strong) !important;
+  background: var(--sentra-app-hover) !important;
+}
+
+.sentra-auth-shell .sentra-severity-chip {
+  color: var(--sentra-app-muted) !important;
+}
+
+.sentra-auth-shell .sentra-copilot-root {
+  right: 1.35rem;
+  bottom: 1.35rem;
+}
+
+.sentra-auth-shell .sentra-copilot-root > button {
+  min-height: 58px;
+  border: 1px solid var(--sentra-app-border-strong) !important;
+  background: var(--sentra-app-panel) !important;
+  box-shadow: var(--sentra-app-shadow) !important;
+  color: var(--sentra-app-text) !important;
+}
+
+.sentra-auth-shell .sentra-copilot-root > button span:first-child {
+  background: var(--sentra-app-active) !important;
+  color: var(--sentra-app-text) !important;
+}
+
+.sentra-auth-shell .sentra-profile-menu-item {
+  display: flex;
+  height: 2.75rem;
+  width: 100%;
+  align-items: center;
+  border-radius: 1rem;
+  padding-inline: 1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: background var(--sentra-app-ease), transform var(--sentra-app-ease);
+}
+
+.sentra-auth-shell .sentra-profile-menu {
+  border-color: var(--sentra-app-border) !important;
+  background: var(--sentra-app-panel) !important;
+  box-shadow: var(--sentra-app-shadow-lg) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.sentra-auth-shell .sentra-profile-menu-item:hover {
+  background: var(--sentra-app-hover) !important;
+}
+
+.sentra-auth-shell [class*="text-cyan-"],
+.sentra-auth-shell [class*="text-sky-"],
+.sentra-auth-shell [class*="text-blue-"],
+.sentra-auth-shell [class*="text-emerald-"],
+.sentra-auth-shell [class*="text-green-"],
+.sentra-auth-shell [class*="text-amber-"] {
+  color: var(--sentra-app-muted) !important;
+}
+
+.sentra-auth-shell [class*="bg-cyan-"],
+.sentra-auth-shell [class*="bg-sky-"],
+.sentra-auth-shell [class*="bg-blue-"],
+.sentra-auth-shell [class*="bg-emerald-"],
+.sentra-auth-shell [class*="bg-green-"],
+.sentra-auth-shell [class*="bg-amber-"] {
+  background-color: var(--sentra-app-active) !important;
+}
+
+.sentra-auth-shell [class*="border-cyan-"],
+.sentra-auth-shell [class*="border-sky-"],
+.sentra-auth-shell [class*="border-blue-"],
+.sentra-auth-shell [class*="border-emerald-"],
+.sentra-auth-shell [class*="border-green-"],
+.sentra-auth-shell [class*="border-amber-"] {
+  border-color: var(--sentra-app-border-strong) !important;
+}
+
+html[data-theme="light"] .sentra-auth-shell .text-white,
+html[data-theme="light"] .sentra-auth-shell [class*="text-white/"] {
+  color: var(--sentra-app-text) !important;
+}
+
+html[data-theme="light"] .sentra-auth-shell [class*="bg-white/"] {
+  background-color: var(--sentra-app-panel-elevated) !important;
+}
+
+html[data-theme="light"] .sentra-auth-shell [class*="border-white/"] {
+  border-color: var(--sentra-app-border) !important;
+}
+
+@media (min-width: 1280px) {
+  .sentra-auth-shell .sentra-phase7-grid-row {
+    grid-template-columns: minmax(0, 1fr) minmax(390px, 0.95fr);
+  }
+}
+
+@media (max-width: 1280px) {
+  .sentra-auth-shell .sentra-topbar-inner {
+    align-items: stretch;
+    flex-wrap: wrap;
+  }
+
+  .sentra-auth-shell .sentra-command-search {
+    order: 3;
+    width: 100%;
+    max-width: none;
+    flex: 1 1 100%;
+  }
+}
+
+@media (max-width: 1024px) {
+  .sentra-auth-shell .sentra-shell-main {
+    margin-left: 0;
+  }
+
+  .sentra-auth-shell .sentra-topbar {
+    min-height: auto;
+  }
+
+  .sentra-auth-shell .sentra-app-sidebar,
+  .sentra-auth-shell .sentra-luxury-sidebar,
+  .sentra-auth-shell .sentra-phase12-sidebar,
+  .sentra-auth-shell .sentra-app-sidebar.is-collapsed,
+  .sentra-auth-shell .sentra-luxury-sidebar.is-collapsed,
+  .sentra-auth-shell .sentra-phase12-sidebar.is-collapsed {
+    width: min(280px, calc(100vw - 24px));
+  }
+}
+
+@media (max-width: 768px) {
+  .sentra-auth-shell .sentra-workspace-hero {
+    min-height: auto;
+    padding: 1.35rem !important;
+    border-radius: 26px;
+  }
+
+  .sentra-auth-shell .sentra-phase12-hero-title {
+    font-size: clamp(2.35rem, 13vw, 4rem);
+  }
+
+  .sentra-auth-shell .sentra-phase7-kpi-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sentra-auth-shell .sentra-topbar-breadcrumb,
+  .sentra-auth-shell .sentra-topbar-right {
+    flex: 1 1 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sentra-auth-shell *,
+  .sentra-auth-shell *::before,
+  .sentra-auth-shell *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
+
+/* Final convergence layer for authenticated Sentra routes. Keep public landing/login untouched. */
+.sentra-auth-shell {
+  --sentra-app-bg: var(--sentra-os-bg, #050505);
+  --sentra-app-bg-secondary: var(--sentra-os-bg, #050505);
+  --sentra-app-panel: var(--sentra-os-panel, #0b0b0b);
+  --sentra-app-panel-elevated: var(--sentra-os-card, #111111);
+  --sentra-app-hover: var(--sentra-os-hover, #181818);
+  --sentra-app-active: var(--sentra-os-active, #232323);
+  --sentra-app-border: var(--sentra-os-border, rgba(255, 255, 255, 0.06));
+  --sentra-app-border-strong: var(--sentra-os-border-strong, rgba(255, 255, 255, 0.12));
+  --sentra-app-text: var(--sentra-os-text, #ffffff);
+  --sentra-app-muted: var(--sentra-os-muted, #a1a1aa);
+  --sentra-app-soft: color-mix(in srgb, var(--sentra-app-muted) 72%, transparent);
+  --sentra-app-shadow: var(--sentra-os-shadow, 0 12px 40px rgba(0, 0, 0, 0.45));
+  --sentra-app-shadow-lg: var(--sentra-os-shadow, 0 24px 70px rgba(0, 0, 0, 0.56));
+  --sentra-text-muted: var(--sentra-app-muted);
+  --sentra-text-soft: var(--sentra-app-soft);
+  --sentra-border-subtle: var(--sentra-app-border);
+  --sentra-border-strong: var(--sentra-app-border-strong);
+  --sentra-surface: var(--sentra-app-panel);
+  --sentra-surface-strong: var(--sentra-app-panel-elevated);
+  --sentra-input-surface: var(--sentra-app-panel-elevated);
+  --text: var(--sentra-app-text);
+  --foreground: var(--sentra-app-text);
+  --surface: var(--sentra-app-panel);
+  --surface-strong: var(--sentra-app-panel-elevated);
+  --border: var(--sentra-app-border);
+}
+
+.app-container.sentra-auth-shell {
+  background:
+    radial-gradient(circle at 50% -20%, color-mix(in srgb, var(--sentra-app-text) 5%, transparent), transparent 32rem),
+    linear-gradient(180deg, var(--sentra-app-bg), var(--sentra-app-bg) 100%) !important;
+}
+
+.sentra-auth-shell .pointer-events-none.fixed.inset-0,
+.sentra-auth-shell .pointer-events-none.absolute.inset-0 {
+  display: none !important;
+}
+
+.sentra-auth-shell main {
+  min-height: auto !important;
+  background: transparent !important;
+  color: var(--sentra-app-text) !important;
+}
+
+.sentra-auth-shell .sentra-shell-main {
+  margin-left: calc(var(--sentra-sidebar-width) + 24px) !important;
+}
+
+.sentra-auth-shell .sentra-analytics-shell,
+.sentra-auth-shell main > .relative.z-10,
+.sentra-auth-shell main > .mx-auto,
+.sentra-auth-shell .settings-container {
+  width: 100%;
+  min-width: 0;
+}
+
+.sentra-auth-shell .sentra-radial-hub {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 238px;
+  margin: 0.15rem 0 0.25rem;
+  isolation: isolate;
+}
+
+.sentra-auth-shell .sentra-radial-orbit {
+  position: absolute;
+  inset: 24px;
+  border: 1px solid var(--sentra-app-border);
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--sentra-app-text) 5%, transparent), transparent 42%),
+    var(--sentra-app-panel-elevated);
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--sentra-app-text) 7%, transparent);
+  animation: sentraRadialDrift 36s linear infinite;
+}
+
+.sentra-auth-shell .sentra-radial-center,
+.sentra-auth-shell .sentra-radial-node {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--sentra-app-border);
+  color: var(--sentra-app-muted);
+  text-decoration: none;
+  transition:
+    background var(--sentra-app-ease),
+    border-color var(--sentra-app-ease),
+    color var(--sentra-app-ease),
+    transform var(--sentra-app-ease),
+    opacity var(--sentra-app-ease);
+}
+
+.sentra-auth-shell .sentra-radial-center {
+  z-index: 3;
+  width: 74px;
+  height: 74px;
+  flex-direction: column;
+  gap: 0.35rem;
+  border-radius: 28px;
+  background: var(--sentra-app-active);
+  color: var(--sentra-app-text);
+  transform: translate(-50%, -50%);
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--sentra-app-text) 10%, transparent);
+}
+
+.sentra-auth-shell .sentra-radial-center span {
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.sentra-auth-shell .sentra-radial-node {
+  z-index: 4;
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  background: var(--sentra-app-panel);
+}
+
+.sentra-auth-shell .sentra-radial-node span {
+  position: absolute;
+  left: 50%;
+  top: calc(100% + 0.42rem);
+  max-width: 86px;
+  transform: translateX(-50%);
+  border: 1px solid var(--sentra-app-border);
+  border-radius: 999px;
+  background: var(--sentra-app-panel);
+  color: var(--sentra-app-text);
+  opacity: 0;
+  padding: 0.28rem 0.5rem;
+  pointer-events: none;
+  font-size: 0.62rem;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  box-shadow: var(--sentra-app-shadow);
+  transition: opacity var(--sentra-app-ease), transform var(--sentra-app-ease);
+}
+
+.sentra-auth-shell .sentra-radial-node:hover,
+.sentra-auth-shell .sentra-radial-node.is-active {
+  z-index: 6;
+  border-color: var(--sentra-app-border-strong);
+  background: var(--sentra-app-active);
+  color: var(--sentra-app-text);
+}
+
+.sentra-auth-shell .sentra-radial-node:hover span,
+.sentra-auth-shell .sentra-radial-node.is-active span {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-2px);
+}
+
+.sentra-auth-shell .sentra-radial-node.is-locked {
+  opacity: 0.58;
+}
+
+.sentra-auth-shell .sentra-radial-node i {
+  position: absolute;
+  right: -1px;
+  top: -1px;
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  background: var(--sentra-app-muted);
+}
+
+.sentra-auth-shell .sentra-nav-lock {
+  display: inline-flex;
+  width: 1rem;
+  height: 1rem;
+  flex: 0 0 auto;
+  color: var(--sentra-app-soft);
+}
+
+.sentra-auth-shell .sentra-radial-hub,
+.sentra-auth-shell .sentra-radial-orbit,
+.sentra-auth-shell .sentra-radial-center,
+.sentra-auth-shell .sentra-radial-node {
+  display: none !important;
+}
+
+.sentra-auth-shell .sentra-radial-hub.is-collapsed {
+  min-height: 96px;
+}
+
+.sentra-auth-shell .sentra-radial-hub.is-collapsed .sentra-radial-orbit {
+  inset: 5px;
+}
+
+.sentra-auth-shell .sentra-radial-hub.is-collapsed .sentra-radial-center {
+  width: 48px;
+  height: 48px;
+  border-radius: 18px;
+}
+
+.sentra-auth-shell .sentra-radial-hub.is-collapsed .sentra-radial-node {
+  width: 22px;
+  height: 22px;
+}
+
+.sentra-auth-shell .sentra-radial-hub.is-collapsed .sentra-radial-node svg {
+  width: 0.76rem;
+  height: 0.76rem;
+}
+
+@keyframes sentraRadialDrift {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.sentra-auth-shell .sentra-theme-choice {
+  display: flex;
+  min-height: 98px;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid var(--sentra-app-border);
+  border-radius: 22px;
+  background: var(--sentra-app-panel-elevated);
+  padding: 1rem;
+  color: var(--sentra-app-muted);
+  text-align: left;
+  transition:
+    background var(--sentra-app-ease),
+    border-color var(--sentra-app-ease),
+    color var(--sentra-app-ease),
+    transform var(--sentra-app-ease);
+}
+
+.sentra-auth-shell .sentra-theme-choice span {
+  color: var(--sentra-app-text);
+  font-weight: 750;
+}
+
+.sentra-auth-shell .sentra-theme-choice small {
+  color: var(--sentra-app-muted);
+  font-size: 0.74rem;
+}
+
+.sentra-auth-shell .sentra-theme-choice:hover,
+.sentra-auth-shell .sentra-theme-choice.is-active {
+  transform: translateY(-1px);
+  border-color: var(--sentra-app-border-strong);
+  background: var(--sentra-app-active);
+}
+
+.sentra-auth-shell .sentra-system-status-chip,
+.sentra-auth-shell .sentra-role-chip {
+  display: inline-flex;
+  min-height: 2.5rem;
+  align-items: center;
+  gap: 0.45rem;
+  border: 1px solid var(--sentra-app-border);
+  border-radius: 999px;
+  background: var(--sentra-app-panel-elevated);
+  color: var(--sentra-app-text);
+  padding: 0 0.85rem;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  line-height: 1;
+  text-transform: uppercase;
+  transition: background var(--sentra-app-ease), border-color var(--sentra-app-ease), transform var(--sentra-app-ease);
+}
+
+.sentra-auth-shell .sentra-system-status-chip:hover,
+.sentra-auth-shell .sentra-role-chip:hover {
+  transform: translateY(-1px);
+  border-color: var(--sentra-app-border-strong);
+  background: var(--sentra-app-hover);
+}
+
+.sentra-auth-shell .sentra-system-status-dot {
+  width: 0.48rem;
+  height: 0.48rem;
+  border-radius: 999px;
+  background: #35d07f;
+  box-shadow: 0 0 0 4px rgba(53, 208, 127, 0.1);
+  animation: sentraStatusPulse 2.4s ease-in-out infinite;
+}
+
+.sentra-auth-shell .sentra-system-status-chip.is-syncing .sentra-system-status-dot {
+  background: #d6b76b;
+  box-shadow: 0 0 0 4px rgba(214, 183, 107, 0.1);
+}
+
+.sentra-auth-shell .sentra-system-status-chip.is-offline .sentra-system-status-dot {
+  background: #d36a6a;
+  box-shadow: 0 0 0 4px rgba(211, 106, 106, 0.1);
+}
+
+@keyframes sentraStatusPulse {
+  0%,
+  100% {
+    opacity: 0.75;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.sentra-auth-shell .sentra-notification-button {
+  position: relative;
+  display: inline-flex;
+  width: 2.75rem;
+  height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--sentra-app-border);
+  border-radius: 999px;
+  background: var(--sentra-app-panel-elevated);
+  color: var(--sentra-app-muted);
+  transition: background var(--sentra-app-ease), border-color var(--sentra-app-ease), color var(--sentra-app-ease), transform var(--sentra-app-ease);
+}
+
+.sentra-auth-shell .sentra-notification-button:hover {
+  transform: translateY(-1px);
+  border-color: var(--sentra-app-border-strong);
+  background: var(--sentra-app-hover);
+  color: var(--sentra-app-text);
+}
+
+.sentra-auth-shell .sentra-notification-count {
+  position: absolute;
+  right: -0.15rem;
+  top: -0.15rem;
+  display: inline-flex;
+  min-width: 1.15rem;
+  height: 1.15rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--sentra-app-bg);
+  border-radius: 999px;
+  background: var(--sentra-app-text);
+  color: var(--sentra-app-bg);
+  font-size: 0.62rem;
+  font-weight: 800;
+}
+
+.sentra-auth-shell .sentra-notification-panel {
+  position: absolute;
+  right: 0;
+  top: 3.55rem;
+  z-index: 80;
+  width: min(380px, calc(100vw - 2rem));
+  overflow: hidden;
+  border: 1px solid var(--sentra-app-border);
+  border-radius: 24px;
+  background: var(--sentra-app-panel);
+  box-shadow: var(--sentra-app-shadow-lg);
+  animation: sentraDrawerIn 180ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.sentra-auth-shell .sentra-notification-panel-header {
+  border-bottom: 1px solid var(--sentra-app-border);
+  padding: 1rem;
+}
+
+.sentra-auth-shell .sentra-notification-panel-header p:last-child {
+  margin-top: 0.3rem;
+  color: var(--sentra-app-muted);
+  font-size: 0.86rem;
+}
+
+.sentra-auth-shell .sentra-notification-eyebrow {
+  color: var(--sentra-app-soft);
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.sentra-auth-shell .sentra-notification-list {
+  max-height: 360px;
+  overflow-y: auto;
+  padding: 0.8rem;
+}
+
+.sentra-auth-shell .sentra-notification-card {
+  margin-bottom: 0.55rem;
+  border: 1px solid var(--sentra-app-border);
+  border-radius: 18px;
+  background: var(--sentra-app-panel-elevated);
+  padding: 0.85rem;
+}
+
+.sentra-auth-shell .sentra-notification-title {
+  color: var(--sentra-app-text);
+  font-size: 0.88rem;
+  font-weight: 750;
+}
+
+.sentra-auth-shell .sentra-notification-body {
+  margin-top: 0.45rem;
+  color: var(--sentra-app-muted);
+  font-size: 0.78rem;
+  line-height: 1.55;
+}
+
+.sentra-auth-shell .sentra-notification-time {
+  display: block;
+  margin-top: 0.6rem;
+  color: var(--sentra-app-soft);
+  font-size: 0.68rem;
+  font-weight: 700;
+}
+
+.sentra-auth-shell .sentra-notification-severity {
+  border: 1px solid var(--sentra-app-border);
+  border-radius: 999px;
+  background: var(--sentra-app-panel);
+  color: var(--sentra-app-muted);
+  padding: 0.28rem 0.48rem;
+  font-size: 0.55rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.sentra-auth-shell .sentra-notification-severity.is-critical {
+  border-color: color-mix(in srgb, var(--sentra-app-danger) 36%, var(--sentra-app-border));
+  color: var(--sentra-app-danger);
+}
+
+.sentra-auth-shell .sentra-notification-severity.is-warning {
+  border-color: color-mix(in srgb, var(--sentra-app-warning) 36%, var(--sentra-app-border));
+  color: var(--sentra-app-warning);
+}
+
+.sentra-auth-shell .sentra-notification-severity.is-success {
+  color: #35d07f;
+}
+
+@keyframes sentraDrawerIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.sentra-auth-shell .sentra-app-sidebar,
+.sentra-auth-shell .sentra-topbar-inner,
+.sentra-auth-shell .glass-panel,
+.sentra-auth-shell .glass-nav,
+.sentra-auth-shell .sentra-phase12-hero,
+.sentra-auth-shell .sentra-workspace-hero,
+.sentra-auth-shell .sentra-phase12-panel,
+.sentra-auth-shell .sentra-phase12-chart-panel,
+.sentra-auth-shell .sentra-analytics-panel,
+.sentra-auth-shell .sentra-obsidian-panel,
+.sentra-auth-shell .sentra-empty-state-premium,
+.sentra-auth-shell .sentra-ai-recommendations-feed,
+.sentra-auth-shell .sentra-crisis-command-bar,
+.sentra-auth-shell .sentra-obsidian-command-bar,
+.sentra-auth-shell header[class*="rounded"],
+.sentra-auth-shell section[class*="rounded"],
+.sentra-auth-shell div[class*="rounded"] {
+  color: var(--sentra-app-text);
+}
+
+.sentra-auth-shell header[class*="bg-white/"],
+.sentra-auth-shell section[class*="bg-white/"],
+.sentra-auth-shell div[class*="bg-white/"],
+.sentra-auth-shell article[class*="bg-white/"],
+.sentra-auth-shell header[class*="bg-black/"],
+.sentra-auth-shell section[class*="bg-black/"],
+.sentra-auth-shell div[class*="bg-black/"],
+.sentra-auth-shell article[class*="bg-black/"] {
+  border-color: var(--sentra-app-border) !important;
+  background: var(--sentra-app-panel-elevated) !important;
+  box-shadow: none !important;
+}
+
+.sentra-auth-shell .sentra-app-card,
+.sentra-auth-shell .sentra-map-card,
+.sentra-auth-shell .sentra-premium-map,
+.sentra-auth-shell .sentra-analytics-panel,
+.sentra-auth-shell .sentra-phase12-panel,
+.sentra-auth-shell .sentra-phase12-chart-panel {
+  border: 1px solid var(--sentra-app-border) !important;
+  border-radius: 28px !important;
+  background: var(--sentra-app-panel) !important;
+  box-shadow: var(--sentra-app-shadow) !important;
+}
+
+.sentra-auth-shell .sentra-map-card {
+  position: relative;
+  overflow: hidden;
+  min-height: 370px;
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--sentra-app-text) 4%, transparent) 1px, transparent 1px),
+    linear-gradient(0deg, color-mix(in srgb, var(--sentra-app-text) 4%, transparent) 1px, transparent 1px),
+    var(--sentra-app-bg) !important;
+  background-size: 48px 48px, 48px 48px, auto !important;
+}
+
+.sentra-auth-shell .sentra-map-card::before {
+  position: absolute;
+  inset: 7%;
+  content: "";
+  border: 1px solid color-mix(in srgb, var(--sentra-app-text) 12%, transparent);
+  border-radius: 45% 52% 48% 42%;
+  background: color-mix(in srgb, var(--sentra-app-text) 4%, transparent);
+}
+
+.sentra-auth-shell .sentra-map-marker {
+  position: absolute;
+  z-index: 3;
+  transform: translate(-50%, -50%);
+}
+
+.sentra-auth-shell .sentra-map-marker-dot {
+  display: grid;
+  width: 14px;
+  height: 14px;
+  place-items: center;
+  border: 2px solid var(--sentra-app-bg);
+  border-radius: 999px;
+  background: var(--sentra-app-text);
+  box-shadow: 0 0 0 7px color-mix(in srgb, var(--sentra-app-text) 10%, transparent);
+}
+
+.sentra-auth-shell .sentra-map-marker.is-critical .sentra-map-marker-dot {
+  background: var(--sentra-app-danger);
+}
+
+.sentra-auth-shell .sentra-map-marker.is-elevated .sentra-map-marker-dot {
+  background: var(--sentra-app-warning);
+}
+
+.sentra-auth-shell .sentra-map-tooltip {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 0.8rem);
+  min-width: 150px;
+  transform: translateX(-50%);
+  border: 1px solid var(--sentra-app-border);
+  border-radius: 16px;
+  background: var(--sentra-app-panel);
+  padding: 0.7rem;
+  opacity: 0;
+  pointer-events: none;
+  box-shadow: var(--sentra-app-shadow);
+  transition: opacity var(--sentra-app-ease), transform var(--sentra-app-ease);
+}
+
+.sentra-auth-shell .sentra-map-marker:hover .sentra-map-tooltip {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-2px);
+}
+
+.sentra-auth-shell .sentra-map-route {
+  stroke: color-mix(in srgb, var(--sentra-app-text) 34%, transparent);
+}
+
+.sentra-auth-shell .sentra-map-safe-zone {
+  fill: color-mix(in srgb, var(--sentra-app-text) 5%, transparent);
+  stroke: color-mix(in srgb, var(--sentra-app-text) 18%, transparent);
+}
+
+.sentra-auth-shell [class*="shadow-cyan"],
+.sentra-auth-shell [class*="shadow-blue"],
+.sentra-auth-shell [class*="shadow-indigo"],
+.sentra-auth-shell [class*="shadow-emerald"],
+.sentra-auth-shell [class*="shadow-purple"] {
+  box-shadow: var(--sentra-app-shadow) !important;
+}
+
+.sentra-auth-shell [class*="text-cyan-"],
+.sentra-auth-shell [class*="text-sky-"],
+.sentra-auth-shell [class*="text-blue-"],
+.sentra-auth-shell [class*="text-indigo-"],
+.sentra-auth-shell [class*="text-purple-"],
+.sentra-auth-shell [class*="text-emerald-"],
+.sentra-auth-shell [class*="text-green-"] {
+  color: var(--sentra-app-muted) !important;
+}
+
+.sentra-auth-shell [class*="border-cyan-"],
+.sentra-auth-shell [class*="border-sky-"],
+.sentra-auth-shell [class*="border-blue-"],
+.sentra-auth-shell [class*="border-indigo-"],
+.sentra-auth-shell [class*="border-purple-"],
+.sentra-auth-shell [class*="border-emerald-"],
+.sentra-auth-shell [class*="border-green-"] {
+  border-color: var(--sentra-app-border) !important;
+}
+
+.sentra-auth-shell [class*="bg-cyan-"],
+.sentra-auth-shell [class*="bg-sky-"],
+.sentra-auth-shell [class*="bg-blue-"],
+.sentra-auth-shell [class*="bg-indigo-"],
+.sentra-auth-shell [class*="bg-purple-"],
+.sentra-auth-shell [class*="bg-emerald-"],
+.sentra-auth-shell [class*="bg-green-"] {
+  background-color: var(--sentra-app-active) !important;
+}
+
+.sentra-auth-shell [class*="bg-[linear-gradient"],
+.sentra-auth-shell [class*="bg-[radial-gradient"],
+.sentra-auth-shell [class*="bg-gradient-to"] {
+  background: var(--sentra-app-panel-elevated) !important;
+}
+
+.sentra-auth-shell [class*="backdrop-blur"] {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.sentra-auth-shell .sentra-copilot-root > button {
+  min-height: 3.1rem !important;
+  border: 1px solid var(--sentra-app-border-strong) !important;
+  border-radius: 999px !important;
+  background: var(--sentra-app-panel) !important;
+  color: var(--sentra-app-text) !important;
+  box-shadow: var(--sentra-app-shadow) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.sentra-auth-shell .sentra-copilot-root > button:hover {
+  transform: translateY(-1px);
+  background: var(--sentra-app-hover) !important;
+}
+
+.sentra-auth-shell .sentra-copilot-root > button span:first-child {
+  background: var(--sentra-app-active) !important;
+  color: var(--sentra-app-text) !important;
+  box-shadow: none !important;
+}
+
+.sentra-auth-shell .sentra-copilot-root > button span:first-child span {
+  display: none !important;
+}
+
+.sentra-auth-shell #ask-sentra-panel {
+  border-color: var(--sentra-app-border) !important;
+  background: var(--sentra-app-panel) !important;
+  box-shadow: var(--sentra-app-shadow-lg) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.sentra-auth-shell #ask-sentra-panel [class*="text-cyan"],
+.sentra-auth-shell #ask-sentra-panel [class*="text-white/"] {
+  color: var(--sentra-app-muted) !important;
+}
+
+.sentra-auth-shell #ask-sentra-panel h2,
+.sentra-auth-shell #ask-sentra-panel .text-white {
+  color: var(--sentra-app-text) !important;
+}
+
+.sentra-auth-shell #ask-sentra-panel [class*="bg-cyan"],
+.sentra-auth-shell #ask-sentra-panel [class*="bg-white/"],
+.sentra-auth-shell #ask-sentra-panel [class*="bg-black/"] {
+  background: var(--sentra-app-panel-elevated) !important;
+}
+
+@media (max-width: 1024px) {
+  .sentra-auth-shell .sentra-shell-main {
+    margin-left: 0 !important;
+  }
+}
+
+/* Final bug-fix layer: sidebar access, AI Council, and neutral Ask Sentra surfaces. */
+.sentra-auth-shell .sentra-app-sidebar,
+.sentra-auth-shell .sentra-luxury-sidebar,
+.sentra-auth-shell .sentra-phase12-sidebar {
+  display: flex !important;
+  max-height: calc(100vh - 40px);
+  overflow: hidden !important;
+}
+
+.sentra-auth-shell .sentra-sidebar-brand,
+.sentra-auth-shell .sentra-workspace-card {
+  flex: 0 0 auto;
+}
+
+.sentra-auth-shell .sentra-sidebar-nav-scroll {
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  overscroll-behavior: contain;
+  padding-right: 0.2rem;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+.sentra-auth-shell .sentra-sidebar-nav-scroll::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+.sentra-auth-shell .sentra-sidebar-bottom {
+  position: sticky;
+  bottom: 0;
+  z-index: 2;
+  flex: 0 0 auto;
+  background: var(--sentra-app-panel) !important;
+}
+
+.sentra-auth-shell .sentra-shell-collapse {
+  display: flex !important;
+  min-height: 48px;
+  width: 100%;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.7rem;
+  border: 1px solid var(--sentra-app-border-strong) !important;
+  border-radius: 999px !important;
+  background: var(--sentra-app-panel-elevated) !important;
+  color: var(--sentra-app-text) !important;
+  opacity: 1 !important;
+  padding: 0 1rem;
+}
+
+.sentra-auth-shell .sentra-shell-collapse svg {
+  flex: 0 0 auto;
+  color: currentColor !important;
+}
+
+.sentra-auth-shell .sentra-shell-collapse:hover {
+  background: var(--sentra-app-hover) !important;
+  border-color: var(--sentra-app-border-strong) !important;
+  color: var(--sentra-app-text) !important;
+}
+
+.sentra-auth-shell .sentra-app-sidebar.is-collapsed .sentra-shell-collapse,
+.sentra-auth-shell .sentra-luxury-sidebar.is-collapsed .sentra-shell-collapse,
+.sentra-auth-shell .sentra-phase12-sidebar.is-collapsed .sentra-shell-collapse {
+  justify-content: center;
+  padding-inline: 0;
+}
+
+.sentra-auth-shell .sentra-ask-dock {
+  min-height: 52px;
+  border: 1px solid var(--sentra-app-border-strong);
+  border-radius: 999px;
+  background: var(--sentra-app-panel);
+  color: var(--sentra-app-text);
+  box-shadow: var(--sentra-app-shadow);
+  padding: 0.55rem 0.9rem;
+  transition: background var(--sentra-app-ease), border-color var(--sentra-app-ease), transform var(--sentra-app-ease);
+}
+
+.sentra-auth-shell .sentra-ask-dock:hover {
+  border-color: var(--sentra-app-border-strong);
+  background: var(--sentra-app-hover);
+}
+
+.sentra-auth-shell .sentra-ask-dock-icon {
+  position: relative;
+  display: flex;
+  width: 2.25rem;
+  height: 2.25rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--sentra-app-border);
+  border-radius: 999px;
+  background: var(--sentra-app-active);
+  color: var(--sentra-app-text);
+  font-weight: 800;
+}
+
+.sentra-auth-shell .sentra-ask-dock-icon > span {
+  display: none;
+}
+
+.sentra-auth-shell .sentra-ask-panel {
+  border: 1px solid var(--sentra-app-border);
+  border-radius: 30px;
+  background: var(--sentra-app-panel);
+  box-shadow: var(--sentra-app-shadow-lg);
+  color: var(--sentra-app-text);
+}
+
+.sentra-auth-shell .sentra-ask-panel-header,
+.sentra-auth-shell .sentra-ask-panel-footer {
+  border-color: var(--sentra-app-border);
+  background: var(--sentra-app-panel-elevated);
+}
+
+.sentra-auth-shell .sentra-ask-panel-header {
+  border-bottom: 1px solid var(--sentra-app-border);
+}
+
+.sentra-auth-shell .sentra-ask-panel-footer {
+  border-top: 1px solid var(--sentra-app-border);
+}
+
+.sentra-auth-shell .sentra-ask-close,
+.sentra-auth-shell .sentra-ask-prompt,
+.sentra-auth-shell .sentra-ask-submit,
+.sentra-auth-shell .sentra-council-action {
+  border: 1px solid var(--sentra-app-border);
+  border-radius: 999px;
+  background: var(--sentra-app-panel);
+  color: var(--sentra-app-text);
+  font-size: 0.78rem;
+  font-weight: 700;
+  transition: background var(--sentra-app-ease), border-color var(--sentra-app-ease), transform var(--sentra-app-ease);
+}
+
+.sentra-auth-shell .sentra-ask-close,
+.sentra-auth-shell .sentra-ask-prompt {
+  padding: 0.45rem 0.75rem;
+}
+
+.sentra-auth-shell .sentra-ask-submit,
+.sentra-auth-shell .sentra-council-action {
+  padding: 0.75rem 1rem;
+}
+
+.sentra-auth-shell .sentra-council-action.is-secondary {
+  color: var(--sentra-app-muted);
+}
+
+.sentra-auth-shell .sentra-ask-close:hover,
+.sentra-auth-shell .sentra-ask-prompt:hover,
+.sentra-auth-shell .sentra-ask-submit:hover,
+.sentra-auth-shell .sentra-council-action:hover {
+  transform: translateY(-1px);
+  background: var(--sentra-app-hover);
+}
+
+.sentra-auth-shell .sentra-ask-input {
+  min-width: 0;
+  flex: 1 1 auto;
+  border: 1px solid var(--sentra-app-border);
+  border-radius: 999px;
+  background: var(--sentra-app-panel);
+  color: var(--sentra-app-text);
+  outline: none;
+  padding: 0.75rem 1rem;
+  font-size: 0.88rem;
+}
+
+.sentra-auth-shell .sentra-ask-input::placeholder {
+  color: var(--sentra-app-soft);
+}
+
+.sentra-auth-shell .sentra-ask-input:focus {
+  border-color: var(--sentra-app-border-strong);
+}
+
+.sentra-auth-shell .sentra-ask-message {
+  border: 1px solid var(--sentra-app-border);
+  border-radius: 24px;
+  background: var(--sentra-app-panel-elevated);
+  color: var(--sentra-app-muted);
+  padding: 0.8rem 1rem;
+  font-size: 0.88rem;
+  line-height: 1.65;
+}
+
+.sentra-auth-shell .sentra-ask-message.is-user {
+  margin-left: 2rem;
+  color: var(--sentra-app-text);
+}
+
+.sentra-auth-shell .sentra-ask-thinking {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid var(--sentra-app-border);
+  border-radius: 999px;
+  background: var(--sentra-app-panel-elevated);
+  color: var(--sentra-app-muted);
+  padding: 0.5rem 0.9rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.sentra-auth-shell .sentra-ask-thinking > span {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 999px;
+  background: var(--sentra-app-text);
+  animation: sentraSoftPulse 1.4s ease-in-out infinite;
+}
+
+@keyframes sentraSoftPulse {
+  0%,
+  100% {
+    opacity: 0.42;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.sentra-auth-shell .sentra-ai-council-hero,
+.sentra-auth-shell .sentra-council-action {
+  color: var(--sentra-app-text);
+}
+
+@media (max-height: 820px) {
+  .sentra-auth-shell .sentra-app-sidebar,
+  .sentra-auth-shell .sentra-luxury-sidebar,
+  .sentra-auth-shell .sentra-phase12-sidebar {
+    gap: 0.75rem;
+    padding: 0.9rem;
+  }
+
+  .sentra-auth-shell .sentra-workspace-card {
+    padding: 0.85rem;
+  }
+
+  .sentra-auth-shell .sentra-luxury-nav-item,
+  .sentra-auth-shell .sentra-shell-nav-item {
+    min-height: 48px;
+  }
+}
+
+/* Final sidebar scrolling fix: 100vh shell with a dedicated scrollable menu region. */
+.sentra-auth-shell {
+  height: 100vh;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.sentra-auth-shell .sentra-app-sidebar,
+.sentra-auth-shell .sentra-luxury-sidebar,
+.sentra-auth-shell .sentra-phase12-sidebar {
+  position: fixed !important;
+  top: 0 !important;
+  right: auto !important;
+  bottom: auto !important;
+  left: 0 !important;
+  display: grid !important;
+  grid-template-rows: auto auto minmax(0, 1fr) auto;
+  width: var(--sentra-sidebar-width) !important;
+  height: 100vh !important;
+  max-height: 100vh !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+  gap: 0 !important;
+  border-radius: 0 28px 28px 0 !important;
+  padding: 1rem !important;
+}
+
+.sentra-auth-shell .sentra-app-sidebar.is-collapsed,
+.sentra-auth-shell .sentra-luxury-sidebar.is-collapsed,
+.sentra-auth-shell .sentra-phase12-sidebar.is-collapsed {
+  width: 88px !important;
+}
+
+.sentra-auth-shell .sentra-sidebar-brand {
+  position: sticky;
+  top: 0;
+  z-index: 4;
+  margin-bottom: 1rem;
+  flex: none !important;
+  background: var(--sentra-app-panel) !important;
+}
+
+.sentra-auth-shell .sentra-workspace-card {
+  position: sticky;
+  top: 72px;
+  z-index: 3;
+  margin-bottom: 1rem;
+  flex: none !important;
+}
+
+.sentra-auth-shell .sentra-sidebar-nav-scroll {
+  display: block !important;
+  min-height: 0 !important;
+  height: 100% !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  overscroll-behavior: contain;
+  padding-right: 0.35rem;
+  padding-bottom: 1rem;
+  scroll-behavior: smooth;
+  scrollbar-color: var(--sentra-app-border-strong) transparent;
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
+  pointer-events: auto !important;
+  touch-action: pan-y;
+}
+
+.sentra-auth-shell .sentra-sidebar-nav-scroll:focus {
+  outline: none;
+}
+
+.sentra-auth-shell .sentra-sidebar-nav-scroll:focus-visible {
+  box-shadow: inset 0 0 0 1px var(--sentra-app-border-strong);
+}
+
+.sentra-auth-shell .sentra-sidebar-nav-scroll::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.sentra-auth-shell .sentra-sidebar-nav-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sentra-auth-shell .sentra-sidebar-nav-scroll::-webkit-scrollbar-thumb {
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background: var(--sentra-app-border-strong);
+  background-clip: content-box;
+}
+
+.sentra-auth-shell .sentra-sidebar-nav-scroll::-webkit-scrollbar-thumb:hover {
+  background: var(--sentra-app-muted);
+  background-clip: content-box;
+}
+
+.sentra-auth-shell .sentra-sidebar-section:first-child {
+  margin-top: 0 !important;
+}
+
+.sentra-auth-shell .sentra-sidebar-bottom {
+  position: sticky !important;
+  bottom: 0 !important;
+  z-index: 4;
+  margin-top: 0 !important;
+  flex: none !important;
+  padding-top: 0.9rem !important;
+  background: var(--sentra-app-panel) !important;
+}
+
+.sentra-auth-shell .sentra-mobile-nav-backdrop {
+  pointer-events: none !important;
+}
+
+.sentra-auth-shell .sentra-mobile-nav-backdrop.is-open {
+  pointer-events: auto !important;
+}
+
+.sentra-auth-shell .grid-layer,
+.sentra-auth-shell .depth-glow,
+.sentra-auth-shell .cursor-glow {
+  pointer-events: none !important;
+}
+
+.sentra-auth-shell .sentra-shell-main {
+  height: 100vh !important;
+  min-height: 0 !important;
+  margin-left: calc(var(--sentra-sidebar-width) + 24px) !important;
+  overflow: hidden !important;
+}
+
+.sentra-auth-shell .sentra-shell-scroll {
+  min-height: 0 !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+}
+
+@media (max-width: 1024px) {
+  .sentra-auth-shell .sentra-app-sidebar,
+  .sentra-auth-shell .sentra-luxury-sidebar,
+  .sentra-auth-shell .sentra-phase12-sidebar,
+  .sentra-auth-shell .sentra-app-sidebar.is-collapsed,
+  .sentra-auth-shell .sentra-luxury-sidebar.is-collapsed,
+  .sentra-auth-shell .sentra-phase12-sidebar.is-collapsed {
+    width: min(300px, 92vw) !important;
+    transform: translateX(calc(-100% - 16px));
+  }
+
+  .sentra-auth-shell .sentra-app-sidebar.is-mobile-open,
+  .sentra-auth-shell .sentra-luxury-sidebar.is-mobile-open,
+  .sentra-auth-shell .sentra-phase12-sidebar.is-mobile-open {
+    transform: translateX(0);
+  }
+
+  .sentra-auth-shell .sentra-shell-main {
+    margin-left: 0 !important;
+  }
+}
+
+@media (max-height: 740px) {
+  .sentra-auth-shell .sentra-app-sidebar,
+  .sentra-auth-shell .sentra-luxury-sidebar,
+  .sentra-auth-shell .sentra-phase12-sidebar {
+    padding: 0.8rem !important;
+  }
+
+  .sentra-auth-shell .sentra-sidebar-brand,
+  .sentra-auth-shell .sentra-workspace-card {
+    margin-bottom: 0.65rem;
+  }
+
+  .sentra-auth-shell .sentra-workspace-card {
+    padding: 0.75rem !important;
+  }
+
+  .sentra-auth-shell .sentra-shell-nav-item,
+  .sentra-auth-shell .sentra-luxury-nav-item {
+    min-height: 46px !important;
+  }
+}

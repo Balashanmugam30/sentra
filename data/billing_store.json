@@ -1,0 +1,308 @@
+{
+  "subscriptions": [
+    {
+      "tenant_id": "TEN-BALA-UNI",
+      "organization_name": "Bala University",
+      "stripe_customer_id": "cus_demo_ten_bala_uni",
+      "stripe_subscription_id": "sub_demo_73b77c2f2a0b",
+      "plan": "enterprise",
+      "billing_status": "active",
+      "billing_interval": "annual",
+      "trial_ends_at": null,
+      "renewal_date": "2027-04-24T14:41:13.366137+00:00",
+      "seat_limit": 10000,
+      "seats_used": 32,
+      "monthly_mrr": 12417,
+      "annual_value": 149000,
+      "grace_period_days": 7,
+      "suspended_flag": false,
+      "cancel_at_period_end": false,
+      "payment_method_status": "failed",
+      "entitlements": [
+        "advanced_ai",
+        "osint_pro",
+        "executive_reports",
+        "sso",
+        "branding",
+        "workflow_automation"
+      ],
+      "locked_modules": [
+        "government_mode"
+      ],
+      "updated_at": "2026-04-24T14:41:13.366150+00:00"
+    },
+    {
+      "tenant_id": "TEN-BALA-MFG",
+      "organization_name": "Bala Manufacturing",
+      "stripe_customer_id": "cus_demo_ten_bala_mfg",
+      "stripe_subscription_id": "sub_demo_7991b42e56dc",
+      "plan": "business",
+      "billing_status": "active",
+      "billing_interval": "monthly",
+      "trial_ends_at": null,
+      "renewal_date": "2026-05-24T14:28:56.469623+00:00",
+      "seat_limit": 50,
+      "seats_used": 14,
+      "monthly_mrr": 2900,
+      "annual_value": 34800,
+      "grace_period_days": 0,
+      "suspended_flag": false,
+      "cancel_at_period_end": false,
+      "payment_method_status": "valid",
+      "entitlements": [
+        "ai_modules",
+        "osint",
+        "reports",
+        "workflow_automation",
+        "geo"
+      ],
+      "locked_modules": [
+        "advanced_ai",
+        "osint_pro",
+        "executive_reports",
+        "sso",
+        "branding",
+        "government_mode"
+      ],
+      "updated_at": "2026-04-24T14:28:56.469627+00:00"
+    },
+    {
+      "tenant_id": "TEN-BALA-HOSP",
+      "organization_name": "Bala Hospital Demo",
+      "stripe_customer_id": "cus_demo_ten_bala_hosp",
+      "stripe_subscription_id": "sub_demo_7a299b42ead6",
+      "plan": "government",
+      "billing_status": "trialing",
+      "billing_interval": "annual",
+      "trial_ends_at": "2026-05-08T14:28:56.469647+00:00",
+      "renewal_date": "2027-04-24T14:28:56.469649+00:00",
+      "seat_limit": 50000,
+      "seats_used": 30,
+      "monthly_mrr": 32500,
+      "annual_value": 390000,
+      "grace_period_days": 0,
+      "suspended_flag": false,
+      "cancel_at_period_end": false,
+      "payment_method_status": "valid",
+      "entitlements": [
+        "advanced_ai",
+        "osint_pro",
+        "executive_reports",
+        "sso",
+        "branding",
+        "workflow_automation",
+        "government_mode"
+      ],
+      "locked_modules": [],
+      "updated_at": "2026-04-24T14:28:56.469653+00:00"
+    }
+  ],
+  "invoices": [
+    {
+      "invoice_id": "INV-8685692439",
+      "tenant_id": "TEN-BALA-UNI",
+      "number": "INV-8685692439",
+      "status": "paid",
+      "amount_due": 12417,
+      "amount_paid": 12417,
+      "currency": "usd",
+      "hosted_invoice_url": "https://billing.sentra.local/invoices/INV-8685692439",
+      "invoice_pdf": "https://billing.sentra.local/invoices/INV-8685692439.pdf",
+      "created_at": "2026-04-24T14:41:13.366178+00:00",
+      "due_date": "2026-05-01T14:41:13.366180+00:00",
+      "paid_at": "2026-04-24T14:41:13.366178+00:00",
+      "failure_reason": null
+    },
+    {
+      "invoice_id": "INV-2167F14B09",
+      "tenant_id": "TEN-BALA-UNI",
+      "number": "INV-2167F14B09",
+      "status": "failed",
+      "amount_due": 12417,
+      "amount_paid": 0,
+      "currency": "usd",
+      "hosted_invoice_url": "https://billing.sentra.local/invoices/INV-2167F14B09",
+      "invoice_pdf": "https://billing.sentra.local/invoices/INV-2167F14B09.pdf",
+      "created_at": "2026-04-24T14:41:13.138541+00:00",
+      "due_date": "2026-05-01T14:41:13.138549+00:00",
+      "paid_at": null,
+      "failure_reason": "card_declined"
+    },
+    {
+      "invoice_id": "INV-8A85A91978",
+      "tenant_id": "TEN-BALA-UNI",
+      "number": "INV-8A85A91978",
+      "status": "paid",
+      "amount_due": 12417,
+      "amount_paid": 12417,
+      "currency": "usd",
+      "hosted_invoice_url": "https://billing.sentra.local/invoices/INV-8A85A91978",
+      "invoice_pdf": "https://billing.sentra.local/invoices/INV-8A85A91978.pdf",
+      "created_at": "2026-04-24T14:41:12.799776+00:00",
+      "due_date": "2026-05-01T14:41:12.799779+00:00",
+      "paid_at": "2026-04-24T14:41:12.799776+00:00",
+      "failure_reason": null
+    },
+    {
+      "invoice_id": "INV-E499A2E578",
+      "tenant_id": "TEN-BALA-UNI",
+      "number": "INV-E499A2E578",
+      "status": "paid",
+      "amount_due": 14900,
+      "amount_paid": 14900,
+      "currency": "usd",
+      "hosted_invoice_url": "https://billing.sentra.local/invoices/INV-E499A2E578",
+      "invoice_pdf": "https://billing.sentra.local/invoices/INV-E499A2E578.pdf",
+      "created_at": "2026-04-24T14:28:56.469601+00:00",
+      "due_date": "2026-05-01T14:28:56.469603+00:00",
+      "paid_at": "2026-04-24T14:28:56.469601+00:00",
+      "failure_reason": null
+    },
+    {
+      "invoice_id": "INV-7F7A7C0995",
+      "tenant_id": "TEN-BALA-UNI",
+      "number": "INV-7F7A7C0995",
+      "status": "paid",
+      "amount_due": 14900,
+      "amount_paid": 14900,
+      "currency": "usd",
+      "hosted_invoice_url": "https://billing.sentra.local/invoices/INV-7F7A7C0995",
+      "invoice_pdf": "https://billing.sentra.local/invoices/INV-7F7A7C0995.pdf",
+      "created_at": "2026-04-24T14:28:56.469610+00:00",
+      "due_date": "2026-05-01T14:28:56.469612+00:00",
+      "paid_at": "2026-04-24T14:28:56.469610+00:00",
+      "failure_reason": null
+    },
+    {
+      "invoice_id": "INV-2E764122AE",
+      "tenant_id": "TEN-BALA-MFG",
+      "number": "INV-2E764122AE",
+      "status": "paid",
+      "amount_due": 2900,
+      "amount_paid": 2900,
+      "currency": "usd",
+      "hosted_invoice_url": "https://billing.sentra.local/invoices/INV-2E764122AE",
+      "invoice_pdf": "https://billing.sentra.local/invoices/INV-2E764122AE.pdf",
+      "created_at": "2026-04-24T14:28:56.469632+00:00",
+      "due_date": "2026-05-01T14:28:56.469634+00:00",
+      "paid_at": "2026-04-24T14:28:56.469632+00:00",
+      "failure_reason": null
+    },
+    {
+      "invoice_id": "INV-90B6B020E4",
+      "tenant_id": "TEN-BALA-MFG",
+      "number": "INV-90B6B020E4",
+      "status": "paid",
+      "amount_due": 2900,
+      "amount_paid": 2900,
+      "currency": "usd",
+      "hosted_invoice_url": "https://billing.sentra.local/invoices/INV-90B6B020E4",
+      "invoice_pdf": "https://billing.sentra.local/invoices/INV-90B6B020E4.pdf",
+      "created_at": "2026-04-24T14:28:56.469638+00:00",
+      "due_date": "2026-05-01T14:28:56.469640+00:00",
+      "paid_at": "2026-04-24T14:28:56.469638+00:00",
+      "failure_reason": null
+    },
+    {
+      "invoice_id": "INV-24EFAE3F54",
+      "tenant_id": "TEN-BALA-HOSP",
+      "number": "INV-24EFAE3F54",
+      "status": "paid",
+      "amount_due": 39000,
+      "amount_paid": 39000,
+      "currency": "usd",
+      "hosted_invoice_url": "https://billing.sentra.local/invoices/INV-24EFAE3F54",
+      "invoice_pdf": "https://billing.sentra.local/invoices/INV-24EFAE3F54.pdf",
+      "created_at": "2026-04-24T14:28:56.469657+00:00",
+      "due_date": "2026-05-01T14:28:56.469658+00:00",
+      "paid_at": "2026-04-24T14:28:56.469657+00:00",
+      "failure_reason": null
+    },
+    {
+      "invoice_id": "INV-A1E08CA0A8",
+      "tenant_id": "TEN-BALA-HOSP",
+      "number": "INV-A1E08CA0A8",
+      "status": "paid",
+      "amount_due": 39000,
+      "amount_paid": 39000,
+      "currency": "usd",
+      "hosted_invoice_url": "https://billing.sentra.local/invoices/INV-A1E08CA0A8",
+      "invoice_pdf": "https://billing.sentra.local/invoices/INV-A1E08CA0A8.pdf",
+      "created_at": "2026-04-24T14:28:56.469662+00:00",
+      "due_date": "2026-05-01T14:28:56.469664+00:00",
+      "paid_at": "2026-04-24T14:28:56.469662+00:00",
+      "failure_reason": null
+    }
+  ],
+  "events": [
+    {
+      "event_id": "BILL-04b2db1aa56c",
+      "event_type": "plan_changed",
+      "tenant_id": "TEN-BALA-UNI",
+      "payload": {
+        "plan": "enterprise",
+        "interval": "annual"
+      },
+      "created_at": "2026-04-24T14:41:12.799768+00:00"
+    },
+    {
+      "event_id": "BILL-9775b944b72a",
+      "event_type": "seat_changed",
+      "tenant_id": "TEN-BALA-UNI",
+      "payload": {
+        "delta": 5
+      },
+      "created_at": "2026-04-24T14:41:12.909856+00:00"
+    },
+    {
+      "event_id": "BILL-7bfa498f12fe",
+      "event_type": "coupon_applied",
+      "tenant_id": "TEN-BALA-UNI",
+      "payload": {
+        "coupon": "LAUNCH20"
+      },
+      "created_at": "2026-04-24T14:41:13.014827+00:00"
+    },
+    {
+      "event_id": "BILL-5015fb6ca244",
+      "event_type": "invoice_failed",
+      "tenant_id": "TEN-BALA-UNI",
+      "payload": {
+        "billing_status": "past_due",
+        "payment_method_status": "failed",
+        "grace_period_days": 7,
+        "updated_at": "2026-04-24T14:41:13.124875+00:00"
+      },
+      "created_at": "2026-04-24T14:41:13.125141+00:00"
+    },
+    {
+      "event_id": "BILL-04362593e227",
+      "event_type": "subscription_reactivated",
+      "tenant_id": "TEN-BALA-UNI",
+      "payload": {
+        "cancel_at_period_end": false,
+        "billing_status": "active",
+        "suspended_flag": false,
+        "updated_at": "2026-04-24T14:41:13.223722+00:00"
+      },
+      "created_at": "2026-04-24T14:41:13.236911+00:00"
+    },
+    {
+      "event_id": "BILL-6b0b8ef61cf9",
+      "event_type": "plan_changed",
+      "tenant_id": "TEN-BALA-UNI",
+      "payload": {
+        "plan": "enterprise",
+        "interval": "annual"
+      },
+      "created_at": "2026-04-24T14:41:13.366172+00:00"
+    }
+  ],
+  "coupons": [
+    {
+      "tenant_id": "TEN-BALA-UNI",
+      "coupon": "LAUNCH20",
+      "applied_at": "2026-04-24T14:41:13.014799+00:00"
+    }
+  ]
+}

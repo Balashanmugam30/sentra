@@ -1,0 +1,33 @@
+{
+  "tenants": [
+    "TEN-BALA-UNI",
+    "TEN-BALA-MFG",
+    "TEN-BALA-HOSP",
+    "TEN-GOV-SOUTH"
+  ],
+  "events": [
+    {
+      "event_id": "MON-EVT-5194B4A1C4",
+      "tenant_id": "TEN-BALA-UNI",
+      "action": "expansion_simulation_executed",
+      "target": "XSIM-A134A48830",
+      "created_at": "2026-04-25T06:47:39.384193+00:00"
+    }
+  ],
+  "acquisition_models": [],
+  "bundles": [],
+  "simulations": [
+    {
+      "simulation_id": "XSIM-A134A48830",
+      "tenant_id": "TEN-BALA-UNI",
+      "scenario": "default_global_choice",
+      "created_at": "2026-04-25T06:47:39.382203+00:00",
+      "countries_after": 31,
+      "partner_revenue_after": 12800000,
+      "monopoly_score_after": 98,
+      "board_move": "combine OpsVision acquisition, sovereign co-sell, and Data Empire bundle into one 12-month expansion plan"
+    }
+  ],
+  "board_strategies": [],
+  "partnerships": []
+}

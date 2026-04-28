@@ -1,0 +1,15 @@
+global:
+  resolve_timeout: 5m
+
+route:
+  receiver: sentra-default
+  group_by: ["alertname", "severity"]
+  group_wait: 20s
+  group_interval: 2m
+  repeat_interval: 2h
+
+receivers:
+  - name: sentra-default
+    webhook_configs:
+      - url: http://backend:8000/system/alerts/webhook
+        send_resolved: true

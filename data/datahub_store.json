@@ -1,0 +1,210 @@
+{
+  "store_version": "phase22x-datahub-2026-04-26",
+  "pipelines": [
+    {
+      "pipeline_id": "PIPE-INCIDENTS",
+      "tenant_id": "TEN-GRAND-MERIDIAN",
+      "name": "Incident warehouse",
+      "source": "incidents",
+      "mode": "ELT",
+      "freshness_min": 4,
+      "quality": 97,
+      "privacy_tier": "internal",
+      "schema_valid": true,
+      "dedupe_rate": 99,
+      "masked_fields": 12,
+      "lineage_nodes": 28,
+      "dead_letters": 2,
+      "status": "healthy",
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "pipeline_id": "PIPE-SENSORS",
+      "tenant_id": "TEN-BALA-HOSP",
+      "name": "Sensor telemetry lake",
+      "source": "sensors",
+      "mode": "stream",
+      "freshness_min": 1,
+      "quality": 96,
+      "privacy_tier": "operational",
+      "schema_valid": true,
+      "dedupe_rate": 98,
+      "masked_fields": 4,
+      "lineage_nodes": 44,
+      "dead_letters": 6,
+      "status": "healthy",
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "pipeline_id": "PIPE-AI-DECISIONS",
+      "tenant_id": "TEN-GOVSECURE",
+      "name": "AI decision ledger",
+      "source": "AI decisions",
+      "mode": "append-only",
+      "freshness_min": 3,
+      "quality": 95,
+      "privacy_tier": "sensitive",
+      "schema_valid": true,
+      "dedupe_rate": 100,
+      "masked_fields": 18,
+      "lineage_nodes": 36,
+      "dead_letters": 0,
+      "status": "healthy",
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "pipeline_id": "PIPE-BILLING",
+      "tenant_id": "TEN-GRAND-MERIDIAN",
+      "name": "Billing and usage signals",
+      "source": "billing",
+      "mode": "ELT",
+      "freshness_min": 18,
+      "quality": 94,
+      "privacy_tier": "financial",
+      "schema_valid": true,
+      "dedupe_rate": 97,
+      "masked_fields": 22,
+      "lineage_nodes": 19,
+      "dead_letters": 1,
+      "status": "healthy",
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "pipeline_id": "PIPE-OSINT",
+      "tenant_id": "TEN-GOVSECURE",
+      "name": "Weather civic OSINT feed",
+      "source": "external feeds",
+      "mode": "ETL",
+      "freshness_min": 12,
+      "quality": 89,
+      "privacy_tier": "public",
+      "schema_valid": true,
+      "dedupe_rate": 93,
+      "masked_fields": 0,
+      "lineage_nodes": 31,
+      "dead_letters": 9,
+      "status": "watch",
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    }
+  ],
+  "graph_entities": [
+    {
+      "entity_id": "ENT-ZONE-KITCHEN",
+      "tenant_id": "TEN-GRAND-MERIDIAN",
+      "type": "zone",
+      "name": "Kitchen Zone B",
+      "risk": 86,
+      "links": [
+        "ENT-DEVICE-FIREPANEL",
+        "ENT-INC-FIRE",
+        "ENT-TEAM-ALPHA"
+      ],
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "entity_id": "ENT-DEVICE-FIREPANEL",
+      "tenant_id": "TEN-GRAND-MERIDIAN",
+      "type": "device",
+      "name": "Fire Panel 3B",
+      "risk": 24,
+      "links": [
+        "ENT-ZONE-KITCHEN",
+        "ENT-VENDOR-BMS"
+      ],
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "entity_id": "ENT-INC-FIRE",
+      "tenant_id": "TEN-GRAND-MERIDIAN",
+      "type": "incident",
+      "name": "Kitchen fire chain",
+      "risk": 92,
+      "links": [
+        "ENT-ZONE-KITCHEN",
+        "ENT-TEAM-ALPHA",
+        "ENT-RISK-SMOKE"
+      ],
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "entity_id": "ENT-VENDOR-BMS",
+      "tenant_id": "TEN-BALA-MFG",
+      "type": "vendor",
+      "name": "BMS Gateway",
+      "risk": 61,
+      "links": [
+        "ENT-DEVICE-FIREPANEL",
+        "ENT-RISK-SMOKE"
+      ],
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "entity_id": "ENT-RISK-SMOKE",
+      "tenant_id": "TEN-GOVSECURE",
+      "type": "risk",
+      "name": "Smoke corridor dependency",
+      "risk": 78,
+      "links": [
+        "ENT-INC-FIRE"
+      ],
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    }
+  ],
+  "monetization": [
+    {
+      "product_id": "DATA-BENCH-HOSP",
+      "name": "Hospital safety benchmark",
+      "arr_potential": 980000,
+      "buyers": 42,
+      "privacy_mode": "anonymized aggregate",
+      "status": "ready",
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "product_id": "DATA-INSURER-RISK",
+      "name": "Insurer risk intelligence feed",
+      "arr_potential": 1800000,
+      "buyers": 18,
+      "privacy_mode": "tenant-safe benchmark",
+      "status": "legal_review",
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    },
+    {
+      "product_id": "DATA-CITY-PACK",
+      "name": "City readiness intelligence pack",
+      "arr_potential": 2400000,
+      "buyers": 11,
+      "privacy_mode": "public sector aggregate",
+      "status": "ready",
+      "updated_at": "2026-04-26T00:00:00+00:00"
+    }
+  ],
+  "runs": [
+    {
+      "run_id": "DATA-RUN-0001",
+      "tenant_id": "TEN-BALA-UNI",
+      "pipeline_id": "PIPE-INCIDENTS",
+      "status": "completed",
+      "rows_processed": 184200,
+      "quality": 97,
+      "created_at": "2026-04-26T00:00:00+00:00"
+    }
+  ],
+  "events": [
+    {
+      "event_id": "DATA-EVT-00001",
+      "tenant_id": "TEN-BALA-UNI",
+      "action": "pipeline_run",
+      "detail": {
+        "run_id": "DATA-RUN-0001",
+        "tenant_id": "TEN-BALA-UNI",
+        "pipeline_id": "PIPE-INCIDENTS",
+        "status": "completed",
+        "rows_processed": 184200,
+        "quality": 97,
+        "created_at": "2026-04-26T00:00:00+00:00"
+      },
+      "created_at": "2026-04-26T00:00:00+00:00"
+    }
+  ]
+}

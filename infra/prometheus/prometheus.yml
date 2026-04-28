@@ -1,0 +1,30 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+rule_files:
+  - /etc/prometheus/alerts.yml
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets: ["alertmanager:9093"]
+
+scrape_configs:
+  - job_name: sentra-backend
+    metrics_path: /system/metrics
+    static_configs:
+      - targets: ["backend:8000"]
+
+  - job_name: sentra-nginx
+    metrics_path: /api/system/metrics
+    static_configs:
+      - targets: ["nginx:80"]
+
+  - job_name: node-exporter
+    static_configs:
+      - targets: ["node-exporter:9100"]
+
+  - job_name: cadvisor
+    static_configs:
+      - targets: ["cadvisor:8080"]

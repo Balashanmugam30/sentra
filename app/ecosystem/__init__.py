@@ -1,0 +1,1 @@
+"""Ecosystem domination operating system."""

@@ -1,0 +1,565 @@
+{
+  "leads": [
+    {
+      "id": "LEAD-A43CB048A6",
+      "tenant_id": "TEN-BALA-UNI",
+      "company_name": "Coimbatore Smart University",
+      "contact_name": "Dr. Priya Menon",
+      "email": "dr.@coimbatoresmartuniversity.example",
+      "phone": "",
+      "role": "CISO",
+      "industry": "university",
+      "country": "India",
+      "company_size": "18,000",
+      "source": "partner",
+      "score": 92,
+      "status": "qualified",
+      "notes": "Board budget signal and urgent command center evaluation requested.",
+      "created_at": "2026-04-24T15:08:29.335296+00:00",
+      "owner": "Sentra Growth Alpha",
+      "deal_value_estimate": 175000
+    },
+    {
+      "id": "LEAD-8100771D21",
+      "tenant_id": "TEN-BALA-UNI",
+      "company_name": "Western State College",
+      "contact_name": "Marcus Lee",
+      "email": "marcus@westernstatecollege.example",
+      "phone": "",
+      "role": "VP Operations",
+      "industry": "university",
+      "country": "United States",
+      "company_size": "32,000",
+      "source": "webinar",
+      "score": 100,
+      "status": "demo_booked",
+      "notes": "Board budget signal and urgent command center evaluation requested.",
+      "created_at": "2026-04-24T15:08:29.335389+00:00",
+      "owner": "Sentra Growth Alpha",
+      "deal_value_estimate": 260000
+    },
+    {
+      "id": "LEAD-8D5D020A36",
+      "tenant_id": "TEN-BALA-UNI",
+      "company_name": "Riverfront Tech Campus",
+      "contact_name": "Nina Shah",
+      "email": "nina@riverfronttechcampus.example",
+      "phone": "",
+      "role": "Campus Safety Director",
+      "industry": "smart campus",
+      "country": "India",
+      "company_size": "7,500",
+      "source": "inbound",
+      "score": 100,
+      "status": "proposal_sent",
+      "notes": "Board budget signal and urgent command center evaluation requested.",
+      "created_at": "2026-04-24T15:08:29.335483+00:00",
+      "owner": "Sentra Growth Alpha",
+      "deal_value_estimate": 345000
+    },
+    {
+      "id": "LEAD-ECB0A6E9A3",
+      "tenant_id": "TEN-BALA-MFG",
+      "company_name": "Orion Advanced Manufacturing",
+      "contact_name": "Elena Vargas",
+      "email": "elena@orionadvancedmanufacturing.example",
+      "phone": "",
+      "role": "COO",
+      "industry": "factory",
+      "country": "Mexico",
+      "company_size": "4,200",
+      "source": "partner",
+      "score": 92,
+      "status": "qualified",
+      "notes": "Board budget signal and urgent command center evaluation requested.",
+      "created_at": "2026-04-24T15:08:29.335565+00:00",
+      "owner": "Sentra Enterprise East",
+      "deal_value_estimate": 175000
+    },
+    {
+      "id": "LEAD-35FAD84C90",
+      "tenant_id": "TEN-BALA-MFG",
+      "company_name": "Axis Battery Gigafactory",
+      "contact_name": "Jonah Kim",
+      "email": "jonah@axisbatterygigafactory.example",
+      "phone": "",
+      "role": "Plant Director",
+      "industry": "factory",
+      "country": "South Korea",
+      "company_size": "8,900",
+      "source": "webinar",
+      "score": 100,
+      "status": "demo_booked",
+      "notes": "Board budget signal and urgent command center evaluation requested.",
+      "created_at": "2026-04-24T15:08:29.335629+00:00",
+      "owner": "Sentra Enterprise East",
+      "deal_value_estimate": 260000
+    },
+    {
+      "id": "LEAD-B43C18ED24",
+      "tenant_id": "TEN-BALA-MFG",
+      "company_name": "Kaveri Industrial Park",
+      "contact_name": "Arun Nair",
+      "email": "arun@kaveriindustrialpark.example",
+      "phone": "",
+      "role": "Security Head",
+      "industry": "industrial campus",
+      "country": "India",
+      "company_size": "11,000",
+      "source": "inbound",
+      "score": 100,
+      "status": "proposal_sent",
+      "notes": "Board budget signal and urgent command center evaluation requested.",
+      "created_at": "2026-04-24T15:08:29.335717+00:00",
+      "owner": "Sentra Enterprise East",
+      "deal_value_estimate": 345000
+    },
+    {
+      "id": "LEAD-93F40E1090",
+      "tenant_id": "TEN-BALA-HOSP",
+      "company_name": "Northbridge Medical Center",
+      "contact_name": "Sarah Whitman",
+      "email": "sarah@northbridgemedicalcenter.example",
+      "phone": "",
+      "role": "Chief Resilience Officer",
+      "industry": "hospital",
+      "country": "United Kingdom",
+      "company_size": "900 beds",
+      "source": "partner",
+      "score": 92,
+      "status": "qualified",
+      "notes": "Board budget signal and urgent command center evaluation requested.",
+      "created_at": "2026-04-24T15:08:29.335788+00:00",
+      "owner": "Sentra Public Sector",
+      "deal_value_estimate": 175000
+    },
+    {
+      "id": "LEAD-E53BDE5318",
+      "tenant_id": "TEN-BALA-HOSP",
+      "company_name": "Aster Emergency Network",
+      "contact_name": "Ravi Iyer",
+      "email": "ravi@asteremergencynetwork.example",
+      "phone": "",
+      "role": "Emergency Director",
+      "industry": "hospital",
+      "country": "India",
+      "company_size": "1,400 beds",
+      "source": "webinar",
+      "score": 100,
+      "status": "demo_booked",
+      "notes": "Board budget signal and urgent command center evaluation requested.",
+      "created_at": "2026-04-24T15:08:29.335848+00:00",
+      "owner": "Sentra Public Sector",
+      "deal_value_estimate": 260000
+    },
+    {
+      "id": "LEAD-5382EB5C02",
+      "tenant_id": "TEN-BALA-HOSP",
+      "company_name": "Metro Health Authority",
+      "contact_name": "Camille Dubois",
+      "email": "camille@metrohealthauthority.example",
+      "phone": "",
+      "role": "Public Safety Lead",
+      "industry": "government",
+      "country": "France",
+      "company_size": "22 sites",
+      "source": "inbound",
+      "score": 100,
+      "status": "proposal_sent",
+      "notes": "Board budget signal and urgent command center evaluation requested.",
+      "created_at": "2026-04-24T15:08:29.335926+00:00",
+      "owner": "Sentra Public Sector",
+      "deal_value_estimate": 345000
+    },
+    {
+      "id": "LEAD-FED1B66292",
+      "tenant_id": "TEN-BALA-UNI",
+      "company_name": "Smoke Test Smart Campus",
+      "contact_name": "Nora Quinn",
+      "email": "nora@smoketest.example",
+      "phone": "",
+      "role": "CRO",
+      "industry": "smart campus",
+      "country": "India",
+      "company_size": "5000",
+      "source": "inbound",
+      "score": 78,
+      "status": "qualified",
+      "notes": "urgent board pilot budget signal",
+      "created_at": "2026-04-24T15:21:45.675561+00:00",
+      "owner": "Sentra Growth",
+      "deal_value_estimate": 155000
+    }
+  ],
+  "deals": [
+    {
+      "id": "DEAL-09A843411B",
+      "tenant_id": "TEN-BALA-UNI",
+      "lead_id": "LEAD-A43CB048A6",
+      "company_name": "Coimbatore Smart University",
+      "stage": "qualified",
+      "value": 175000,
+      "probability": 35,
+      "expected_close_date": "2026-05-20",
+      "owner": "Sentra Growth Alpha",
+      "risk": "medium",
+      "competitors": [
+        "legacy BMS",
+        "manual command center"
+      ],
+      "timeline": [
+        "Discovery complete",
+        "Economic buyer identified"
+      ],
+      "created_at": "2026-04-24T15:08:29.335350+00:00",
+      "updated_at": "2026-04-24T15:08:29.335350+00:00"
+    },
+    {
+      "id": "DEAL-E3D8974956",
+      "tenant_id": "TEN-BALA-UNI",
+      "lead_id": "LEAD-8100771D21",
+      "company_name": "Western State College",
+      "stage": "demo",
+      "value": 260000,
+      "probability": 52,
+      "expected_close_date": "2026-05-25",
+      "owner": "Sentra Growth Alpha",
+      "risk": "medium",
+      "competitors": [
+        "legacy BMS",
+        "manual command center"
+      ],
+      "timeline": [
+        "Discovery complete",
+        "Economic buyer identified"
+      ],
+      "created_at": "2026-04-24T15:08:29.335410+00:00",
+      "updated_at": "2026-04-24T15:08:29.335410+00:00"
+    },
+    {
+      "id": "DEAL-CC779BEA9B",
+      "tenant_id": "TEN-BALA-UNI",
+      "lead_id": "LEAD-8D5D020A36",
+      "company_name": "Riverfront Tech Campus",
+      "stage": "proposal",
+      "value": 345000,
+      "probability": 68,
+      "expected_close_date": "2026-05-29",
+      "owner": "Sentra Growth Alpha",
+      "risk": "low",
+      "competitors": [
+        "legacy BMS",
+        "manual command center"
+      ],
+      "timeline": [
+        "Discovery complete",
+        "Economic buyer identified"
+      ],
+      "created_at": "2026-04-24T15:08:29.335513+00:00",
+      "updated_at": "2026-04-24T15:08:29.335513+00:00"
+    },
+    {
+      "id": "DEAL-148C6859D0",
+      "tenant_id": "TEN-BALA-MFG",
+      "lead_id": "LEAD-ECB0A6E9A3",
+      "company_name": "Orion Advanced Manufacturing",
+      "stage": "qualified",
+      "value": 175000,
+      "probability": 35,
+      "expected_close_date": "2026-05-20",
+      "owner": "Sentra Enterprise East",
+      "risk": "medium",
+      "competitors": [
+        "legacy BMS",
+        "manual command center"
+      ],
+      "timeline": [
+        "Discovery complete",
+        "Economic buyer identified"
+      ],
+      "created_at": "2026-04-24T15:08:29.335589+00:00",
+      "updated_at": "2026-04-24T15:08:29.335589+00:00"
+    },
+    {
+      "id": "DEAL-2A34A01F33",
+      "tenant_id": "TEN-BALA-MFG",
+      "lead_id": "LEAD-35FAD84C90",
+      "company_name": "Axis Battery Gigafactory",
+      "stage": "demo",
+      "value": 260000,
+      "probability": 52,
+      "expected_close_date": "2026-05-25",
+      "owner": "Sentra Enterprise East",
+      "risk": "medium",
+      "competitors": [
+        "legacy BMS",
+        "manual command center"
+      ],
+      "timeline": [
+        "Discovery complete",
+        "Economic buyer identified"
+      ],
+      "created_at": "2026-04-24T15:08:29.335653+00:00",
+      "updated_at": "2026-04-24T15:08:29.335653+00:00"
+    },
+    {
+      "id": "DEAL-1891716B9F",
+      "tenant_id": "TEN-BALA-MFG",
+      "lead_id": "LEAD-B43C18ED24",
+      "company_name": "Kaveri Industrial Park",
+      "stage": "proposal",
+      "value": 345000,
+      "probability": 68,
+      "expected_close_date": "2026-05-29",
+      "owner": "Sentra Enterprise East",
+      "risk": "low",
+      "competitors": [
+        "legacy BMS",
+        "manual command center"
+      ],
+      "timeline": [
+        "Discovery complete",
+        "Economic buyer identified"
+      ],
+      "created_at": "2026-04-24T15:08:29.335742+00:00",
+      "updated_at": "2026-04-24T15:08:29.335742+00:00"
+    },
+    {
+      "id": "DEAL-8C32BE6CA5",
+      "tenant_id": "TEN-BALA-HOSP",
+      "lead_id": "LEAD-93F40E1090",
+      "company_name": "Northbridge Medical Center",
+      "stage": "qualified",
+      "value": 175000,
+      "probability": 35,
+      "expected_close_date": "2026-05-20",
+      "owner": "Sentra Public Sector",
+      "risk": "medium",
+      "competitors": [
+        "legacy BMS",
+        "manual command center"
+      ],
+      "timeline": [
+        "Discovery complete",
+        "Economic buyer identified"
+      ],
+      "created_at": "2026-04-24T15:08:29.335810+00:00",
+      "updated_at": "2026-04-24T15:08:29.335810+00:00"
+    },
+    {
+      "id": "DEAL-B8636C5261",
+      "tenant_id": "TEN-BALA-HOSP",
+      "lead_id": "LEAD-E53BDE5318",
+      "company_name": "Aster Emergency Network",
+      "stage": "demo",
+      "value": 260000,
+      "probability": 52,
+      "expected_close_date": "2026-05-25",
+      "owner": "Sentra Public Sector",
+      "risk": "medium",
+      "competitors": [
+        "legacy BMS",
+        "manual command center"
+      ],
+      "timeline": [
+        "Discovery complete",
+        "Economic buyer identified"
+      ],
+      "created_at": "2026-04-24T15:08:29.335868+00:00",
+      "updated_at": "2026-04-24T15:08:29.335868+00:00"
+    },
+    {
+      "id": "DEAL-E0A634A362",
+      "tenant_id": "TEN-BALA-HOSP",
+      "lead_id": "LEAD-5382EB5C02",
+      "company_name": "Metro Health Authority",
+      "stage": "proposal",
+      "value": 345000,
+      "probability": 68,
+      "expected_close_date": "2026-05-29",
+      "owner": "Sentra Public Sector",
+      "risk": "low",
+      "competitors": [
+        "legacy BMS",
+        "manual command center"
+      ],
+      "timeline": [
+        "Discovery complete",
+        "Economic buyer identified"
+      ],
+      "created_at": "2026-04-24T15:08:29.335949+00:00",
+      "updated_at": "2026-04-24T15:08:29.335949+00:00"
+    },
+    {
+      "id": "DEAL-92593C0A45",
+      "tenant_id": "TEN-BALA-UNI",
+      "lead_id": null,
+      "company_name": "Smoke Test Smart Campus",
+      "stage": "proposal",
+      "value": 155000,
+      "probability": 55,
+      "expected_close_date": "2026-05-18",
+      "owner": "Sentra Growth",
+      "risk": "medium",
+      "competitors": [
+        "legacy BMS",
+        "manual command center"
+      ],
+      "timeline": [
+        "Discovery complete",
+        "Economic buyer identified",
+        "Moved to proposal at 2026-04-24T15:21:45.919613+00:00"
+      ],
+      "created_at": "2026-04-24T15:21:45.789825+00:00",
+      "updated_at": "2026-04-24T15:21:45.919626+00:00"
+    }
+  ],
+  "activities": [
+    {
+      "id": "ACT-A23671D4C7",
+      "tenant_id": "TEN-BALA-UNI",
+      "lead_id": "LEAD-A43CB048A6",
+      "deal_id": "DEAL-09A843411B",
+      "activity_type": "emails",
+      "subject": "Coimbatore Smart University growth motion",
+      "notes": "Enterprise discovery completed with crisis operations stakeholders.",
+      "owner": "Sentra Growth Alpha",
+      "created_at": "2026-04-24T15:08:29.335375+00:00",
+      "next_step": "Schedule stakeholder demo"
+    },
+    {
+      "id": "ACT-757BFBED85",
+      "tenant_id": "TEN-BALA-UNI",
+      "lead_id": "LEAD-8100771D21",
+      "deal_id": "DEAL-E3D8974956",
+      "activity_type": "demo",
+      "subject": "Western State College growth motion",
+      "notes": "Enterprise discovery completed with crisis operations stakeholders.",
+      "owner": "Sentra Growth Alpha",
+      "created_at": "2026-04-24T15:08:29.335433+00:00",
+      "next_step": "Schedule stakeholder demo"
+    },
+    {
+      "id": "ACT-24153FBE3A",
+      "tenant_id": "TEN-BALA-UNI",
+      "lead_id": "LEAD-8D5D020A36",
+      "deal_id": "DEAL-CC779BEA9B",
+      "activity_type": "emails",
+      "subject": "Riverfront Tech Campus growth motion",
+      "notes": "Enterprise discovery completed with crisis operations stakeholders.",
+      "owner": "Sentra Growth Alpha",
+      "created_at": "2026-04-24T15:08:29.335537+00:00",
+      "next_step": "Schedule stakeholder demo"
+    },
+    {
+      "id": "ACT-D0A2437B64",
+      "tenant_id": "TEN-BALA-MFG",
+      "lead_id": "LEAD-ECB0A6E9A3",
+      "deal_id": "DEAL-148C6859D0",
+      "activity_type": "emails",
+      "subject": "Orion Advanced Manufacturing growth motion",
+      "notes": "Enterprise discovery completed with crisis operations stakeholders.",
+      "owner": "Sentra Enterprise East",
+      "created_at": "2026-04-24T15:08:29.335610+00:00",
+      "next_step": "Schedule stakeholder demo"
+    },
+    {
+      "id": "ACT-8D6EAA1602",
+      "tenant_id": "TEN-BALA-MFG",
+      "lead_id": "LEAD-35FAD84C90",
+      "deal_id": "DEAL-2A34A01F33",
+      "activity_type": "demo",
+      "subject": "Axis Battery Gigafactory growth motion",
+      "notes": "Enterprise discovery completed with crisis operations stakeholders.",
+      "owner": "Sentra Enterprise East",
+      "created_at": "2026-04-24T15:08:29.335674+00:00",
+      "next_step": "Schedule stakeholder demo"
+    },
+    {
+      "id": "ACT-7C320FC6F5",
+      "tenant_id": "TEN-BALA-MFG",
+      "lead_id": "LEAD-B43C18ED24",
+      "deal_id": "DEAL-1891716B9F",
+      "activity_type": "emails",
+      "subject": "Kaveri Industrial Park growth motion",
+      "notes": "Enterprise discovery completed with crisis operations stakeholders.",
+      "owner": "Sentra Enterprise East",
+      "created_at": "2026-04-24T15:08:29.335762+00:00",
+      "next_step": "Schedule stakeholder demo"
+    },
+    {
+      "id": "ACT-3342B4DAFE",
+      "tenant_id": "TEN-BALA-HOSP",
+      "lead_id": "LEAD-93F40E1090",
+      "deal_id": "DEAL-8C32BE6CA5",
+      "activity_type": "emails",
+      "subject": "Northbridge Medical Center growth motion",
+      "notes": "Enterprise discovery completed with crisis operations stakeholders.",
+      "owner": "Sentra Public Sector",
+      "created_at": "2026-04-24T15:08:29.335830+00:00",
+      "next_step": "Schedule stakeholder demo"
+    },
+    {
+      "id": "ACT-BA9109506E",
+      "tenant_id": "TEN-BALA-HOSP",
+      "lead_id": "LEAD-E53BDE5318",
+      "deal_id": "DEAL-B8636C5261",
+      "activity_type": "demo",
+      "subject": "Aster Emergency Network growth motion",
+      "notes": "Enterprise discovery completed with crisis operations stakeholders.",
+      "owner": "Sentra Public Sector",
+      "created_at": "2026-04-24T15:08:29.335889+00:00",
+      "next_step": "Schedule stakeholder demo"
+    },
+    {
+      "id": "ACT-62070D8496",
+      "tenant_id": "TEN-BALA-HOSP",
+      "lead_id": "LEAD-5382EB5C02",
+      "deal_id": "DEAL-E0A634A362",
+      "activity_type": "emails",
+      "subject": "Metro Health Authority growth motion",
+      "notes": "Enterprise discovery completed with crisis operations stakeholders.",
+      "owner": "Sentra Public Sector",
+      "created_at": "2026-04-24T15:08:29.335969+00:00",
+      "next_step": "Schedule stakeholder demo"
+    }
+  ],
+  "demos": [
+    {
+      "id": "DEMO-C41F5DAB26",
+      "tenant_id": "TEN-BALA-UNI",
+      "lead_id": "LEAD-8100771D21",
+      "company_name": "Western State College",
+      "contact_name": "Marcus Lee",
+      "scheduled_at": "2026-04-29T15:00:00+00:00",
+      "owner": "Sentra Growth Alpha",
+      "status": "scheduled",
+      "agenda": "Executive crisis intelligence platform walkthrough",
+      "meeting_url": "https://meet.sentra.local/demo/a900c392"
+    },
+    {
+      "id": "DEMO-D890EF9244",
+      "tenant_id": "TEN-BALA-MFG",
+      "lead_id": "LEAD-35FAD84C90",
+      "company_name": "Axis Battery Gigafactory",
+      "contact_name": "Jonah Kim",
+      "scheduled_at": "2026-04-29T15:00:00+00:00",
+      "owner": "Sentra Enterprise East",
+      "status": "scheduled",
+      "agenda": "Executive crisis intelligence platform walkthrough",
+      "meeting_url": "https://meet.sentra.local/demo/5e4ba3c3"
+    },
+    {
+      "id": "DEMO-BF133A7A67",
+      "tenant_id": "TEN-BALA-HOSP",
+      "lead_id": "LEAD-E53BDE5318",
+      "company_name": "Aster Emergency Network",
+      "contact_name": "Ravi Iyer",
+      "scheduled_at": "2026-04-29T15:00:00+00:00",
+      "owner": "Sentra Public Sector",
+      "status": "scheduled",
+      "agenda": "Executive crisis intelligence platform walkthrough",
+      "meeting_url": "https://meet.sentra.local/demo/5d869436"
+    }
+  ]
+}

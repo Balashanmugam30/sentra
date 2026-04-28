@@ -1,0 +1,47 @@
+groups:
+  - name: sentra-platform
+    rules:
+      - alert: SentraBackendDown
+        expr: up{job="sentra-backend"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: Sentra backend is down
+          description: Prometheus cannot scrape the Sentra backend.
+
+      - alert: SentraHighErrorRate
+        expr: sentra_errors_total > 5
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: Sentra API error rate is above threshold
+          description: Backend telemetry reports more than 5 server errors.
+
+      - alert: SentraP95LatencyHigh
+        expr: sentra_request_latency_ms{quantile="0.95"} > 2500
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: Sentra P95 latency is high
+          description: P95 backend latency is above 2500ms.
+
+      - alert: SentraCacheHitRatioLow
+        expr: sentra_runtime_cache_hit_ratio < 35
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: Sentra runtime cache hit ratio is low
+          description: Hot endpoint caching is not preventing enough recomputation.
+
+      - alert: SentraWebsocketDisconnectStorm
+        expr: sentra_websocket_clients < 1
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: Sentra websocket clients are absent
+          description: No websocket clients have been observed for five minutes.

@@ -1,0 +1,86 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isSelf(uid) {
+      return signedIn() && request.auth.uid == uid;
+    }
+
+    function userProfile() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid));
+    }
+
+    function hasRole(role) {
+      return signedIn()
+        && exists(/databases/$(database)/documents/users/$(request.auth.uid))
+        && userProfile().data.role == role
+        && userProfile().data.status == "active";
+    }
+
+    function isAdmin() {
+      return hasRole("admin");
+    }
+
+    function isOperator() {
+      return hasRole("operator") || isAdmin();
+    }
+
+    match /users/{uid} {
+      allow read: if isSelf(uid) || isAdmin();
+      allow create: if isSelf(uid) || isAdmin();
+      allow update: if (isSelf(uid)
+        && !request.resource.data.diff(resource.data).affectedKeys().hasAny(["role", "status"]))
+        || isAdmin();
+      allow delete: if isAdmin();
+    }
+
+    match /incidents/{incidentId} {
+      allow read: if signedIn();
+      allow create: if signedIn();
+      allow update: if isOperator();
+      allow delete: if isAdmin();
+    }
+
+    match /alerts/{alertId} {
+      allow read: if signedIn();
+      allow create, update: if isOperator();
+      allow delete: if isAdmin();
+    }
+
+    match /resources/{resourceId} {
+      allow read: if signedIn();
+      allow create, update: if isOperator();
+      allow delete: if isAdmin();
+    }
+
+    match /reports/{reportId} {
+      allow read, create: if signedIn();
+      allow update, delete: if isAdmin();
+    }
+
+    match /messages/{messageId} {
+      allow read, create: if signedIn();
+      allow update, delete: if isAdmin();
+    }
+
+    match /analytics_events/{eventId} {
+      allow create: if signedIn();
+      allow read: if isAdmin();
+      allow update, delete: if false;
+    }
+
+    match /system_logs/{logId} {
+      allow read: if isAdmin();
+      allow create: if signedIn();
+      allow update, delete: if false;
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

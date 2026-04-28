@@ -1,0 +1,60 @@
+rules_version = '2';
+
+service firebase.storage {
+  match /b/{bucket}/o {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(ownerId) {
+      return signedIn() && request.auth.uid == ownerId;
+    }
+
+    function userProfile() {
+      return firestore.get(/databases/(default)/documents/users/$(request.auth.uid));
+    }
+
+    function isAdmin() {
+      return signedIn()
+        && firestore.exists(/databases/(default)/documents/users/$(request.auth.uid))
+        && userProfile().data.role == "admin"
+        && userProfile().data.status == "active";
+    }
+
+    function isOperator() {
+      return signedIn()
+        && firestore.exists(/databases/(default)/documents/users/$(request.auth.uid))
+        && (userProfile().data.role == "operator" || userProfile().data.role == "admin")
+        && userProfile().data.status == "active";
+    }
+
+    match /avatars/{uid}/{fileName} {
+      allow read: if signedIn();
+      allow write: if isOwner(uid) || isAdmin();
+    }
+
+    match /incident-photos/{incidentId}/{fileName} {
+      allow read: if signedIn();
+      allow write: if isOperator();
+    }
+
+    match /cctv-captures/{incidentId}/{fileName} {
+      allow read: if signedIn();
+      allow write: if isOperator();
+    }
+
+    match /reports/{reportId}/{fileName} {
+      allow read: if signedIn();
+      allow write: if isOperator();
+    }
+
+    match /documents/{ownerId}/{fileName} {
+      allow read: if isOwner(ownerId) || isAdmin();
+      allow write: if isOwner(ownerId) || isAdmin();
+    }
+
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}

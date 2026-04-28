@@ -1,0 +1,781 @@
+{
+  "tenants": [
+    {
+      "tenant_id": "TEN-GRAND-MERIDIAN",
+      "name": "Grand Meridian Hotels",
+      "vertical": "Hospitality",
+      "region": "North America",
+      "plan": "Enterprise",
+      "status": "mission_ready",
+      "buildings": 48,
+      "seats": 820,
+      "users": 744,
+      "ai_runs": 18420,
+      "notifications": 312000,
+      "storage_tb": 18.4,
+      "sla_percent": 99.96,
+      "mrr": 148000,
+      "arr": 1776000,
+      "open_incidents": 2,
+      "command_capacity": 91,
+      "role_hierarchy": [
+        "owner",
+        "regional_admin",
+        "building_commander",
+        "responder",
+        "auditor"
+      ],
+      "last_audit": "2026-04-26T00:06:00+00:00",
+      "updated_at": "2026-04-26T06:15:58.341751+00:00"
+    },
+    {
+      "tenant_id": "TEN-BALA-HOSP",
+      "name": "MetroCare Hospitals",
+      "vertical": "Healthcare",
+      "region": "India",
+      "plan": "Government",
+      "status": "protected",
+      "buildings": 22,
+      "seats": 1100,
+      "users": 1042,
+      "ai_runs": 22640,
+      "notifications": 498000,
+      "storage_tb": 24.9,
+      "sla_percent": 99.98,
+      "mrr": 216000,
+      "arr": 2592000,
+      "open_incidents": 1,
+      "command_capacity": 94,
+      "role_hierarchy": [
+        "owner",
+        "clinical_admin",
+        "security_manager",
+        "medical_responder",
+        "privacy_auditor"
+      ],
+      "last_audit": "2026-04-26T00:08:00+00:00",
+      "updated_at": "2026-04-26T06:15:58.341763+00:00"
+    },
+    {
+      "tenant_id": "TEN-BALA-MFG",
+      "name": "Nova Mall Group",
+      "vertical": "Retail",
+      "region": "GCC",
+      "plan": "Growth",
+      "status": "watch",
+      "buildings": 31,
+      "seats": 540,
+      "users": 492,
+      "ai_runs": 12780,
+      "notifications": 208400,
+      "storage_tb": 11.2,
+      "sla_percent": 99.91,
+      "mrr": 93000,
+      "arr": 1116000,
+      "open_incidents": 4,
+      "command_capacity": 84,
+      "role_hierarchy": [
+        "owner",
+        "mall_admin",
+        "tenant_manager",
+        "security_lead",
+        "floor_staff"
+      ],
+      "last_audit": "2026-04-26T00:10:00+00:00",
+      "updated_at": "2026-04-26T06:15:58.341766+00:00"
+    },
+    {
+      "tenant_id": "TEN-BALA-UNI",
+      "name": "Skyline University",
+      "vertical": "Education",
+      "region": "Europe",
+      "plan": "Enterprise",
+      "status": "mission_ready",
+      "buildings": 64,
+      "seats": 1360,
+      "users": 1208,
+      "ai_runs": 19240,
+      "notifications": 388000,
+      "storage_tb": 20.1,
+      "sla_percent": 99.94,
+      "mrr": 126000,
+      "arr": 1512000,
+      "open_incidents": 0,
+      "command_capacity": 89,
+      "role_hierarchy": [
+        "owner",
+        "campus_admin",
+        "residence_lead",
+        "security_manager",
+        "student_safety"
+      ],
+      "last_audit": "2026-04-26T00:12:00+00:00",
+      "updated_at": "2026-04-26T06:15:58.341768+00:00"
+    },
+    {
+      "tenant_id": "TEN-GOVSECURE",
+      "name": "SmartCity Authority",
+      "vertical": "Public Sector",
+      "region": "APAC",
+      "plan": "Custom Strategic",
+      "status": "sovereign",
+      "buildings": 118,
+      "seats": 2400,
+      "users": 2165,
+      "ai_runs": 38400,
+      "notifications": 842000,
+      "storage_tb": 41.8,
+      "sla_percent": 99.99,
+      "mrr": 420000,
+      "arr": 5040000,
+      "open_incidents": 3,
+      "command_capacity": 96,
+      "role_hierarchy": [
+        "sovereign_owner",
+        "regional_commander",
+        "agency_admin",
+        "field_commander",
+        "auditor"
+      ],
+      "last_audit": "2026-04-26T00:14:00+00:00",
+      "updated_at": "2026-04-26T06:15:58.341771+00:00"
+    }
+  ],
+  "regions": [
+    {
+      "region_id": "REG-NA",
+      "name": "North America",
+      "tenants": 42,
+      "active_incidents": 5,
+      "latency_ms": 48,
+      "sla_percent": 99.95,
+      "capacity": 88,
+      "command_nodes": 126,
+      "updated_at": "2026-04-26T06:15:58.341774+00:00"
+    },
+    {
+      "region_id": "REG-GCC",
+      "name": "GCC",
+      "tenants": 18,
+      "active_incidents": 3,
+      "latency_ms": 61,
+      "sla_percent": 99.93,
+      "capacity": 82,
+      "command_nodes": 74,
+      "updated_at": "2026-04-26T06:15:58.341776+00:00"
+    },
+    {
+      "region_id": "REG-IN",
+      "name": "India",
+      "tenants": 57,
+      "active_incidents": 4,
+      "latency_ms": 54,
+      "sla_percent": 99.96,
+      "capacity": 91,
+      "command_nodes": 188,
+      "updated_at": "2026-04-26T06:15:58.341778+00:00"
+    },
+    {
+      "region_id": "REG-EU",
+      "name": "Europe",
+      "tenants": 39,
+      "active_incidents": 2,
+      "latency_ms": 58,
+      "sla_percent": 99.94,
+      "capacity": 86,
+      "command_nodes": 132,
+      "updated_at": "2026-04-26T06:15:58.341780+00:00"
+    },
+    {
+      "region_id": "REG-APAC",
+      "name": "APAC",
+      "tenants": 44,
+      "active_incidents": 6,
+      "latency_ms": 67,
+      "sla_percent": 99.92,
+      "capacity": 84,
+      "command_nodes": 141,
+      "updated_at": "2026-04-26T06:15:58.341781+00:00"
+    }
+  ],
+  "incidents": [
+    {
+      "incident_id": "INC-AUTO-FIRE",
+      "tenant_id": "TEN-GRAND-MERIDIAN",
+      "title": "Fire + auto dispatch",
+      "severity": "critical",
+      "status": "executing",
+      "eta_to_stability_min": 11,
+      "actions_linked": 6,
+      "updated_at": "2026-04-26T06:15:58.341783+00:00"
+    },
+    {
+      "incident_id": "INC-PANIC-REROUTE",
+      "tenant_id": "TEN-BALA-MFG",
+      "title": "Panic + crowd reroute",
+      "severity": "high",
+      "status": "stabilizing",
+      "eta_to_stability_min": 8,
+      "actions_linked": 5,
+      "updated_at": "2026-04-26T06:15:58.341785+00:00"
+    },
+    {
+      "incident_id": "INC-CYBER-FALLBACK",
+      "tenant_id": "TEN-GOVSECURE",
+      "title": "Cyber outage + fallback",
+      "severity": "high",
+      "status": "failover_active",
+      "eta_to_stability_min": 17,
+      "actions_linked": 7,
+      "updated_at": "2026-04-26T06:15:58.341787+00:00"
+    },
+    {
+      "incident_id": "INC-SLA-BREACH",
+      "tenant_id": "TEN-GRAND-MERIDIAN",
+      "title": "VIP tenant SLA breach",
+      "severity": "medium",
+      "status": "executive_watch",
+      "eta_to_stability_min": 22,
+      "actions_linked": 4,
+      "updated_at": "2026-04-26T06:15:58.341789+00:00"
+    },
+    {
+      "incident_id": "INC-GLOBAL-SURGE",
+      "tenant_id": "TEN-GOVSECURE",
+      "title": "Global surge event",
+      "severity": "critical",
+      "status": "surge_control",
+      "eta_to_stability_min": 28,
+      "actions_linked": 9,
+      "updated_at": "2026-04-26T06:15:58.341790+00:00"
+    }
+  ],
+  "action_queue": [
+    {
+      "action_id": "ACT-DISPATCH-001",
+      "tenant_id": "TEN-GRAND-MERIDIAN",
+      "title": "Dispatch responders to Kitchen B",
+      "type": "dispatch",
+      "owner": "Ops Alpha",
+      "priority": "critical",
+      "status": "running",
+      "approval_status": "approved",
+      "eta_minutes": 3,
+      "guardrail": "life_safety_first",
+      "confidence": 96,
+      "updated_at": "2026-04-26T06:16:16.210939+00:00"
+    },
+    {
+      "action_id": "ACT-COMMS-002",
+      "tenant_id": "TEN-GRAND-MERIDIAN",
+      "title": "Send floor 3 guided evacuation broadcast",
+      "type": "communications",
+      "owner": "Comms Relay",
+      "priority": "critical",
+      "status": "queued",
+      "approval_status": "approved",
+      "eta_minutes": 1,
+      "guardrail": "calm_authoritative_tone",
+      "confidence": 94,
+      "updated_at": "2026-04-26T06:15:58.341794+00:00"
+    },
+    {
+      "action_id": "ACT-ZONE-003",
+      "tenant_id": "TEN-BALA-MFG",
+      "title": "Open north exit and close smoke corridor",
+      "type": "zone_control",
+      "owner": "Security Bravo",
+      "priority": "high",
+      "status": "awaiting_approval",
+      "approval_status": "manager_required",
+      "eta_minutes": 4,
+      "guardrail": "avoid_crowd_compression",
+      "confidence": 89,
+      "updated_at": "2026-04-26T06:15:58.341796+00:00"
+    },
+    {
+      "action_id": "ACT-WORKFLOW-004",
+      "tenant_id": "TEN-BALA-HOSP",
+      "title": "Launch oxygen wing recovery workflow",
+      "type": "workflow",
+      "owner": "Facilities Lead",
+      "priority": "high",
+      "status": "queued",
+      "approval_status": "clinical_required",
+      "eta_minutes": 9,
+      "guardrail": "patient_continuity",
+      "confidence": 91,
+      "updated_at": "2026-04-26T06:15:58.341798+00:00"
+    },
+    {
+      "action_id": "ACT-FALLBACK-005",
+      "tenant_id": "TEN-GOVSECURE",
+      "title": "Switch notification provider to sovereign fallback",
+      "type": "failover",
+      "owner": "Cloud Sentinel",
+      "priority": "critical",
+      "status": "running",
+      "approval_status": "auto_safe",
+      "eta_minutes": 2,
+      "guardrail": "data_residency_locked",
+      "confidence": 92,
+      "updated_at": "2026-04-26T06:15:58.341799+00:00"
+    },
+    {
+      "action_id": "ACT-RECOVERY-006",
+      "tenant_id": "TEN-BALA-UNI",
+      "title": "Trigger campus re-entry readiness checks",
+      "type": "recovery",
+      "owner": "Campus Ops",
+      "priority": "medium",
+      "status": "queued",
+      "approval_status": "approved",
+      "eta_minutes": 18,
+      "guardrail": "human_approval_before_reopen",
+      "confidence": 88,
+      "updated_at": "2026-04-26T06:15:58.341801+00:00"
+    }
+  ],
+  "executions": [
+    {
+      "execution_id": "EXE-0001",
+      "tenant_id": "TEN-GRAND-MERIDIAN",
+      "action_id": "ACT-DISPATCH-001",
+      "status": "running",
+      "progress": 68,
+      "last_step": "Responder route confirmed via east stairwell",
+      "latency_ms": 210,
+      "retry_count": 0,
+      "updated_at": "2026-04-26T06:15:58.341803+00:00"
+    },
+    {
+      "execution_id": "EXE-0002",
+      "tenant_id": "TEN-GOVSECURE",
+      "action_id": "ACT-FALLBACK-005",
+      "status": "running",
+      "progress": 74,
+      "last_step": "Fallback provider accepted priority queue",
+      "latency_ms": 188,
+      "retry_count": 1,
+      "updated_at": "2026-04-26T06:15:58.341805+00:00"
+    },
+    {
+      "execution_id": "EXE-0003",
+      "tenant_id": "TEN-BALA-MFG",
+      "action_id": "ACT-ZONE-003",
+      "status": "waiting",
+      "progress": 42,
+      "last_step": "Human approval required before exit close",
+      "latency_ms": 242,
+      "retry_count": 0,
+      "updated_at": "2026-04-26T06:15:58.341806+00:00"
+    }
+  ],
+  "recovery": [
+    {
+      "recovery_id": "REC-CLOSED-LOOP",
+      "tenant_id": "TEN-GRAND-MERIDIAN",
+      "title": "Closed-loop fire recovery",
+      "score": 94,
+      "outcome": "Floor 3 evacuation stable; smoke containment verified.",
+      "next_action": "Start HVAC clearance and room reopen waves.",
+      "eta_minutes": 42,
+      "updated_at": "2026-04-26T06:15:58.341809+00:00"
+    },
+    {
+      "recovery_id": "REC-CYBER-FALLBACK",
+      "tenant_id": "TEN-GOVSECURE",
+      "title": "Cyber outage fallback recovery",
+      "score": 91,
+      "outcome": "Traffic shifted to sovereign queue with no data residency breach.",
+      "next_action": "Keep primary connector isolated until checks pass.",
+      "eta_minutes": 27,
+      "updated_at": "2026-04-26T06:15:58.341810+00:00"
+    },
+    {
+      "recovery_id": "REC-PANIC-REROUTE",
+      "tenant_id": "TEN-BALA-MFG",
+      "title": "Crowd reroute recovery",
+      "score": 88,
+      "outcome": "Food court density reduced below pressure threshold.",
+      "next_action": "Release re-entry in staged waves.",
+      "eta_minutes": 31,
+      "updated_at": "2026-04-26T06:15:58.341812+00:00"
+    }
+  ],
+  "guardrails": [
+    {
+      "guardrail_id": "GR-LIFE",
+      "name": "Life safety override",
+      "state": "active",
+      "coverage": 100,
+      "description": "Blocks revenue-optimized decisions when human risk exceeds threshold.",
+      "updated_at": "2026-04-26T06:15:58.341814+00:00"
+    },
+    {
+      "guardrail_id": "GR-RBAC",
+      "name": "Human governance approvals",
+      "state": "active",
+      "coverage": 96,
+      "description": "Routes critical actions to manager, executive, or dual approval.",
+      "updated_at": "2026-04-26T06:15:58.341816+00:00"
+    },
+    {
+      "guardrail_id": "GR-ROLLBACK",
+      "name": "Rollback and fail-safe posture",
+      "state": "active",
+      "coverage": 94,
+      "description": "Every autonomous execution carries rollback or fallback instructions.",
+      "updated_at": "2026-04-26T06:15:58.341818+00:00"
+    },
+    {
+      "guardrail_id": "GR-TENANT",
+      "name": "Tenant isolation",
+      "state": "active",
+      "coverage": 99,
+      "description": "Data and command actions stay scoped to tenant and region.",
+      "updated_at": "2026-04-26T06:15:58.341820+00:00"
+    }
+  ],
+  "usage": [
+    {
+      "usage_id": "USAGE-TEN-GRAND-MERIDIAN",
+      "tenant_id": "TEN-GRAND-MERIDIAN",
+      "tenant_name": "Grand Meridian Hotels",
+      "ai_runs": 18420,
+      "notifications": 312000,
+      "storage_tb": 18.4,
+      "seat_utilization": 91,
+      "quota_health": 94,
+      "updated_at": "2026-04-26T06:15:58.341822+00:00"
+    },
+    {
+      "usage_id": "USAGE-TEN-BALA-HOSP",
+      "tenant_id": "TEN-BALA-HOSP",
+      "tenant_name": "MetroCare Hospitals",
+      "ai_runs": 22640,
+      "notifications": 498000,
+      "storage_tb": 24.9,
+      "seat_utilization": 95,
+      "quota_health": 97,
+      "updated_at": "2026-04-26T06:15:58.341824+00:00"
+    },
+    {
+      "usage_id": "USAGE-TEN-BALA-MFG",
+      "tenant_id": "TEN-BALA-MFG",
+      "tenant_name": "Nova Mall Group",
+      "ai_runs": 12780,
+      "notifications": 208400,
+      "storage_tb": 11.2,
+      "seat_utilization": 91,
+      "quota_health": 87,
+      "updated_at": "2026-04-26T06:15:58.341825+00:00"
+    },
+    {
+      "usage_id": "USAGE-TEN-BALA-UNI",
+      "tenant_id": "TEN-BALA-UNI",
+      "tenant_name": "Skyline University",
+      "ai_runs": 19240,
+      "notifications": 388000,
+      "storage_tb": 20.1,
+      "seat_utilization": 89,
+      "quota_health": 92,
+      "updated_at": "2026-04-26T06:15:58.341827+00:00"
+    },
+    {
+      "usage_id": "USAGE-TEN-GOVSECURE",
+      "tenant_id": "TEN-GOVSECURE",
+      "tenant_name": "SmartCity Authority",
+      "ai_runs": 38400,
+      "notifications": 842000,
+      "storage_tb": 41.8,
+      "seat_utilization": 90,
+      "quota_health": 99,
+      "updated_at": "2026-04-26T06:15:58.341828+00:00"
+    }
+  ],
+  "revenue": [
+    {
+      "revenue_id": "REV-TEN-GRAND-MERIDIAN",
+      "tenant_id": "TEN-GRAND-MERIDIAN",
+      "tenant_name": "Grand Meridian Hotels",
+      "mrr": 148000,
+      "arr": 1776000,
+      "growth_percent": 137,
+      "churn_risk": 3,
+      "expansion_pipeline": 603840,
+      "renewal_days": 63,
+      "updated_at": "2026-04-26T06:15:58.341830+00:00"
+    },
+    {
+      "revenue_id": "REV-TEN-BALA-HOSP",
+      "tenant_id": "TEN-BALA-HOSP",
+      "tenant_name": "MetroCare Hospitals",
+      "mrr": 216000,
+      "arr": 2592000,
+      "growth_percent": 135,
+      "churn_risk": 3,
+      "expansion_pipeline": 881280,
+      "renewal_days": 61,
+      "updated_at": "2026-04-26T06:15:58.341832+00:00"
+    },
+    {
+      "revenue_id": "REV-TEN-BALA-MFG",
+      "tenant_id": "TEN-BALA-MFG",
+      "tenant_name": "Nova Mall Group",
+      "mrr": 93000,
+      "arr": 1116000,
+      "growth_percent": 131,
+      "churn_risk": 12,
+      "expansion_pipeline": 379440,
+      "renewal_days": 57,
+      "updated_at": "2026-04-26T06:15:58.341833+00:00"
+    },
+    {
+      "revenue_id": "REV-TEN-BALA-UNI",
+      "tenant_id": "TEN-BALA-UNI",
+      "tenant_name": "Skyline University",
+      "mrr": 126000,
+      "arr": 1512000,
+      "growth_percent": 134,
+      "churn_risk": 3,
+      "expansion_pipeline": 514080,
+      "renewal_days": 60,
+      "updated_at": "2026-04-26T06:15:58.341835+00:00"
+    },
+    {
+      "revenue_id": "REV-TEN-GOVSECURE",
+      "tenant_id": "TEN-GOVSECURE",
+      "tenant_name": "SmartCity Authority",
+      "mrr": 420000,
+      "arr": 5040000,
+      "growth_percent": 182,
+      "churn_risk": 3,
+      "expansion_pipeline": 1713600,
+      "renewal_days": 61,
+      "updated_at": "2026-04-26T06:15:58.341836+00:00"
+    }
+  ],
+  "forecasts": [
+    {
+      "forecast_id": "FC-BASE",
+      "tenant_id": "TEN-GOVSECURE",
+      "scenario": "base",
+      "arr_12_month": 18400000,
+      "growth_percent": 182,
+      "churn_percent": 3.4,
+      "enterprise_wins": 18,
+      "confidence": 91,
+      "updated_at": "2026-04-26T06:15:58.341839+00:00"
+    },
+    {
+      "forecast_id": "FC-CONSERVATIVE",
+      "tenant_id": "TEN-GOVSECURE",
+      "scenario": "conservative",
+      "arr_12_month": 14200000,
+      "growth_percent": 124,
+      "churn_percent": 5.8,
+      "enterprise_wins": 11,
+      "confidence": 94,
+      "updated_at": "2026-04-26T06:15:58.341841+00:00"
+    },
+    {
+      "forecast_id": "FC-AGGRESSIVE",
+      "tenant_id": "TEN-GOVSECURE",
+      "scenario": "aggressive",
+      "arr_12_month": 28600000,
+      "growth_percent": 268,
+      "churn_percent": 2.2,
+      "enterprise_wins": 31,
+      "confidence": 82,
+      "updated_at": "2026-04-26T06:15:58.341843+00:00"
+    }
+  ],
+  "investors": [
+    {
+      "investor_id": "INV-SEQUOIA-SCOUT",
+      "tenant_id": "TEN-GOVSECURE",
+      "fund": "Sequoia scout",
+      "stage": "partner_intro",
+      "conviction": 84,
+      "check_size": 500000,
+      "next_action": "Send crisis autonomy demo cut",
+      "fit": "AI infrastructure",
+      "updated_at": "2026-04-26T06:15:58.341845+00:00"
+    },
+    {
+      "investor_id": "INV-ACCEL",
+      "tenant_id": "TEN-GOVSECURE",
+      "fund": "Accel partner",
+      "stage": "first_meeting",
+      "conviction": 78,
+      "check_size": 2500000,
+      "next_action": "Share ARR forecast and cloud tenant metrics",
+      "fit": "enterprise SaaS",
+      "updated_at": "2026-04-26T06:15:58.341847+00:00"
+    },
+    {
+      "investor_id": "INV-LIGHTSPEED",
+      "tenant_id": "TEN-GOVSECURE",
+      "fund": "Lightspeed associate",
+      "stage": "diligence",
+      "conviction": 72,
+      "check_size": 1000000,
+      "next_action": "Provide AI governance evidence",
+      "fit": "vertical AI",
+      "updated_at": "2026-04-26T06:15:58.341848+00:00"
+    },
+    {
+      "investor_id": "INV-TIGER",
+      "tenant_id": "TEN-GOVSECURE",
+      "fund": "Tiger growth",
+      "stage": "target",
+      "conviction": 61,
+      "check_size": 8000000,
+      "next_action": "Wait for $10M ARR signal",
+      "fit": "growth",
+      "updated_at": "2026-04-26T06:15:58.341850+00:00"
+    },
+    {
+      "investor_id": "INV-UAE",
+      "tenant_id": "TEN-GOVSECURE",
+      "fund": "Sovereign UAE fund",
+      "stage": "partner_meeting",
+      "conviction": 88,
+      "check_size": 12000000,
+      "next_action": "Discuss sovereign command cloud",
+      "fit": "national resilience",
+      "updated_at": "2026-04-26T06:15:58.341851+00:00"
+    },
+    {
+      "investor_id": "INV-GOVTECH",
+      "tenant_id": "TEN-GOVSECURE",
+      "fund": "Strategic GovTech Fund",
+      "stage": "term_sheet_watch",
+      "conviction": 91,
+      "check_size": 6000000,
+      "next_action": "Draft strategic pilot terms",
+      "fit": "public safety",
+      "updated_at": "2026-04-26T06:15:58.341853+00:00"
+    }
+  ],
+  "finance": [
+    {
+      "finance_id": "FIN-BOARD",
+      "tenant_id": "TEN-GOVSECURE",
+      "arr": 4800000,
+      "mrr": 400000,
+      "growth_percent": 182,
+      "nrr": 129,
+      "burn_monthly": 210000,
+      "cash": 6400000,
+      "runway_months": 30,
+      "burn_multiple": 0.52,
+      "valuation_base": 62000000,
+      "valuation_low": 42000000,
+      "valuation_high": 98000000,
+      "ipo_score": 64,
+      "updated_at": "2026-04-26T06:15:58.341855+00:00"
+    }
+  ],
+  "board_summary": [
+    {
+      "summary_id": "BOARD-MONTHLY",
+      "tenant_id": "TEN-GOVSECURE",
+      "title": "April board command pack",
+      "readiness_score": 91,
+      "strategic_ask": "Approve sovereign pilot and Series A prep window.",
+      "top_risk": "Enterprise onboarding capacity becomes bottleneck if GCC pilots close together.",
+      "recommended_action": "Hire deployment lead and keep autonomy guardrails in approval-required mode for public-sector pilots.",
+      "updated_at": "2026-04-26T06:15:58.341857+00:00"
+    }
+  ],
+  "audit": [
+    {
+      "audit_id": "AUD-MASTER-0001",
+      "tenant_id": "TEN-GRAND-MERIDIAN",
+      "action": "autonomous_dispatch_approved",
+      "actor": "ai.council@sentra",
+      "result": "success",
+      "risk_score": 72,
+      "created_at": "2026-04-26T00:15:00+00:00",
+      "updated_at": "2026-04-26T06:15:58.341860+00:00"
+    },
+    {
+      "audit_id": "AUD-MASTER-0002",
+      "tenant_id": "TEN-GOVSECURE",
+      "action": "fallback_provider_switched",
+      "actor": "cloud.sentinel@sentra",
+      "result": "success",
+      "risk_score": 68,
+      "created_at": "2026-04-26T00:17:00+00:00",
+      "updated_at": "2026-04-26T06:15:58.341861+00:00"
+    },
+    {
+      "audit_id": "AUD-MASTER-0003",
+      "tenant_id": "TEN-BALA-MFG",
+      "action": "exit_control_waiting_approval",
+      "actor": "governance.router@sentra",
+      "result": "pending",
+      "risk_score": 54,
+      "created_at": "2026-04-26T00:19:00+00:00",
+      "updated_at": "2026-04-26T06:15:58.341863+00:00"
+    },
+    {
+      "audit_id": "AUD-MASTER-0004",
+      "tenant_id": "TEN-BALA-UNI",
+      "action": "autonomy_grid_run",
+      "actor": "sentra.autonomy",
+      "result": "success",
+      "risk_score": 74,
+      "created_at": "2026-04-26T06:15:59.106333+00:00",
+      "updated_at": "2026-04-26T06:15:59.106333+00:00"
+    },
+    {
+      "audit_id": "AUD-MASTER-0005",
+      "tenant_id": "TEN-BALA-UNI",
+      "action": "autonomy_grid_run",
+      "actor": "sentra.autonomy",
+      "result": "success",
+      "risk_score": 74,
+      "created_at": "2026-04-26T06:16:16.226343+00:00",
+      "updated_at": "2026-04-26T06:16:16.226343+00:00"
+    }
+  ],
+  "events": [
+    {
+      "event_id": "MASTER-EVT-00001",
+      "tenant_id": "TEN-BALA-UNI",
+      "action": "autonomy_grid_run",
+      "payload": {
+        "action_id": null,
+        "scenario_id": "INC-AUTO-FIRE",
+        "actor": "sentra.autonomy",
+        "risk_score": 74
+      },
+      "created_at": "2026-04-26T06:15:59.106333+00:00"
+    },
+    {
+      "event_id": "MASTER-EVT-00002",
+      "tenant_id": "TEN-GRAND-MERIDIAN",
+      "action": "autonomy_action_running",
+      "payload": {
+        "action_id": "ACT-DISPATCH-001",
+        "approval_status": "approved"
+      },
+      "created_at": "2026-04-26T06:16:16.210961+00:00"
+    },
+    {
+      "event_id": "MASTER-EVT-00003",
+      "tenant_id": "TEN-BALA-UNI",
+      "action": "autonomy_grid_run",
+      "payload": {
+        "action_id": "ACT-DISPATCH-001",
+        "scenario_id": "INC-AUTO-FIRE",
+        "actor": "sentra.autonomy",
+        "risk_score": 74
+      },
+      "created_at": "2026-04-26T06:16:16.226343+00:00"
+    }
+  ]
+}

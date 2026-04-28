@@ -1,0 +1,52 @@
+{
+  "name": "sentra-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "apps/mobile"
+  ],
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build && npm --workspace sentra-mobile run build",
+    "build:web": "next build",
+    "build:mobile": "npm --workspace sentra-mobile run build",
+    "start": "next start",
+    "lint": "eslint . --max-warnings=0 && npm --workspace sentra-mobile run lint",
+    "analyze": "npm run build && node scripts/bundle-report.mjs",
+    "format": "prettier --check .",
+    "format:write": "prettier --write .",
+    "typecheck": "tsc --noEmit && npm --workspace sentra-mobile run typecheck"
+  },
+  "dependencies": {
+    "@react-spring/web": "^10.0.3",
+    "@studio-freight/lenis": "^1.0.42",
+    "@types/leaflet": "^1.9.21",
+    "d3": "^7.9.0",
+    "date-fns": "^4.1.0",
+    "echarts": "^6.0.0",
+    "echarts-for-react": "^3.0.6",
+    "firebase": "^12.12.0",
+    "framer-motion": "^12.38.0",
+    "leaflet": "^1.9.4",
+    "next": "^16.0.0",
+    "react": "^19.2.0",
+    "react-countup": "^6.5.3",
+    "react-dom": "^19.2.0",
+    "react-leaflet": "^5.0.0",
+    "react-simple-maps": "^3.0.0",
+    "recharts": "^3.8.1",
+    "zustand": "^5.0.8"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.11",
+    "@types/node": "^24.3.0",
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2",
+    "eslint": "^9.34.0",
+    "eslint-config-next": "^16.0.0",
+    "prettier": "^3.6.2",
+    "prettier-plugin-tailwindcss": "^0.6.14",
+    "tailwindcss": "^4.1.11",
+    "typescript": "^5.9.2"
+  }
+}

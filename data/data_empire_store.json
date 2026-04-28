@@ -1,0 +1,534 @@
+{
+  "sources": [
+    {
+      "source_id": "crm",
+      "tenant_id": "TEN-BALA-UNI",
+      "name": "CRM",
+      "category": "commercial",
+      "signals_day": 920000,
+      "freshness_seconds": 12,
+      "quality_score": 96,
+      "status": "streaming",
+      "last_ingested_at": "2026-04-25T06:02:56.299499+00:00"
+    },
+    {
+      "source_id": "billing",
+      "tenant_id": "TEN-BALA-UNI",
+      "name": "Billing",
+      "category": "financial",
+      "signals_day": 410000,
+      "freshness_seconds": 16,
+      "quality_score": 95,
+      "status": "streaming",
+      "last_ingested_at": "2026-04-25T06:02:56.299531+00:00"
+    },
+    {
+      "source_id": "incidents",
+      "tenant_id": "TEN-BALA-UNI",
+      "name": "Incidents",
+      "category": "crisis",
+      "signals_day": 1840000,
+      "freshness_seconds": 20,
+      "quality_score": 94,
+      "status": "streaming",
+      "last_ingested_at": "2026-04-25T06:02:56.299539+00:00"
+    },
+    {
+      "source_id": "sensors",
+      "tenant_id": "TEN-BALA-UNI",
+      "name": "Sensors",
+      "category": "physical",
+      "signals_day": 3900000,
+      "freshness_seconds": 24,
+      "quality_score": 93,
+      "status": "streaming",
+      "last_ingested_at": "2026-04-25T06:02:56.299545+00:00"
+    },
+    {
+      "source_id": "social",
+      "tenant_id": "TEN-BALA-UNI",
+      "name": "Social signals",
+      "category": "public",
+      "signals_day": 1120000,
+      "freshness_seconds": 28,
+      "quality_score": 92,
+      "status": "streaming",
+      "last_ingested_at": "2026-04-25T06:02:56.299550+00:00"
+    },
+    {
+      "source_id": "weather",
+      "tenant_id": "TEN-BALA-UNI",
+      "name": "Weather",
+      "category": "environment",
+      "signals_day": 780000,
+      "freshness_seconds": 32,
+      "quality_score": 96,
+      "status": "streaming",
+      "last_ingested_at": "2026-04-25T06:02:56.299555+00:00"
+    },
+    {
+      "source_id": "traffic",
+      "tenant_id": "TEN-BALA-UNI",
+      "name": "Traffic",
+      "category": "mobility",
+      "signals_day": 1460000,
+      "freshness_seconds": 36,
+      "quality_score": 95,
+      "status": "streaming",
+      "last_ingested_at": "2026-04-25T06:02:56.299560+00:00"
+    },
+    {
+      "source_id": "government",
+      "tenant_id": "TEN-BALA-UNI",
+      "name": "Government feeds",
+      "category": "sovereign",
+      "signals_day": 540000,
+      "freshness_seconds": 40,
+      "quality_score": 94,
+      "status": "streaming",
+      "last_ingested_at": "2026-04-25T06:02:56.299565+00:00"
+    },
+    {
+      "source_id": "financial",
+      "tenant_id": "TEN-BALA-UNI",
+      "name": "Financial feeds",
+      "category": "market",
+      "signals_day": 320000,
+      "freshness_seconds": 44,
+      "quality_score": 93,
+      "status": "streaming",
+      "last_ingested_at": "2026-04-25T06:02:56.299569+00:00"
+    },
+    {
+      "source_id": "api_usage",
+      "tenant_id": "TEN-BALA-UNI",
+      "name": "API usage",
+      "category": "platform",
+      "signals_day": 2400000,
+      "freshness_seconds": 48,
+      "quality_score": 92,
+      "status": "streaming",
+      "last_ingested_at": "2026-04-25T06:02:56.299574+00:00"
+    },
+    {
+      "source_id": "ecosystem_apps",
+      "tenant_id": "TEN-BALA-UNI",
+      "name": "Ecosystem apps",
+      "category": "ecosystem",
+      "signals_day": 860000,
+      "freshness_seconds": 52,
+      "quality_score": 96,
+      "status": "streaming",
+      "last_ingested_at": "2026-04-25T06:02:56.299578+00:00"
+    },
+    {
+      "source_id": "user_actions",
+      "tenant_id": "TEN-BALA-UNI",
+      "name": "User actions",
+      "category": "behavioral",
+      "signals_day": 1180000,
+      "freshness_seconds": 56,
+      "quality_score": 95,
+      "status": "streaming",
+      "last_ingested_at": "2026-04-25T06:02:56.299582+00:00"
+    },
+    {
+      "source_id": "telemetry",
+      "tenant_id": "TEN-BALA-UNI",
+      "name": "Operational telemetry",
+      "category": "ops",
+      "signals_day": 790000,
+      "freshness_seconds": 60,
+      "quality_score": 94,
+      "status": "streaming",
+      "last_ingested_at": "2026-04-25T06:02:56.299587+00:00"
+    },
+    {
+      "source_id": "ai_decisions",
+      "tenant_id": "TEN-BALA-UNI",
+      "name": "AI decisions",
+      "category": "autonomy",
+      "signals_day": 168000,
+      "freshness_seconds": 64,
+      "quality_score": 93,
+      "status": "streaming",
+      "last_ingested_at": "2026-04-25T06:02:56.299592+00:00"
+    },
+    {
+      "source_id": "support",
+      "tenant_id": "TEN-BALA-UNI",
+      "name": "Support tickets",
+      "category": "success",
+      "signals_day": 110000,
+      "freshness_seconds": 68,
+      "quality_score": 92,
+      "status": "streaming",
+      "last_ingested_at": "2026-04-25T06:02:56.299596+00:00"
+    },
+    {
+      "source_id": "crm",
+      "tenant_id": "TEN-BALA-MFG",
+      "name": "CRM",
+      "category": "commercial",
+      "signals_day": 920000,
+      "freshness_seconds": 12,
+      "quality_score": 96,
+      "status": "streaming",
+      "last_ingested_at": "2026-04-25T06:02:56.299615+00:00"
+    },
+    {
+      "source_id": "billing",
+      "tenant_id": "TEN-BALA-MFG",
+      "name": "Billing",
+      "category": "financial",
+      "signals_day": 410000,
+      "freshness_seconds": 16,
+      "quality_score": 95,
+      "status": "streaming",
+      "last_ingested_at": "2026-04-25T06:02:56.299619+00:00"
+    },
+    {
+      "source_id": "incidents",
+      "tenant_id": "TEN-BALA-MFG",
+      "name": "Incidents",
+      "category": "crisis",
+      "signals_day": 1840000,
+      "freshness_seconds": 20,
+      "quality_score": 94,
+      "status": "streaming",
+      "last_ingested_at": "2026-04-25T06:02:56.299624+00:00"
+    },
+    {
+      "source_id": "sensors",
+      "tenant_id": "TEN-BALA-MFG",
+      "name": "Sensors",
+      "category": "physical",
+      "signals_day": 3900000,
+      "freshness_seconds": 24,
+      "quality_score": 93,
+      "status": "streaming",
+      "last_ingested_at": "2026-04-25T06:02:56.299628+00:00"
+    },
+    {
+      "source_id": "social",
+      "tenant_id": "TEN-BALA-MFG",
+      "name": "Social signals",
+      "category": "public",
+      "signals_day": 1120000,
+      "freshness_seconds": 28,
+      "quality_score": 92,
+      "status": "streaming",
+      "last_ingested_at": "2026-04-25T06:02:56.299632+00:00"
+    },
+    {
+      "source_id": "weather",
+      "tenant_id": "TEN-BALA-MFG",
+      "name": "Weather",
+      "category": "environment",
+      "signals_day": 780000,
+      "freshness_seconds": 32,
+      "quality_score": 96,
+      "status": "streaming",
+      "last_ingested_at": "2026-04-25T06:02:56.299637+00:00"
+    },
+    {
+      "source_id": "traffic",
+      "tenant_id": "TEN-BALA-MFG",
+      "name": "Traffic",
+      "category": "mobility",
+      "signals_day": 1460000,
+      "freshness_seconds": 36,
+      "quality_score": 95,
+      "status": "streaming",
+      "last_ingested_at": "2026-04-25T06:02:56.299641+00:00"
+    },
+    {
+      "source_id": "government",
+      "tenant_id": "TEN-BALA-MFG",
+      "name": "Government feeds",
+      "category": "sovereign",
+      "signals_day": 540000,
+      "freshness_seconds": 40,
+      "quality_score": 94,
+      "status": "streaming",
+      "last_ingested_at": "2026-04-25T06:02:56.299645+00:00"
+    },
+    {
+      "source_id": "financial",
+      "tenant_id": "TEN-BALA-MFG",
+      "name": "Financial feeds",
+      "category": "market",
+      "signals_day": 320000,
+      "freshness_seconds": 44,
+      "quality_score": 93,
+      "status": "streaming",
+      "last_ingested_at": "2026-04-25T06:02:56.299649+00:00"
+    },
+    {
+      "source_id": "api_usage",
+      "tenant_id": "TEN-BALA-MFG",
+      "name": "API usage",
+      "category": "platform",
+      "signals_day": 2400000,
+      "freshness_seconds": 48,
+      "quality_score": 92,
+      "status": "streaming",
+      "last_ingested_at": "2026-04-25T06:02:56.299653+00:00"
+    },
+    {
+      "source_id": "ecosystem_apps",
+      "tenant_id": "TEN-BALA-MFG",
+      "name": "Ecosystem apps",
+      "category": "ecosystem",
+      "signals_day": 860000,
+      "freshness_seconds": 52,
+      "quality_score": 96,
+      "status": "streaming",
+      "last_ingested_at": "2026-04-25T06:02:56.299658+00:00"
+    },
+    {
+      "source_id": "user_actions",
+      "tenant_id": "TEN-BALA-MFG",
+      "name": "User actions",
+      "category": "behavioral",
+      "signals_day": 1180000,
+      "freshness_seconds": 56,
+      "quality_score": 95,
+      "status": "streaming",
+      "last_ingested_at": "2026-04-25T06:02:56.299662+00:00"
+    },
+    {
+      "source_id": "telemetry",
+      "tenant_id": "TEN-BALA-MFG",
+      "name": "Operational telemetry",
+      "category": "ops",
+      "signals_day": 790000,
+      "freshness_seconds": 60,
+      "quality_score": 94,
+      "status": "streaming",
+      "last_ingested_at": "2026-04-25T06:02:56.299666+00:00"
+    },
+    {
+      "source_id": "ai_decisions",
+      "tenant_id": "TEN-BALA-MFG",
+      "name": "AI decisions",
+      "category": "autonomy",
+      "signals_day": 168000,
+      "freshness_seconds": 64,
+      "quality_score": 93,
+      "status": "streaming",
+      "last_ingested_at": "2026-04-25T06:02:56.299670+00:00"
+    },
+    {
+      "source_id": "support",
+      "tenant_id": "TEN-BALA-MFG",
+      "name": "Support tickets",
+      "category": "success",
+      "signals_day": 110000,
+      "freshness_seconds": 68,
+      "quality_score": 92,
+      "status": "streaming",
+      "last_ingested_at": "2026-04-25T06:02:56.299674+00:00"
+    },
+    {
+      "source_id": "crm",
+      "tenant_id": "TEN-BALA-HOSP",
+      "name": "CRM",
+      "category": "commercial",
+      "signals_day": 920000,
+      "freshness_seconds": 12,
+      "quality_score": 96,
+      "status": "streaming",
+      "last_ingested_at": "2026-04-25T06:02:56.299685+00:00"
+    },
+    {
+      "source_id": "billing",
+      "tenant_id": "TEN-BALA-HOSP",
+      "name": "Billing",
+      "category": "financial",
+      "signals_day": 410000,
+      "freshness_seconds": 16,
+      "quality_score": 95,
+      "status": "streaming",
+      "last_ingested_at": "2026-04-25T06:02:56.299690+00:00"
+    },
+    {
+      "source_id": "incidents",
+      "tenant_id": "TEN-BALA-HOSP",
+      "name": "Incidents",
+      "category": "crisis",
+      "signals_day": 1840000,
+      "freshness_seconds": 20,
+      "quality_score": 94,
+      "status": "streaming",
+      "last_ingested_at": "2026-04-25T06:02:56.299694+00:00"
+    },
+    {
+      "source_id": "sensors",
+      "tenant_id": "TEN-BALA-HOSP",
+      "name": "Sensors",
+      "category": "physical",
+      "signals_day": 3900000,
+      "freshness_seconds": 24,
+      "quality_score": 93,
+      "status": "streaming",
+      "last_ingested_at": "2026-04-25T06:02:56.299698+00:00"
+    },
+    {
+      "source_id": "social",
+      "tenant_id": "TEN-BALA-HOSP",
+      "name": "Social signals",
+      "category": "public",
+      "signals_day": 1120000,
+      "freshness_seconds": 28,
+      "quality_score": 92,
+      "status": "streaming",
+      "last_ingested_at": "2026-04-25T06:02:56.299703+00:00"
+    },
+    {
+      "source_id": "weather",
+      "tenant_id": "TEN-BALA-HOSP",
+      "name": "Weather",
+      "category": "environment",
+      "signals_day": 780000,
+      "freshness_seconds": 32,
+      "quality_score": 96,
+      "status": "streaming",
+      "last_ingested_at": "2026-04-25T06:02:56.299708+00:00"
+    },
+    {
+      "source_id": "traffic",
+      "tenant_id": "TEN-BALA-HOSP",
+      "name": "Traffic",
+      "category": "mobility",
+      "signals_day": 1460000,
+      "freshness_seconds": 36,
+      "quality_score": 95,
+      "status": "streaming",
+      "last_ingested_at": "2026-04-25T06:02:56.299712+00:00"
+    },
+    {
+      "source_id": "government",
+      "tenant_id": "TEN-BALA-HOSP",
+      "name": "Government feeds",
+      "category": "sovereign",
+      "signals_day": 540000,
+      "freshness_seconds": 40,
+      "quality_score": 94,
+      "status": "streaming",
+      "last_ingested_at": "2026-04-25T06:02:56.299716+00:00"
+    },
+    {
+      "source_id": "financial",
+      "tenant_id": "TEN-BALA-HOSP",
+      "name": "Financial feeds",
+      "category": "market",
+      "signals_day": 320000,
+      "freshness_seconds": 44,
+      "quality_score": 93,
+      "status": "streaming",
+      "last_ingested_at": "2026-04-25T06:02:56.299720+00:00"
+    },
+    {
+      "source_id": "api_usage",
+      "tenant_id": "TEN-BALA-HOSP",
+      "name": "API usage",
+      "category": "platform",
+      "signals_day": 2400000,
+      "freshness_seconds": 48,
+      "quality_score": 92,
+      "status": "streaming",
+      "last_ingested_at": "2026-04-25T06:02:56.299724+00:00"
+    },
+    {
+      "source_id": "ecosystem_apps",
+      "tenant_id": "TEN-BALA-HOSP",
+      "name": "Ecosystem apps",
+      "category": "ecosystem",
+      "signals_day": 860000,
+      "freshness_seconds": 52,
+      "quality_score": 96,
+      "status": "streaming",
+      "last_ingested_at": "2026-04-25T06:02:56.299729+00:00"
+    },
+    {
+      "source_id": "user_actions",
+      "tenant_id": "TEN-BALA-HOSP",
+      "name": "User actions",
+      "category": "behavioral",
+      "signals_day": 1180000,
+      "freshness_seconds": 56,
+      "quality_score": 95,
+      "status": "streaming",
+      "last_ingested_at": "2026-04-25T06:02:56.299734+00:00"
+    },
+    {
+      "source_id": "telemetry",
+      "tenant_id": "TEN-BALA-HOSP",
+      "name": "Operational telemetry",
+      "category": "ops",
+      "signals_day": 790000,
+      "freshness_seconds": 60,
+      "quality_score": 94,
+      "status": "streaming",
+      "last_ingested_at": "2026-04-25T06:02:56.299738+00:00"
+    },
+    {
+      "source_id": "ai_decisions",
+      "tenant_id": "TEN-BALA-HOSP",
+      "name": "AI decisions",
+      "category": "autonomy",
+      "signals_day": 168000,
+      "freshness_seconds": 64,
+      "quality_score": 93,
+      "status": "streaming",
+      "last_ingested_at": "2026-04-25T06:02:56.299742+00:00"
+    },
+    {
+      "source_id": "support",
+      "tenant_id": "TEN-BALA-HOSP",
+      "name": "Support tickets",
+      "category": "success",
+      "signals_day": 110000,
+      "freshness_seconds": 68,
+      "quality_score": 92,
+      "status": "streaming",
+      "last_ingested_at": "2026-04-25T06:02:56.299747+00:00"
+    }
+  ],
+  "jobs": [
+    {
+      "learning_job_id": "LEARN-3767830190",
+      "tenant_id": "TEN-BALA-UNI",
+      "patterns_absorbed": 9840,
+      "models_improved": 37,
+      "accuracy_gain": 1.8,
+      "completed_at": "2026-04-25T06:02:56.471979+00:00"
+    },
+    {
+      "learning_job_id": "LEARN-DFE3CECAC5",
+      "tenant_id": "TEN-BALA-UNI",
+      "patterns_absorbed": 9840,
+      "models_improved": 37,
+      "accuracy_gain": 1.8,
+      "completed_at": "2026-04-25T06:05:32.091494+00:00"
+    }
+  ],
+  "products_launched": [],
+  "events": [
+    {
+      "event_id": "DEVT-4B0D063BAB",
+      "tenant_id": "TEN-BALA-UNI",
+      "action": "learning_run",
+      "target": "LEARN-3767830190",
+      "created_at": "2026-04-25T06:02:56.497827+00:00"
+    },
+    {
+      "event_id": "DEVT-3419ED3F50",
+      "tenant_id": "TEN-BALA-UNI",
+      "action": "learning_run",
+      "target": "LEARN-DFE3CECAC5",
+      "created_at": "2026-04-25T06:05:32.101304+00:00"
+    }
+  ]
+}

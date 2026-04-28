@@ -1,0 +1,9 @@
+fastapi
+uvicorn[standard]
+pydantic
+python-dotenv
+bcrypt
+PyJWT
+paho-mqtt
+stripe
+firebase-admin

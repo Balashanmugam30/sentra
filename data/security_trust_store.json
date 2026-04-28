@@ -1,0 +1,702 @@
+{
+  "tenants": [
+    {
+      "tenant_id": "TEN-BALA-UNI",
+      "name": "Bala University",
+      "sector": "Education",
+      "buyer_readiness": 86,
+      "updated_at": "2026-04-26T07:20:42.737099+00:00"
+    },
+    {
+      "tenant_id": "TEN-BALA-HOSP",
+      "name": "Bala Hospital Demo",
+      "sector": "Healthcare",
+      "buyer_readiness": 91,
+      "updated_at": "2026-04-26T07:20:42.737132+00:00"
+    },
+    {
+      "tenant_id": "TEN-BALA-MFG",
+      "name": "Bala Manufacturing",
+      "sector": "Industrial",
+      "buyer_readiness": 82,
+      "updated_at": "2026-04-26T07:20:42.737144+00:00"
+    },
+    {
+      "tenant_id": "TEN-GOVSECURE",
+      "name": "SmartCity Authority",
+      "sector": "Government",
+      "buyer_readiness": 93,
+      "updated_at": "2026-04-26T07:20:42.737150+00:00"
+    },
+    {
+      "tenant_id": "TEN-GRAND-MERIDIAN",
+      "name": "GovSecure South",
+      "sector": "Government pilot",
+      "buyer_readiness": 88,
+      "updated_at": "2026-04-26T07:20:42.737156+00:00"
+    }
+  ],
+  "frameworks": [
+    {
+      "framework_id": "SOC2",
+      "tenant_id": "TEN-GOVSECURE",
+      "name": "SOC2 readiness",
+      "score": 91,
+      "control_pass_rate": 92,
+      "open_gaps": 4,
+      "risk_priority": "high",
+      "remediation_eta_days": 24,
+      "controls": [
+        "audit logs",
+        "RBAC",
+        "MFA",
+        "backups",
+        "incident response",
+        "monitoring"
+      ],
+      "updated_at": "2026-04-26T07:20:42.737167+00:00"
+    },
+    {
+      "framework_id": "ISO27001",
+      "tenant_id": "TEN-BALA-MFG",
+      "name": "ISO27001 readiness",
+      "score": 87,
+      "control_pass_rate": 88,
+      "open_gaps": 6,
+      "risk_priority": "medium",
+      "remediation_eta_days": 31,
+      "controls": [
+        "policies",
+        "asset control",
+        "risk management",
+        "training",
+        "governance"
+      ],
+      "updated_at": "2026-04-26T07:20:42.737174+00:00"
+    },
+    {
+      "framework_id": "GDPR",
+      "tenant_id": "TEN-BALA-UNI",
+      "name": "GDPR readiness",
+      "score": 84,
+      "control_pass_rate": 85,
+      "open_gaps": 7,
+      "risk_priority": "medium",
+      "remediation_eta_days": 28,
+      "controls": [
+        "deletion flows",
+        "consent controls",
+        "data minimization",
+        "export controls"
+      ],
+      "updated_at": "2026-04-26T07:20:42.737180+00:00"
+    },
+    {
+      "framework_id": "HIPAA",
+      "tenant_id": "TEN-BALA-HOSP",
+      "name": "HIPAA readiness",
+      "score": 89,
+      "control_pass_rate": 91,
+      "open_gaps": 5,
+      "risk_priority": "high",
+      "remediation_eta_days": 21,
+      "controls": [
+        "access control",
+        "audit trails",
+        "encryption",
+        "least privilege"
+      ],
+      "updated_at": "2026-04-26T07:20:42.737185+00:00"
+    },
+    {
+      "framework_id": "DPDP",
+      "tenant_id": "TEN-BALA-UNI",
+      "name": "DPDP India readiness",
+      "score": 86,
+      "control_pass_rate": 87,
+      "open_gaps": 5,
+      "risk_priority": "medium",
+      "remediation_eta_days": 26,
+      "controls": [
+        "consent posture",
+        "data minimization",
+        "purpose logs",
+        "deletion queue"
+      ],
+      "updated_at": "2026-04-26T07:20:42.737190+00:00"
+    },
+    {
+      "framework_id": "GOV-PROC",
+      "tenant_id": "TEN-GRAND-MERIDIAN",
+      "name": "Gov procurement readiness",
+      "score": 90,
+      "control_pass_rate": 92,
+      "open_gaps": 3,
+      "risk_priority": "high",
+      "remediation_eta_days": 18,
+      "controls": [
+        "vendor risk",
+        "audit exports",
+        "policy approvals",
+        "legal trust room"
+      ],
+      "updated_at": "2026-04-26T07:20:42.737196+00:00"
+    }
+  ],
+  "gaps": [
+    {
+      "gap_id": "GAP-SOC2-004",
+      "tenant_id": "TEN-GOVSECURE",
+      "framework": "SOC2",
+      "title": "Formal backup restore test evidence",
+      "priority": "high",
+      "owner": "Security Admin",
+      "eta_days": 9,
+      "status": "in progress",
+      "updated_at": "2026-04-26T07:20:42.737205+00:00"
+    },
+    {
+      "gap_id": "GAP-HIPAA-002",
+      "tenant_id": "TEN-BALA-HOSP",
+      "framework": "HIPAA",
+      "title": "Clinical export retention acknowledgement",
+      "priority": "high",
+      "owner": "Privacy Officer",
+      "eta_days": 7,
+      "status": "queued",
+      "updated_at": "2026-04-26T07:20:42.737211+00:00"
+    },
+    {
+      "gap_id": "GAP-GDPR-006",
+      "tenant_id": "TEN-BALA-UNI",
+      "framework": "GDPR",
+      "title": "Data subject request response SLA evidence",
+      "priority": "medium",
+      "owner": "Legal Ops",
+      "eta_days": 14,
+      "status": "review",
+      "updated_at": "2026-04-26T07:20:42.737218+00:00"
+    },
+    {
+      "gap_id": "GAP-ISO-003",
+      "tenant_id": "TEN-BALA-MFG",
+      "framework": "ISO27001",
+      "title": "Vendor access quarterly review",
+      "priority": "medium",
+      "owner": "Procurement",
+      "eta_days": 18,
+      "status": "in progress",
+      "updated_at": "2026-04-26T07:20:42.737223+00:00"
+    }
+  ],
+  "privacy_fields": [
+    {
+      "field_id": "PF-USER-EMAIL",
+      "tenant_id": "TEN-BALA-UNI",
+      "name": "user_email",
+      "classification": "PII",
+      "exposure": 28,
+      "masked": true,
+      "encrypted": true,
+      "retention_days": 365,
+      "purpose": "account access",
+      "updated_at": "2026-04-26T07:20:42.737231+00:00"
+    },
+    {
+      "field_id": "PF-CLINICAL-STATUS",
+      "tenant_id": "TEN-BALA-HOSP",
+      "name": "medical_assistance_status",
+      "classification": "Sensitive",
+      "exposure": 42,
+      "masked": true,
+      "encrypted": true,
+      "retention_days": 180,
+      "purpose": "emergency triage",
+      "updated_at": "2026-04-26T07:20:42.737236+00:00"
+    },
+    {
+      "field_id": "PF-INCIDENT-ZONE",
+      "tenant_id": "TEN-BALA-MFG",
+      "name": "incident_zone",
+      "classification": "Internal",
+      "exposure": 18,
+      "masked": false,
+      "encrypted": true,
+      "retention_days": 730,
+      "purpose": "safety analytics",
+      "updated_at": "2026-04-26T07:20:42.737242+00:00"
+    },
+    {
+      "field_id": "PF-PUBLIC-ALERT",
+      "tenant_id": "TEN-GOVSECURE",
+      "name": "public_alert_copy",
+      "classification": "Public",
+      "exposure": 6,
+      "masked": false,
+      "encrypted": false,
+      "retention_days": 1095,
+      "purpose": "public safety record",
+      "updated_at": "2026-04-26T07:20:42.737247+00:00"
+    },
+    {
+      "field_id": "PF-DEVICE-REGION",
+      "tenant_id": "TEN-GRAND-MERIDIAN",
+      "name": "device_region",
+      "classification": "PII",
+      "exposure": 31,
+      "masked": true,
+      "encrypted": true,
+      "retention_days": 365,
+      "purpose": "session risk",
+      "updated_at": "2026-04-26T07:20:42.737253+00:00"
+    }
+  ],
+  "privacy_queues": [
+    {
+      "queue_id": "DEL-001",
+      "tenant_id": "TEN-BALA-UNI",
+      "type": "deletion",
+      "subject": "visitor route history",
+      "due_days": 5,
+      "status": "scheduled",
+      "risk": 18,
+      "updated_at": "2026-04-26T07:20:42.737259+00:00"
+    },
+    {
+      "queue_id": "EXP-002",
+      "tenant_id": "TEN-BALA-HOSP",
+      "type": "export",
+      "subject": "clinical incident audit pack",
+      "due_days": 2,
+      "status": "legal review",
+      "risk": 34,
+      "updated_at": "2026-04-26T07:20:42.737265+00:00"
+    },
+    {
+      "queue_id": "RET-003",
+      "tenant_id": "TEN-BALA-MFG",
+      "type": "retention",
+      "subject": "IoT telemetry archive",
+      "due_days": 21,
+      "status": "active",
+      "risk": 16,
+      "updated_at": "2026-04-26T07:20:42.737271+00:00"
+    },
+    {
+      "queue_id": "MASK-004",
+      "tenant_id": "TEN-GOVSECURE",
+      "type": "masking",
+      "subject": "board report occupant names",
+      "due_days": 1,
+      "status": "ready",
+      "risk": 12,
+      "updated_at": "2026-04-26T07:20:42.737276+00:00"
+    }
+  ],
+  "policies": [
+    {
+      "policy_id": "POL-MFA",
+      "tenant_id": "TEN-GOVSECURE",
+      "name": "MFA policy",
+      "category": "access",
+      "status": "approved",
+      "version": "v3.1",
+      "owner": "Security Admin",
+      "coverage": 96,
+      "last_review": "2026-04-19",
+      "next_review": "2026-05-19",
+      "updated_at": "2026-04-26T07:20:42.737283+00:00"
+    },
+    {
+      "policy_id": "POL-PASSWORD",
+      "tenant_id": "TEN-BALA-UNI",
+      "name": "Password policy",
+      "category": "identity",
+      "status": "approved",
+      "version": "v2.7",
+      "owner": "IT Security",
+      "coverage": 92,
+      "last_review": "2026-04-12",
+      "next_review": "2026-05-12",
+      "updated_at": "2026-04-26T07:20:42.737293+00:00"
+    },
+    {
+      "policy_id": "POL-ACCESS-REVIEW",
+      "tenant_id": "TEN-BALA-HOSP",
+      "name": "Access review cycles",
+      "category": "governance",
+      "status": "approved",
+      "version": "v1.9",
+      "owner": "Compliance Lead",
+      "coverage": 84,
+      "last_review": "2026-04-26",
+      "next_review": "2026-04-30",
+      "updated_at": "2026-04-26T07:20:43.710357+00:00"
+    },
+    {
+      "policy_id": "POL-ADMIN",
+      "tenant_id": "TEN-GOVSECURE",
+      "name": "Admin privilege policy",
+      "category": "access",
+      "status": "approved",
+      "version": "v2.4",
+      "owner": "CISO",
+      "coverage": 94,
+      "last_review": "2026-04-10",
+      "next_review": "2026-05-10",
+      "updated_at": "2026-04-26T07:20:42.737306+00:00"
+    },
+    {
+      "policy_id": "POL-VENDOR",
+      "tenant_id": "TEN-BALA-MFG",
+      "name": "Vendor access policy",
+      "category": "third party",
+      "status": "approved",
+      "version": "v2.0",
+      "owner": "Procurement",
+      "coverage": 88,
+      "last_review": "2026-04-06",
+      "next_review": "2026-05-06",
+      "updated_at": "2026-04-26T07:20:42.737312+00:00"
+    },
+    {
+      "policy_id": "POL-RETENTION",
+      "tenant_id": "TEN-BALA-UNI",
+      "name": "Retention policy",
+      "category": "privacy",
+      "status": "revise",
+      "version": "v3.0",
+      "owner": "Privacy Officer",
+      "coverage": 86,
+      "last_review": "2026-03-28",
+      "next_review": "2026-04-28",
+      "updated_at": "2026-04-26T07:20:42.737318+00:00"
+    },
+    {
+      "policy_id": "POL-AI-USAGE",
+      "tenant_id": "TEN-GOVSECURE",
+      "name": "AI usage policy",
+      "category": "AI governance",
+      "status": "approved",
+      "version": "v1.6",
+      "owner": "AI Governance",
+      "coverage": 90,
+      "last_review": "2026-04-15",
+      "next_review": "2026-05-15",
+      "updated_at": "2026-04-26T07:20:42.737324+00:00"
+    },
+    {
+      "policy_id": "POL-OVERRIDE",
+      "tenant_id": "TEN-BALA-HOSP",
+      "name": "Emergency override policy",
+      "category": "crisis operations",
+      "status": "approved",
+      "version": "v2.2",
+      "owner": "Operations",
+      "coverage": 91,
+      "last_review": "2026-04-17",
+      "next_review": "2026-05-17",
+      "updated_at": "2026-04-26T07:20:42.737330+00:00"
+    }
+  ],
+  "vendors": [
+    {
+      "vendor_id": "VEN-GOOGLE",
+      "tenant_id": "TEN-BALA-UNI",
+      "name": "Google",
+      "risk_score": 24,
+      "token_health": 94,
+      "trust_tier": "tier 1",
+      "permissions": [
+        "SSO",
+        "email"
+      ],
+      "data_classes": [
+        "PII"
+      ],
+      "last_review": "2026-04-08",
+      "next_review": "2026-05-08",
+      "outages": 0,
+      "access_scope": "federated identity",
+      "updated_at": "2026-04-26T07:20:42.737338+00:00"
+    },
+    {
+      "vendor_id": "VEN-MICROSOFT",
+      "tenant_id": "TEN-GOVSECURE",
+      "name": "Microsoft",
+      "risk_score": 18,
+      "token_health": 96,
+      "trust_tier": "tier 1",
+      "permissions": [
+        "SSO",
+        "Teams"
+      ],
+      "data_classes": [
+        "PII",
+        "Internal"
+      ],
+      "last_review": "2026-04-10",
+      "next_review": "2026-05-10",
+      "outages": 0,
+      "access_scope": "identity + comms",
+      "updated_at": "2026-04-26T07:20:42.737345+00:00"
+    },
+    {
+      "vendor_id": "VEN-SLACK",
+      "tenant_id": "TEN-BALA-MFG",
+      "name": "Slack",
+      "risk_score": 36,
+      "token_health": 82,
+      "trust_tier": "tier 2",
+      "permissions": [
+        "alerts"
+      ],
+      "data_classes": [
+        "Internal"
+      ],
+      "last_review": "2026-04-02",
+      "next_review": "2026-05-02",
+      "outages": 1,
+      "access_scope": "incident notifications",
+      "updated_at": "2026-04-26T07:20:42.737347+00:00"
+    },
+    {
+      "vendor_id": "VEN-TEAMS",
+      "tenant_id": "TEN-GOVSECURE",
+      "name": "Teams",
+      "risk_score": 22,
+      "token_health": 91,
+      "trust_tier": "tier 1",
+      "permissions": [
+        "alerts",
+        "approvals"
+      ],
+      "data_classes": [
+        "Internal",
+        "PII"
+      ],
+      "last_review": "2026-04-09",
+      "next_review": "2026-05-09",
+      "outages": 0,
+      "access_scope": "executive communications",
+      "updated_at": "2026-04-26T07:20:42.737349+00:00"
+    },
+    {
+      "vendor_id": "VEN-WHATSAPP",
+      "tenant_id": "TEN-BALA-HOSP",
+      "name": "WhatsApp",
+      "risk_score": 48,
+      "token_health": 78,
+      "trust_tier": "tier 3",
+      "permissions": [
+        "public alerts"
+      ],
+      "data_classes": [
+        "Public",
+        "PII"
+      ],
+      "last_review": "2026-03-31",
+      "next_review": "2026-04-30",
+      "outages": 1,
+      "access_scope": "mass notification",
+      "updated_at": "2026-04-26T07:20:42.737351+00:00"
+    },
+    {
+      "vendor_id": "VEN-N8N",
+      "tenant_id": "TEN-BALA-MFG",
+      "name": "n8n",
+      "risk_score": 42,
+      "token_health": 84,
+      "trust_tier": "tier 2",
+      "permissions": [
+        "automation"
+      ],
+      "data_classes": [
+        "Internal"
+      ],
+      "last_review": "2026-04-05",
+      "next_review": "2026-05-05",
+      "outages": 0,
+      "access_scope": "workflow orchestration",
+      "updated_at": "2026-04-26T07:20:42.737353+00:00"
+    },
+    {
+      "vendor_id": "VEN-STRIPE",
+      "tenant_id": "TEN-GRAND-MERIDIAN",
+      "name": "Stripe",
+      "risk_score": 21,
+      "token_health": 93,
+      "trust_tier": "tier 1",
+      "permissions": [
+        "billing"
+      ],
+      "data_classes": [
+        "PII",
+        "Financial"
+      ],
+      "last_review": "2026-04-11",
+      "next_review": "2026-05-11",
+      "outages": 0,
+      "access_scope": "billing",
+      "updated_at": "2026-04-26T07:20:42.737355+00:00"
+    },
+    {
+      "vendor_id": "VEN-MAPS",
+      "tenant_id": "TEN-BALA-UNI",
+      "name": "Maps provider",
+      "risk_score": 31,
+      "token_health": 88,
+      "trust_tier": "tier 2",
+      "permissions": [
+        "routing"
+      ],
+      "data_classes": [
+        "Internal"
+      ],
+      "last_review": "2026-04-03",
+      "next_review": "2026-05-03",
+      "outages": 0,
+      "access_scope": "route intelligence",
+      "updated_at": "2026-04-26T07:20:42.737357+00:00"
+    },
+    {
+      "vendor_id": "VEN-EMAIL",
+      "tenant_id": "TEN-BALA-HOSP",
+      "name": "Email provider",
+      "risk_score": 29,
+      "token_health": 89,
+      "trust_tier": "tier 2",
+      "permissions": [
+        "email"
+      ],
+      "data_classes": [
+        "PII"
+      ],
+      "last_review": "2026-04-07",
+      "next_review": "2026-05-07",
+      "outages": 0,
+      "access_scope": "notification delivery",
+      "updated_at": "2026-04-26T07:20:42.737359+00:00"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "EVD-BOARD-PACK",
+      "tenant_id": "TEN-GOVSECURE",
+      "name": "Downloadable board pack",
+      "type": "PDF",
+      "status": "ready",
+      "items": 42,
+      "last_generated": "2026-04-26T08:10:00+00:00",
+      "hash": "e0a1-board-pack",
+      "updated_at": "2026-04-26T07:20:42.737362+00:00"
+    },
+    {
+      "evidence_id": "EVD-AUDIT-LOGS",
+      "tenant_id": "TEN-BALA-UNI",
+      "name": "Audit logs",
+      "type": "JSON",
+      "status": "ready",
+      "items": 18420,
+      "last_generated": "2026-04-26T08:05:00+00:00",
+      "hash": "b19f-audit-logs",
+      "updated_at": "2026-04-26T07:20:42.737364+00:00"
+    },
+    {
+      "evidence_id": "EVD-ACCESS-REVIEW",
+      "tenant_id": "TEN-BALA-HOSP",
+      "name": "Access review exports",
+      "type": "CSV",
+      "status": "legal review",
+      "items": 128,
+      "last_generated": "2026-04-25T18:00:00+00:00",
+      "hash": "a72c-access-review",
+      "updated_at": "2026-04-26T07:20:42.737366+00:00"
+    },
+    {
+      "evidence_id": "EVD-INCIDENT-HISTORY",
+      "tenant_id": "TEN-BALA-MFG",
+      "name": "Incident history",
+      "type": "JSON",
+      "status": "ready",
+      "items": 824,
+      "last_generated": "2026-04-26T07:44:00+00:00",
+      "hash": "88be-incident-history",
+      "updated_at": "2026-04-26T07:20:42.737368+00:00"
+    },
+    {
+      "evidence_id": "EVD-POLICY-ACK",
+      "tenant_id": "TEN-GOVSECURE",
+      "name": "Policy acknowledgements",
+      "type": "CSV",
+      "status": "ready",
+      "items": 412,
+      "last_generated": "2026-04-26T06:55:00+00:00",
+      "hash": "c120-policy-ack",
+      "updated_at": "2026-04-26T07:20:42.737370+00:00"
+    },
+    {
+      "evidence_id": "EVD-COMPLIANCE-SNAP",
+      "tenant_id": "TEN-GRAND-MERIDIAN",
+      "name": "Compliance snapshots",
+      "type": "PDF",
+      "status": "ready",
+      "items": 18,
+      "last_generated": "2026-04-26T08:00:00+00:00",
+      "hash": "91ad-compliance-snap",
+      "updated_at": "2026-04-26T07:20:42.737372+00:00"
+    }
+  ],
+  "legal_items": [
+    {
+      "item_id": "LEGAL-DPA",
+      "tenant_id": "TEN-GOVSECURE",
+      "title": "Data Processing Agreement",
+      "status": "ready",
+      "owner": "Legal Ops",
+      "buyer_blocker": false,
+      "updated_at": "2026-04-26T07:20:42.737374+00:00"
+    },
+    {
+      "item_id": "LEGAL-BAA",
+      "tenant_id": "TEN-BALA-HOSP",
+      "title": "HIPAA BAA draft",
+      "status": "review",
+      "owner": "Healthcare Counsel",
+      "buyer_blocker": true,
+      "updated_at": "2026-04-26T07:20:42.737376+00:00"
+    },
+    {
+      "item_id": "LEGAL-SLA",
+      "tenant_id": "TEN-GRAND-MERIDIAN",
+      "title": "Enterprise SLA",
+      "status": "ready",
+      "owner": "Procurement",
+      "buyer_blocker": false,
+      "updated_at": "2026-04-26T07:20:42.737378+00:00"
+    },
+    {
+      "item_id": "LEGAL-AI",
+      "tenant_id": "TEN-BALA-UNI",
+      "title": "AI governance appendix",
+      "status": "ready",
+      "owner": "AI Governance",
+      "buyer_blocker": false,
+      "updated_at": "2026-04-26T07:20:42.737379+00:00"
+    }
+  ],
+  "events": [
+    {
+      "event_id": "TRUST-EVT-00001",
+      "tenant_id": "TEN-BALA-HOSP",
+      "action": "policy_approved",
+      "payload": {
+        "policy_id": "POL-ACCESS-REVIEW",
+        "reason": "Phase 26.C smoke policy approval",
+        "decision": "approved"
+      },
+      "created_at": "2026-04-26T07:20:43.710367+00:00",
+      "chain_hash": "trust-00001-pol-access-review"
+    }
+  ]
+}

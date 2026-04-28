@@ -1,0 +1,428 @@
+{
+  "organizations": [
+    {
+      "org_id": "ORG-GRAND-MERIDIAN",
+      "tenant_id": "TEN-GRAND-MERIDIAN",
+      "org_name": "Grand Meridian Hotels",
+      "tier": "Enterprise",
+      "seats_total": 820,
+      "seats_used": 642,
+      "sso_enabled": true,
+      "sso_provider": "Microsoft Entra",
+      "owner": "Security Admin",
+      "risk_score": 18,
+      "last_activity": "2026-04-26T08:42:00+00:00",
+      "billing_tier": "Enterprise",
+      "updated_at": "2026-04-26T06:57:50.357021+00:00"
+    },
+    {
+      "org_id": "ORG-METROCARE",
+      "tenant_id": "TEN-BALA-HOSP",
+      "org_name": "MetroCare Hospitals",
+      "tier": "Government",
+      "seats_total": 1280,
+      "seats_used": 1104,
+      "sso_enabled": true,
+      "sso_provider": "Google Workspace",
+      "owner": "Ops Lead",
+      "risk_score": 24,
+      "last_activity": "2026-04-26T08:36:00+00:00",
+      "billing_tier": "Government",
+      "updated_at": "2026-04-26T06:57:50.357033+00:00"
+    },
+    {
+      "org_id": "ORG-NOVA-MALL",
+      "tenant_id": "TEN-BALA-MFG",
+      "org_name": "Nova Mall Group",
+      "tier": "Growth",
+      "seats_total": 460,
+      "seats_used": 394,
+      "sso_enabled": false,
+      "sso_provider": "SSO ready",
+      "owner": "Analyst 1",
+      "risk_score": 31,
+      "last_activity": "2026-04-26T08:31:00+00:00",
+      "billing_tier": "Growth",
+      "updated_at": "2026-04-26T06:57:50.357037+00:00"
+    },
+    {
+      "org_id": "ORG-SKYLINE",
+      "tenant_id": "TEN-BALA-UNI",
+      "org_name": "Skyline University",
+      "tier": "Enterprise",
+      "seats_total": 900,
+      "seats_used": 768,
+      "sso_enabled": true,
+      "sso_provider": "SAML",
+      "owner": "Night Operator",
+      "risk_score": 27,
+      "last_activity": "2026-04-26T08:27:00+00:00",
+      "billing_tier": "Enterprise",
+      "updated_at": "2026-04-26T06:57:50.357039+00:00"
+    },
+    {
+      "org_id": "ORG-SMARTCITY",
+      "tenant_id": "TEN-GOVSECURE",
+      "org_name": "SmartCity Authority",
+      "tier": "Custom Strategic",
+      "seats_total": 1500,
+      "seats_used": 1248,
+      "sso_enabled": true,
+      "sso_provider": "Sovereign SAML",
+      "owner": "Bala CEO",
+      "risk_score": 14,
+      "last_activity": "2026-04-26T08:44:00+00:00",
+      "billing_tier": "Custom Strategic",
+      "updated_at": "2026-04-26T06:57:50.357041+00:00"
+    }
+  ],
+  "users": [
+    {
+      "id": "USR-BALA-CEO",
+      "name": "Bala CEO",
+      "email": "bala.ceo@sentra.demo",
+      "org_id": "ORG-SMARTCITY",
+      "tenant_id": "TEN-GOVSECURE",
+      "role": "Super Admin",
+      "status": "active",
+      "department": "Executive",
+      "mfa_enabled": true,
+      "created_at": "2026-01-08T09:00:00+00:00",
+      "last_seen": "2026-04-26T08:45:00+00:00",
+      "trusted_devices": 4,
+      "risk_score": 8,
+      "updated_at": "2026-04-26T06:57:50.357044+00:00"
+    },
+    {
+      "id": "USR-SECURITY-ADMIN",
+      "name": "Security Admin",
+      "email": "security.admin@sentra.demo",
+      "org_id": "ORG-GRAND-MERIDIAN",
+      "tenant_id": "TEN-GRAND-MERIDIAN",
+      "role": "Security Manager",
+      "status": "active",
+      "department": "Security",
+      "mfa_enabled": true,
+      "created_at": "2026-02-02T09:00:00+00:00",
+      "last_seen": "2026-04-26T08:42:00+00:00",
+      "trusted_devices": 3,
+      "risk_score": 12,
+      "updated_at": "2026-04-26T06:57:50.357046+00:00"
+    },
+    {
+      "id": "USR-OPS-LEAD",
+      "name": "Ops Lead",
+      "email": "ops.lead@sentra.demo",
+      "org_id": "ORG-METROCARE",
+      "tenant_id": "TEN-BALA-HOSP",
+      "role": "Operations Lead",
+      "status": "active",
+      "department": "Operations",
+      "mfa_enabled": true,
+      "created_at": "2026-02-16T09:00:00+00:00",
+      "last_seen": "2026-04-26T08:39:00+00:00",
+      "trusted_devices": 2,
+      "risk_score": 16,
+      "updated_at": "2026-04-26T06:57:50.357048+00:00"
+    },
+    {
+      "id": "USR-ANALYST-1",
+      "name": "Analyst 1",
+      "email": "analyst1@sentra.demo",
+      "org_id": "ORG-NOVA-MALL",
+      "tenant_id": "TEN-BALA-MFG",
+      "role": "Analyst",
+      "status": "active",
+      "department": "Analytics",
+      "mfa_enabled": false,
+      "created_at": "2026-03-01T09:00:00+00:00",
+      "last_seen": "2026-04-26T08:20:00+00:00",
+      "trusted_devices": 1,
+      "risk_score": 38,
+      "updated_at": "2026-04-26T06:57:50.357050+00:00"
+    },
+    {
+      "id": "USR-NIGHT-OPERATOR",
+      "name": "Night Operator",
+      "email": "night.operator@sentra.demo",
+      "org_id": "ORG-SKYLINE",
+      "tenant_id": "TEN-BALA-UNI",
+      "role": "Operator",
+      "status": "locked",
+      "department": "Command Desk",
+      "mfa_enabled": false,
+      "created_at": "2026-03-12T09:00:00+00:00",
+      "last_seen": "2026-04-26T06:12:00+00:00",
+      "trusted_devices": 1,
+      "risk_score": 64,
+      "updated_at": "2026-04-26T06:57:50.357051+00:00"
+    },
+    {
+      "id": "USR-VIEWER-GUEST",
+      "name": "Viewer Guest",
+      "email": "viewer.guest@sentra.demo",
+      "org_id": "ORG-GRAND-MERIDIAN",
+      "tenant_id": "TEN-GRAND-MERIDIAN",
+      "role": "Viewer",
+      "status": "active",
+      "department": "External Audit",
+      "mfa_enabled": true,
+      "created_at": "2026-03-30T09:00:00+00:00",
+      "last_seen": "2026-04-25T19:18:00+00:00",
+      "trusted_devices": 1,
+      "risk_score": 21,
+      "updated_at": "2026-04-26T06:57:50.357053+00:00"
+    },
+    {
+      "id": "USR-INVITE-007",
+      "name": "Phase 26 Invite",
+      "email": "phase26.invite@sentra.demo",
+      "org_id": "ORG-GRAND-MERIDIAN",
+      "tenant_id": "TEN-GRAND-MERIDIAN",
+      "role": "Viewer",
+      "status": "invited",
+      "department": "Pending onboarding",
+      "mfa_enabled": false,
+      "created_at": "2026-04-26T06:57:51.228644+00:00",
+      "last_seen": "pending",
+      "trusted_devices": 0,
+      "risk_score": 34,
+      "invite_method": "email"
+    }
+  ],
+  "sessions": [
+    {
+      "session_id": "SES-BALA-CEO-01",
+      "user_id": "USR-BALA-CEO",
+      "tenant_id": "TEN-GOVSECURE",
+      "device": "MacBook Pro",
+      "browser": "Chrome 124",
+      "region": "Chennai, IN",
+      "risk_score": 9,
+      "created_at": "2026-04-26T05:58:00+00:00",
+      "last_active": "2026-04-26T08:45:00+00:00",
+      "token_age_minutes": 167,
+      "status": "active",
+      "trusted_device": true,
+      "impossible_travel": false,
+      "updated_at": "2026-04-26T06:57:50.357055+00:00"
+    },
+    {
+      "session_id": "SES-SEC-ADMIN-01",
+      "user_id": "USR-SECURITY-ADMIN",
+      "tenant_id": "TEN-GRAND-MERIDIAN",
+      "device": "Windows Command Tablet",
+      "browser": "Edge 124",
+      "region": "New York, US",
+      "risk_score": 18,
+      "created_at": "2026-04-26T06:12:00+00:00",
+      "last_active": "2026-04-26T08:42:00+00:00",
+      "token_age_minutes": 150,
+      "status": "active",
+      "trusted_device": true,
+      "impossible_travel": false,
+      "updated_at": "2026-04-26T06:57:50.357057+00:00"
+    },
+    {
+      "session_id": "SES-OPS-LEAD-01",
+      "user_id": "USR-OPS-LEAD",
+      "tenant_id": "TEN-BALA-HOSP",
+      "device": "iPad Field",
+      "browser": "Safari 17",
+      "region": "Boston, US",
+      "risk_score": 22,
+      "created_at": "2026-04-26T06:18:00+00:00",
+      "last_active": "2026-04-26T08:39:00+00:00",
+      "token_age_minutes": 141,
+      "status": "active",
+      "trusted_device": true,
+      "impossible_travel": false,
+      "updated_at": "2026-04-26T06:57:50.357059+00:00"
+    },
+    {
+      "session_id": "SES-ANALYST-01",
+      "user_id": "USR-ANALYST-1",
+      "tenant_id": "TEN-BALA-MFG",
+      "device": "Lenovo ThinkPad",
+      "browser": "Firefox 125",
+      "region": "Dubai, AE",
+      "risk_score": 42,
+      "created_at": "2026-04-25T20:10:00+00:00",
+      "last_active": "2026-04-26T08:20:00+00:00",
+      "token_age_minutes": 730,
+      "status": "watch",
+      "trusted_device": false,
+      "impossible_travel": false,
+      "updated_at": "2026-04-26T06:57:50.357061+00:00"
+    },
+    {
+      "session_id": "SES-NIGHT-OP-01",
+      "user_id": "USR-NIGHT-OPERATOR",
+      "tenant_id": "TEN-BALA-UNI",
+      "device": "Unknown Android",
+      "browser": "Mobile Chrome",
+      "region": "Unknown VPN",
+      "risk_score": 78,
+      "created_at": "2026-04-26T02:12:00+00:00",
+      "last_active": "2026-04-26T06:12:00+00:00",
+      "token_age_minutes": 600,
+      "status": "revoked",
+      "trusted_device": false,
+      "impossible_travel": true,
+      "updated_at": "2026-04-26T06:57:50.357062+00:00"
+    }
+  ],
+  "alerts": [
+    {
+      "alert_id": "SEC-ALERT-001",
+      "tenant_id": "TEN-BALA-UNI",
+      "type": "locked_account",
+      "severity": "high",
+      "title": "Night Operator locked after repeated OTP failures",
+      "detail": "Account is contained; admin review required before unlock.",
+      "created_at": "2026-04-26T06:14:00+00:00",
+      "status": "open",
+      "updated_at": "2026-04-26T06:57:50.357065+00:00"
+    },
+    {
+      "alert_id": "SEC-ALERT-002",
+      "tenant_id": "TEN-BALA-MFG",
+      "type": "mfa_gap",
+      "severity": "medium",
+      "title": "Analyst 1 requires MFA enrollment",
+      "detail": "Read-only analytics access is allowed, export permissions stay blocked.",
+      "created_at": "2026-04-26T08:03:00+00:00",
+      "status": "watch",
+      "updated_at": "2026-04-26T06:57:50.357067+00:00"
+    },
+    {
+      "alert_id": "SEC-ALERT-003",
+      "tenant_id": "TEN-GRAND-MERIDIAN",
+      "type": "sso_health",
+      "severity": "low",
+      "title": "Microsoft Entra certificate rotation due in 18 days",
+      "detail": "No outage risk yet; schedule rotation during low traffic window.",
+      "created_at": "2026-04-26T07:41:00+00:00",
+      "status": "scheduled",
+      "updated_at": "2026-04-26T06:57:50.357068+00:00"
+    },
+    {
+      "alert_id": "SEC-ALERT-004",
+      "tenant_id": "TEN-GOVSECURE",
+      "type": "impossible_travel_watch",
+      "severity": "medium",
+      "title": "Sovereign workspace impossible-travel model armed",
+      "detail": "No active violation; model confidence is calibrated at 92 percent.",
+      "created_at": "2026-04-26T08:10:00+00:00",
+      "status": "healthy",
+      "updated_at": "2026-04-26T06:57:50.357070+00:00"
+    }
+  ],
+  "roles": [
+    {
+      "role_id": "super_admin",
+      "name": "Super Admin",
+      "tier": "platform",
+      "users": 1,
+      "permissions": [
+        "all platform control",
+        "tenant switching",
+        "billing access",
+        "AI override",
+        "security policy"
+      ],
+      "updated_at": "2026-04-26T06:57:50.357072+00:00"
+    },
+    {
+      "role_id": "org_admin",
+      "name": "Org Admin",
+      "tier": "tenant",
+      "users": 0,
+      "permissions": [
+        "manage users",
+        "configure SSO",
+        "billing access",
+        "export reports",
+        "workspace policy"
+      ],
+      "updated_at": "2026-04-26T06:57:50.357075+00:00"
+    },
+    {
+      "role_id": "security_manager",
+      "name": "Security Manager",
+      "tier": "operations",
+      "users": 1,
+      "permissions": [
+        "view incidents",
+        "approve actions",
+        "twin control",
+        "revoke sessions",
+        "security audit"
+      ],
+      "updated_at": "2026-04-26T06:57:50.357076+00:00"
+    },
+    {
+      "role_id": "operations_lead",
+      "name": "Operations Lead",
+      "tier": "operations",
+      "users": 1,
+      "permissions": [
+        "approve actions",
+        "workflow control",
+        "field dispatch",
+        "tenant reports"
+      ],
+      "updated_at": "2026-04-26T06:57:50.357078+00:00"
+    },
+    {
+      "role_id": "analyst",
+      "name": "Analyst",
+      "tier": "read",
+      "users": 1,
+      "permissions": [
+        "analytics view",
+        "reports view",
+        "read-only AI insights"
+      ],
+      "updated_at": "2026-04-26T06:57:50.357080+00:00"
+    },
+    {
+      "role_id": "operator",
+      "name": "Operator",
+      "tier": "field",
+      "users": 1,
+      "permissions": [
+        "task updates",
+        "incident acknowledgement",
+        "limited zone tools"
+      ],
+      "updated_at": "2026-04-26T06:57:50.357082+00:00"
+    },
+    {
+      "role_id": "viewer",
+      "name": "Viewer",
+      "tier": "read",
+      "users": 1,
+      "permissions": [
+        "limited alerts",
+        "personal route",
+        "read-only status"
+      ],
+      "updated_at": "2026-04-26T06:57:50.357083+00:00"
+    }
+  ],
+  "events": [
+    {
+      "event_id": "SEC-EVT-00001",
+      "tenant_id": "TEN-GRAND-MERIDIAN",
+      "action": "user_invited",
+      "payload": {
+        "user_id": "USR-INVITE-007",
+        "email": "phase26.invite@sentra.demo",
+        "role": "Viewer"
+      },
+      "created_at": "2026-04-26T06:57:51.228658+00:00"
+    }
+  ],
+  "active_org_id": "ORG-GRAND-MERIDIAN"
+}

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" viewBox="0 0 192 192" role="img" aria-label="Sentra Mobile icon">
+  <defs>
+    <linearGradient id="sentra-g" x1="30" x2="162" y1="24" y2="168" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#38bdf8"/>
+      <stop offset="0.52" stop-color="#2563eb"/>
+      <stop offset="1" stop-color="#10b981"/>
+    </linearGradient>
+    <filter id="sentra-shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#2563eb" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+  <rect width="192" height="192" rx="44" fill="#030712"/>
+  <rect x="26" y="26" width="140" height="140" rx="36" fill="url(#sentra-g)" filter="url(#sentra-shadow)"/>
+  <path fill="#fff" d="M98.4 130.8c-19.8 0-34.2-9.4-38.7-25.4l18.9-5.2c2.6 8.1 9.1 12.1 20.1 12.1 9.8 0 15.2-3.1 15.2-8.5 0-5.9-5.6-7.4-20.2-9.9-18.3-3.1-30.8-8.5-30.8-26.1 0-16.2 13.5-27.2 33.6-27.2 17.8 0 31.1 8.2 36.1 22.7l-18.1 6.7c-2.9-7.3-8.8-10.8-18.3-10.8-8.9 0-13.8 3.2-13.8 8.2 0 5.5 5.2 7 19.2 9.5 19.4 3.4 32.1 8.8 32.1 26.4 0 16.8-13.7 27.5-35.3 27.5Z"/>
+</svg>

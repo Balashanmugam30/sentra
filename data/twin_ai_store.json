@@ -1,0 +1,699 @@
+{
+  "predictions": [
+    {
+      "prediction_id": "PRED-FIRE-GM-001",
+      "tenant_id": "TEN-GRAND-MERIDIAN",
+      "facility": "Grand Meridian Hotel",
+      "domain": "fire_spread",
+      "risk": 88,
+      "horizon_5": "Smoke reaches service corridor edge.",
+      "horizon_15": "Kitchen heat remains contained if suppression holds.",
+      "horizon_30": "Guest wing re-entry possible after HVAC clearance.",
+      "confidence": 94,
+      "recommended_action": "Contain corridor-first and keep Stairwell B open.",
+      "updated_at": "2026-04-26T06:41:34.436832+00:00"
+    },
+    {
+      "prediction_id": "PRED-GAS-BU-001",
+      "tenant_id": "TEN-BALA-UNI",
+      "facility": "Bala University",
+      "domain": "gas_propagation",
+      "risk": 76,
+      "horizon_5": "Lab concentration rises near storage wall.",
+      "horizon_15": "Ventilation isolation prevents hallway spread.",
+      "horizon_30": "Hazmat verification clears adjacent classrooms.",
+      "confidence": 90,
+      "recommended_action": "Shut lab HVAC and route students to west courtyard.",
+      "updated_at": "2026-04-26T06:41:34.436865+00:00"
+    },
+    {
+      "prediction_id": "PRED-CROWD-NM-001",
+      "tenant_id": "TEN-BALA-MFG",
+      "facility": "Nova Mall Group",
+      "domain": "crowd_congestion",
+      "risk": 84,
+      "horizon_5": "Food court density exceeds comfort threshold.",
+      "horizon_15": "North atrium bottleneck forms without split routing.",
+      "horizon_30": "Crowd stabilizes if east exit is made primary.",
+      "confidence": 91,
+      "recommended_action": "Split flow between north and east exits now.",
+      "updated_at": "2026-04-26T06:41:34.436876+00:00"
+    },
+    {
+      "prediction_id": "PRED-PANIC-MC-001",
+      "tenant_id": "TEN-BALA-HOSP",
+      "facility": "MetroCare Campus",
+      "domain": "panic_spread",
+      "risk": 63,
+      "horizon_5": "Family waiting area confusion rises.",
+      "horizon_15": "Clinical escorts reduce non-compliance.",
+      "horizon_30": "Panic remains localized if messaging stays calm.",
+      "confidence": 88,
+      "recommended_action": "Use clinical authority voice and escort high-risk patients.",
+      "updated_at": "2026-04-26T06:41:34.436882+00:00"
+    },
+    {
+      "prediction_id": "PRED-CYBER-SC-001",
+      "tenant_id": "TEN-GOVSECURE",
+      "facility": "SmartCity District",
+      "domain": "utility_failure_chain",
+      "risk": 79,
+      "horizon_5": "Primary notification queue degrades.",
+      "horizon_15": "Fallback provider preserves command traffic.",
+      "horizon_30": "Manual wayfinding remains available if edge cache holds.",
+      "confidence": 92,
+      "recommended_action": "Switch to sovereign notification fallback and reduce noncritical polling.",
+      "updated_at": "2026-04-26T06:41:34.436889+00:00"
+    }
+  ],
+  "risk_map": [
+    {
+      "risk_id": "RM-GM-KITCHEN",
+      "tenant_id": "TEN-GRAND-MERIDIAN",
+      "facility": "Grand Meridian Hotel",
+      "zone": "Kitchen Zone B",
+      "x": 18,
+      "y": 46,
+      "risk": 92,
+      "type": "fire",
+      "exposure": 820000,
+      "reputation": 74,
+      "updated_at": "2026-04-26T06:41:34.436900+00:00"
+    },
+    {
+      "risk_id": "RM-GM-CORRIDOR",
+      "tenant_id": "TEN-GRAND-MERIDIAN",
+      "facility": "Grand Meridian Hotel",
+      "zone": "East Corridor",
+      "x": 52,
+      "y": 44,
+      "risk": 58,
+      "type": "smoke",
+      "exposure": 240000,
+      "reputation": 52,
+      "updated_at": "2026-04-26T06:41:34.436907+00:00"
+    },
+    {
+      "risk_id": "RM-NM-FOOD",
+      "tenant_id": "TEN-BALA-MFG",
+      "facility": "Nova Mall Group",
+      "zone": "Food Court",
+      "x": 34,
+      "y": 38,
+      "risk": 84,
+      "type": "crowd",
+      "exposure": 540000,
+      "reputation": 81,
+      "updated_at": "2026-04-26T06:41:34.436913+00:00"
+    },
+    {
+      "risk_id": "RM-BU-LAB",
+      "tenant_id": "TEN-BALA-UNI",
+      "facility": "Bala University",
+      "zone": "Chemistry Lab 8C",
+      "x": 68,
+      "y": 40,
+      "risk": 76,
+      "type": "gas",
+      "exposure": 260000,
+      "reputation": 64,
+      "updated_at": "2026-04-26T06:41:34.436920+00:00"
+    },
+    {
+      "risk_id": "RM-MC-ICU",
+      "tenant_id": "TEN-BALA-HOSP",
+      "facility": "MetroCare Campus",
+      "zone": "ICU Oxygen Manifold",
+      "x": 61,
+      "y": 35,
+      "risk": 69,
+      "type": "clinical",
+      "exposure": 1200000,
+      "reputation": 88,
+      "updated_at": "2026-04-26T06:41:34.436925+00:00"
+    }
+  ],
+  "route_plans": [
+    {
+      "route_id": "RT-AI-RESP-FIRE",
+      "tenant_id": "TEN-GRAND-MERIDIAN",
+      "name": "Fire team east service path",
+      "use_case": "fire_team_pathing",
+      "owner": "Fire Team Alpha",
+      "from": "Lobby command point",
+      "to": "Kitchen Zone B",
+      "eta_minutes": 3,
+      "safety": 94,
+      "congestion": 22,
+      "hazard_avoidance": 91,
+      "reserve_capacity": 78,
+      "score": 94,
+      "steps": [
+        "Use east service elevator override",
+        "Stage at Stairwell B landing",
+        "Enter Kitchen B via service door",
+        "Hold suppression boundary"
+      ],
+      "updated_at": "2026-04-26T06:41:34.436933+00:00"
+    },
+    {
+      "route_id": "RT-AI-EVAC-SPLIT",
+      "tenant_id": "TEN-BALA-MFG",
+      "name": "Mall crowd split route",
+      "use_case": "evacuation_flows",
+      "owner": "Security Bravo",
+      "from": "Food Court",
+      "to": "North and East exits",
+      "eta_minutes": 9,
+      "safety": 88,
+      "congestion": 36,
+      "hazard_avoidance": 86,
+      "reserve_capacity": 74,
+      "score": 91,
+      "steps": [
+        "Divide families north",
+        "Send staff east",
+        "Hold escalator entry",
+        "Open exterior assembly lane"
+      ],
+      "updated_at": "2026-04-26T06:41:34.436939+00:00"
+    },
+    {
+      "route_id": "RT-AI-AMB-ICU",
+      "tenant_id": "TEN-BALA-HOSP",
+      "name": "Ambulance clinical corridor",
+      "use_case": "ambulance_corridor",
+      "owner": "Clinical Rapid Unit",
+      "from": "South ambulance bay",
+      "to": "ICU Wing",
+      "eta_minutes": 5,
+      "safety": 96,
+      "congestion": 18,
+      "hazard_avoidance": 89,
+      "reserve_capacity": 82,
+      "score": 93,
+      "steps": [
+        "Clear south bay",
+        "Hold visitor corridor",
+        "Assign two escorts",
+        "Keep elevator C for clinical use"
+      ],
+      "updated_at": "2026-04-26T06:41:34.436945+00:00"
+    },
+    {
+      "route_id": "RT-AI-EXEC-GM",
+      "tenant_id": "TEN-GRAND-MERIDIAN",
+      "name": "Executive safe extraction",
+      "use_case": "executive_safe_extraction",
+      "owner": "Executive Liaison",
+      "from": "Board suite",
+      "to": "South service gate",
+      "eta_minutes": 6,
+      "safety": 92,
+      "congestion": 28,
+      "hazard_avoidance": 95,
+      "reserve_capacity": 80,
+      "score": 90,
+      "steps": [
+        "Hold public elevator",
+        "Use service corridor",
+        "Meet security at South Gate",
+        "Move to offsite command"
+      ],
+      "updated_at": "2026-04-26T06:41:34.436950+00:00"
+    }
+  ],
+  "resources": [
+    {
+      "resource_id": "RES-GUARDS-01",
+      "tenant_id": "TEN-GRAND-MERIDIAN",
+      "name": "Security Guards",
+      "type": "guards",
+      "deployed": 14,
+      "idle": 4,
+      "overload": 22,
+      "reserve_health": 86,
+      "best_move": "Move 2 guards from lobby to Stairwell B.",
+      "updated_at": "2026-04-26T06:41:34.436957+00:00"
+    },
+    {
+      "resource_id": "RES-MEDICS-02",
+      "tenant_id": "TEN-BALA-HOSP",
+      "name": "Medics",
+      "type": "medics",
+      "deployed": 8,
+      "idle": 2,
+      "overload": 31,
+      "reserve_health": 78,
+      "best_move": "Stage Medic Unit 2 near ICU corridor.",
+      "updated_at": "2026-04-26T06:41:34.436963+00:00"
+    },
+    {
+      "resource_id": "RES-DRONES-03",
+      "tenant_id": "TEN-GOVSECURE",
+      "name": "Drones",
+      "type": "drones",
+      "deployed": 3,
+      "idle": 5,
+      "overload": 9,
+      "reserve_health": 92,
+      "best_move": "Send drone 2 to platform crowd scan.",
+      "updated_at": "2026-04-26T06:41:34.436969+00:00"
+    },
+    {
+      "resource_id": "RES-HAZMAT-04",
+      "tenant_id": "TEN-BALA-UNI",
+      "name": "Hazmat Team",
+      "type": "hazmat",
+      "deployed": 2,
+      "idle": 1,
+      "overload": 44,
+      "reserve_health": 70,
+      "best_move": "Request mutual-aid hazmat standby.",
+      "updated_at": "2026-04-26T06:41:34.436975+00:00"
+    },
+    {
+      "resource_id": "RES-VEHICLES-05",
+      "tenant_id": "TEN-BALA-MFG",
+      "name": "Vehicles",
+      "type": "vehicles",
+      "deployed": 6,
+      "idle": 3,
+      "overload": 18,
+      "reserve_health": 88,
+      "best_move": "Stage utility cart at East exit.",
+      "updated_at": "2026-04-26T06:41:34.436981+00:00"
+    }
+  ],
+  "campus_buildings": [
+    {
+      "building_id": "BLD-BALA-LIB",
+      "tenant_id": "TEN-BALA-UNI",
+      "campus": "Bala University",
+      "name": "Library Tower",
+      "health": 94,
+      "occupancy": 840,
+      "pressure": 48,
+      "incident": "none",
+      "shared_resource": "Campus Security Pod 1",
+      "updated_at": "2026-04-26T06:41:34.436988+00:00"
+    },
+    {
+      "building_id": "BLD-BALA-LAB",
+      "tenant_id": "TEN-BALA-UNI",
+      "campus": "Bala University",
+      "name": "Lab Block C",
+      "health": 76,
+      "occupancy": 146,
+      "pressure": 63,
+      "incident": "gas alert",
+      "shared_resource": "Hazmat Team",
+      "updated_at": "2026-04-26T06:41:34.436995+00:00"
+    },
+    {
+      "building_id": "BLD-MC-ICU",
+      "tenant_id": "TEN-BALA-HOSP",
+      "campus": "Bala Hospital Demo",
+      "name": "ICU Tower",
+      "health": 88,
+      "occupancy": 220,
+      "pressure": 52,
+      "incident": "oxygen watch",
+      "shared_resource": "Clinical Rapid Unit",
+      "updated_at": "2026-04-26T06:41:34.437001+00:00"
+    },
+    {
+      "building_id": "BLD-GM-HOTEL",
+      "tenant_id": "TEN-GRAND-MERIDIAN",
+      "campus": "Grand Meridian Hotel",
+      "name": "Main Hotel",
+      "health": 82,
+      "occupancy": 428,
+      "pressure": 66,
+      "incident": "kitchen fire",
+      "shared_resource": "Fire Team Alpha",
+      "updated_at": "2026-04-26T06:41:34.437006+00:00"
+    },
+    {
+      "building_id": "BLD-NOVA-FOOD",
+      "tenant_id": "TEN-BALA-MFG",
+      "campus": "Nova Mall Group",
+      "name": "Food Court Wing",
+      "health": 79,
+      "occupancy": 1840,
+      "pressure": 84,
+      "incident": "panic surge",
+      "shared_resource": "Security Bravo",
+      "updated_at": "2026-04-26T06:41:34.437012+00:00"
+    },
+    {
+      "building_id": "BLD-METROCARE",
+      "tenant_id": "TEN-BALA-HOSP",
+      "campus": "MetroCare Campus",
+      "name": "Care Continuity Center",
+      "health": 91,
+      "occupancy": 520,
+      "pressure": 44,
+      "incident": "none",
+      "shared_resource": "Ambulance Corridor",
+      "updated_at": "2026-04-26T06:41:34.437017+00:00"
+    }
+  ],
+  "network_links": [
+    {
+      "link_id": "LINK-BALA-LAB-LIB",
+      "tenant_id": "TEN-BALA-UNI",
+      "from": "Lab Block C",
+      "to": "Library Tower",
+      "route_health": 84,
+      "travel_minutes": 6,
+      "cascading_risk": 42,
+      "updated_at": "2026-04-26T06:41:34.437024+00:00"
+    },
+    {
+      "link_id": "LINK-GM-HOTEL-SOUTH",
+      "tenant_id": "TEN-GRAND-MERIDIAN",
+      "from": "Main Hotel",
+      "to": "South Assembly",
+      "route_health": 91,
+      "travel_minutes": 4,
+      "cascading_risk": 33,
+      "updated_at": "2026-04-26T06:41:34.437030+00:00"
+    },
+    {
+      "link_id": "LINK-NOVA-FOOD-EAST",
+      "tenant_id": "TEN-BALA-MFG",
+      "from": "Food Court Wing",
+      "to": "East Parking",
+      "route_health": 73,
+      "travel_minutes": 8,
+      "cascading_risk": 61,
+      "updated_at": "2026-04-26T06:41:34.437036+00:00"
+    },
+    {
+      "link_id": "LINK-MC-ICU-AMB",
+      "tenant_id": "TEN-BALA-HOSP",
+      "from": "ICU Tower",
+      "to": "South Ambulance Bay",
+      "route_health": 89,
+      "travel_minutes": 5,
+      "cascading_risk": 37,
+      "updated_at": "2026-04-26T06:41:34.437041+00:00"
+    }
+  ],
+  "strategies": [
+    {
+      "strategy_id": "STR-CORRIDOR-FIRST",
+      "tenant_id": "TEN-GRAND-MERIDIAN",
+      "name": "corridor-first containment",
+      "casualty_risk": 8,
+      "recovery_eta": 42,
+      "downtime_hours": 4,
+      "financial_loss": 280000,
+      "reputation_risk": 28,
+      "confidence": 94,
+      "winner": true,
+      "why": "Contains smoke while keeping evacuation load below stairwell pressure threshold.",
+      "updated_at": "2026-04-26T06:41:34.437048+00:00"
+    },
+    {
+      "strategy_id": "STR-FULL-LOCKDOWN",
+      "tenant_id": "TEN-GRAND-MERIDIAN",
+      "name": "full lockdown",
+      "casualty_risk": 18,
+      "recovery_eta": 64,
+      "downtime_hours": 9,
+      "financial_loss": 910000,
+      "reputation_risk": 58,
+      "confidence": 77,
+      "winner": false,
+      "why": "Overconstrains movement and delays suppression team.",
+      "updated_at": "2026-04-26T06:41:34.437054+00:00"
+    },
+    {
+      "strategy_id": "STR-PHASED-EVAC",
+      "tenant_id": "TEN-BALA-MFG",
+      "name": "phased evacuation",
+      "casualty_risk": 11,
+      "recovery_eta": 55,
+      "downtime_hours": 6,
+      "financial_loss": 540000,
+      "reputation_risk": 36,
+      "confidence": 91,
+      "winner": true,
+      "why": "Reduces panic and keeps exits below crush pressure.",
+      "updated_at": "2026-04-26T06:41:34.437059+00:00"
+    },
+    {
+      "strategy_id": "STR-MUTUAL-AID",
+      "tenant_id": "TEN-BALA-HOSP",
+      "name": "mutual-aid surge",
+      "casualty_risk": 7,
+      "recovery_eta": 48,
+      "downtime_hours": 5,
+      "financial_loss": 780000,
+      "reputation_risk": 24,
+      "confidence": 89,
+      "winner": false,
+      "why": "Excellent safety outcome but higher operational disruption than clinical corridor first.",
+      "updated_at": "2026-04-26T06:41:34.437065+00:00"
+    },
+    {
+      "strategy_id": "STR-SILENT-CONTAIN",
+      "tenant_id": "TEN-GOVSECURE",
+      "name": "silent containment",
+      "casualty_risk": 21,
+      "recovery_eta": 70,
+      "downtime_hours": 8,
+      "financial_loss": 620000,
+      "reputation_risk": 46,
+      "confidence": 72,
+      "winner": false,
+      "why": "Reputation risk stays lower initially but panic rebound increases later.",
+      "updated_at": "2026-04-26T06:41:34.437070+00:00"
+    }
+  ],
+  "replay_intelligence": [
+    {
+      "lesson_id": "LESSON-GM-001",
+      "tenant_id": "TEN-GRAND-MERIDIAN",
+      "replay_id": "RPL-HOTEL-KITCHEN",
+      "mistake": "Approval delayed by 72 seconds for corridor closure.",
+      "better_alternative": "Pre-approve smoke-door closure when flame + camera confidence exceed 90 percent.",
+      "audit_evidence": "AI council confidence 94, responder ETA 2m, east stairwell pressure below 55 percent.",
+      "impact": "Would reduce smoke exposure by 18 percent.",
+      "confidence": 93,
+      "updated_at": "2026-04-26T06:41:34.437077+00:00"
+    },
+    {
+      "lesson_id": "LESSON-NM-001",
+      "tenant_id": "TEN-BALA-MFG",
+      "replay_id": "RPL-MALL-PANIC",
+      "mistake": "Initial announcement sent to all zones instead of food court only.",
+      "better_alternative": "Target calm directional message to food court and silent signage to adjacent stores.",
+      "audit_evidence": "Crowd density localized to food court; adjacent stores stable.",
+      "impact": "Would reduce confusion by 22 percent.",
+      "confidence": 91,
+      "updated_at": "2026-04-26T06:41:34.437083+00:00"
+    },
+    {
+      "lesson_id": "LESSON-MC-001",
+      "tenant_id": "TEN-BALA-HOSP",
+      "replay_id": "RPL-HOSP-OXY",
+      "mistake": "Clinical escort route opened after public corridor update.",
+      "better_alternative": "Reserve elevator C for clinical use before public message.",
+      "audit_evidence": "ICU patient dependency score high; visitor pressure moderate.",
+      "impact": "Would improve patient continuity ETA by 6 minutes.",
+      "confidence": 89,
+      "updated_at": "2026-04-26T06:41:34.437089+00:00"
+    }
+  ],
+  "events": [
+    {
+      "event_id": "TWIN-AI-EVT-00001",
+      "tenant_id": "TEN-BALA-UNI",
+      "action": "twin_route_computed",
+      "payload": {
+        "route_id": "RT-AI-RESP-FIRE",
+        "actor": null,
+        "risk_score": 42
+      },
+      "created_at": "2026-04-26T06:41:35.463705+00:00"
+    },
+    {
+      "event_id": "TWIN-AI-EVT-00002",
+      "tenant_id": "TEN-BALA-UNI",
+      "action": "twin_resources_rebalanced",
+      "payload": {
+        "actor": null,
+        "risk_score": 45
+      },
+      "created_at": "2026-04-26T06:41:35.525092+00:00"
+    },
+    {
+      "event_id": "TWIN-AI-EVT-00003",
+      "tenant_id": "TEN-BALA-UNI",
+      "action": "twin_executive_decision_compared",
+      "payload": {
+        "winner": "STR-CORRIDOR-FIRST",
+        "actor": null,
+        "risk_score": 52
+      },
+      "created_at": "2026-04-26T06:41:35.610954+00:00"
+    },
+    {
+      "event_id": "TWIN-AI-EVT-00004",
+      "tenant_id": "TEN-BALA-UNI",
+      "action": "twin_executive_decision_compared",
+      "payload": {
+        "winner": "STR-CORRIDOR-FIRST",
+        "actor": null,
+        "risk_score": 52
+      },
+      "created_at": "2026-04-26T16:27:42.796540+00:00"
+    },
+    {
+      "event_id": "TWIN-AI-EVT-00005",
+      "tenant_id": "TEN-BALA-UNI",
+      "action": "twin_executive_decision_compared",
+      "payload": {
+        "winner": "STR-CORRIDOR-FIRST",
+        "actor": null,
+        "risk_score": 52
+      },
+      "created_at": "2026-04-26T16:27:42.932903+00:00"
+    },
+    {
+      "event_id": "TWIN-AI-EVT-00006",
+      "tenant_id": "TEN-BALA-UNI",
+      "action": "twin_executive_decision_compared",
+      "payload": {
+        "winner": "STR-CORRIDOR-FIRST",
+        "actor": null,
+        "risk_score": 52
+      },
+      "created_at": "2026-04-27T15:50:49.675682+00:00"
+    },
+    {
+      "event_id": "TWIN-AI-EVT-00007",
+      "tenant_id": "TEN-BALA-UNI",
+      "action": "twin_executive_decision_compared",
+      "payload": {
+        "winner": "STR-CORRIDOR-FIRST",
+        "actor": null,
+        "risk_score": 52
+      },
+      "created_at": "2026-04-27T17:32:46.968838+00:00"
+    },
+    {
+      "event_id": "TWIN-AI-EVT-00008",
+      "tenant_id": "TEN-BALA-UNI",
+      "action": "twin_executive_decision_compared",
+      "payload": {
+        "winner": "STR-CORRIDOR-FIRST",
+        "actor": null,
+        "risk_score": 52
+      },
+      "created_at": "2026-04-28T03:26:28.257054+00:00"
+    },
+    {
+      "event_id": "TWIN-AI-EVT-00009",
+      "tenant_id": "TEN-BALA-UNI",
+      "action": "twin_executive_decision_compared",
+      "payload": {
+        "winner": "STR-CORRIDOR-FIRST",
+        "actor": null,
+        "risk_score": 52
+      },
+      "created_at": "2026-04-28T03:37:27.395684+00:00"
+    },
+    {
+      "event_id": "TWIN-AI-EVT-00010",
+      "tenant_id": "TEN-BALA-UNI",
+      "action": "twin_executive_decision_compared",
+      "payload": {
+        "winner": "STR-CORRIDOR-FIRST",
+        "actor": null,
+        "risk_score": 52
+      },
+      "created_at": "2026-04-28T03:55:10.083639+00:00"
+    },
+    {
+      "event_id": "TWIN-AI-EVT-00011",
+      "tenant_id": "TEN-BALA-UNI",
+      "action": "twin_executive_decision_compared",
+      "payload": {
+        "winner": "STR-CORRIDOR-FIRST",
+        "actor": null,
+        "risk_score": 52
+      },
+      "created_at": "2026-04-28T04:06:00.029222+00:00"
+    },
+    {
+      "event_id": "TWIN-AI-EVT-00012",
+      "tenant_id": "TEN-BALA-UNI",
+      "action": "twin_executive_decision_compared",
+      "payload": {
+        "winner": "STR-CORRIDOR-FIRST",
+        "actor": null,
+        "risk_score": 52
+      },
+      "created_at": "2026-04-28T04:12:20.302623+00:00"
+    },
+    {
+      "event_id": "TWIN-AI-EVT-00013",
+      "tenant_id": "TEN-BALA-UNI",
+      "action": "twin_executive_decision_compared",
+      "payload": {
+        "winner": "STR-CORRIDOR-FIRST",
+        "actor": null,
+        "risk_score": 52
+      },
+      "created_at": "2026-04-28T04:31:11.318590+00:00"
+    },
+    {
+      "event_id": "TWIN-AI-EVT-00014",
+      "tenant_id": "TEN-BALA-UNI",
+      "action": "twin_executive_decision_compared",
+      "payload": {
+        "winner": "STR-CORRIDOR-FIRST",
+        "actor": null,
+        "risk_score": 52
+      },
+      "created_at": "2026-04-28T04:32:13.435059+00:00"
+    },
+    {
+      "event_id": "TWIN-AI-EVT-00015",
+      "tenant_id": "TEN-BALA-UNI",
+      "action": "twin_executive_decision_compared",
+      "payload": {
+        "winner": "safe-fallback-corridor-first",
+        "actor": null,
+        "risk_score": 52
+      },
+      "created_at": "2026-04-28T12:23:51.858590+00:00"
+    },
+    {
+      "event_id": "TWIN-AI-EVT-00016",
+      "tenant_id": "TEN-BALA-UNI",
+      "action": "twin_executive_decision_compared",
+      "payload": {
+        "winner": "safe-fallback-corridor-first",
+        "actor": null,
+        "risk_score": 52
+      },
+      "created_at": "2026-04-28T14:23:10.574308+00:00"
+    },
+    {
+      "event_id": "TWIN-AI-EVT-00017",
+      "tenant_id": "TEN-BALA-UNI",
+      "action": "twin_executive_decision_compared",
+      "payload": {
+        "winner": "safe-fallback-corridor-first",
+        "actor": null,
+        "risk_score": 52
+      },
+      "created_at": "2026-04-28T15:35:23.449597+00:00"
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+"use client";
+
+import Link from "next/link";
+import type { Route } from "next";
+
+import { PolicyCenter } from "@/components/security/policy-center";
+import { ProtectedWorkspaceShell } from "@/components/app/protected-workspace-shell";
+import { useSecurityTrust } from "@/lib/securitytrust/use-trust";
+
+export default function SecurityPoliciesPage() {
+  const { policies, busyAction, loading, error, lastAction, approvePolicy, refresh } = useSecurityTrust();
+  return (
+    <ProtectedWorkspaceShell>
+      <main className="min-h-screen overflow-hidden bg-[#02040a] px-5 py-8 text-white md:px-8">
+        <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_18%_0%,rgba(34,211,238,0.14),transparent_32%),linear-gradient(180deg,#02040a_0%,#030712_100%)]" />
+        <div className="relative z-10 mx-auto flex max-w-7xl flex-col gap-6">
+          <header className="rounded-[34px] border border-white/10 bg-white/[0.05] p-6 backdrop-blur-2xl">
+            <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.26em] text-cyan-100/70">Policy Management Center</p>
+                <h1 className="mt-3 max-w-4xl text-4xl font-semibold tracking-[-0.045em] text-white md:text-5xl">Govern MFA, access review, retention, AI usage, and emergency overrides</h1>
+                <p className="mt-4 max-w-3xl text-sm leading-6 text-white/55">Approve, revise, and archive policies with audit-ready evidence for procurement and security reviews.</p>
+              </div>
+              <div className="flex flex-wrap gap-3">
+                <Link className="rounded-2xl border border-white/10 px-4 py-3 text-sm font-semibold text-white/70 transition hover:bg-white/10" href={"/security/compliance" as Route}>Compliance</Link>
+                <button className="rounded-2xl bg-cyan-100 px-4 py-3 text-sm font-semibold text-slate-950 transition hover:bg-white disabled:opacity-60" disabled={loading} onClick={() => void refresh()} type="button">Refresh</button>
+              </div>
+            </div>
+            {(error || lastAction) && <div className="mt-5 rounded-2xl border border-white/10 bg-black/25 px-4 py-3 text-sm text-white/60">{error ? `Resilient mode: ${error}` : lastAction}</div>}
+          </header>
+          <div className="grid gap-4 md:grid-cols-4">
+            <Kpi label="Approved" value={policies.approved} />
+            <Kpi label="Needs Revision" value={policies.needs_revision} />
+            <Kpi label="Coverage" value={`${policies.coverage}%`} />
+            <Kpi label="Categories" value={Object.keys(policies.categories).length} />
+          </div>
+          <PolicyCenter busyAction={busyAction} onDecision={approvePolicy} policies={policies.policies} />
+        </div>
+      </main>
+    </ProtectedWorkspaceShell>
+  );
+}
+
+function Kpi({ label, value }: { label: string; value: number | string }) {
+  return (
+    <div className="rounded-3xl border border-white/10 bg-white/[0.045] p-5">
+      <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/45">{label}</p>
+      <p className="mt-3 font-mono text-3xl text-white">{value}</p>
+    </div>
+  );
+}

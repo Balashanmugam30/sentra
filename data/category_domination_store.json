@@ -1,0 +1,32 @@
+{
+  "tenants": [
+    "TEN-BALA-UNI",
+    "TEN-BALA-MFG",
+    "TEN-BALA-HOSP",
+    "TEN-GOV-SOUTH"
+  ],
+  "events": [
+    {
+      "event_id": "CAT-EVT-AFA5A835E4",
+      "tenant_id": "TEN-BALA-UNI",
+      "action": "market_simulation_executed",
+      "target": "MSIM-92D5A2E03C",
+      "created_at": "2026-04-25T06:19:36.293060+00:00"
+    }
+  ],
+  "campaigns": [],
+  "analyses": [],
+  "board_stories": [],
+  "simulations": [
+    {
+      "simulation_id": "MSIM-92D5A2E03C",
+      "tenant_id": "TEN-BALA-UNI",
+      "scenario": "category_leader_acceleration",
+      "created_at": "2026-04-25T06:19:36.292108+00:00",
+      "projected_capture": 1920000000,
+      "category_score_after": 98,
+      "expected_mentions_lift": 18,
+      "recommended_move": "Publish benchmark, intensify government trust motion, and launch competitive replacement campaign."
+    }
+  ]
+}
