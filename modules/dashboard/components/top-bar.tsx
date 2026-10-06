@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import type { Route } from "next";
 import { useEffect, useMemo, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
@@ -263,6 +264,14 @@ export function TopBar({ onOpenCommand, onOpenNav }: TopBarProps) {
                 <span className="sentra-system-status-dot" />
                 {realtimeBadge.label}
               </span>
+              <Link
+                className="hidden sm:inline-flex items-center gap-1.5 rounded-full border border-sky-400/25 bg-sky-500/10 px-3 py-1.5 text-xs font-semibold text-sky-200 transition hover:border-sky-400/50 hover:bg-sky-500/20 shadow-[0_0_15px_rgba(56,189,248,0.15)]"
+                href={"/mobile" as Route}
+                title="Switch to Mobile Field Operations App"
+              >
+                <span className="text-sm">📱</span>
+                <span>Mobile Ops</span>
+              </Link>
               <RoleBadge compact role={user?.role} />
               <div className="relative hidden sm:block">
               <button

@@ -519,30 +519,39 @@
 :root,
 [data-theme="dark"],
 .dark {
-  --sentra-os-bg: #050505;
-  --sentra-os-panel: #0b0b0b;
-  --sentra-os-card: #111111;
-  --sentra-os-soft: #171717;
-  --sentra-os-hover: #181818;
-  --sentra-os-active: #232323;
-  --sentra-os-border: rgba(255, 255, 255, 0.06);
-  --sentra-os-border-strong: rgba(255, 255, 255, 0.12);
-  --sentra-os-text: #ffffff;
-  --sentra-os-muted: #a1a1aa;
-  --sentra-os-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+  --sentra-os-bg: #030712;
+  --sentra-os-panel: rgba(8, 14, 28, 0.88);
+  --sentra-os-card: rgba(15, 23, 42, 0.72);
+  --sentra-os-soft: rgba(30, 41, 59, 0.6);
+  --sentra-os-hover: rgba(30, 58, 95, 0.5);
+  --sentra-os-active: rgba(14, 116, 144, 0.4);
+  --sentra-os-border: rgba(148, 163, 184, 0.12);
+  --sentra-os-border-strong: rgba(56, 189, 248, 0.28);
+  --sentra-os-text: #f8fafc;
+  --sentra-os-muted: #94a3b8;
+  --sentra-os-shadow: 0 16px 48px -8px rgba(0, 0, 0, 0.65), 0 0 24px rgba(6, 182, 212, 0.1);
+  --sentra-os-cyan: #22d3ee;
+  --sentra-os-cyan-glow: rgba(34, 211, 238, 0.25);
+  --sentra-os-blue: #38bdf8;
+  --sentra-os-indigo: #818cf8;
 }
 
 [data-theme="light"],
 .light {
-  --sentra-os-bg: #f5f5f5;
+  --sentra-os-bg: #f8fafc;
   --sentra-os-panel: #ffffff;
-  --sentra-os-card: #fafafa;
-  --sentra-os-soft: #f1f1f2;
-  --sentra-os-hover: #f1f1f2;
-  --sentra-os-active: #eaeaea;
-  --sentra-os-border: #dddddd;
-  --sentra-os-border-strong: rgba(0, 0, 0, 0.18);
-  --sentra-os-text: #111111;
-  --sentra-os-muted: #52525b;
-  --sentra-os-shadow: 0 12px 34px rgba(15, 15, 15, 0.08);
+  --sentra-os-card: #f1f5f9;
+  --sentra-os-soft: #e2e8f0;
+  --sentra-os-hover: #e0f2fe;
+  --sentra-os-active: #bae6fd;
+  --sentra-os-border: #cbd5e1;
+  --sentra-os-border-strong: #0284c7;
+  --sentra-os-text: #0f172a;
+  --sentra-os-muted: #64748b;
+  --sentra-os-shadow: 0 12px 34px rgba(15, 23, 42, 0.08);
+  --sentra-os-cyan: #0891b2;
+  --sentra-os-cyan-glow: rgba(8, 145, 178, 0.2);
+  --sentra-os-blue: #0284c7;
+  --sentra-os-indigo: #4f46e5;
 }
+

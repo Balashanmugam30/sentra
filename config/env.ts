@@ -103,9 +103,9 @@ function ensurePresent(
   }
 
   const fallback = options?.fallback ?? null;
-  const requiredInProduction = options?.requiredInProduction ?? true;
+  const requiredInProduction = options?.requiredInProduction ?? false;
 
-  if (isProductionEnv && requiredInProduction) {
+  if (isProductionEnv && requiredInProduction && fallback === null) {
     throw new Error(`Missing required environment variable: ${key}`);
   }
 
@@ -115,14 +115,14 @@ function ensurePresent(
 
 const firebaseApiKey = ensurePresent("NEXT_PUBLIC_FIREBASE_API_KEY", process.env.NEXT_PUBLIC_FIREBASE_API_KEY, {
   fallback: null,
-  requiredInProduction: true,
+  requiredInProduction: false,
 });
 const firebaseAuthDomain = ensurePresent(
   "NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN",
   process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
   {
     fallback: null,
-    requiredInProduction: true,
+    requiredInProduction: false,
   },
 );
 const firebaseProjectId = ensurePresent(
@@ -130,7 +130,7 @@ const firebaseProjectId = ensurePresent(
   process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
   {
     fallback: null,
-    requiredInProduction: true,
+    requiredInProduction: false,
   },
 );
 const firebaseStorageBucket = ensurePresent(
@@ -138,7 +138,7 @@ const firebaseStorageBucket = ensurePresent(
   process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
   {
     fallback: null,
-    requiredInProduction: true,
+    requiredInProduction: false,
   },
 );
 const firebaseMessagingSenderId = ensurePresent(
@@ -146,12 +146,12 @@ const firebaseMessagingSenderId = ensurePresent(
   process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
   {
     fallback: null,
-    requiredInProduction: true,
+    requiredInProduction: false,
   },
 );
 const firebaseAppId = ensurePresent("NEXT_PUBLIC_FIREBASE_APP_ID", process.env.NEXT_PUBLIC_FIREBASE_APP_ID, {
   fallback: null,
-  requiredInProduction: true,
+  requiredInProduction: false,
 });
 
 const firebase: FirebasePublicConfig = {
@@ -175,23 +175,23 @@ const missingFirebaseVars = Object.entries({
   .map(([key]) => key);
 
 export const env: PublicEnv = {
-  appEnv: ensurePresent("NEXT_PUBLIC_APP_ENV", process.env.NEXT_PUBLIC_APP_ENV, {
+  appEnv: (ensurePresent("NEXT_PUBLIC_APP_ENV", process.env.NEXT_PUBLIC_APP_ENV, {
     fallback: "development",
-    requiredInProduction: true,
-  }) as AppEnv,
+    requiredInProduction: false,
+  }) || "development") as AppEnv,
   appName: ensurePresent("NEXT_PUBLIC_APP_NAME", process.env.NEXT_PUBLIC_APP_NAME, {
     fallback: "Sentra",
-    requiredInProduction: true,
+    requiredInProduction: false,
   }) ?? "Sentra",
   apiBaseUrl:
     ensurePresent("NEXT_PUBLIC_API_BASE", resolveApiBaseUrl(), {
       fallback: isProductionEnv ? "/api" : "http://127.0.0.1:8000",
-      requiredInProduction: true,
+      requiredInProduction: false,
     }) ?? (isProductionEnv ? "/api" : "http://127.0.0.1:8000"),
   wsBaseUrl:
     ensurePresent("NEXT_PUBLIC_WS_BASE_URL", resolveWsBaseUrl(), {
       fallback: isProductionEnv ? "/ws/incidents" : "ws://127.0.0.1:8000/ws/incidents",
-      requiredInProduction: true,
+      requiredInProduction: false,
     }) ?? (isProductionEnv ? "/ws/incidents" : "ws://127.0.0.1:8000/ws/incidents"),
   firebaseApiKey,
   firebaseAuthDomain,

@@ -3959,19 +3959,19 @@ html[data-theme="light"] .sentra-auth-shell [class*="border-white/"] {
 
 /* Final convergence layer for authenticated Sentra routes. Keep public landing/login untouched. */
 .sentra-auth-shell {
-  --sentra-app-bg: var(--sentra-os-bg, #050505);
-  --sentra-app-bg-secondary: var(--sentra-os-bg, #050505);
-  --sentra-app-panel: var(--sentra-os-panel, #0b0b0b);
-  --sentra-app-panel-elevated: var(--sentra-os-card, #111111);
-  --sentra-app-hover: var(--sentra-os-hover, #181818);
-  --sentra-app-active: var(--sentra-os-active, #232323);
-  --sentra-app-border: var(--sentra-os-border, rgba(255, 255, 255, 0.06));
-  --sentra-app-border-strong: var(--sentra-os-border-strong, rgba(255, 255, 255, 0.12));
-  --sentra-app-text: var(--sentra-os-text, #ffffff);
-  --sentra-app-muted: var(--sentra-os-muted, #a1a1aa);
+  --sentra-app-bg: var(--sentra-os-bg, #030712);
+  --sentra-app-bg-secondary: var(--sentra-os-bg, #030712);
+  --sentra-app-panel: var(--sentra-os-panel, rgba(8, 14, 28, 0.88));
+  --sentra-app-panel-elevated: var(--sentra-os-card, rgba(15, 23, 42, 0.72));
+  --sentra-app-hover: var(--sentra-os-hover, rgba(30, 58, 95, 0.5));
+  --sentra-app-active: var(--sentra-os-active, rgba(14, 116, 144, 0.4));
+  --sentra-app-border: var(--sentra-os-border, rgba(148, 163, 184, 0.12));
+  --sentra-app-border-strong: var(--sentra-os-border-strong, rgba(56, 189, 248, 0.28));
+  --sentra-app-text: var(--sentra-os-text, #f8fafc);
+  --sentra-app-muted: var(--sentra-os-muted, #94a3b8);
   --sentra-app-soft: color-mix(in srgb, var(--sentra-app-muted) 72%, transparent);
-  --sentra-app-shadow: var(--sentra-os-shadow, 0 12px 40px rgba(0, 0, 0, 0.45));
-  --sentra-app-shadow-lg: var(--sentra-os-shadow, 0 24px 70px rgba(0, 0, 0, 0.56));
+  --sentra-app-shadow: var(--sentra-os-shadow, 0 16px 48px -8px rgba(0, 0, 0, 0.65), 0 0 24px rgba(6, 182, 212, 0.1));
+  --sentra-app-shadow-lg: var(--sentra-os-shadow, 0 28px 80px rgba(0, 0, 0, 0.75), 0 0 40px rgba(6, 182, 212, 0.15));
   --sentra-text-muted: var(--sentra-app-muted);
   --sentra-text-soft: var(--sentra-app-soft);
   --sentra-border-subtle: var(--sentra-app-border);
@@ -3988,8 +3988,10 @@ html[data-theme="light"] .sentra-auth-shell [class*="border-white/"] {
 
 .app-container.sentra-auth-shell {
   background:
-    radial-gradient(circle at 50% -20%, color-mix(in srgb, var(--sentra-app-text) 5%, transparent), transparent 32rem),
-    linear-gradient(180deg, var(--sentra-app-bg), var(--sentra-app-bg) 100%) !important;
+    radial-gradient(circle at 12% 8%, rgba(56, 189, 248, 0.08), transparent 32rem),
+    radial-gradient(circle at 88% 12%, rgba(99, 102, 241, 0.09), transparent 30rem),
+    radial-gradient(circle at 50% 90%, rgba(14, 165, 233, 0.05), transparent 42rem),
+    linear-gradient(180deg, var(--sentra-app-bg), #02050e 100%) !important;
 }
 
 .sentra-auth-shell .pointer-events-none.fixed.inset-0,

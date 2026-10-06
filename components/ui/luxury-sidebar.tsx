@@ -120,6 +120,13 @@ const navGroups: NavGroup[] = [
         match: ["/operations/recovery"],
         permissions: ["operations.manage", "reports.view"],
       },
+      {
+        description: "Mobile companion & field SOS",
+        href: "/mobile/home" as Route,
+        icon: "launch",
+        label: "Field Mobile App",
+        match: ["/mobile"],
+      },
     ],
   },
   {

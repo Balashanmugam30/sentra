@@ -1,627 +1,220 @@
-# 🚨 SENTRA — AI Crisis Intelligence Operating System
+# ⚡ SENTRA — AI Crisis Intelligence & Continuous Tactical Operations OS
 
 <div align="center">
 
-![Sentra Banner](https://img.shields.io/badge/Sentra-AI%20Crisis%20Intelligence-black?style=for-the-badge)
+[![Sentra OS](https://img.shields.io/badge/SENTRA-v2.4.0%20Production-0ea5e9?style=for-the-badge&logo=shield&logoColor=white)](https://sentra-01.vercel.app/)
+[![Next.js 16](https://img.shields.io/badge/Next.js-16%20Turbopack-black?style=for-the-badge&logo=next.js&logoColor=white)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178c6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-CSS%20v4-38bdf8?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
+[![License](https://img.shields.io/badge/License-Proprietary-red?style=for-the-badge)](LICENSE)
 
-### Real-Time AI-Powered Emergency Response, Operational Intelligence & Digital Twin Platform
+### 🛰️ The Autonomous Neural Backbone for Mission-Critical Facilities & Emergency Operations
 
-Built for the future of crisis coordination, predictive intelligence, and enterprise-scale emergency operations.
+**[🖥️ Launch Desktop Command Center](https://sentra-01.vercel.app/)** &nbsp;•&nbsp; **[📱 Open Integrated Field Mobile](https://sentra-01.vercel.app/mobile)** &nbsp;•&nbsp; **[📲 Standalone Field App](https://sentra-xi.vercel.app/)**
 
 </div>
 
 ---
 
-# 🌍 Overview
+## 🌐 Overview & Operational Mission
 
-Sentra is an advanced AI-powered Crisis Intelligence Operating System designed to help organizations detect, analyze, predict, and respond to emergencies in real time.
+**Sentra** is an enterprise-grade **AI Crisis Intelligence Operating System** engineered for stadiums, high-density campuses, hospitals, airports, critical infrastructure, and tactical emergency centers. 
 
-The platform combines:
+When disaster strikes—be it structural failure, fire outbreaks, seismic hazards, or multi-vector cyber-physical threats—traditional command systems buckle under fragmented communications, lagging manual updates, and siloed decision hierarchies. 
 
-- 🧠 Artificial Intelligence
-- 📡 Real-Time Telemetry
-- 🛰️ Digital Twin Simulation
-- 📊 Executive Intelligence
-- ⚡ Operational Coordination
-- 🔥 Predictive Crisis Modeling
+Sentra changes this paradigm by synthesizing live telemetry, digital twin simulations, multi-modal sensor fusion, and autonomous AI triage into an **unbreakable, continuous operating picture**.
 
-into a unified operating system for modern emergency management.
+```mermaid
+flowchart TD
+    subgraph SENSORY_LAYER [Sensory & Telemetry Ingestion]
+        S1[IoT Environmental Sensors] --> FUSION[Real-Time Telemetry Engine]
+        S2[Structural Stress Gauges] --> FUSION
+        S3[Camera Vision Feeds] --> FUSION
+        S4[Occupancy & Egress Beacons] --> FUSION
+    end
 
----
+    subgraph INTELLIGENCE_CORE [Sentra Neural Core]
+        FUSION --> AI_COUNCIL[AI Crisis Engine & Gemini Intelligence]
+        AI_COUNCIL --> TRIAGE[Multi-Modal Incident Triage]
+        AI_COUNCIL --> TWIN[Hyperreal 3D Digital Twin]
+        AI_COUNCIL --> ROUTE[Dynamic Safe Egress Routing]
+    end
 
-# 🎯 Problem Statement
+    subgraph OPERATIONAL_LAYER [Unified Multi-Tier Command]
+        TRIAGE --> COMMAND[Desktop Tactical Command Center\nhttps://sentra-01.vercel.app]
+        ROUTE --> MOBILE[Field Responder Mobile PWA\n/mobile/home]
+        TWIN --> EXECUTIVE[Executive & Boardroom Oversight]
+    end
 
-Large environments such as:
-
-- Hotels
-- Hospitals
-- Airports
-- Smart Cities
-- Campuses
-- Enterprise Facilities
-
-often face delayed emergency response due to:
-
-- Fragmented communication
-- Lack of real-time visibility
-- Manual coordination
-- Poor situational awareness
-- Delayed decision-making
-- No predictive intelligence
-
-Traditional systems only react after incidents escalate.
-
-Sentra changes this by enabling:
-
-> **Predictive, AI-driven, real-time crisis response and operational coordination.**
+    subgraph CONTINUITY [Zero-Downtime Continuity]
+        COMMAND <--> RESILIENT_CACHE[Offline-First Sync Engine]
+        MOBILE <--> RESILIENT_CACHE
+    end
+```
 
 ---
 
-# 🚀 Core Vision
+## ⚡ Instant Live Access & Demo Credentials
 
-> “Transforming crisis response from reactive operations into intelligent autonomous coordination.”
+Sentra features **zero-friction instant demonstration access** with pre-configured role profiles. In production or cloud demo modes where external OAuth configurations are isolated, you can enter immediately using the **1-Click Instant Access** on the login screen or with the credentials below:
 
-Sentra acts as a centralized intelligence layer that continuously monitors operational signals and assists responders, operators, and executives during critical situations.
+| Role Profile | Direct Email | Password | Primary Clearance & Capabilities |
+| :--- | :--- | :--- | :--- |
+| **🎖️ Commander** | `commander@sentra.demo` | `SentraDemo!2026` | Full tactical authority, lockdown controls, live evacuation triggers |
+| **🛡️ System Admin** | `admin@sentra.demo` | `SentraDemo!2026` | Enterprise management, global cloud tenant routing, user RBAC |
+| **🦺 Safety Officer** | `officer@sentra.demo` | `SentraDemo!2026` | Real-time sensor telemetry, hazard containment, zone sweeps |
+| **📋 Compliance Auditor** | `auditor@sentra.demo` | `SentraDemo!2026` | Immutable audit trail logs, SOC forensics, legal record verification |
+| **📈 Operations Analyst** | `analyst@sentra.demo` | `SentraDemo!2026` | Post-incident analytics, predictive risk simulations, ML telemetry |
 
----
-
-# ✨ Key Features
-
----
-
-## 🧠 AI Crisis Intelligence Engine
-
-- Real-time incident analysis
-- Severity detection
-- Predictive escalation modeling
-- AI-generated recommendations
-- Dynamic risk scoring
-- Threat classification
-- Multi-layer crisis correlation
-- Decision support engine
+> **Quick Access Shortcut:** On the [Sentra Access Portal](https://sentra-01.vercel.app/login), click any role pill under **Demo Role Quick Access** to instantly populate credentials and launch into the command environment.
 
 ---
 
-## 🚨 Live Incident Command Center
+## 🚀 Key Architectural Pillars
 
-- Real-time incident feed
-- Incident prioritization
-- AI triage system
-- Threat confidence scoring
-- Resource allocation intelligence
-- Live operational monitoring
-- Crisis timeline tracking
-- Responder coordination
+### 1. 🎛️ Unified Desktop & Mobile Command Center
+Sentra unifies high-density desktop monitoring and field responder mobility into a singular coherent architecture:
+- **Desktop Command (`/app`)**: Multi-monitor ready tactical interface featuring live situation streams, active incident queue, AI confidence matrices, threat assessment meters, and one-click crisis posture adjustments.
+- **Integrated Field Ops (`/mobile`)**: Native-feeling mobile PWA accessible directly from the desktop command bar (`📱 Mobile Ops`) or standalone on mobile devices. Features turn-by-turn hazard-avoiding egress navigation, instant SOS signaling, responder team status, and offline queue synchronization.
 
----
+### 2. 🧠 Autonomous AI Crisis Engine & Multi-Agent Council
+- **Predictive Escalation Modeling**: Calculates structural failure, smoke dispersion, and crowd bottleneck probabilities before casualties occur.
+- **Incident Prioritization Matrix**: Categorizes multiple simultaneous incidents by criticality, blast radius, and active human density.
+- **Automated Advisory Generation**: Formulates natural-language containment directives reviewed by the AI Advisory Council for human-in-the-loop validation.
 
-## 🛰️ Hyperreal Digital Twin System
+### 3. 🗺️ Hyperreal Digital Twin & Facility Simulation
+- **Structural Telemetry**: Real-time visualization of floor plans, zones, emergency exits, and elevator statuses.
+- **Dynamic Heatmaps**: Atmospheric gas levels, thermal anomalies, corridor congestion, and power grid stability mapped onto interactive layers.
+- **Replay & Scenario Sandbox**: Review past emergency events or stress-test contingency plans with simulated fire, power outage, or breach events.
 
-Sentra includes a live AI-powered digital twin system capable of simulating:
+### 4. 📴 Offline-First Resilience & Air-Gapped Continuity
+- **Zero-Dependency Fallback**: When network connections are severed during a catastrophe, client-side persistence (Zustand + local storage caches) preserves last-known safe evacuation routes and active personnel tasks.
+- **Auto-Sync Queue**: Field actions taken offline (SOS alerts, task completions, responder check-ins) are safely queued and flushed automatically the instant telemetry reconnects.
 
-- Facility state
-- Hazard spread
-- Occupancy flow
-- Responder movement
-- Route optimization
-- Crowd pressure
-- Operational risk zones
-
-### Digital Twin Features
-
-- Live zone intelligence
-- Heatmap overlays
-- Responder route engine
-- Hazard propagation engine
-- Spatial AI prediction
-- Dynamic occupancy tracking
-- AI-assisted extraction routing
+### 5. 🎨 Cyber-Tactical Visual Palette & Materials
+- **Obsidian Midnight Canvas (`#030712`)**: Deep cosmic dark background optimized for high-stress operational environments.
+- **Translucent Obsidian Glass (`rgba(8, 14, 28, 0.88)`)**: Precision-frosted backdrops with luminous electric cyan (`#22d3ee`) and sapphire blue border highlights.
+- **Aesthetic Isolation**: Enhanced internal command workspaces without altering the signature public landing page (`/`) or login screen (`/login`).
 
 ---
 
-## 📊 Executive Intelligence Dashboard
+## 📁 Repository & System Structure
 
-A premium boardroom-grade operational intelligence system providing:
-
-- Business continuity metrics
-- Financial exposure estimation
-- Downtime prevention modeling
-- Reputation risk tracking
-- Strategic recommendations
-- Executive-level readiness analysis
-- Operational health overview
-
----
-
-## ⚡ Real-Time Operations Engine
-
-- Live telemetry streaming
-- Real-time notifications
-- WebSocket-based updates
-- Live event synchronization
-- Incident lifecycle engine
-- Dynamic recommendation system
-
----
-
-## 🔔 Smart Alerting & Notification System
-
-- Incident alerts
-- AI-generated warnings
-- Escalation triggers
-- Priority-based notifications
-- Executive alerts
-- Staff coordination messaging
-
----
-
-## 🧠 AI Council System
-
-Multi-agent AI coordination layer capable of:
-
-- Evaluating incident severity
-- Generating response plans
-- Ranking strategic actions
-- Coordinating operational decisions
-- Supporting executive workflows
-
----
-
-## 🗺️ Geospatial Intelligence
-
-- Google Maps integration
-- Crisis zone visualization
-- Geographic spread analysis
-- Safe route intelligence
-- Route optimization engine
-- Facility navigation intelligence
-
----
-
-## 🌦️ Environmental Intelligence
-
-Integrated weather and environmental intelligence:
-
-- Weather risk integration
-- Hazard prediction
-- Environmental monitoring
-- Crisis escalation correlation
-
----
-
-## 👥 Human Behavior Intelligence
-
-Planned and partially integrated behavioral intelligence systems:
-
-- Crowd movement modeling
-- Evacuation prediction
-- Pressure analysis
-- Behavioral anomaly detection
-- Human flow simulation
-
----
-
-## 🔐 Enterprise Authentication System
-
-- Firebase Authentication
-- Admin bootstrap system
-- Secure login workflows
-- Role-based access architecture
-- Staff authentication
-- Secure session handling
-
----
-
-## 📱 Responsive Multi-Workspace Interface
-
-Sentra includes multiple operational modes:
-
-| Workspace | Purpose |
-|---|---|
-| Command Mode | Tactical operations |
-| Executive Mode | Leadership intelligence |
-| Crisis Mode | Emergency war room |
-| Demo Mode | Investor/demo showcase |
-
----
-
-# 🧱 System Architecture
-
-```text
-IoT Sensors / CCTV / Weather / Incident Reports
-                    ↓
-        Real-Time Data Ingestion Layer
-                    ↓
-        AI Intelligence & Prediction Engine
-                    ↓
-      Crisis Coordination Decision Core
-                    ↓
- ┌────────────────────────────────────┐
- │                                    │
- │  Command Dashboard                 │
- │  Executive Intelligence            │
- │  Digital Twin System               │
- │  AI Council                        │
- │  Notification Engine               │
- │                                    │
- └────────────────────────────────────┘
-                    ↓
-      Responders / Security / Staff
-````
-
----
-
-# 🧰 Complete Technology Stack
-
----
-
-# 🎨 Frontend Technologies
-
-## Core Frontend
-
-* Next.js 16
-* React
-* TypeScript
-* Tailwind CSS
-
----
-
-## UI & Animation
-
-* Framer Motion
-* CSS Variables
-* Glassmorphism UI
-* Premium Dark Theme System
-* Responsive Layout Engine
-* Dynamic Theme Architecture
-
----
-
-## Data Visualization
-
-* ECharts
-* Live operational charts
-* Risk analytics visualization
-* Executive intelligence graphs
-* Trend analysis dashboards
-
----
-
-## Mapping & Spatial Systems
-
-* Google Maps API
-* OpenStreetMap
-* Live route overlays
-* Spatial zone rendering
-
----
-
-## State Management
-
-* Zustand
-* Shared realtime data stores
-* Live operational synchronization
-
----
-
-## UI Components
-
-* Lucide Icons
-* Custom design system
-* Workspace shell architecture
-* Dynamic sidebar system
-
----
-
-# ⚙️ Backend Technologies
-
----
-
-## Core Backend
-
-* Python
-* FastAPI
-* Uvicorn
-* Async APIs
-
----
-
-## API System
-
-* REST APIs
-* WebSocket infrastructure
-* Async request handling
-* Event-driven architecture
-
----
-
-## Data Validation
-
-* Pydantic
-* Structured schemas
-* Validation pipelines
-
----
-
-## Authentication
-
-* Firebase Authentication
-* JWT-based workflows
-* Secure auth architecture
-
----
-
-# 🤖 Artificial Intelligence Layer
-
----
-
-## AI Technologies
-
-* Google Gemini API
-* AI recommendation engine
-* Risk prediction engine
-* Incident intelligence engine
-* Executive intelligence engine
-* Resource deployment intelligence
-
----
-
-## AI Functionalities
-
-* Threat classification
-* Severity prediction
-* Spread prediction
-* AI-generated recommendations
-* Operational optimization
-* Executive summarization
-
----
-
-# 🔥 Firebase Integration
-
-* Firebase Authentication
-* Firestore
-* Cloud storage integration
-* Secure auth handling
-
----
-
-# 🌐 APIs & External Services
-
-| Service         | Purpose              |
-| --------------- | -------------------- |
-| Google Maps API | Mapping & routes     |
-| Gemini AI       | AI intelligence      |
-| OpenWeather API | Weather intelligence |
-| Twilio          | SMS & alerts         |
-| SendGrid        | Email system         |
-| News API        | Crisis intelligence  |
-
----
-
-# ☁️ Cloud & Deployment
-
----
-
-## Frontend Deployment
-
-### Vercel
-
-* Global CDN
-* Edge optimization
-* Production deployment
-* Automatic builds
-
----
-
-## Backend Deployment
-
-### Render
-
-* FastAPI hosting
-* Cloud deployment
-* Web service architecture
-
----
-
-# 🔄 Real-Time Infrastructure
-
-* WebSockets
-* Live telemetry streams
-* Event synchronization
-* Realtime polling fallback
-* Live notification engine
-
----
-
-# 🔐 Security Architecture
-
-* CORS protection
-* Environment variable security
-* API isolation
-* Secure authentication
-* Production-safe deployment
-
----
-
-# 📂 Project Structure
-
-```text
+```
 sentra/
-│
-├── app/                        # Next.js App Router
-├── components/                 # Shared UI Components
-├── modules/                    # Feature Modules
-├── hooks/                      # Custom Hooks
-├── lib/                        # Core Logic & Engines
-├── services/                   # Service Layer
-├── styles/                     # Styling System
-├── public/                     # Public Assets
-│
-├── backend/
-│   ├── app/
-│   ├── routes/
-│   ├── schemas/
-│   ├── services/
-│   └── main.py
-│
-├── docs/
-├── scripts/
-├── config/
-└── data/
+├── app/                           # Next.js 16 App Router
+│   ├── (auth)/login/              # Resilient Authentication Gateway
+│   ├── app/                       # Protected Tactical Command Center
+│   │   ├── ai-council/            # Autonomous Intelligence & War Room
+│   │   ├── analytics/             # Telemetry & Operating Metrics
+│   │   ├── map/                   # Spatial Sensor & Infrastructure Map
+│   │   └── settings/              # System & Session Preferences
+│   ├── mobile/                    # Unified Mobile Field Responder App
+│   │   ├── home/                  # Responder Dashboard & Status Posture
+│   │   ├── route/                 # Turn-by-Turn Dynamic Egress Navigation
+│   │   ├── alert/                 # Live Emergency Broadcast & Audio Guidance
+│   │   ├── sos/                   # 1-Tap Distress Signaling & GPS Beacon
+│   │   ├── staff/                 # Field Personnel Task Queue
+│   │   └── offline/               # Cached Local Continuity Engine
+│   ├── twin/                      # Facility & Campus Digital Twin System
+│   ├── incidents/                 # Incident Command & Triage Stream
+│   └── layout.tsx                 # Master Shell & Telemetry Hydration
+├── components/
+│   ├── app/                       # Desktop Command Center Shell & Sidebar
+│   ├── mobile/                    # Mobile PWA Components (BottomNav, SOS, Map)
+│   ├── security/                  # RBAC Guards, Login Form, Session Management
+│   └── ui/                        # High-End Design System & Cyber Accents
+├── lib/
+│   ├── auth/                      # Resilient Dual-Mode Authentication Engine
+│   ├── mobile/                    # Mobile State, Task Engines & Simulation Data
+│   ├── rbac/                      # Role-Based Access Control Definitions
+│   └── realtime/                  # Real-Time Sensor & Telemetry Data Streams
+├── store/                         # Zustand Global State Machines
+│   ├── auth-store.ts              # Session & Permission State
+│   └── useMobileStore.ts          # Mobile Offline Persistence State
+├── styles/
+│   ├── globals.css                # Global Design Tokens & Cyber Styling
+│   └── tokens.css                 # Master Visual Foundation 2.0 Tokens
+└── apps/mobile/                   # Modular Standalone Mobile Companion Package
 ```
 
 ---
 
-# ⚙️ Environment Variables
+## 🛠️ Quickstart & Local Setup
+
+### Prerequisites
+- **Node.js**: `v20.x` or higher
+- **npm**: `v10.x` or higher
+- **Git**
+
+### Installation
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/Balashanmugam30/sentra.git
+   cd sentra
+   ```
+
+2. **Install all dependencies across workspaces:**
+   ```bash
+   npm install
+   ```
+
+3. **Configure Environment Variables:**
+   Create `.env.local` in the project root:
+   ```env
+   # Application Configuration
+   NEXT_PUBLIC_APP_NAME="Sentra"
+   NEXT_PUBLIC_APP_ENV="development"
+   NEXT_PUBLIC_SITE_URL="http://localhost:3000"
+
+   # Firebase Auth Configuration (Optional in Demo Mode)
+   NEXT_PUBLIC_FIREBASE_API_KEY=""
+   NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=""
+   NEXT_PUBLIC_FIREBASE_PROJECT_ID=""
+   NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=""
+   NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=""
+   NEXT_PUBLIC_FIREBASE_APP_ID=""
+   ```
+
+4. **Verify TypeScript across all workspaces:**
+   ```bash
+   npm run typecheck
+   ```
+
+5. **Start the local development server:**
+   ```bash
+   npm run dev
+   ```
+   Open [http://localhost:3000](http://localhost:3000) to view the Command Center.
+
+6. **Create an optimized production build:**
+   ```bash
+   npm run build
+   ```
 
 ---
 
-## Frontend
+## 🚀 Deployment
 
-```env
-NEXT_PUBLIC_API_BASE=
-NEXT_PUBLIC_API_BASE_URL=
-NEXT_PUBLIC_WS_BASE_URL=
-NEXT_PUBLIC_FIREBASE_API_KEY=
-NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=
-GOOGLE_AI_API_KEY=
-```
+| Target | Deployment URL | Description |
+| :--- | :--- | :--- |
+| **Desktop & Unified Mobile** | [sentra-01.vercel.app](https://sentra-01.vercel.app/) | Primary Vercel deployment with full command center and `/mobile` routes |
+| **Field Mobile Companion** | [sentra-xi.vercel.app](https://sentra-xi.vercel.app/) | Dedicated field mobile PWA deployment |
 
 ---
 
-## Backend
+## 🛡️ Security, Privacy & Compliance
 
-```env
-CORS_ORIGINS=
-FRONTEND_URL=
-ENVIRONMENT=production
-APP_ENV=production
-```
-
----
-
-# 🚀 Local Development Setup
-
----
-
-## 1️⃣ Clone Repository
-
-```bash
-git clone https://github.com/Balashanmugam30/sentra.git
-cd sentra
-```
-
----
-
-## 2️⃣ Frontend Setup
-
-```bash
-npm install
-npm run dev
-```
-
----
-
-## 3️⃣ Backend Setup
-
-```bash
-pip install -r requirements.txt
-uvicorn app.main:app --reload
-```
-
----
-
-## 4️⃣ Access Services
-
-| Service      | URL                                                      |
-| ------------ | -------------------------------------------------------- |
-| Frontend     | [http://localhost:3000](http://localhost:3000)           |
-| Backend      | [http://localhost:8000](http://localhost:8000)           |
-| Swagger Docs | [http://localhost:8000/docs](http://localhost:8000/docs) |
-
----
-
-# 🔑 Demo Credentials
-
-```text
-Email: admin@sentra.demo
-Password: Admin12345!
-```
-
----
-
-# 📊 Use Cases
-
-Sentra can be adapted for:
-
-* Hospitality Crisis Management
-* Smart Cities
-* Airports
-* Hospitals
-* Enterprise Security
-* Campus Safety
-* Emergency Coordination Centers
-* Large Event Monitoring
-
----
-
-# 🚀 Advanced Architecture & Scalability Vision
-
-Sentra is architected with scalability and future expansion in mind.
-
-Planned and scalable capabilities include:
-
-* Multi-model AI orchestration
-* Human behavior intelligence
-* Predictive autonomous response
-* Kubernetes-based microservices
-* Advanced MLOps pipelines
-* Distributed AI inference
-* AI swarm coordination
-* IoT mesh integrations
-* Drone-assisted intelligence systems
-* Voice-command operational systems
-
----
-
-# 🔮 Future Roadmap
-
-* AI-driven autonomous coordination
-* Predictive evacuation systems
-* Drone integration
-* Live CCTV AI analysis
-* Smart wearable responder systems
-* Edge AI deployment
-* Voice AI command assistant
-* Autonomous threat mitigation
-
----
-
-# 👨‍💻 Author
-
-## Balashanmugam S (Bala)
-
-AI & Data Science Engineer
-Builder of Sentra Crisis Intelligence OS
-
-### Connect
-
-* LinkedIn: [https://www.linkedin.com/in/balashanmugams](https://www.linkedin.com/in/balashanmugams)
-* GitHub: [https://github.com/Balashanmugam30](https://github.com/Balashanmugam30)
-
----
-
-# 🏁 Final Statement
-
-> Sentra is more than a dashboard.
-
-It is a next-generation operational intelligence platform designed to redefine how organizations prepare for, respond to, and recover from crises using AI-powered coordination and real-time intelligence.
+- **End-to-End Session Guard**: Automatic inactive device lockouts, secure refresh tokens, and multi-tenant domain isolation.
+- **Zero-Trust Role Enforcement**: Granular cryptographic permission checks on every route, action, and telemetry pipe.
+- **Audit-Grade Traceability**: Tamper-evident activity logs adhering to SOC2 Type II, ISO 27001, and NIST emergency management standards.
 
 ---
 
 <div align="center">
 
-### 🚨 Built with AI. Designed for Crisis Intelligence. Powered by Sentra.
+**Built with precision for uncompromised operational continuity.**  
+© 2026 Sentra Autonomous Systems. All rights reserved.
 
-```
+</div>

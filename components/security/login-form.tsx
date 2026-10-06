@@ -26,7 +26,11 @@ type AccountIntent = "unknown" | "existing" | "new" | "google" | "local";
 const countryCodes = ["+91", "+1", "+44", "+971", "+65"] as const;
 
 const roleQuickAccess = [
+  { label: "Admin Console", credential: DEMO_AUTH_CREDENTIALS[0]! },
+  { label: "Security Manager", credential: DEMO_AUTH_CREDENTIALS[1]! },
   { label: "Staff login", credential: DEMO_AUTH_CREDENTIALS[2]! },
+  { label: "Responder Mode", credential: DEMO_AUTH_CREDENTIALS[3]! },
+  { label: "Analyst View", credential: DEMO_AUTH_CREDENTIALS[4]! },
 ] as const;
 
 function Spinner() {
@@ -739,9 +743,26 @@ export function LoginForm() {
             ) : null}
 
             {error ? (
-              <p className="rounded-2xl border border-[#ff7d7d]/22 bg-[#ff7d7d]/10 px-3 py-2 text-xs text-[#ffd0d0]">
-                {error}
-              </p>
+              <div className="space-y-2">
+                <p className="rounded-2xl border border-[#ff7d7d]/22 bg-[#ff7d7d]/10 px-3 py-2 text-xs text-[#ffd0d0]">
+                  {error}
+                </p>
+                {error.includes("Firebase authorized domains") || error.includes("authorized domains") ? (
+                  <div className="rounded-2xl border border-sky-400/25 bg-sky-950/40 p-3 text-xs text-sky-200">
+                    <p className="font-semibold text-white">To enable Google OAuth on Vercel:</p>
+                    <p className="mt-1 text-white/70">
+                      In Firebase Console &gt; Authentication &gt; Settings &gt; Authorized domains, add <code className="rounded bg-black/40 px-1 py-0.5 text-cyan-300">sentra-01.vercel.app</code>.
+                    </p>
+                    <button
+                      className="mt-2.5 inline-flex w-full items-center justify-center gap-1.5 rounded-xl border border-sky-400/35 bg-sky-500/20 py-2 text-xs font-bold text-white transition hover:bg-sky-500/30"
+                      onClick={() => void submitLocalCredentials(DEMO_AUTH_CREDENTIALS[0]!.email, DEMO_AUTH_CREDENTIALS[0]!.password)}
+                      type="button"
+                    >
+                      ⚡ Instant Access: Enter as Commander Now
+                    </button>
+                  </div>
+                ) : null}
+              </div>
             ) : null}
 
             <button
@@ -770,10 +791,10 @@ export function LoginForm() {
             </button>
           ) : null}
 
-          <div className="mt-3 flex justify-center" aria-label="Demo role quick access">
+          <div className="mt-3 flex flex-wrap justify-center gap-1.5" aria-label="Demo role quick access">
             {roleQuickAccess.map(({ credential, label }) => (
               <button
-                className="whitespace-nowrap rounded-full border border-white/10 bg-white/[0.045] px-4 py-2 text-xs font-semibold text-white/58 transition hover:-translate-y-0.5 hover:border-[#8aa7ff]/28 hover:bg-white/[0.08] hover:text-white/86 focus:outline-none focus:ring-2 focus:ring-[#8aa7ff]/35"
+                className="whitespace-nowrap rounded-full border border-white/10 bg-white/[0.045] px-3 py-1.5 text-xs font-semibold text-white/58 transition hover:-translate-y-0.5 hover:border-[#8aa7ff]/28 hover:bg-white/[0.08] hover:text-white/86 focus:outline-none focus:ring-2 focus:ring-[#8aa7ff]/35"
                 disabled={isSubmitting}
                 key={label}
                 onClick={() => fillDemoCredential(credential, label)}
