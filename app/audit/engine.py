@@ -89,15 +89,18 @@ def build_audit_context(
     user_agent = request.headers.get("user-agent") if request else None
 
     return {
-        "actor_user_id": actor_user_id or (str(identity["id"]) if identity else None),
-        "actor_email": actor_email or (str(identity["email"]) if identity else None),
-        "actor_role": actor_role or (str(identity["role"]) if identity else None),
+        "actor_user_id": actor_user_id
+        or (str(identity.get("id") or identity.get("user_id") or "") if identity else None),
+        "actor_email": actor_email or (str(identity.get("email") or "") if identity else None),
+        "actor_role": actor_role or (str(identity.get("role") or "") if identity else None),
         "tenant_id": (
             str(identity["tenant_id"])
             if identity and identity.get("tenant_id")
-            else str(getattr(request.state, "tenant_id", ""))
-            if request and getattr(request.state, "tenant_id", None)
-            else None
+            else (
+                str(getattr(request.state, "tenant_id", ""))
+                if request and getattr(request.state, "tenant_id", None)
+                else None
+            )
         ),
         "source_ip": source_ip,
         "user_agent": user_agent,
@@ -199,11 +202,7 @@ def get_audit_integrity_snapshot() -> dict[str, Any]:
 
     for event in events:
         expected_hash = AuditRecord.compute_hash(
-            payload={
-                key: value
-                for key, value in event.items()
-                if key not in {"record_hash", "previous_hash"}
-            },
+            payload={key: value for key, value in event.items() if key not in {"record_hash", "previous_hash"}},
             previous_hash=previous_hash,
         )
         if event["previous_hash"] != previous_hash or event["record_hash"] != expected_hash:
@@ -220,20 +219,14 @@ def get_audit_integrity_snapshot() -> dict[str, Any]:
 def _events_today(events: list[dict[str, Any]]) -> list[dict[str, Any]]:
     cutoff = utc_now() - timedelta(days=1)
     return [
-        event
-        for event in events
-        if datetime.fromisoformat(event["timestamp_utc"].replace("Z", "+00:00")) >= cutoff
+        event for event in events if datetime.fromisoformat(event["timestamp_utc"].replace("Z", "+00:00")) >= cutoff
     ]
 
 
 def _tenant_events(events: list[dict[str, Any]], tenant_id: str | None) -> list[dict[str, Any]]:
     if not tenant_id:
         return events
-    return [
-        event
-        for event in events
-        if event.get("tenant_id") == tenant_id or bool(event.get("is_demo"))
-    ]
+    return [event for event in events if event.get("tenant_id") == tenant_id or bool(event.get("is_demo"))]
 
 
 def build_audit_live_snapshot(*, include_full_details: bool, tenant_id: str | None = None) -> dict[str, Any]:
@@ -251,9 +244,7 @@ def build_audit_live_snapshot(*, include_full_details: bool, tenant_id: str | No
                 [event for event in events_today if event["category"] == "auth" and event["action"] == "login_failed"]
             ),
             "denied_requests": len([event for event in events_today if event["status"] == "denied"]),
-            "critical_actions": len(
-                [event for event in events_today if event["severity"] in {"high", "critical"}]
-            ),
+            "critical_actions": len([event for event in events_today if event["severity"] in {"high", "critical"}]),
         },
         "recent_events": recent_events if include_full_details else recent_events[:5],
         "anomalies": anomalies if include_full_details else anomalies[:2],
@@ -392,29 +383,182 @@ def ensure_demo_audit_seeded() -> None:
         return
 
     sample_events = [
-        ("auth", "login_success", "low", "auth", "success", "Sentra Admin session established", "admin@sentra.local", "super_admin"),
+        (
+            "auth",
+            "login_success",
+            "low",
+            "auth",
+            "success",
+            "Sentra Admin session established",
+            "admin@sentra.local",
+            "super_admin",
+        ),
         ("auth", "login_failed", "medium", "auth", "error", "Invalid password supplied", "unknown@sentra.local", None),
-        ("rbac", "role_assignment", "medium", "rbac", "success", "Assigned analyst role", "admin@sentra.local", "super_admin"),
-        ("facility", "lockdown", "critical", "facility", "success", "Zone 2 lockdown triggered", "admin@sentra.local", "super_admin"),
-        ("rbac", "permission_denied", "high", "facility", "denied", "Executive denied facility lockdown", "exec@sentra.local", "executive"),
-        ("operations", "workflow_run", "high", "operations", "success", "Critical fire workflow launched", "ops@sentra.local", "operations_commander"),
-        ("governance", "approval_granted", "medium", "governance", "success", "Commander approved action", "ops@sentra.local", "operations_commander"),
-        ("hardware", "device_command", "medium", "hardware", "success", "Siren command delivered", "security@sentra.local", "security_lead"),
-        ("field", "task_acknowledge", "low", "field", "success", "Responder acknowledged task", "responder@sentra.local", "responder"),
-        ("field", "backup_request", "medium", "field", "success", "Backup requested from Zone 2", "responder@sentra.local", "responder"),
-        ("integrations", "delivery_retry", "medium", "integrations", "success", "Retry queue drained", "admin@sentra.local", "super_admin"),
-        ("resilience", "recover_workflow", "medium", "resilience", "success", "Workflow recovered", "ops@sentra.local", "operations_commander"),
-        ("auth", "refresh_token", "low", "auth", "success", "Access token refreshed", "admin@sentra.local", "super_admin"),
+        (
+            "rbac",
+            "role_assignment",
+            "medium",
+            "rbac",
+            "success",
+            "Assigned analyst role",
+            "admin@sentra.local",
+            "super_admin",
+        ),
+        (
+            "facility",
+            "lockdown",
+            "critical",
+            "facility",
+            "success",
+            "Zone 2 lockdown triggered",
+            "admin@sentra.local",
+            "super_admin",
+        ),
+        (
+            "rbac",
+            "permission_denied",
+            "high",
+            "facility",
+            "denied",
+            "Executive denied facility lockdown",
+            "exec@sentra.local",
+            "executive",
+        ),
+        (
+            "operations",
+            "workflow_run",
+            "high",
+            "operations",
+            "success",
+            "Critical fire workflow launched",
+            "ops@sentra.local",
+            "operations_commander",
+        ),
+        (
+            "governance",
+            "approval_granted",
+            "medium",
+            "governance",
+            "success",
+            "Commander approved action",
+            "ops@sentra.local",
+            "operations_commander",
+        ),
+        (
+            "hardware",
+            "device_command",
+            "medium",
+            "hardware",
+            "success",
+            "Siren command delivered",
+            "security@sentra.local",
+            "security_lead",
+        ),
+        (
+            "field",
+            "task_acknowledge",
+            "low",
+            "field",
+            "success",
+            "Responder acknowledged task",
+            "responder@sentra.local",
+            "responder",
+        ),
+        (
+            "field",
+            "backup_request",
+            "medium",
+            "field",
+            "success",
+            "Backup requested from Zone 2",
+            "responder@sentra.local",
+            "responder",
+        ),
+        (
+            "integrations",
+            "delivery_retry",
+            "medium",
+            "integrations",
+            "success",
+            "Retry queue drained",
+            "admin@sentra.local",
+            "super_admin",
+        ),
+        (
+            "resilience",
+            "recover_workflow",
+            "medium",
+            "resilience",
+            "success",
+            "Workflow recovered",
+            "ops@sentra.local",
+            "operations_commander",
+        ),
+        (
+            "auth",
+            "refresh_token",
+            "low",
+            "auth",
+            "success",
+            "Access token refreshed",
+            "admin@sentra.local",
+            "super_admin",
+        ),
         ("auth", "logout", "low", "auth", "success", "Session closed", "admin@sentra.local", "super_admin"),
-        ("facility", "hvac_command", "high", "facility", "success", "Zone 3 HVAC shutdown", "security@sentra.local", "security_lead"),
-        ("facility", "announcement", "medium", "facility", "success", "PA evacuation message sent", "security@sentra.local", "security_lead"),
-        ("facility", "elevator_recall", "high", "facility", "success", "Elevator recall initiated", "security@sentra.local", "security_lead"),
+        (
+            "facility",
+            "hvac_command",
+            "high",
+            "facility",
+            "success",
+            "Zone 3 HVAC shutdown",
+            "security@sentra.local",
+            "security_lead",
+        ),
+        (
+            "facility",
+            "announcement",
+            "medium",
+            "facility",
+            "success",
+            "PA evacuation message sent",
+            "security@sentra.local",
+            "security_lead",
+        ),
+        (
+            "facility",
+            "elevator_recall",
+            "high",
+            "facility",
+            "success",
+            "Elevator recall initiated",
+            "security@sentra.local",
+            "security_lead",
+        ),
         ("auth", "login_failed", "medium", "auth", "error", "Invalid password supplied", "unknown@sentra.local", None),
         ("auth", "login_failed", "medium", "auth", "error", "Invalid password supplied", "unknown@sentra.local", None),
         ("auth", "login_failed", "medium", "auth", "error", "Invalid password supplied", "unknown@sentra.local", None),
         ("auth", "login_failed", "medium", "auth", "error", "Invalid password supplied", "unknown@sentra.local", None),
-        ("rbac", "permission_denied", "high", "operations", "denied", "Responder attempted operations route", "responder@sentra.local", "responder"),
-        ("hardware", "device_command", "medium", "hardware", "success", "Beacon flash queued", "security@sentra.local", "security_lead"),
+        (
+            "rbac",
+            "permission_denied",
+            "high",
+            "operations",
+            "denied",
+            "Responder attempted operations route",
+            "responder@sentra.local",
+            "responder",
+        ),
+        (
+            "hardware",
+            "device_command",
+            "medium",
+            "hardware",
+            "success",
+            "Beacon flash queued",
+            "security@sentra.local",
+            "security_lead",
+        ),
         ("system", "startup", "low", "system", "success", "System startup event", "system@sentra.local", "super_admin"),
         ("system", "demo_event", "low", "audit", "success", "Demo audit record", "admin@sentra.local", "super_admin"),
     ]
