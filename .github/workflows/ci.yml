@@ -32,7 +32,7 @@ jobs:
       - run: ruff check app tests
       - run: black --check app/core/observability.py app/main.py app/auth/router.py app/routes/incident_routes.py tests
       - run: mypy --explicit-package-bases --follow-imports=skip app/core/observability.py app/main.py app/auth/router.py app/routes/incident_routes.py
-      - run: pytest
+      - run: python -m pytest
       - run: python -m compileall app
 
   docker:

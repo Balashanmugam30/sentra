@@ -20,3 +20,4 @@ exclude = ["\\.venv", "node_modules", "\\.next"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-q"
+pythonpath = ["."]
