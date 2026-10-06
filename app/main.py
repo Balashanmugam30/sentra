@@ -504,9 +504,7 @@ def system_performance_deep() -> dict[str, object]:
             "inflight_cache_builds": cache_stats["inflight"],
         },
         "stale_engine_states": [
-            item["route"]
-            for item in slow_routes
-            if int(item["avg_latency_ms"]) >= 1_200 or int(item["timeouts"]) > 0
+            item["route"] for item in slow_routes if int(item["avg_latency_ms"]) >= 1_200 or int(item["timeouts"]) > 0
         ],
         "recommendations": [
             "Keep executive mode active for leadership reviews.",

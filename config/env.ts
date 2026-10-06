@@ -114,14 +114,14 @@ function ensurePresent(
 }
 
 const firebaseApiKey = ensurePresent("NEXT_PUBLIC_FIREBASE_API_KEY", process.env.NEXT_PUBLIC_FIREBASE_API_KEY, {
-  fallback: null,
+  fallback: "AIzaSyDXscfi8k93z0Ep140WTqFnaGGGn02FBWs",
   requiredInProduction: false,
 });
 const firebaseAuthDomain = ensurePresent(
   "NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN",
   process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
   {
-    fallback: null,
+    fallback: "sentra-01.firebaseapp.com",
     requiredInProduction: false,
   },
 );
@@ -129,7 +129,7 @@ const firebaseProjectId = ensurePresent(
   "NEXT_PUBLIC_FIREBASE_PROJECT_ID",
   process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
   {
-    fallback: null,
+    fallback: "sentra-01",
     requiredInProduction: false,
   },
 );
@@ -137,7 +137,7 @@ const firebaseStorageBucket = ensurePresent(
   "NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET",
   process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
   {
-    fallback: null,
+    fallback: "sentra-01.firebasestorage.app",
     requiredInProduction: false,
   },
 );
@@ -145,12 +145,12 @@ const firebaseMessagingSenderId = ensurePresent(
   "NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID",
   process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
   {
-    fallback: null,
+    fallback: "557394501991",
     requiredInProduction: false,
   },
 );
 const firebaseAppId = ensurePresent("NEXT_PUBLIC_FIREBASE_APP_ID", process.env.NEXT_PUBLIC_FIREBASE_APP_ID, {
-  fallback: null,
+  fallback: "1:557394501991:web:c1e69b36810f3767940fc2",
   requiredInProduction: false,
 });
 

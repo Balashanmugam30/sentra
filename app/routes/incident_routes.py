@@ -142,8 +142,15 @@ def get_incident_endpoint(incident_id: str, user: dict[str, object] = Depends(ge
 
 
 @router.patch("/{incident_id}", response_model=ApiResponse)
-async def update_incident_status_endpoint(incident_id: str, payload: IncidentStatusUpdate, request: Request, user: dict[str, object] = Depends(get_current_user)) -> ApiResponse:
-    incident = await update_incident_status(incident_id, payload.status, updated_by=str(user.get("user_id") or user.get("email") or "unknown"))
+async def update_incident_status_endpoint(
+    incident_id: str,
+    payload: IncidentStatusUpdate,
+    request: Request,
+    user: dict[str, object] = Depends(get_current_user),
+) -> ApiResponse:
+    incident = await update_incident_status(
+        incident_id, payload.status, updated_by=str(user.get("user_id") or user.get("email") or "unknown")
+    )
     append_audit_event(
         category="incident",
         action="incident_status_updated",
@@ -152,7 +159,11 @@ async def update_incident_status_endpoint(incident_id: str, payload: IncidentSta
         status="success",
         reason="Incident status updated from authenticated Firebase/Sentra session",
         request=request,
-        identity={"user_id": str(user.get("user_id") or ""), "email": str(user.get("email") or ""), "role": str(user.get("role") or "")},
+        identity={
+            "user_id": str(user.get("user_id") or ""),
+            "email": str(user.get("email") or ""),
+            "role": str(user.get("role") or ""),
+        },
         target_id=incident.id,
         after_state={"status": payload.status},
         risk_score=42,

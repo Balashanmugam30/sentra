@@ -373,7 +373,9 @@ def _session_device_from_record(record: dict[str, object], current_session_id: s
         expires_at=expires_at,
         revoked=bool(record.get("revoked")),
         current=str(record["session_id"]) == current_session_id,
-        device_label="Current secure browser" if str(record["session_id"]) == current_session_id else "Remembered browser",
+        device_label=(
+            "Current secure browser" if str(record["session_id"]) == current_session_id else "Remembered browser"
+        ),
         last_active=issued_at,
     )
 
@@ -383,8 +385,7 @@ def list_sessions(context: AuthContext = Depends(get_current_auth_context)) -> S
     user_id = str(context.user["user_id"])
     current_session_id = str(context.payload.get("sid") or "") or None
     sessions = [
-        _session_device_from_record(record, current_session_id)
-        for record in auth_store.list_user_sessions(user_id)
+        _session_device_from_record(record, current_session_id) for record in auth_store.list_user_sessions(user_id)
     ]
     return SessionsResponse(sessions=sorted(sessions, key=lambda item: item.issued_at, reverse=True))
 
