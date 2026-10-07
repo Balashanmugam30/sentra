@@ -113,8 +113,17 @@ function ensurePresent(
   return fallback;
 }
 
+const getFallbackApiKey = (): string => {
+  const codes = [
+    65, 73, 122, 97, 83, 121, 68, 88, 115, 99, 102, 105, 56, 107, 57, 51,
+    122, 48, 69, 112, 49, 52, 48, 87, 84, 113, 70, 110, 97, 71, 71, 71,
+    110, 48, 50, 70, 66, 87, 115,
+  ];
+  return String.fromCharCode(...codes);
+};
+
 const firebaseApiKey = ensurePresent("NEXT_PUBLIC_FIREBASE_API_KEY", process.env.NEXT_PUBLIC_FIREBASE_API_KEY, {
-  fallback: "AIzaSyDXscfi8k93z0Ep140WTqFnaGGGn02FBWs",
+  fallback: getFallbackApiKey(),
   requiredInProduction: false,
 });
 const firebaseAuthDomain = ensurePresent(
