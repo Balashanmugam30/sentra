@@ -10,7 +10,7 @@
 
 ### 🛰️ The Autonomous Neural Backbone for Mission-Critical Facilities & Emergency Operations
 
-**[🖥️ Launch Desktop Command Center](https://sentra-01.vercel.app/)** &nbsp;•&nbsp; **[📱 Open Integrated Field Mobile](https://sentra-01.vercel.app/mobile)** &nbsp;•&nbsp; **[📲 Standalone Field App](https://sentra-xi.vercel.app/)**
+**[🖥️ Launch Desktop Command Center](https://sentra-01.vercel.app/app)** &nbsp;•&nbsp; **[📱 Open Integrated Field Mobile](https://sentra-01.vercel.app/mobile)** &nbsp;•&nbsp; **[🌐 Public Showcase](https://sentra-01.vercel.app/)**
 
 </div>
 
@@ -135,7 +135,12 @@ sentra/
 ├── styles/
 │   ├── globals.css                # Global Design Tokens & Cyber Styling
 │   └── tokens.css                 # Master Visual Foundation 2.0 Tokens
-└── apps/mobile/                   # Modular Standalone Mobile Companion Package
+├── tests/
+│   ├── e2e/                       # Playwright Multi-Viewport Regression Specs (01-10)
+│   └── test_enterprise_platform.py # FastAPI Python Unit & Integration Suite
+├── types/
+│   └── incident-intelligence.ts   # Future Capability Seams & Type Contracts
+└── playwright.config.ts           # Playwright Test Runner Configuration
 ```
 
 ---
@@ -199,8 +204,8 @@ sentra/
 
 | Target | Deployment URL | Description |
 | :--- | :--- | :--- |
-| **Desktop & Unified Mobile** | [sentra-01.vercel.app](https://sentra-01.vercel.app/) | Primary Vercel deployment with full command center and `/mobile` routes |
-| **Field Mobile Companion** | [sentra-xi.vercel.app](https://sentra-xi.vercel.app/) | Dedicated field mobile PWA deployment |
+| **Primary Production Command OS** | [sentra-01.vercel.app](https://sentra-01.vercel.app/) | Production Vercel deployment with full command center (`/app`) and unified field mobile (`/mobile`) |
+| **Legacy Standalone Deployment** | [sentra-xi.vercel.app](https://sentra-xi.vercel.app/) | Legacy standalone mobile deployment (consolidated into primary) |
 
 ---
 
