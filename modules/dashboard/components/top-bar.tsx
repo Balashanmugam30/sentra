@@ -247,7 +247,7 @@ export function TopBar({ onOpenCommand, onOpenNav }: TopBarProps) {
                       key={item.mode}
                       onClick={() => {
                         setWorkspaceMode(item.mode);
-                        router.push(`/dashboard?mode=${item.mode}` as Route);
+                        router.push(`/app?mode=${item.mode}` as Route);
                       }}
                       role="tab"
                       type="button"

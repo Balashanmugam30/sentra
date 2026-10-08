@@ -42,7 +42,7 @@ export function PortfolioSection() {
           <div className="mt-7 flex flex-col gap-3 sm:flex-row">
             <Link
               className="inline-flex items-center justify-center rounded-full border border-cyan-100/18 bg-cyan-200/12 px-5 py-3 text-sm font-semibold text-white transition hover:bg-cyan-100/18"
-              href="/landing#case-study"
+              href="#case-study"
             >
               View case study
             </Link>

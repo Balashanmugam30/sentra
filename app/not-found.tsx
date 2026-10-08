@@ -20,7 +20,7 @@ export default function NotFound() {
         <div className="mt-7 flex flex-col justify-center gap-3 sm:flex-row">
           <Link
             className="inline-flex items-center justify-center rounded-full border border-cyan-100/20 bg-cyan-200/12 px-5 py-3 text-sm font-semibold text-white transition hover:bg-cyan-100/18"
-            href="/landing"
+            href="/"
           >
             View launch showcase
           </Link>

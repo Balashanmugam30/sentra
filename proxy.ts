@@ -37,6 +37,25 @@ function isProtectedRoute(pathname: string) {
 
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
+
+  if (pathname === "/dashboard" || pathname === "/dashboard/") {
+    const url = new URL("/app", request.url);
+    url.search = request.nextUrl.search;
+    return NextResponse.redirect(url);
+  }
+
+  if (pathname === "/app/dashboard" || pathname === "/app/dashboard/") {
+    const url = new URL("/app", request.url);
+    url.search = request.nextUrl.search;
+    return NextResponse.redirect(url);
+  }
+
+  if (pathname === "/landing" || pathname === "/landing/") {
+    const url = new URL("/", request.url);
+    url.search = request.nextUrl.search;
+    return NextResponse.redirect(url);
+  }
+
   const clientSession = request.cookies.get(CLIENT_SESSION_COOKIE_NAME)?.value;
   const accessToken = request.cookies.get(ACCESS_COOKIE_NAME)?.value;
   const refreshToken = request.cookies.get(REFRESH_COOKIE_NAME)?.value;

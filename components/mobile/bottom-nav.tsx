@@ -42,7 +42,7 @@ export function BottomNav() {
         })}
         <Link
           className="flex min-h-12 flex-col items-center justify-center rounded-2xl px-1 text-[0.65rem] font-semibold text-cyan-300 transition hover:bg-white/10"
-          href="/dashboard"
+          href="/app"
           title="Switch to Desktop Command OS"
         >
           <span className="mb-1 text-[0.7rem]">🖥️</span>

@@ -7,6 +7,25 @@ const nextConfig: NextConfig = {
   experimental: {
     optimizePackageImports: ["zustand"],
   },
+  async redirects() {
+    return [
+      {
+        source: "/dashboard",
+        destination: "/app",
+        permanent: true,
+      },
+      {
+        source: "/app/dashboard",
+        destination: "/app",
+        permanent: true,
+      },
+      {
+        source: "/landing",
+        destination: "/",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;
