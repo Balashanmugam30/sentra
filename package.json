@@ -2,20 +2,16 @@
   "name": "sentra-frontend",
   "version": "0.1.0",
   "private": true,
-  "workspaces": [
-    "apps/mobile"
-  ],
   "scripts": {
     "dev": "next dev",
-    "build": "next build && npm --workspace sentra-mobile run build",
-    "build:web": "next build",
-    "build:mobile": "npm --workspace sentra-mobile run build",
+    "build": "next build",
     "start": "next start",
-    "lint": "eslint . --max-warnings=0 && npm --workspace sentra-mobile run lint",
+    "lint": "eslint . --max-warnings=0",
     "analyze": "npm run build && node scripts/bundle-report.mjs",
     "format": "prettier --check .",
     "format:write": "prettier --write .",
-    "typecheck": "tsc --noEmit && npm --workspace sentra-mobile run typecheck"
+    "typecheck": "tsc --noEmit",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "@react-spring/web": "^10.0.3",
@@ -38,6 +34,7 @@
     "zustand": "^5.0.8"
   },
   "devDependencies": {
+    "@playwright/test": "^1.64.0",
     "@tailwindcss/postcss": "^4.1.11",
     "@types/node": "^24.3.0",
     "@types/react": "^19.2.2",

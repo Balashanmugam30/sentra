@@ -1,15 +1,15 @@
 const SENTRA_CACHE = "sentra-mobile-v2";
 const APP_SHELL = [
-  "/",
-  "/home",
-  "/alert",
-  "/route",
-  "/sos",
-  "/staff",
-  "/responder",
-  "/settings",
-  "/offline",
-  "/about",
+  "/mobile",
+  "/mobile/home",
+  "/mobile/alert",
+  "/mobile/route",
+  "/mobile/sos",
+  "/mobile/staff",
+  "/mobile/responder",
+  "/mobile/settings",
+  "/mobile/offline",
+  "/mobile/about",
   "/manifest.json",
   "/icons/sentra-icon.svg",
   "/icons/sentra-maskable.svg",
@@ -45,6 +45,6 @@ self.addEventListener("fetch", (event) => {
         caches.open(SENTRA_CACHE).then((cache) => cache.put(event.request, copy));
         return response;
       })
-      .catch(() => caches.match(event.request).then((cached) => cached || caches.match("/offline"))),
+      .catch(() => caches.match(event.request).then((cached) => cached || caches.match("/mobile/offline"))),
   );
 });
