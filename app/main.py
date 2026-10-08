@@ -13,6 +13,7 @@ from fastapi.responses import PlainTextResponse, Response
 from app.ai.router import router as autonomous_ai_router
 from app.ai.council_router import router as ai_council_router
 from app.ai.learning_router import router as ai_learning_router
+from app.ai.intelligence_router import router as incident_intelligence_router
 from app.aicouncil.router import router as ai_decision_council_router
 from app.aicouncil.store import ai_council_store
 from app.analytics.router import router as analytics_router
@@ -233,6 +234,7 @@ app.include_router(simulation_router, prefix=settings.api_prefix)
 app.include_router(perception_router, prefix=settings.api_prefix)
 app.include_router(agents_router, prefix=settings.api_prefix)
 app.include_router(autonomous_ai_router, prefix=settings.api_prefix)
+app.include_router(incident_intelligence_router, prefix=settings.api_prefix)
 app.include_router(ai_council_router, prefix=settings.api_prefix)
 app.include_router(ai_learning_router, prefix=settings.api_prefix)
 app.include_router(ai_decision_council_router, prefix=settings.api_prefix)

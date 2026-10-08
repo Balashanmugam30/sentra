@@ -3,7 +3,7 @@
 > **Authoritative Specification:** Compressed 9-Phase Production Program  
 > **Repository:** `https://github.com/Balashanmugam30/sentra`  
 > **Canonical Production URL:** `https://sentra-01.vercel.app/`  
-> **Current Execution Focus:** Phase 3 — Complete Authenticated Operations UI & Infrastructure Hardening  
+> **Current Execution Focus:** Phase 4 — Real Multimodal Crisis Intelligence Layer  
 
 ---
 
@@ -13,8 +13,8 @@
 | :---: | :--- | :---: | :--- |
 | **1** | Architecture Consolidation + Unified Responsive Foundation | ✅ Complete | Next.js 16 monorepo unification, retired standalone duplicate `apps/mobile/`, consolidated route redirects, unified desktop/tablet/mobile shells, 10 Playwright regression suites. |
 | **2** | Design System Reconstruction + Liquid Glass 3.0 | ✅ Complete | Obsidian Midnight base (`#030712`), 3 optical glass tiers (`Glass 01` subtle, `Glass 02` elevated with specular sheen, `Glass 03` floating command), 8 semantic statuses, UI primitive suite, `/app/design-system` QA gallery. |
-| **3** | Complete Authenticated Operations UI & Infrastructure Hardening | 🔄 In Progress | Unified authenticated shell, command header, operational command center, incidents & detail workspace, continuous incident timeline, analytics, operations execution, security posture, tenant command, mobile field ops, Vercel/Render recovery. |
-| **4** | Real Intelligence Layer | ⏳ Planned | Real Gemini 2.5/Flash model integration, multimodal crisis perception, RAG vector ingestion, AI Decision Council reasoning, structured tool execution. |
+| **3** | Complete Authenticated Operations UI & Infrastructure Hardening | ✅ Complete | Unified authenticated shell, command header, operational command center, incidents & detail workspace, continuous incident timeline, analytics, operations execution, security posture, tenant command, mobile field ops, Vercel/Render recovery. |
+| **4** | Real Multimodal Crisis Intelligence Layer | ✅ Complete | Official Google GenAI (Gemini 2.5 Flash / Pro) integration, Multimodal perception (FLIR thermal, CCTV, air quality), Topological Evidence Graph DAG with cross-modal conflict detection, Multi-tenant RAG emergency SOP vector retrieval (NFPA, OSHA, ISO), 5 Specialist Agent deliberation council, Mandatory Human Approval Safety Gate (ActionProposal state machine), and Incident Intelligence Cockpit UI. |
 | **5** | Real Data + Prediction + MLOps | ⏳ Planned | Live geospatial sensor feeds, hazard propagation modeling, ML inference registry, model drift monitoring, data ingestion pipelines. |
 | **6** | Autonomous Crisis Operations | ⏳ Planned | Closed-loop hazard containment, automated building overrides, safety approval gates, multi-agent dispatch protocols. |
 | **7** | Security + Reliability + Enterprise Hardening | ⏳ Planned | End-to-end zero-trust architecture, audit log immutability, automated failover, air-gapped readiness, enterprise compliance. |
@@ -77,3 +77,35 @@
    - Tenant & Multi-Organization Command Surface.
    - Application Settings with honest persistence state.
    - Root-Integrated Mobile Field Operations Companion (`/mobile/*`).
+
+---
+
+## Phase 4 Deliverables (Real Multimodal Crisis Intelligence Layer)
+1. **Official Google GenAI (Gemini 2.5 Flash / Pro) Provider:**
+   - Integrated the official `google-genai` Python SDK (v2.29.0) and `@google/genai` npm library.
+   - Server-side execution only with strict JSON Schema contracts.
+   - Explicit degradation and deterministic fallback (`RULE_BASED_FALLBACK`) when offline or unconfigured.
+2. **Topological Evidence Graph (DAG):**
+   - Implemented graph data structure linking `SourceNode` -> `ObservationNode` -> `EvidenceNode` -> `AssessmentNode`.
+   - Calibrated confidence engine factoring in sensor variance, degradation, and cross-modal corroboration.
+3. **Cross-Modal Conflict Detection:**
+   - Detects discrepancies between sensor modalities (e.g. radiometric thermal spike vs. particulate air sensor baseline).
+   - Establishes `ConflictEdge` objects with explanation strings and applies automated confidence dampening.
+4. **Multi-Tenant RAG Emergency SOP Retrieval:**
+   - Vector similarity retrieval engine indexing NFPA 1600 (Emergency Mgmt), OSHA 1910.120 (Hazmat), NFPA 101 (Life Safety Code), ISO 22320, and tenant-scoped facility directives.
+   - Verifiable citations with standard name, section title, chunk ID, and exact textual excerpts.
+5. **AI Incident Commander & 5 Specialist Roles:**
+   - Multi-agent deliberation across Fire Commander, Evacuation Coordinator, Medical Triage Officer, Crowd Dynamics Specialist, and Structural Safety Inspector.
+   - Structured tactical reasoning with operational caveats and dissent tracking.
+6. **Mandatory Human Approval Safety Gate:**
+   - Strict `ActionProposal` state machine (`pending_review` -> `approved` -> `executed` / `rejected`).
+   - High-impact physical operations (Lockdowns, Mass Alerts, Sprinkler Activation, Tactical Dispatch) blocked from execution without explicit verified operator sign-off.
+7. **Incident Intelligence Cockpit UI Integration:**
+   - Seamlessly integrated into `/app/incidents` with Liquid Glass 3.0 tokens.
+   - Interactive sub-navigation across Topological Evidence DAG, Specialist Agents, Human Approval Gate, and RAG Citations.
+8. **Forensic Audit & Architecture Documentation:**
+   - Authored `docs/INTELLIGENCE_AUDIT.md` (complete forensic matrix).
+   - Authored `docs/INTELLIGENCE_ARCHITECTURE.md` (end-to-end multi-tier pipeline and mathematical formulas).
+9. **Full Automated Verification:**
+   - Python unit test suite (`tests/test_intelligence_layer.py`) passing 100% with live Gemini invocation.
+   - Playwright end-to-end test suite (`tests/e2e/13-intelligence-layer.spec.ts`) validating UI intelligence panels, DAG nodes, and human approval transitions.

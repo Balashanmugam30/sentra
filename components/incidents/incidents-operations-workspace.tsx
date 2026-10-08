@@ -20,6 +20,7 @@ import { useLiveDataStore } from "@/lib/realtime/live-data-store";
 import { useLiveDataEngine } from "@/lib/realtime/use-live-data";
 import type { LiveIncident, LiveIncidentStatus } from "@/lib/engines/incident-intelligence";
 import { IncidentIntelligenceDashboard } from "@/components/analytics/premium-charts";
+import { IncidentIntelligencePanel } from "@/components/intelligence/incident-intelligence-panel";
 
 function severityToStatus(severity: number): StatusType {
   if (severity >= 5) return "critical";
@@ -69,6 +70,7 @@ export function IncidentsOperationsWorkspace() {
   const [severityFilter, setSeverityFilter] = useState<string>("all");
   const [statusFilter, setStatusFilter] = useState<string>("all");
   const [actionNotice, setActionNotice] = useState<string | null>(null);
+  const [cockpitSubView, setCockpitSubView] = useState<"ai_commander" | "timeline" | "telemetry">("ai_commander");
 
   // Fallback to first incident if selected doesn't exist
   const selectedIncident = useMemo(() => {
@@ -494,6 +496,13 @@ export function IncidentsOperationsWorkspace() {
                   </div>
                 </GlassPanel>
 
+                {/* Real AI Incident Commander & Multimodal Evidence Graph (Phase 4) */}
+                <IncidentIntelligencePanel
+                  incidentId={selectedIncident.id}
+                  incidentTitle={selectedIncident.title ?? undefined}
+                  incidentLocation={selectedIncident.location ?? undefined}
+                />
+
                 {/* Continuous Chronological Timeline */}
                 <GlassPanel tier="subtle" className="flex flex-col gap-4 p-6">
                   <div className="flex items-center justify-between border-b border-white/10 pb-3">
@@ -506,7 +515,6 @@ export function IncidentsOperationsWorkspace() {
                   </div>
 
                   <div className="relative pl-6 before:absolute before:bottom-2 before:left-2 before:top-2 before:w-px before:bg-white/15">
-                    {/* Default synthesized logs if timeline_logs is empty */}
                     {(selectedIncident.timeline_logs && selectedIncident.timeline_logs.length > 0
                       ? selectedIncident.timeline_logs
                       : [

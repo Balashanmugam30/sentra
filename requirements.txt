@@ -7,3 +7,4 @@ PyJWT
 paho-mqtt
 stripe
 firebase-admin
+google-genai>=2.0.0
