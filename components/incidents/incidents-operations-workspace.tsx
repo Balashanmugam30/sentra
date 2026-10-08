@@ -21,6 +21,7 @@ import { useLiveDataEngine } from "@/lib/realtime/use-live-data";
 import type { LiveIncident, LiveIncidentStatus } from "@/lib/engines/incident-intelligence";
 import { IncidentIntelligenceDashboard } from "@/components/analytics/premium-charts";
 import { IncidentIntelligencePanel } from "@/components/intelligence/incident-intelligence-panel";
+import { PredictionCockpitPanel } from "@/components/predictions/prediction-cockpit-panel";
 
 function severityToStatus(severity: number): StatusType {
   if (severity >= 5) return "critical";
@@ -501,6 +502,11 @@ export function IncidentsOperationsWorkspace() {
                   incidentId={selectedIncident.id}
                   incidentTitle={selectedIncident.title ?? undefined}
                   incidentLocation={selectedIncident.location ?? undefined}
+                />
+
+                {/* Real Data Plane, Calibrated Predictions & MLOps Governance (Phase 5) */}
+                <PredictionCockpitPanel
+                  initialIncidentId={selectedIncident.id}
                 />
 
                 {/* Continuous Chronological Timeline */}

@@ -9,6 +9,7 @@ import { FinancialImpact } from "@/components/twin/financial-impact";
 import { PredictiveRiskRadar } from "@/components/twin/predictive-risk-radar";
 import { SpreadForecast } from "@/components/twin/spread-forecast";
 import { ProtectedWorkspaceShell } from "@/components/app/protected-workspace-shell";
+import { PredictionCockpitPanel } from "@/components/predictions/prediction-cockpit-panel";
 import { useTwin } from "@/lib/twin/use-twin";
 
 export default function TwinPredictivePage() {
@@ -56,6 +57,9 @@ export default function TwinPredictivePage() {
           </section>
           <section className="mt-6">
             <SpreadForecast forecast={forecast} />
+          </section>
+          <section className="mt-6">
+            <PredictionCockpitPanel initialIncidentId="INC-TWIN-PREDICTIVE" />
           </section>
         </div>
       </main>

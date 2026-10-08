@@ -14,6 +14,7 @@ import { useAnalyticsHub } from "@/lib/analytics/use-analytics";
 import { useLiveDataEngine } from "@/lib/realtime/use-live-data";
 import { ExecutiveAnalyticsCommandCenter } from "@/components/analytics/premium-charts";
 import { LiveOperationsCharts } from "@/modules/charts/live-operations-charts";
+import { PredictionCockpitPanel } from "@/components/predictions/prediction-cockpit-panel";
 
 export function OperationalAnalyticsWorkspace() {
   useLiveDataEngine();
@@ -114,6 +115,11 @@ export function OperationalAnalyticsWorkspace() {
       {/* Live Operations Charts */}
       <section className="mt-2">
         <LiveOperationsCharts />
+      </section>
+
+      {/* Phase 5 Calibrated Crisis Predictions & MLOps Governance Cockpit */}
+      <section className="mt-4">
+        <PredictionCockpitPanel initialIncidentId="INC-FLEET-ANALYTICS" />
       </section>
     </div>
   );

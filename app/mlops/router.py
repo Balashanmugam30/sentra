@@ -126,3 +126,59 @@ def post_retrain(payload: MLOpsMutationRequest, request: Request, tenant: dict[s
     _log(request, identity, tenant, "auto_retrain_triggered", f"Retrain triggered: {event['payload'].get('domain')}", event["event_id"])
     return MLOpsMutationResponse(ok=True, message="Auto retrain trigger queued", data={"event": event})
 
+
+# ---------------------------------------------------------------------------
+# Phase 5 MLOps Governance & Observability Extensions
+# ---------------------------------------------------------------------------
+
+@router.get("/governance/models")
+def get_governance_models():
+    """Returns registered model versions with lifecycle deployment states."""
+    from app.mlops.model_registry import mlops_governance
+    return {
+        "models": [m.model_dump(mode="json") for m in mlops_governance.list_models()],
+        "active_and_shadow": mlops_governance.get_active_models(),
+    }
+
+
+@router.get("/governance/drift")
+def get_governance_drift():
+    """Returns Population Stability Index (PSI) drift report across feature families."""
+    from app.mlops.model_registry import mlops_governance
+    return mlops_governance.evaluate_drift().model_dump(mode="json")
+
+
+@router.get("/governance/telemetry")
+def get_governance_telemetry(tenant_id: str = "TEN-BALA-HQ"):
+    """Returns MLOps inference latency percentiles (p50, p95, p99), errors, and cost."""
+    from app.mlops.model_registry import mlops_governance
+    return mlops_governance.get_telemetry_report(tenant_id=tenant_id).model_dump(mode="json")
+
+
+@router.get("/governance/shadow/divergence")
+def get_shadow_divergence(limit: int = 50):
+    """Returns shadow candidate model evaluation divergence logs."""
+    from app.data.storage import data_storage
+    return {
+        "count": len(data_storage.get_shadow_divergence_logs(limit=limit)),
+        "logs": data_storage.get_shadow_divergence_logs(limit=limit),
+    }
+
+
+@router.get("/health")
+def get_mlops_health():
+    """Returns composite health for MLOps registry, drift engine, and telemetry."""
+    from app.mlops.model_registry import mlops_governance
+    drift = mlops_governance.evaluate_drift()
+    telemetry = mlops_governance.get_telemetry_report()
+    return {
+        "status": "healthy" if drift.drift_state.value in {"NORMAL", "WATCH"} else "warning",
+        "drift_state": drift.drift_state.value,
+        "overall_psi": drift.overall_psi,
+        "active_model": telemetry.active_model_version,
+        "shadow_model": telemetry.shadow_model_version,
+        "p95_latency_ms": telemetry.p95_latency_ms,
+        "total_inferences": telemetry.total_inferences,
+    }
+
+

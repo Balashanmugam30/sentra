@@ -19,5 +19,7 @@ exclude = ["\\.venv", "node_modules", "\\.next"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-addopts = "-q"
+norecursedirs = ["node_modules", ".next", ".venv", "venv", "build", "dist"]
+addopts = "-q -p no:langsmith"
 pythonpath = ["."]
+
