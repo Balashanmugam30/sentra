@@ -9,9 +9,15 @@ export default defineConfig({
   timeout: 30000,
   reporter: "list",
   use: {
-    baseURL: process.env.PLAYWRIGHT_TEST_BASE_URL || "http://localhost:3000",
+    baseURL: process.env.PLAYWRIGHT_TEST_BASE_URL || "http://127.0.0.1:3100",
     trace: "on-first-retry",
     screenshot: "only-on-failure",
+  },
+  webServer: {
+    command: "npx next dev -p 3100",
+    url: "http://127.0.0.1:3100",
+    reuseExistingServer: false,
+    timeout: 120000,
   },
   projects: [
     {
