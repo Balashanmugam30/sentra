@@ -1,25 +1,39 @@
 "use client";
 
 import Lenis from "@studio-freight/lenis";
+import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 
 export default function SmoothScroll() {
-  useEffect(() => {
-    const isNativeScrollTarget = (target: EventTarget | null) => {
-      if (!(target instanceof Element)) {
-        return false;
-      }
+  const pathname = usePathname();
 
-      return Boolean(
-        target.closest(
-          "[data-native-scroll], [data-lenis-prevent], .sentra-sidebar-nav-scroll, .sentra-app-sidebar",
-        ),
-      );
-    };
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    // Do not run on app, mobile, or login screens where internal scrolling / forms are used
+    if (
+      pathname.startsWith("/app") ||
+      pathname.startsWith("/mobile") ||
+      pathname.startsWith("/login")
+    ) {
+      return;
+    }
+
+    // Respect reduced motion preference
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      return;
+    }
+
+    // Do not intercept touch devices
+    if (window.matchMedia("(pointer: coarse)").matches) {
+      return;
+    }
 
     const lenis = new Lenis({
       smooth: true,
-      smoothTouch: true,
+      smoothTouch: false,
       smoothWheel: true,
       lerp: 0.08,
     } as ConstructorParameters<typeof Lenis>[0] & { smooth: boolean });
@@ -31,53 +45,13 @@ export default function SmoothScroll() {
       frame = window.requestAnimationFrame(raf);
     };
 
-    const handleKeydown = (event: KeyboardEvent) => {
-      if (isNativeScrollTarget(event.target)) {
-        return;
-      }
-
-      const step = window.innerHeight * 0.9;
-
-      switch (event.key) {
-        case "ArrowDown":
-          event.preventDefault();
-          lenis.scrollTo(window.scrollY + 120, { duration: 1.1 });
-          break;
-        case "ArrowUp":
-          event.preventDefault();
-          lenis.scrollTo(window.scrollY - 120, { duration: 1.1 });
-          break;
-        case "PageDown":
-        case " ":
-          event.preventDefault();
-          lenis.scrollTo(window.scrollY + step, { duration: 1.2 });
-          break;
-        case "PageUp":
-          event.preventDefault();
-          lenis.scrollTo(window.scrollY - step, { duration: 1.2 });
-          break;
-        case "Home":
-          event.preventDefault();
-          lenis.scrollTo(0, { duration: 1.2 });
-          break;
-        case "End":
-          event.preventDefault();
-          lenis.scrollTo(document.documentElement.scrollHeight, { duration: 1.2 });
-          break;
-        default:
-          break;
-      }
-    };
-
     frame = window.requestAnimationFrame(raf);
-    window.addEventListener("keydown", handleKeydown, { passive: false });
 
     return () => {
       window.cancelAnimationFrame(frame);
-      window.removeEventListener("keydown", handleKeydown);
       lenis.destroy();
     };
-  }, []);
+  }, [pathname]);
 
   return null;
 }

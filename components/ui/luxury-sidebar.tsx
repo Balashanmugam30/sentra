@@ -3,7 +3,7 @@
 import Link from "next/link";
 import type { Route } from "next";
 import { usePathname, useRouter } from "next/navigation";
-import { KeyboardEvent, WheelEvent, useMemo, useState } from "react";
+import { KeyboardEvent, WheelEvent, useCallback, useEffect, useMemo, useState } from "react";
 
 import { RoleBadge } from "@/components/security/role-badge";
 import { useRbac } from "@/lib/rbac/use-rbac";
@@ -555,8 +555,29 @@ export function LuxurySidebar({
   const storedWorkspaceMode = useWorkspace((state) => state.mode);
   const { hasAnyPermission, loading } = useRbac();
   const [lockedItem, setLockedItem] = useState<NavItem | null>(null);
-  const closeMobile = () => onMobileOpenChange(false);
+  const closeMobile = useCallback(() => {
+    onMobileOpenChange(false);
+  }, [onMobileOpenChange]);
   const currentMode = storedWorkspaceMode;
+
+  useEffect(() => {
+    closeMobile();
+  }, [closeMobile, pathname]);
+
+  useEffect(() => {
+    if (!mobileOpen) {
+      return;
+    }
+
+    const handleKeyDown = (event: globalThis.KeyboardEvent) => {
+      if (event.key === "Escape") {
+        closeMobile();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [closeMobile, mobileOpen]);
 
   const userLabel = user?.displayName || user?.email || "Sentra Operator";
   const workspaceLabel = useMemo(() => {
