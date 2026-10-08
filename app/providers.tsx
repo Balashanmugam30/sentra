@@ -21,7 +21,7 @@ import { useUiStore } from "@/store/ui-store";
 import { useUserStore } from "@/store/user-store";
 import { apiClient as serviceApiClient } from "@/services/api/client";
 
-const publicExperiencePrefixes = ["/landing", "/site", "/mobile"];
+const publicExperiencePrefixes = ["/landing", "/site", "/mobile", "/app/design-system"];
 
 function isPublicExperienceRoute(pathname: string | null) {
   if (!pathname) {

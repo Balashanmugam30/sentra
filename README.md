@@ -91,9 +91,15 @@ Sentra unifies high-density desktop monitoring and field responder mobility into
 - **Zero-Dependency Fallback**: When network connections are severed during a catastrophe, client-side persistence (Zustand + local storage caches) preserves last-known safe evacuation routes and active personnel tasks.
 - **Auto-Sync Queue**: Field actions taken offline (SOS alerts, task completions, responder check-ins) are safely queued and flushed automatically the instant telemetry reconnects.
 
-### 5. 🎨 Cyber-Tactical Visual Palette & Materials
-- **Obsidian Midnight Canvas (`#030712`)**: Deep cosmic dark background optimized for high-stress operational environments.
-- **Translucent Obsidian Glass (`rgba(8, 14, 28, 0.88)`)**: Precision-frosted backdrops with luminous electric cyan (`#22d3ee`) and sapphire blue border highlights.
+### 5. 💎 Liquid Glass Design System 3.0 (Apple visionOS & Aerospace Density)
+- **Obsidian Midnight Canvas (`#030712`)**: Deep cosmic dark background providing infinite contrast and preventing visual fatigue during active crisis operations.
+- **3-Tier Optical Glass Materials**:
+  - `Glass 01` (Subtle): 14px blur, 8% border for dense background telemetry panels and data tables.
+  - `Glass 02` (Elevated): 22px blur, 12% border with top hairline specular edge highlight for operational cards and navigation docks.
+  - `Glass 03` (Floating): 30px blur, 18% border with command occlusion shadows for modals, HUDs, and emergency overlays.
+- **8 Standardized Semantic Statuses**: `SAFE` (#10b981), `WARNING` (#f59e0b), `CRITICAL` (#ef4444 with pulsing beacons), `INTELLIGENCE` (#06b6d4), `INFO` (#0ea5e9), `OFFLINE` (#64748b), `UNKNOWN` (#94a3b8), `EXECUTIVE` (#f5d58a).
+- **Future Intelligence Visual Grammar**: `<EvidenceCard>` and `<ConfidenceIndicator>` establishing contracts for sensor stream citations, latency telemetry, multi-sensor confirmation states, and calibrated model confidence meters (0–100%).
+- **Interactive QA Gallery Route**: Inspect every token, component primitive, and responsive viewport live at [`/app/design-system`](https://sentra-01.vercel.app/app/design-system). Full specifications available in [`docs/DESIGN_SYSTEM.md`](docs/DESIGN_SYSTEM.md).
 - **Aesthetic Isolation**: Enhanced internal command workspaces without altering the signature public landing page (`/`) or login screen (`/login`).
 
 ---

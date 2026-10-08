@@ -32,6 +32,9 @@ const BACKEND_PROXY_ORIGIN =
   process.env.BACKEND_PROXY_ORIGIN?.trim() || "http://127.0.0.1:8000";
 
 function isProtectedRoute(pathname: string) {
+  if (pathname === "/app/design-system" || pathname.startsWith("/app/design-system/")) {
+    return false;
+  }
   return protectedPrefixes.some((prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`));
 }
 

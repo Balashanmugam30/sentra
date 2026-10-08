@@ -555,3 +555,195 @@
   --sentra-os-indigo: #4f46e5;
 }
 
+/* ==========================================================================
+   SENTRA LIQUID GLASS DESIGN SYSTEM 3.0 (PHASE 2)
+   Calm, authoritative, high-trust, operational, information-dense visual language.
+   Apple Liquid Glass & visionOS material depth meets mission-critical aerospace density.
+   ========================================================================== */
+:root,
+[data-theme="dark"],
+.dark {
+  /* --- Obsidian Midnight Base --- */
+  --liquid-base: #030712;
+  --liquid-base-elevated: #070d1b;
+  --liquid-base-surface: #0b1528;
+
+  /* --- Glass Material Tiers --- */
+  /* Tier 1: Subtle (Data tables, secondary panels, background groupings) */
+  --glass-tier-1-bg: rgba(255, 255, 255, 0.035);
+  --glass-tier-1-border: rgba(255, 255, 255, 0.075);
+  --glass-tier-1-blur: 14px;
+  --glass-tier-1-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.35);
+
+  /* Tier 2: Elevated (Standard cards, interactive panels, navigation docks) */
+  --glass-tier-2-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.03) 100%);
+  --glass-tier-2-border: rgba(255, 255, 255, 0.12);
+  --glass-tier-2-blur: 22px;
+  --glass-tier-2-shadow: 0 16px 40px -4px rgba(0, 0, 0, 0.5), inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
+
+  /* Tier 3: Floating (Command bars, modals, flyouts, emergency HUD overlays) */
+  --glass-tier-3-bg: linear-gradient(180deg, rgba(15, 23, 42, 0.82) 0%, rgba(7, 13, 27, 0.88) 100%);
+  --glass-tier-3-border: rgba(255, 255, 255, 0.18);
+  --glass-tier-3-blur: 30px;
+  --glass-tier-3-shadow: 0 28px 70px -8px rgba(0, 0, 0, 0.7), 0 0 1px 1px rgba(255, 255, 255, 0.14), inset 0 1px 0 0 rgba(255, 255, 255, 0.25);
+
+  /* --- Semantic Status Palette --- */
+  /* SAFE (Operational Normal) */
+  --status-safe: #10b981;
+  --status-safe-bg: rgba(16, 185, 129, 0.12);
+  --status-safe-border: rgba(16, 185, 129, 0.28);
+  --status-safe-text: #6ee7b7;
+  --status-safe-glow: rgba(16, 185, 129, 0.24);
+
+  /* WARNING (Elevated Caution) */
+  --status-warning: #f59e0b;
+  --status-warning-bg: rgba(245, 158, 11, 0.12);
+  --status-warning-border: rgba(245, 158, 11, 0.28);
+  --status-warning-text: #fcd34d;
+  --status-warning-glow: rgba(245, 158, 11, 0.24);
+
+  /* CRITICAL (Emergency / Life Safety / High Severity) */
+  --status-critical: #ef4444;
+  --status-critical-bg: rgba(239, 68, 68, 0.14);
+  --status-critical-border: rgba(239, 68, 68, 0.32);
+  --status-critical-text: #fca5a5;
+  --status-critical-glow: rgba(239, 68, 68, 0.28);
+
+  /* INTELLIGENCE / AI (Deep Cyan & Azure — Calm Operational Intelligence) */
+  --status-intelligence: #06b6d4;
+  --status-intelligence-bg: rgba(6, 182, 212, 0.12);
+  --status-intelligence-border: rgba(6, 182, 212, 0.28);
+  --status-intelligence-text: #67e8f9;
+  --status-intelligence-glow: rgba(6, 182, 212, 0.24);
+
+  /* INFO (System Telemetry & State) */
+  --status-info: #0ea5e9;
+  --status-info-bg: rgba(14, 165, 233, 0.12);
+  --status-info-border: rgba(14, 165, 233, 0.28);
+  --status-info-text: #7dd3fc;
+  --status-info-glow: rgba(14, 165, 233, 0.24);
+
+  /* OFFLINE (Disconnected / Mesh Loss) */
+  --status-offline: #64748b;
+  --status-offline-bg: rgba(100, 116, 139, 0.12);
+  --status-offline-border: rgba(100, 116, 139, 0.24);
+  --status-offline-text: #94a3b8;
+  --status-offline-glow: transparent;
+
+  /* UNKNOWN (Pending Verification) */
+  --status-unknown: #94a3b8;
+  --status-unknown-bg: rgba(148, 163, 184, 0.12);
+  --status-unknown-border: rgba(148, 163, 184, 0.24);
+  --status-unknown-text: #cbd5e1;
+  --status-unknown-glow: transparent;
+
+  /* EXECUTIVE (Tactical Leadership / High Authority) */
+  --status-executive: #f5d58a;
+  --status-executive-bg: rgba(245, 213, 138, 0.10);
+  --status-executive-border: rgba(245, 213, 138, 0.28);
+  --status-executive-text: #fde68a;
+  --status-executive-glow: rgba(245, 213, 138, 0.22);
+
+  /* --- Minimum Touch Target & Elevation --- */
+  --touch-target-min: 44px;
+}
+
+/* Liquid Glass Utility Classes */
+.glass-tier-1,
+.liquid-glass-subtle {
+  background: var(--glass-tier-1-bg);
+  backdrop-filter: blur(var(--glass-tier-1-blur));
+  -webkit-backdrop-filter: blur(var(--glass-tier-1-blur));
+  border: 1px solid var(--glass-tier-1-border);
+  box-shadow: var(--glass-tier-1-shadow);
+}
+
+.glass-tier-2,
+.liquid-glass-elevated {
+  position: relative;
+  background: var(--glass-tier-2-bg);
+  backdrop-filter: blur(var(--glass-tier-2-blur));
+  -webkit-backdrop-filter: blur(var(--glass-tier-2-blur));
+  border: 1px solid var(--glass-tier-2-border);
+  box-shadow: var(--glass-tier-2-shadow);
+}
+
+.glass-tier-2::before,
+.liquid-glass-elevated::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.28), transparent);
+  pointer-events: none;
+}
+
+.glass-tier-3,
+.liquid-glass-floating {
+  position: relative;
+  background: var(--glass-tier-3-bg);
+  backdrop-filter: blur(var(--glass-tier-3-blur));
+  -webkit-backdrop-filter: blur(var(--glass-tier-3-blur));
+  border: 1px solid var(--glass-tier-3-border);
+  box-shadow: var(--glass-tier-3-shadow);
+}
+
+.glass-tier-3::before,
+.liquid-glass-floating::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 5%;
+  right: 5%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.38), transparent);
+  pointer-events: none;
+}
+
+/* Hairline specular borders & glow effects */
+.specular-border {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.18);
+}
+
+/* Operational pulse animation for real-time crisis alerts */
+@keyframes sentra-beacon-pulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.6);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 8px rgba(239, 68, 68, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+  }
+}
+
+.animate-beacon-pulse {
+  animation: sentra-beacon-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Safe touch target enforcement (minimum 44px) */
+.touch-target-safe {
+  min-height: var(--touch-target-min, 44px);
+  min-width: var(--touch-target-min, 44px);
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .animate-beacon-pulse {
+    animation: none !important;
+  }
+  * {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+

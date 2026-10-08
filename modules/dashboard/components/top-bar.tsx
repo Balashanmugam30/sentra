@@ -260,6 +260,7 @@ export function TopBar({ onOpenCommand, onOpenNav }: TopBarProps) {
               <span
                 aria-label={`Realtime status ${realtimeBadge.label}`}
                 className={`sentra-system-status-chip is-${realtimeBadge.tone}`}
+                suppressHydrationWarning
               >
                 <span className="sentra-system-status-dot" />
                 {realtimeBadge.label}

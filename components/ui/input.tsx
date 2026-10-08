@@ -90,3 +90,65 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
     </div>
   );
 });
+
+export interface SearchInputProps extends InputHTMLAttributes<HTMLInputElement> {
+  onClear?: () => void;
+  shortcut?: string;
+}
+
+export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(function SearchInput(
+  { className, onClear, shortcut = "⌘K", value, ...props },
+  ref,
+) {
+  const hasValue = Boolean(value && String(value).length > 0);
+
+  return (
+    <div className="relative w-full">
+      <span className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400">
+        <svg
+          aria-hidden="true"
+          className="h-4 w-4"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          viewBox="0 0 24 24"
+        >
+          <circle cx="11" cy="11" r="8" />
+          <path d="m21 21-4.35-4.35" />
+        </svg>
+      </span>
+      <input
+        className={cn(
+          "h-11 w-full rounded-2xl border border-white/12 bg-white/[0.05] pl-10 pr-16 text-sm text-white placeholder:text-slate-400",
+          "backdrop-blur-xl transition-all duration-200 outline-none",
+          "focus:border-cyan-400/50 focus:bg-white/[0.08] focus:ring-2 focus:ring-cyan-400/20",
+          className,
+        )}
+        ref={ref}
+        type="search"
+        value={value}
+        {...props}
+      />
+      <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1.5">
+        {hasValue && onClear && (
+          <button
+            aria-label="Clear search"
+            className="rounded-full p-1 text-slate-400 hover:text-white"
+            onClick={onClear}
+            type="button"
+          >
+            <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path d="M18 6 6 18M6 6l12 12" strokeWidth="2" />
+            </svg>
+          </button>
+        )}
+        {shortcut && (
+          <kbd className="hidden sm:inline-flex items-center rounded-md border border-white/10 bg-white/[0.06] px-1.5 py-0.5 text-[10px] font-medium text-slate-400">
+            {shortcut}
+          </kbd>
+        )}
+      </div>
+    </div>
+  );
+});
+
