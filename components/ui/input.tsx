@@ -129,15 +129,15 @@ export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(functi
         value={value}
         {...props}
       />
-      <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1.5">
+      <div className="absolute right-1.5 top-1/2 -translate-y-1/2 flex items-center gap-1">
         {hasValue && onClear && (
           <button
             aria-label="Clear search"
-            className="rounded-full p-1 text-slate-400 hover:text-white"
+            className="inline-flex h-11 w-11 min-h-[44px] min-w-[44px] items-center justify-center rounded-xl text-slate-400 hover:text-white transition touch-target-safe"
             onClick={onClear}
             type="button"
           >
-            <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path d="M18 6 6 18M6 6l12 12" strokeWidth="2" />
             </svg>
           </button>

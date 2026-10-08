@@ -18,16 +18,16 @@ function SettingsSection({
   title: string;
 }) {
   return (
-      <details
-        className="group rounded-[28px] border p-5 backdrop-blur-xl"
-        open={open}
-        style={{
-          borderColor: "var(--border)",
-          background: "var(--surface)",
-          boxShadow: "var(--sentra-shadow-panel)",
-        }}
-      >
-      <summary className="cursor-pointer list-none space-y-2 [&::-webkit-details-marker]:hidden">
+    <details
+      className="group rounded-[28px] border p-5 backdrop-blur-xl"
+      open={open}
+      style={{
+        borderColor: "var(--border)",
+        background: "var(--surface)",
+        boxShadow: "var(--sentra-shadow-panel)",
+      }}
+    >
+      <summary className="cursor-pointer list-none space-y-2 min-h-[44px] py-1 [&::-webkit-details-marker]:hidden">
         <p className="text-xs uppercase tracking-[0.24em]" style={{ color: "var(--sentra-text-soft)" }}>
           Section
         </p>
@@ -39,10 +39,10 @@ function SettingsSection({
             </p>
           </div>
           <span
-            className="inline-flex h-9 w-9 items-center justify-center rounded-full border text-sm transition-transform duration-200 ease-in-out group-open:rotate-45"
-              style={{
-                borderColor: "var(--sentra-border-subtle)",
-                background: "var(--sentra-surface)",
+            className="inline-flex h-11 w-11 min-h-[44px] min-w-[44px] items-center justify-center rounded-full border text-sm transition-transform duration-200 ease-out group-open:rotate-45"
+            style={{
+              borderColor: "var(--sentra-border-subtle)",
+              background: "var(--sentra-surface)",
               color: "var(--text)",
             }}
           >
@@ -79,7 +79,7 @@ export default function SettingsPage() {
       <div className="mx-auto flex w-full max-w-[900px] flex-col gap-6 py-2">
         <div className="space-y-3">
           <button
-            className="inline-flex items-center gap-2 text-sm transition-all duration-200 ease-out hover:opacity-80 active:scale-[0.97]"
+            className="inline-flex min-h-[44px] items-center gap-2 px-2 text-sm transition-all duration-200 ease-out hover:opacity-80 active:scale-[0.97]"
             onClick={() => router.back()}
             style={{ color: "var(--sentra-text-muted)" }}
             type="button"

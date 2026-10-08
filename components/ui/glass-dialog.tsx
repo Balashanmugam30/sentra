@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useId, useRef } from "react";
 import type { HTMLAttributes, ReactNode } from "react";
 
 import { cn } from "@/lib/utils";
@@ -32,24 +32,79 @@ export function GlassDialog({
   ...props
 }: GlassDialogProps) {
   const dialogRef = useRef<HTMLDivElement>(null);
+  const previousActiveElementRef = useRef<HTMLElement | null>(null);
+  const titleId = useId();
+  const descId = useId();
 
   useEffect(() => {
     if (!open) return;
 
+    previousActiveElementRef.current = document.activeElement as HTMLElement | null;
+
+    // Lock body scroll
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    // Focus first interactive element or dialog
+    const focusTimer = window.setTimeout(() => {
+      if (dialogRef.current) {
+        const focusables = dialogRef.current.querySelectorAll<HTMLElement>(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+        );
+        if (focusables.length > 0 && focusables[0]) {
+          focusables[0].focus();
+        } else {
+          dialogRef.current.focus();
+        }
+      }
+    }, 50);
+
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
+        event.preventDefault();
         onClose();
+        return;
+      }
+
+      // Trap Tab navigation inside dialog
+      if (event.key === "Tab" && dialogRef.current) {
+        const focusables = dialogRef.current.querySelectorAll<HTMLElement>(
+          'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
+        );
+        if (focusables.length === 0) return;
+
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+
+        if (first && last) {
+          if (event.shiftKey && document.activeElement === first) {
+            event.preventDefault();
+            last.focus();
+          } else if (!event.shiftKey && document.activeElement === last) {
+            event.preventDefault();
+            first.focus();
+          }
+        }
       }
     };
 
     window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
+    return () => {
+      window.clearTimeout(focusTimer);
+      window.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = originalOverflow;
+      if (previousActiveElementRef.current && typeof previousActiveElementRef.current.focus === "function") {
+        previousActiveElementRef.current.focus();
+      }
+    };
   }, [open, onClose]);
 
   if (!open) return null;
 
   return (
     <div
+      aria-describedby={description ? descId : undefined}
+      aria-labelledby={title ? titleId : undefined}
       aria-modal="true"
       className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6"
       role="dialog"
@@ -57,7 +112,7 @@ export function GlassDialog({
       {/* Backdrop */}
       <div
         aria-hidden="true"
-        className="fixed inset-0 bg-[#030712]/75 backdrop-blur-md transition-opacity duration-300"
+        className="fixed inset-0 bg-[#030712]/80 backdrop-blur-md transition-opacity duration-300"
         onClick={onClose}
       />
 
@@ -72,20 +127,25 @@ export function GlassDialog({
           className,
         )}
         ref={dialogRef}
+        tabIndex={-1}
         {...props}
       >
         <div className="flex items-start justify-between gap-4">
           <div className="space-y-1.5">
             {title && (
-              <h2 className="text-xl font-semibold tracking-tight text-white">{title}</h2>
+              <h2 className="text-xl font-semibold tracking-tight text-white" id={titleId}>
+                {title}
+              </h2>
             )}
             {description && (
-              <p className="text-sm text-slate-400 leading-relaxed">{description}</p>
+              <p className="text-sm text-slate-400 leading-relaxed" id={descId}>
+                {description}
+              </p>
             )}
           </div>
           <button
             aria-label="Close dialog"
-            className="flex h-9 w-9 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-slate-400 transition hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/50"
+            className="flex h-11 w-11 min-h-[44px] min-w-[44px] items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-slate-400 transition hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/50 touch-target-safe"
             onClick={onClose}
             type="button"
           >

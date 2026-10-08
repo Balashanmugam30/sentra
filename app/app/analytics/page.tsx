@@ -1,14 +1,12 @@
 import { PermissionGate } from "@/components/auth/PermissionGate";
-import { SectionPlaceholder } from "@/components/app/section-placeholder";
+import { OperationalAnalyticsWorkspace } from "@/components/analytics/operational-analytics-workspace";
+
+export const dynamic = "force-dynamic";
 
 export default function AnalyticsPage() {
   return (
     <PermissionGate permission="analytics.view">
-      <SectionPlaceholder
-        description="Operational analytics, performance trends, and system intelligence summaries will appear here."
-        eyebrow="Analytics"
-        title="Operational analytics"
-      />
+      <OperationalAnalyticsWorkspace />
     </PermissionGate>
   );
 }

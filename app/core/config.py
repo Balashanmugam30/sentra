@@ -17,12 +17,12 @@ class Settings:
     app_version: str = os.getenv("SENTRA_APP_VERSION", "0.1.0")
     api_prefix: str = os.getenv("SENTRA_API_PREFIX", "")
     host: str = os.getenv("SENTRA_HOST", "0.0.0.0")
-    port: int = int(os.getenv("SENTRA_PORT", "8000"))
+    port: int = int(os.getenv("PORT", os.getenv("SENTRA_PORT", "8000")))
     database_url: str = os.getenv("DATABASE_URL", "")
     redis_url: str = os.getenv("REDIS_URL", "")
     allowed_origins: str = os.getenv(
         "ALLOWED_ORIGINS",
-        "http://localhost,http://localhost:3000,http://127.0.0.1:3000",
+        "http://localhost,http://localhost:3000,http://127.0.0.1:3000,https://sentra-01.vercel.app",
     )
     auth_jwt_secret: str = field(
         default_factory=lambda: (

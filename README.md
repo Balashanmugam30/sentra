@@ -129,7 +129,7 @@ sentra/
 │   ├── app/                       # Desktop Command Center Shell & Sidebar
 │   ├── mobile/                    # Mobile PWA Components (BottomNav, SOS, Map)
 │   ├── security/                  # RBAC Guards, Login Form, Session Management
-│   └── ui/                        # High-End Design System & Cyber Accents
+│   └── ui/                        # Liquid Glass 3.0 Operational Primitives
 ├── lib/
 │   ├── auth/                      # Resilient Dual-Mode Authentication Engine
 │   ├── mobile/                    # Mobile State, Task Engines & Simulation Data
@@ -139,8 +139,8 @@ sentra/
 │   ├── auth-store.ts              # Session & Permission State
 │   └── useMobileStore.ts          # Mobile Offline Persistence State
 ├── styles/
-│   ├── globals.css                # Global Design Tokens & Cyber Styling
-│   └── tokens.css                 # Master Visual Foundation 2.0 Tokens
+│   ├── globals.css                # Global Layout & Foundation Styles
+│   └── tokens.css                 # Master Liquid Glass 3.0 Design Tokens
 ├── tests/
 │   ├── e2e/                       # Playwright Multi-Viewport Regression Specs (01-10)
 │   └── test_enterprise_platform.py # FastAPI Python Unit & Integration Suite

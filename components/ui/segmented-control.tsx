@@ -1,7 +1,7 @@
 "use client";
 
-import { useId } from "react";
-import type { HTMLAttributes, ReactNode } from "react";
+import { useId, useRef } from "react";
+import type { HTMLAttributes, KeyboardEvent, ReactNode } from "react";
 
 import { cn } from "@/lib/utils";
 
@@ -28,9 +28,9 @@ const sizeStyles = {
 };
 
 const itemSizeStyles = {
-  sm: "px-2.5 py-1 min-h-[32px]",
-  md: "px-3.5 py-1.5 min-h-[38px]",
-  lg: "px-4.5 py-2 min-h-[44px]",
+  sm: "px-3 py-1.5 min-h-[36px] sm:min-h-[32px]",
+  md: "px-4 py-2 min-h-[44px]",
+  lg: "px-5 py-2.5 min-h-[48px]",
 };
 
 export function SegmentedControl<T extends string = string>({
@@ -42,6 +42,37 @@ export function SegmentedControl<T extends string = string>({
   ...props
 }: SegmentedControlProps<T>) {
   const baseId = useId();
+  const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
+
+  const handleKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
+    const enabledOptions = options.filter((o) => !o.disabled);
+    const currentIndex = enabledOptions.findIndex((o) => o.value === value);
+    if (currentIndex === -1) return;
+
+    let targetIndex = -1;
+    if (e.key === "ArrowRight" || e.key === "ArrowDown") {
+      e.preventDefault();
+      targetIndex = (currentIndex + 1) % enabledOptions.length;
+    } else if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
+      e.preventDefault();
+      targetIndex = (currentIndex - 1 + enabledOptions.length) % enabledOptions.length;
+    } else if (e.key === "Home") {
+      e.preventDefault();
+      targetIndex = 0;
+    } else if (e.key === "End") {
+      e.preventDefault();
+      targetIndex = enabledOptions.length - 1;
+    }
+
+    if (targetIndex !== -1) {
+      const nextOption = enabledOptions[targetIndex];
+      if (nextOption) {
+        onChange(nextOption.value);
+        const originalIndex = options.findIndex((o) => o.value === nextOption.value);
+        tabRefs.current[originalIndex]?.focus();
+      }
+    }
+  };
 
   return (
     <div
@@ -51,10 +82,11 @@ export function SegmentedControl<T extends string = string>({
         sizeStyles[size],
         className,
       )}
+      onKeyDown={handleKeyDown}
       role="tablist"
       {...props}
     >
-      {options.map((option) => {
+      {options.map((option, index) => {
         const isSelected = option.value === value;
         const itemId = `${baseId}-${option.value}`;
 
@@ -62,7 +94,7 @@ export function SegmentedControl<T extends string = string>({
           <button
             aria-selected={isSelected}
             className={cn(
-              "relative inline-flex items-center justify-center gap-2 rounded-xl font-medium transition-all duration-200 select-none",
+              "relative inline-flex items-center justify-center gap-2 rounded-xl font-medium transition-all duration-200 select-none touch-target-safe",
               itemSizeStyles[size],
               isSelected
                 ? "bg-white/[0.14] text-white shadow-[0_2px_12px_rgba(0,0,0,0.35),inset_0_1px_0_0_rgba(255,255,255,0.22)] border border-white/16"
@@ -73,7 +105,11 @@ export function SegmentedControl<T extends string = string>({
             id={itemId}
             key={option.value}
             onClick={() => !option.disabled && onChange(option.value)}
+            ref={(el) => {
+              tabRefs.current[index] = el;
+            }}
             role="tab"
+            tabIndex={isSelected ? 0 : -1}
             type="button"
           >
             {option.icon && <span className="shrink-0">{option.icon}</span>}

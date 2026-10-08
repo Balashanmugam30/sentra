@@ -141,6 +141,9 @@ async def auto_scan_loop() -> None:
     try:
         while True:
             await asyncio.sleep(AUTO_SCAN_INTERVAL_SECONDS)
-            await scan_and_inject()
+            try:
+                await scan_and_inject()
+            except Exception:
+                pass
     except asyncio.CancelledError:
         raise

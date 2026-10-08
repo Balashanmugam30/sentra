@@ -101,16 +101,24 @@ export function useRbac() {
         authStatus === "authenticated"
           ? ((state.currentUser ?? fallbackUser)?.permissions ?? []).length
           : 0,
-      hasPermission: (permission: AppPermission) =>
-        authStatus === "authenticated"
-          ? ((state.currentUser ?? fallbackUser)?.permissions ?? []).includes(permission)
-          : false,
-      hasAnyPermission: (...requested: AppPermission[]) =>
-        authStatus === "authenticated"
-          ? requested.some((permission) =>
-              ((state.currentUser ?? fallbackUser)?.permissions ?? []).includes(permission),
-            )
-          : false,
+      hasPermission: (permission: AppPermission) => {
+        if (authStatus !== "authenticated") return false;
+        const perms = (state.currentUser ?? fallbackUser)?.permissions ?? [];
+        const role = (state.currentUser ?? fallbackUser)?.role;
+        if (role === "admin" || role === "super_admin" || perms.includes("*" as AppPermission)) {
+          return true;
+        }
+        return perms.includes(permission);
+      },
+      hasAnyPermission: (...requested: AppPermission[]) => {
+        if (authStatus !== "authenticated") return false;
+        const perms = (state.currentUser ?? fallbackUser)?.permissions ?? [];
+        const role = (state.currentUser ?? fallbackUser)?.role;
+        if (role === "admin" || role === "super_admin" || perms.includes("*" as AppPermission)) {
+          return true;
+        }
+        return requested.some((permission) => perms.includes(permission));
+      },
       hasRole: (role: Exclude<AppRole, "guest">) =>
         authStatus === "authenticated"
           ? (state.currentUser ?? fallbackUser)?.role === role

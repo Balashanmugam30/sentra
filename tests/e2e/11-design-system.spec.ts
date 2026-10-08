@@ -1,6 +1,10 @@
 import { test, expect } from "@playwright/test";
+import { setupAuthSession } from "./helpers/auth";
 
 test.describe("11 - Sentra Liquid Glass Design System QA", () => {
+  test.beforeEach(async ({ context, page }) => {
+    await setupAuthSession(context, page);
+  });
   test("renders design system showcase without errors", async ({ page }) => {
     await page.goto("/app/design-system");
 

@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: sentra
+    runtime: python
+    region: oregon
+    plan: free
+    branch: main
+    buildCommand: "pip install -r requirements-prod.txt"
+    startCommand: "uvicorn app.main:app --host 0.0.0.0 --port $PORT --proxy-headers --forwarded-allow-ips '*'"
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.12.0"
+      - key: APP_ENV
+        value: "production"
+      - key: SENTRA_COOKIE_SECURE
+        value: "true"
+      - key: JWT_SECRET
+        generateValue: true
+      - key: SECRET_KEY
+        generateValue: true
+      - key: ALLOWED_ORIGINS
+        value: "https://sentra-01.vercel.app,http://localhost:3000,http://127.0.0.1:3000"
+      - key: SENTRA_ENABLE_DEMO_SEED
+        value: "true"

@@ -19,6 +19,7 @@ export interface EvidenceCardProps extends HTMLAttributes<HTMLDivElement> {
   excerpt: ReactNode;
   coordinates?: string;
   tags?: string[];
+  simulated?: boolean;
 }
 
 const verificationMap: Record<VerificationState, { status: StatusType; label: string }> = {
@@ -34,6 +35,7 @@ export function EvidenceCard({
   coordinates,
   excerpt,
   latencyMs,
+  simulated = false,
   sourceName,
   sourceType,
   tags = [],
@@ -70,9 +72,16 @@ export function EvidenceCard({
           </div>
         </div>
 
-        <StatusBadge size="sm" status={verState.status}>
-          {verState.label}
-        </StatusBadge>
+        <div className="flex items-center gap-1.5">
+          {simulated && (
+            <span className="rounded-md border border-amber-500/25 bg-amber-500/10 px-2 py-0.5 text-[10px] font-mono text-amber-300">
+              Demo / Simulation
+            </span>
+          )}
+          <StatusBadge size="sm" status={verState.status}>
+            {verState.label}
+          </StatusBadge>
+        </div>
       </div>
 
       {/* Title & Excerpt */}

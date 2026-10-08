@@ -69,10 +69,10 @@ const navGroups: NavGroup[] = [
       },
       {
         description: "Analytics and operating evidence",
-        href: "/analytics",
+        href: "/app/analytics" as Route,
         icon: "intelligence",
         label: "Analytics",
-        match: ["/analytics", "/data", "/behavior"],
+        match: ["/app/analytics", "/analytics", "/data", "/behavior"],
         permissions: ["analytics.view", "analytics.executive"],
       },
       {
@@ -90,10 +90,10 @@ const navGroups: NavGroup[] = [
     items: [
       {
         description: "Live incident queue",
-        href: "/incidents",
+        href: "/app/incidents" as Route,
         icon: "incident",
         label: "Incidents",
-        match: ["/incidents", "/app/incidents"],
+        match: ["/app/incidents", "/incidents"],
         permissions: ["incidents.view"],
       },
       {

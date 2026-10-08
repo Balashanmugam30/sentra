@@ -1,18 +1,13 @@
 import { PermissionGate } from "@/components/auth/PermissionGate";
-import { Card } from "@/components/ui";
+import { HyperrealLiveTwin } from "@/modules/live-twin";
+
+export const dynamic = "force-dynamic";
 
 export default function MapPage() {
   return (
     <PermissionGate permission="dashboard.view">
-      <div className="space-y-6">
-        <div className="space-y-2">
-          <p className="text-sm font-medium uppercase tracking-[0.18em] text-muted">Map</p>
-          <h1 className="text-3xl font-semibold tracking-[-0.03em] text-foreground">Map</h1>
-        </div>
-
-        <Card className="flex min-h-[420px] items-center justify-center p-6">
-          <p className="text-lg font-medium text-foreground">Map loading...</p>
-        </Card>
+      <div className="mx-auto flex w-full max-w-[1560px] flex-col gap-6 px-4 pb-12 pt-4 md:px-6 lg:px-8">
+        <HyperrealLiveTwin />
       </div>
     </PermissionGate>
   );

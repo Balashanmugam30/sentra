@@ -33,16 +33,18 @@ export function AlertBanner({
   title,
   ...props
 }: AlertBannerProps) {
+  const isUrgent = severity === "critical" || severity === "warning";
+
   return (
     <aside
-      aria-live="polite"
+      aria-live={severity === "critical" ? "assertive" : "polite"}
       className={cn(
         "relative overflow-hidden rounded-2xl border p-4 backdrop-blur-xl transition-all duration-200",
         "before:pointer-events-none before:absolute before:inset-x-4 before:top-0 before:h-px before:bg-gradient-to-r before:from-transparent before:via-white/20 before:to-transparent",
         severityBorderStyles[severity],
         className,
       )}
-      role="alert"
+      role={isUrgent ? "alert" : "status"}
       {...props}
     >
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
@@ -72,7 +74,7 @@ export function AlertBanner({
           {onDismiss && (
             <button
               aria-label="Dismiss alert"
-              className="rounded-lg p-1.5 text-slate-400 hover:bg-white/10 hover:text-white transition"
+              className="inline-flex h-11 w-11 min-h-[44px] min-w-[44px] items-center justify-center rounded-xl text-slate-400 hover:bg-white/10 hover:text-white transition touch-target-safe"
               onClick={onDismiss}
               type="button"
             >
