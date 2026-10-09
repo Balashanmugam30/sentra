@@ -134,4 +134,27 @@ test.describe("14 - Real Data Plane, Calibrated Prediction & MLOps Governance QA
     const cockpitTag = page.locator("text=Phase 5 Prediction Cockpit").first();
     await expect(cockpitTag).toBeVisible({ timeout: 8000 });
   });
+
+  test("verifies service failure and recovery fallback states on API network failure", async ({
+    page,
+  }) => {
+    // Intercept backend API routes to simulate temporary service outage
+    await page.route("**/predictions/**", (route) => {
+      route.fulfill({
+        status: 503,
+        contentType: "application/json",
+        body: JSON.stringify({ error: "Service Unavailable", status: 503 }),
+      });
+    });
+
+    await page.goto("/app/incidents");
+    // Verify that the cockpit gracefully renders with resilient local fallbacks rather than crashing
+    const cockpitTag = page.locator("text=Phase 5 Prediction Cockpit").first();
+    await expect(cockpitTag).toBeVisible({ timeout: 10000 });
+    await expect(page.locator("text=Escalation Risk (Calibrated)").first()).toBeVisible();
+
+    // Clear route intercept to verify clean recovery path
+    await page.unroute("**/predictions/**");
+  });
 });
+

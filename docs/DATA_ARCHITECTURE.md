@@ -31,6 +31,7 @@ The Sentra Data Plane is a high-throughput, multi-modal crisis data ingestion an
 - **Atomic Persistent Fallback Engine:**
   - Thread-safe repository in `app/data/storage.py` backed by re-entrant locks (`threading.RLock`).
   - Writes are committed via atomic temporary files (`.tmp` $\to$ `.replace()`) with continuous SHA-256 digest validation to prevent write corruption during unexpected server restarts.
+  - **Durability Contract:** The local file store serves as an atomic, zero-dependency persistence layer for local development, testing, and single-instance containers. On ephemeral container platforms like Render Free tier (where container disks reset on redeploy), durable cross-restart multi-instance persistence requires configuring `DATABASE_URL` (PostgreSQL) or mounting a persistent Render Disk.
 
 ---
 

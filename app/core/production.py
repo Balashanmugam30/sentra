@@ -39,6 +39,12 @@ def validate_environment() -> list[ReadinessCheck]:
     origins = settings.cors_origins
     wildcard_origin = "*" in origins
     stripe_ready = bool(settings.stripe_secret_key and settings.stripe_webhook_secret)
+    jwt_secret_val = (
+        os.getenv("JWT_SECRET")
+        or os.getenv("SECRET_KEY")
+        or os.getenv("SENTRA_JWT_SECRET")
+        or settings.auth_jwt_secret
+    )
     checks = [
         ReadinessCheck(
             "runtime_mode",
@@ -48,7 +54,7 @@ def validate_environment() -> list[ReadinessCheck]:
         ),
         ReadinessCheck(
             "jwt_secret",
-            _status(not jwt_is_ephemeral and len(settings.auth_jwt_secret) >= 32),
+            _status(not jwt_is_ephemeral and len(jwt_secret_val) >= 32),
             12,
             "JWT/secret key must come from environment with sufficient entropy in production.",
         ),

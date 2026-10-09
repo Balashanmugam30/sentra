@@ -3,15 +3,16 @@
 ## 1. Model Registry & Lifecycle Governance
 The Sentra Model Registry manages all production and experimental AI models across their lifecycle:
 - **Lifecycle States:** `CANDIDATE` $\to$ `VALIDATED` $\to$ `SHADOW` $\to$ `ACTIVE` $\to$ `RETIRED` / `ROLLBACK`.
-- **Model Metadata:** Unique model ID, semantic version, task definition, training dataset S3/GCS URI, evaluation metrics (accuracy, precision, recall, F1, calibration ECE, latency).
-- **Active Production Model:** `sentra-ensemble-risk-v2.4` (XGBoost Calibrated Hazard Ensemble, F1: 0.940, Mean Latency: 18.2ms).
+- **Model Metadata:** Unique model ID, semantic version, task definition, training dataset contract reference, evaluation metric thresholds (accuracy, precision, recall, F1, calibration ECE, latency).
+- **Active Production Baseline:** `sentra-ensemble-risk-v2.4` (Physics-informed Hazard Risk Ensemble, Mean Latency: ~18ms).
+- **Implementation Note:** Registered evaluation metrics represent baseline contract standards for production qualification.
 
 ---
 
 ## 2. Zero-Disruption Shadow Execution Runner
 Candidate models run concurrently with production models without impacting active operational decisions:
 - Shadow model receives exact real-time feature snapshots.
-- Candidate model evaluated: `sentra-transformer-crowd-v3.0` (Spatio-Temporal Crowd Dynamics Transformer).
+- Candidate model evaluated: `sentra-transformer-crowd-v3.0` (Spatio-Temporal Crowd Dynamics Transformer rule candidate).
 - **Divergence Tracking:** Divergence delta $\Delta = |\hat{y}_{\text{active}} - \hat{y}_{\text{shadow}}|$ recorded in `sentra_shadow_divergence_logs`.
 - **Divergence Threshold:** Maximum acceptable divergence set to $\pm 15.0\%$. Violations flag candidate model for offline audit before promotion.
 

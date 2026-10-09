@@ -307,6 +307,118 @@
         "confidence": 0.94,
         "status": "validated",
         "schema_version": "5.0.0"
+      },
+      {
+        "reading_id": "THM-0516076420",
+        "tenant_id": "TEN-BALA-HQ",
+        "incident_id": "INC-QUALITY-TEST",
+        "sensor_id": "SNR-THM-CONFLICT",
+        "modality": "FLIR_THERMAL",
+        "location": {
+          "zone_id": "ZONE-B",
+          "zone_name": "Kitchen Zone B",
+          "floor": 1,
+          "building": "Main Facility",
+          "latitude": 11.0168,
+          "longitude": 76.9558
+        },
+        "timestamp": "2026-10-09T05:16:07.642089Z",
+        "ingestion_timestamp": "2026-10-09T05:16:07.642091Z",
+        "metrics": {
+          "temperature_celsius": 95.0,
+          "ambient_celsius": 24.0,
+          "thermal_gradient_celsius": 71.0,
+          "radiometric_emissivity": 0.95,
+          "focal_plane_array_temp": 22.5
+        },
+        "provenance": "flir_radiometric_stream",
+        "confidence": 0.96,
+        "status": "validated",
+        "schema_version": "5.0.0"
+      },
+      {
+        "reading_id": "ENV-0516076465",
+        "tenant_id": "TEN-BALA-HQ",
+        "incident_id": "INC-QUALITY-TEST",
+        "sensor_id": "SNR-AIR-CONFLICT",
+        "modality": "AIR_QUALITY",
+        "location": {
+          "zone_id": "ZONE-B",
+          "zone_name": "Kitchen Zone B",
+          "floor": 1,
+          "building": "Main Facility",
+          "latitude": 11.0168,
+          "longitude": 76.9558
+        },
+        "timestamp": "2026-10-09T05:16:07.646599Z",
+        "ingestion_timestamp": "2026-10-09T05:16:07.646600Z",
+        "metrics": {
+          "particulate_pm25": 4.0,
+          "particulate_pm10": 25.0,
+          "combustion_aerosol_ppm": 0.0,
+          "co2_ppm": 420.0,
+          "voc_ppb": 50.0
+        },
+        "provenance": "airiq_iot_mesh",
+        "confidence": 0.94,
+        "status": "validated",
+        "schema_version": "5.0.0"
+      },
+      {
+        "reading_id": "THM-0523089968",
+        "tenant_id": "TEN-BALA-HQ",
+        "incident_id": "INC-QUALITY-TEST",
+        "sensor_id": "SNR-THM-CONFLICT",
+        "modality": "FLIR_THERMAL",
+        "location": {
+          "zone_id": "ZONE-B",
+          "zone_name": "Kitchen Zone B",
+          "floor": 1,
+          "building": "Main Facility",
+          "latitude": 11.0168,
+          "longitude": 76.9558
+        },
+        "timestamp": "2026-10-09T05:23:08.996845Z",
+        "ingestion_timestamp": "2026-10-09T05:23:08.996845Z",
+        "metrics": {
+          "temperature_celsius": 95.0,
+          "ambient_celsius": 24.0,
+          "thermal_gradient_celsius": 71.0,
+          "radiometric_emissivity": 0.95,
+          "focal_plane_array_temp": 22.5
+        },
+        "provenance": "flir_radiometric_stream",
+        "confidence": 0.96,
+        "status": "validated",
+        "schema_version": "5.0.0"
+      },
+      {
+        "reading_id": "ENV-0523089994",
+        "tenant_id": "TEN-BALA-HQ",
+        "incident_id": "INC-QUALITY-TEST",
+        "sensor_id": "SNR-AIR-CONFLICT",
+        "modality": "AIR_QUALITY",
+        "location": {
+          "zone_id": "ZONE-B",
+          "zone_name": "Kitchen Zone B",
+          "floor": 1,
+          "building": "Main Facility",
+          "latitude": 11.0168,
+          "longitude": 76.9558
+        },
+        "timestamp": "2026-10-09T05:23:08.999430Z",
+        "ingestion_timestamp": "2026-10-09T05:23:08.999431Z",
+        "metrics": {
+          "particulate_pm25": 4.0,
+          "particulate_pm10": 25.0,
+          "combustion_aerosol_ppm": 0.0,
+          "co2_ppm": 420.0,
+          "voc_ppb": 50.0
+        },
+        "provenance": "airiq_iot_mesh",
+        "confidence": 0.94,
+        "status": "validated",
+        "schema_version": "5.0.0"
       }
     ],
     "INC-FEAT-TEST": [
@@ -576,6 +688,118 @@
         },
         "timestamp": "2026-10-08T17:58:52.717369Z",
         "ingestion_timestamp": "2026-10-08T17:58:52.717371Z",
+        "metrics": {
+          "crowd_count": 22,
+          "optical_flow_velocity_mps": 0.8,
+          "visible_smoke_density": 0.0,
+          "egress_obstruction_ratio": 0.0,
+          "bounding_boxes": []
+        },
+        "provenance": "cctv_vision_model",
+        "confidence": 0.91,
+        "status": "validated",
+        "schema_version": "5.0.0"
+      },
+      {
+        "reading_id": "THM-0516076630",
+        "tenant_id": "TEN-BALA-HQ",
+        "incident_id": "INC-FEAT-TEST",
+        "sensor_id": "SNR-THM-FEAT",
+        "modality": "FLIR_THERMAL",
+        "location": {
+          "zone_id": "ZONE-B",
+          "zone_name": "Kitchen Zone B",
+          "floor": 1,
+          "building": "Main Facility",
+          "latitude": 11.0168,
+          "longitude": 76.9558
+        },
+        "timestamp": "2026-10-09T05:16:07.663049Z",
+        "ingestion_timestamp": "2026-10-09T05:16:07.663050Z",
+        "metrics": {
+          "temperature_celsius": 68.0,
+          "ambient_celsius": 24.0,
+          "thermal_gradient_celsius": 44.0,
+          "radiometric_emissivity": 0.95,
+          "focal_plane_array_temp": 22.5
+        },
+        "provenance": "flir_radiometric_stream",
+        "confidence": 0.96,
+        "status": "validated",
+        "schema_version": "5.0.0"
+      },
+      {
+        "reading_id": "CAM-0516076714",
+        "tenant_id": "TEN-BALA-HQ",
+        "incident_id": "INC-FEAT-TEST",
+        "sensor_id": "SNR-CAM-FEAT",
+        "modality": "CCTV_OPTICAL",
+        "location": {
+          "zone_id": "ZONE-B",
+          "zone_name": "Kitchen Zone B",
+          "floor": 1,
+          "building": "Main Facility",
+          "latitude": 11.0168,
+          "longitude": 76.9558
+        },
+        "timestamp": "2026-10-09T05:16:07.671505Z",
+        "ingestion_timestamp": "2026-10-09T05:16:07.671506Z",
+        "metrics": {
+          "crowd_count": 22,
+          "optical_flow_velocity_mps": 0.8,
+          "visible_smoke_density": 0.0,
+          "egress_obstruction_ratio": 0.0,
+          "bounding_boxes": []
+        },
+        "provenance": "cctv_vision_model",
+        "confidence": 0.91,
+        "status": "validated",
+        "schema_version": "5.0.0"
+      },
+      {
+        "reading_id": "THM-0523090077",
+        "tenant_id": "TEN-BALA-HQ",
+        "incident_id": "INC-FEAT-TEST",
+        "sensor_id": "SNR-THM-FEAT",
+        "modality": "FLIR_THERMAL",
+        "location": {
+          "zone_id": "ZONE-B",
+          "zone_name": "Kitchen Zone B",
+          "floor": 1,
+          "building": "Main Facility",
+          "latitude": 11.0168,
+          "longitude": 76.9558
+        },
+        "timestamp": "2026-10-09T05:23:09.007808Z",
+        "ingestion_timestamp": "2026-10-09T05:23:09.007808Z",
+        "metrics": {
+          "temperature_celsius": 68.0,
+          "ambient_celsius": 24.0,
+          "thermal_gradient_celsius": 44.0,
+          "radiometric_emissivity": 0.95,
+          "focal_plane_array_temp": 22.5
+        },
+        "provenance": "flir_radiometric_stream",
+        "confidence": 0.96,
+        "status": "validated",
+        "schema_version": "5.0.0"
+      },
+      {
+        "reading_id": "CAM-0523090103",
+        "tenant_id": "TEN-BALA-HQ",
+        "incident_id": "INC-FEAT-TEST",
+        "sensor_id": "SNR-CAM-FEAT",
+        "modality": "CCTV_OPTICAL",
+        "location": {
+          "zone_id": "ZONE-B",
+          "zone_name": "Kitchen Zone B",
+          "floor": 1,
+          "building": "Main Facility",
+          "latitude": 11.0168,
+          "longitude": 76.9558
+        },
+        "timestamp": "2026-10-09T05:23:09.010386Z",
+        "ingestion_timestamp": "2026-10-09T05:23:09.010387Z",
         "metrics": {
           "crowd_count": 22,
           "optical_flow_velocity_mps": 0.8,
@@ -1006,6 +1230,174 @@
         "confidence": 0.91,
         "status": "validated",
         "schema_version": "5.0.0"
+      },
+      {
+        "reading_id": "THM-0516076858",
+        "tenant_id": "TEN-BALA-HQ",
+        "incident_id": "INC-PRED-TEST",
+        "sensor_id": "SNR-THM-P1",
+        "modality": "FLIR_THERMAL",
+        "location": {
+          "zone_id": "ZONE-B",
+          "zone_name": "Kitchen Zone B",
+          "floor": 1,
+          "building": "Main Facility",
+          "latitude": 11.0168,
+          "longitude": 76.9558
+        },
+        "timestamp": "2026-10-09T05:16:07.685921Z",
+        "ingestion_timestamp": "2026-10-09T05:16:07.685922Z",
+        "metrics": {
+          "temperature_celsius": 78.4,
+          "ambient_celsius": 24.0,
+          "thermal_gradient_celsius": 54.400000000000006,
+          "radiometric_emissivity": 0.95,
+          "focal_plane_array_temp": 22.5
+        },
+        "provenance": "flir_radiometric_stream",
+        "confidence": 0.96,
+        "status": "validated",
+        "schema_version": "5.0.0"
+      },
+      {
+        "reading_id": "ENV-0516076899",
+        "tenant_id": "TEN-BALA-HQ",
+        "incident_id": "INC-PRED-TEST",
+        "sensor_id": "SNR-AIR-P1",
+        "modality": "AIR_QUALITY",
+        "location": {
+          "zone_id": "ZONE-B",
+          "zone_name": "Kitchen Zone B",
+          "floor": 1,
+          "building": "Main Facility",
+          "latitude": 11.0168,
+          "longitude": 76.9558
+        },
+        "timestamp": "2026-10-09T05:16:07.689955Z",
+        "ingestion_timestamp": "2026-10-09T05:16:07.689956Z",
+        "metrics": {
+          "particulate_pm25": 42.8,
+          "particulate_pm10": 25.0,
+          "combustion_aerosol_ppm": 35.0,
+          "co2_ppm": 420.0,
+          "voc_ppb": 50.0
+        },
+        "provenance": "airiq_iot_mesh",
+        "confidence": 0.94,
+        "status": "validated",
+        "schema_version": "5.0.0"
+      },
+      {
+        "reading_id": "CAM-0516076939",
+        "tenant_id": "TEN-BALA-HQ",
+        "incident_id": "INC-PRED-TEST",
+        "sensor_id": "SNR-CAM-P1",
+        "modality": "CCTV_OPTICAL",
+        "location": {
+          "zone_id": "ZONE-B",
+          "zone_name": "Kitchen Zone B",
+          "floor": 1,
+          "building": "Main Facility",
+          "latitude": 11.0168,
+          "longitude": 76.9558
+        },
+        "timestamp": "2026-10-09T05:16:07.694007Z",
+        "ingestion_timestamp": "2026-10-09T05:16:07.694009Z",
+        "metrics": {
+          "crowd_count": 18,
+          "optical_flow_velocity_mps": 1.2,
+          "visible_smoke_density": 0.0,
+          "egress_obstruction_ratio": 0.0,
+          "bounding_boxes": []
+        },
+        "provenance": "cctv_vision_model",
+        "confidence": 0.91,
+        "status": "validated",
+        "schema_version": "5.0.0"
+      },
+      {
+        "reading_id": "THM-0523090177",
+        "tenant_id": "TEN-BALA-HQ",
+        "incident_id": "INC-PRED-TEST",
+        "sensor_id": "SNR-THM-P1",
+        "modality": "FLIR_THERMAL",
+        "location": {
+          "zone_id": "ZONE-B",
+          "zone_name": "Kitchen Zone B",
+          "floor": 1,
+          "building": "Main Facility",
+          "latitude": 11.0168,
+          "longitude": 76.9558
+        },
+        "timestamp": "2026-10-09T05:23:09.017730Z",
+        "ingestion_timestamp": "2026-10-09T05:23:09.017731Z",
+        "metrics": {
+          "temperature_celsius": 78.4,
+          "ambient_celsius": 24.0,
+          "thermal_gradient_celsius": 54.400000000000006,
+          "radiometric_emissivity": 0.95,
+          "focal_plane_array_temp": 22.5
+        },
+        "provenance": "flir_radiometric_stream",
+        "confidence": 0.96,
+        "status": "validated",
+        "schema_version": "5.0.0"
+      },
+      {
+        "reading_id": "ENV-0523090202",
+        "tenant_id": "TEN-BALA-HQ",
+        "incident_id": "INC-PRED-TEST",
+        "sensor_id": "SNR-AIR-P1",
+        "modality": "AIR_QUALITY",
+        "location": {
+          "zone_id": "ZONE-B",
+          "zone_name": "Kitchen Zone B",
+          "floor": 1,
+          "building": "Main Facility",
+          "latitude": 11.0168,
+          "longitude": 76.9558
+        },
+        "timestamp": "2026-10-09T05:23:09.020319Z",
+        "ingestion_timestamp": "2026-10-09T05:23:09.020320Z",
+        "metrics": {
+          "particulate_pm25": 42.8,
+          "particulate_pm10": 25.0,
+          "combustion_aerosol_ppm": 35.0,
+          "co2_ppm": 420.0,
+          "voc_ppb": 50.0
+        },
+        "provenance": "airiq_iot_mesh",
+        "confidence": 0.94,
+        "status": "validated",
+        "schema_version": "5.0.0"
+      },
+      {
+        "reading_id": "CAM-0523090228",
+        "tenant_id": "TEN-BALA-HQ",
+        "incident_id": "INC-PRED-TEST",
+        "sensor_id": "SNR-CAM-P1",
+        "modality": "CCTV_OPTICAL",
+        "location": {
+          "zone_id": "ZONE-B",
+          "zone_name": "Kitchen Zone B",
+          "floor": 1,
+          "building": "Main Facility",
+          "latitude": 11.0168,
+          "longitude": 76.9558
+        },
+        "timestamp": "2026-10-09T05:23:09.022828Z",
+        "ingestion_timestamp": "2026-10-09T05:23:09.022829Z",
+        "metrics": {
+          "crowd_count": 18,
+          "optical_flow_velocity_mps": 1.2,
+          "visible_smoke_density": 0.0,
+          "egress_obstruction_ratio": 0.0,
+          "bounding_boxes": []
+        },
+        "provenance": "cctv_vision_model",
+        "confidence": 0.91,
+        "status": "validated",
+        "schema_version": "5.0.0"
       }
     ],
     "INC-API-501": [
@@ -1174,6 +1566,62 @@
         "confidence": 0.96,
         "status": "validated",
         "schema_version": "5.0.0"
+      },
+      {
+        "reading_id": "THM-0516079400",
+        "tenant_id": "TEN-BALA-HQ",
+        "incident_id": "INC-API-501",
+        "sensor_id": "SNR-FLIR-API",
+        "modality": "FLIR_THERMAL",
+        "location": {
+          "zone_id": "ZONE-B",
+          "zone_name": "Kitchen Zone B",
+          "floor": 1,
+          "building": "Main Facility",
+          "latitude": 11.0168,
+          "longitude": 76.9558
+        },
+        "timestamp": "2026-10-09T05:16:07.940064Z",
+        "ingestion_timestamp": "2026-10-09T05:16:07.940065Z",
+        "metrics": {
+          "temperature_celsius": 82.0,
+          "ambient_celsius": 24.0,
+          "thermal_gradient_celsius": 58.0,
+          "radiometric_emissivity": 0.95,
+          "focal_plane_array_temp": 22.5
+        },
+        "provenance": "flir_radiometric_stream",
+        "confidence": 0.96,
+        "status": "validated",
+        "schema_version": "5.0.0"
+      },
+      {
+        "reading_id": "THM-0523090970",
+        "tenant_id": "TEN-BALA-HQ",
+        "incident_id": "INC-API-501",
+        "sensor_id": "SNR-FLIR-API",
+        "modality": "FLIR_THERMAL",
+        "location": {
+          "zone_id": "ZONE-B",
+          "zone_name": "Kitchen Zone B",
+          "floor": 1,
+          "building": "Main Facility",
+          "latitude": 11.0168,
+          "longitude": 76.9558
+        },
+        "timestamp": "2026-10-09T05:23:09.097122Z",
+        "ingestion_timestamp": "2026-10-09T05:23:09.097123Z",
+        "metrics": {
+          "temperature_celsius": 82.0,
+          "ambient_celsius": 24.0,
+          "thermal_gradient_celsius": 58.0,
+          "radiometric_emissivity": 0.95,
+          "focal_plane_array_temp": 22.5
+        },
+        "provenance": "flir_radiometric_stream",
+        "confidence": 0.96,
+        "status": "validated",
+        "schema_version": "5.0.0"
       }
     ],
     "INC-TEST-2df920": [
@@ -1253,6 +1701,66 @@
         },
         "timestamp": "2026-10-08T17:58:52.687415Z",
         "ingestion_timestamp": "2026-10-08T17:58:52.687417Z",
+        "metrics": {
+          "temperature_celsius": 76.5,
+          "ambient_celsius": 24.0,
+          "thermal_gradient_celsius": 52.5,
+          "radiometric_emissivity": 0.95,
+          "focal_plane_array_temp": 22.5
+        },
+        "provenance": "flir_radiometric_stream",
+        "confidence": 0.96,
+        "status": "validated",
+        "schema_version": "5.0.0"
+      }
+    ],
+    "INC-TEST-388162": [
+      {
+        "reading_id": "THM-0516076264",
+        "tenant_id": "TEN-BALA-HQ",
+        "incident_id": "INC-TEST-388162",
+        "sensor_id": "SNR-FLIR-09",
+        "modality": "FLIR_THERMAL",
+        "location": {
+          "zone_id": "ZONE-KITCHEN-B",
+          "zone_name": "Kitchen Zone B",
+          "floor": 1,
+          "building": "Main Facility",
+          "latitude": 11.0168,
+          "longitude": 76.9558
+        },
+        "timestamp": "2026-10-09T05:16:07.626595Z",
+        "ingestion_timestamp": "2026-10-09T05:16:07.626598Z",
+        "metrics": {
+          "temperature_celsius": 76.5,
+          "ambient_celsius": 24.0,
+          "thermal_gradient_celsius": 52.5,
+          "radiometric_emissivity": 0.95,
+          "focal_plane_array_temp": 22.5
+        },
+        "provenance": "flir_radiometric_stream",
+        "confidence": 0.96,
+        "status": "validated",
+        "schema_version": "5.0.0"
+      }
+    ],
+    "INC-TEST-c9fd40": [
+      {
+        "reading_id": "THM-0523089920",
+        "tenant_id": "TEN-BALA-HQ",
+        "incident_id": "INC-TEST-c9fd40",
+        "sensor_id": "SNR-FLIR-09",
+        "modality": "FLIR_THERMAL",
+        "location": {
+          "zone_id": "ZONE-KITCHEN-B",
+          "zone_name": "Kitchen Zone B",
+          "floor": 1,
+          "building": "Main Facility",
+          "latitude": 11.0168,
+          "longitude": 76.9558
+        },
+        "timestamp": "2026-10-09T05:23:08.992077Z",
+        "ingestion_timestamp": "2026-10-09T05:23:08.992077Z",
         "metrics": {
           "temperature_celsius": 76.5,
           "ambient_celsius": 24.0,
@@ -1487,6 +1995,112 @@
           "modality_coverage_count": 2
         },
         "raw_reading_ids": [
+          "CAM-1758527173",
+          "THM-1758527144",
+          "CAM-1727327524",
+          "THM-1727327481",
+          "CAM-1727045136",
+          "THM-1727045082",
+          "CAM-1725463165",
+          "THM-1725463129",
+          "CAM-1723579427",
+          "THM-1723579401"
+        ]
+      },
+      {
+        "id": "FEAT-76F98177",
+        "incident_id": "INC-FEAT-TEST",
+        "tenant_id": "TEN-BALA-HQ",
+        "timestamp": "2026-10-09T05:16:07.678719Z",
+        "feature_schema_version": "2.0.0",
+        "environmental": {
+          "max_temperature_c": 68.0,
+          "thermal_rise_rate_c_per_min": 7.33,
+          "particulate_peak_ppm": 0.0,
+          "particulate_surge_ratio": 1.0,
+          "hazard_index": 0.258
+        },
+        "spatial": {
+          "affected_zone_radius_m": 12.5,
+          "active_sensor_density_per_sqm": 0.0133,
+          "distance_to_nearest_exit_m": 18.0,
+          "perimeter_isolation_pct": 95.0
+        },
+        "crowd": {
+          "estimated_occupancy": 132,
+          "crowd_density_per_sqm": 1.65,
+          "egress_velocity_mps": 0.8,
+          "flow_deceleration_rate": 0.6,
+          "corridor_congestion_risk": 0.945
+        },
+        "temporal": {
+          "incident_duration_minutes": 712.2,
+          "observation_frequency_hz": 0.0,
+          "volatility_index": 0.464
+        },
+        "evidence": {
+          "sensor_agreement_ratio": 0.94,
+          "cross_modal_conflict_delta": 0.04,
+          "fused_confidence_score": 0.94,
+          "modality_coverage_count": 2
+        },
+        "raw_reading_ids": [
+          "CAM-0516076714",
+          "THM-0516076630",
+          "CAM-1758527173",
+          "THM-1758527144",
+          "CAM-1727327524",
+          "THM-1727327481",
+          "CAM-1727045136",
+          "THM-1727045082",
+          "CAM-1725463165",
+          "THM-1725463129",
+          "CAM-1723579427",
+          "THM-1723579401"
+        ]
+      },
+      {
+        "id": "FEAT-71AF4C30",
+        "incident_id": "INC-FEAT-TEST",
+        "tenant_id": "TEN-BALA-HQ",
+        "timestamp": "2026-10-09T05:23:09.012879Z",
+        "feature_schema_version": "2.0.0",
+        "environmental": {
+          "max_temperature_c": 68.0,
+          "thermal_rise_rate_c_per_min": 6.29,
+          "particulate_peak_ppm": 0.0,
+          "particulate_surge_ratio": 1.0,
+          "hazard_index": 0.258
+        },
+        "spatial": {
+          "affected_zone_radius_m": 12.5,
+          "active_sensor_density_per_sqm": 0.0133,
+          "distance_to_nearest_exit_m": 18.0,
+          "perimeter_isolation_pct": 95.0
+        },
+        "crowd": {
+          "estimated_occupancy": 154,
+          "crowd_density_per_sqm": 1.93,
+          "egress_velocity_mps": 0.8,
+          "flow_deceleration_rate": 0.6,
+          "corridor_congestion_risk": 1.0
+        },
+        "temporal": {
+          "incident_duration_minutes": 719.2,
+          "observation_frequency_hz": 0.0,
+          "volatility_index": 0.481
+        },
+        "evidence": {
+          "sensor_agreement_ratio": 0.94,
+          "cross_modal_conflict_delta": 0.04,
+          "fused_confidence_score": 0.93,
+          "modality_coverage_count": 2
+        },
+        "raw_reading_ids": [
+          "CAM-0523090103",
+          "THM-0523090077",
+          "CAM-0516076714",
+          "THM-0516076630",
           "CAM-1758527173",
           "THM-1758527144",
           "CAM-1727327524",
@@ -1990,6 +2604,244 @@
           "ENV-1723579514",
           "THM-1723579493"
         ]
+      },
+      {
+        "id": "FEAT-7A54FA16",
+        "incident_id": "INC-PRED-TEST",
+        "tenant_id": "TEN-BALA-HQ",
+        "timestamp": "2026-10-09T05:16:07.702055Z",
+        "feature_schema_version": "2.0.0",
+        "environmental": {
+          "max_temperature_c": 78.4,
+          "thermal_rise_rate_c_per_min": 9.07,
+          "particulate_peak_ppm": 35.0,
+          "particulate_surge_ratio": 2.85,
+          "hazard_index": 0.6
+        },
+        "spatial": {
+          "affected_zone_radius_m": 12.5,
+          "active_sensor_density_per_sqm": 0.02,
+          "distance_to_nearest_exit_m": 18.0,
+          "perimeter_isolation_pct": 75.0
+        },
+        "crowd": {
+          "estimated_occupancy": 108,
+          "crowd_density_per_sqm": 1.35,
+          "egress_velocity_mps": 1.2,
+          "flow_deceleration_rate": 0.2,
+          "corridor_congestion_risk": 0.715
+        },
+        "temporal": {
+          "incident_duration_minutes": 712.2,
+          "observation_frequency_hz": 0.0,
+          "volatility_index": 0.635
+        },
+        "evidence": {
+          "sensor_agreement_ratio": 0.94,
+          "cross_modal_conflict_delta": 0.04,
+          "fused_confidence_score": 0.94,
+          "modality_coverage_count": 3
+        },
+        "raw_reading_ids": [
+          "CAM-0516076939",
+          "ENV-0516076899",
+          "THM-0516076858",
+          "CAM-1758527338",
+          "ENV-1758527308",
+          "THM-1758527265",
+          "CAM-1727327684",
+          "ENV-1727327652",
+          "THM-1727327619",
+          "CAM-1727045308",
+          "ENV-1727045273",
+          "THM-1727045244",
+          "CAM-1725463295",
+          "ENV-1725463269",
+          "THM-1725463241",
+          "CAM-1723579533",
+          "ENV-1723579514",
+          "THM-1723579493"
+        ]
+      },
+      {
+        "id": "FEAT-4CBFB876",
+        "incident_id": "INC-PRED-TEST",
+        "tenant_id": "TEN-BALA-HQ",
+        "timestamp": "2026-10-09T05:16:07.715571Z",
+        "feature_schema_version": "2.0.0",
+        "environmental": {
+          "max_temperature_c": 78.4,
+          "thermal_rise_rate_c_per_min": 9.07,
+          "particulate_peak_ppm": 35.0,
+          "particulate_surge_ratio": 2.85,
+          "hazard_index": 0.6
+        },
+        "spatial": {
+          "affected_zone_radius_m": 12.5,
+          "active_sensor_density_per_sqm": 0.02,
+          "distance_to_nearest_exit_m": 18.0,
+          "perimeter_isolation_pct": 75.0
+        },
+        "crowd": {
+          "estimated_occupancy": 108,
+          "crowd_density_per_sqm": 1.35,
+          "egress_velocity_mps": 1.2,
+          "flow_deceleration_rate": 0.2,
+          "corridor_congestion_risk": 0.715
+        },
+        "temporal": {
+          "incident_duration_minutes": 712.2,
+          "observation_frequency_hz": 0.0,
+          "volatility_index": 0.635
+        },
+        "evidence": {
+          "sensor_agreement_ratio": 0.94,
+          "cross_modal_conflict_delta": 0.04,
+          "fused_confidence_score": 0.94,
+          "modality_coverage_count": 3
+        },
+        "raw_reading_ids": [
+          "CAM-0516076939",
+          "ENV-0516076899",
+          "THM-0516076858",
+          "CAM-1758527338",
+          "ENV-1758527308",
+          "THM-1758527265",
+          "CAM-1727327684",
+          "ENV-1727327652",
+          "THM-1727327619",
+          "CAM-1727045308",
+          "ENV-1727045273",
+          "THM-1727045244",
+          "CAM-1725463295",
+          "ENV-1725463269",
+          "THM-1725463241",
+          "CAM-1723579533",
+          "ENV-1723579514",
+          "THM-1723579493"
+        ]
+      },
+      {
+        "id": "FEAT-A51E955A",
+        "incident_id": "INC-PRED-TEST",
+        "tenant_id": "TEN-BALA-HQ",
+        "timestamp": "2026-10-09T05:23:09.029621Z",
+        "feature_schema_version": "2.0.0",
+        "environmental": {
+          "max_temperature_c": 78.4,
+          "thermal_rise_rate_c_per_min": 7.77,
+          "particulate_peak_ppm": 35.0,
+          "particulate_surge_ratio": 2.85,
+          "hazard_index": 0.6
+        },
+        "spatial": {
+          "affected_zone_radius_m": 12.5,
+          "active_sensor_density_per_sqm": 0.02,
+          "distance_to_nearest_exit_m": 18.0,
+          "perimeter_isolation_pct": 75.0
+        },
+        "crowd": {
+          "estimated_occupancy": 126,
+          "crowd_density_per_sqm": 1.57,
+          "egress_velocity_mps": 1.2,
+          "flow_deceleration_rate": 0.2,
+          "corridor_congestion_risk": 0.828
+        },
+        "temporal": {
+          "incident_duration_minutes": 719.2,
+          "observation_frequency_hz": 0.0,
+          "volatility_index": 0.669
+        },
+        "evidence": {
+          "sensor_agreement_ratio": 0.94,
+          "cross_modal_conflict_delta": 0.04,
+          "fused_confidence_score": 0.94,
+          "modality_coverage_count": 3
+        },
+        "raw_reading_ids": [
+          "CAM-0523090228",
+          "ENV-0523090202",
+          "THM-0523090177",
+          "CAM-0516076939",
+          "ENV-0516076899",
+          "THM-0516076858",
+          "CAM-1758527338",
+          "ENV-1758527308",
+          "THM-1758527265",
+          "CAM-1727327684",
+          "ENV-1727327652",
+          "THM-1727327619",
+          "CAM-1727045308",
+          "ENV-1727045273",
+          "THM-1727045244",
+          "CAM-1725463295",
+          "ENV-1725463269",
+          "THM-1725463241",
+          "CAM-1723579533",
+          "ENV-1723579514",
+          "THM-1723579493"
+        ]
+      },
+      {
+        "id": "FEAT-82C7205C",
+        "incident_id": "INC-PRED-TEST",
+        "tenant_id": "TEN-BALA-HQ",
+        "timestamp": "2026-10-09T05:23:09.047419Z",
+        "feature_schema_version": "2.0.0",
+        "environmental": {
+          "max_temperature_c": 78.4,
+          "thermal_rise_rate_c_per_min": 7.77,
+          "particulate_peak_ppm": 35.0,
+          "particulate_surge_ratio": 2.85,
+          "hazard_index": 0.6
+        },
+        "spatial": {
+          "affected_zone_radius_m": 12.5,
+          "active_sensor_density_per_sqm": 0.02,
+          "distance_to_nearest_exit_m": 18.0,
+          "perimeter_isolation_pct": 75.0
+        },
+        "crowd": {
+          "estimated_occupancy": 126,
+          "crowd_density_per_sqm": 1.57,
+          "egress_velocity_mps": 1.2,
+          "flow_deceleration_rate": 0.2,
+          "corridor_congestion_risk": 0.828
+        },
+        "temporal": {
+          "incident_duration_minutes": 719.2,
+          "observation_frequency_hz": 0.0,
+          "volatility_index": 0.669
+        },
+        "evidence": {
+          "sensor_agreement_ratio": 0.94,
+          "cross_modal_conflict_delta": 0.04,
+          "fused_confidence_score": 0.94,
+          "modality_coverage_count": 3
+        },
+        "raw_reading_ids": [
+          "CAM-0523090228",
+          "ENV-0523090202",
+          "THM-0523090177",
+          "CAM-0516076939",
+          "ENV-0516076899",
+          "THM-0516076858",
+          "CAM-1758527338",
+          "ENV-1758527308",
+          "THM-1758527265",
+          "CAM-1727327684",
+          "ENV-1727327652",
+          "THM-1727327619",
+          "CAM-1727045308",
+          "ENV-1727045273",
+          "THM-1727045244",
+          "CAM-1725463295",
+          "ENV-1725463269",
+          "THM-1725463241",
+          "CAM-1723579533",
+          "ENV-1723579514",
+          "THM-1723579493"
+        ]
       }
     ],
     "INC-SHADOW-TEST": [
@@ -2154,6 +3006,84 @@
         "incident_id": "INC-SHADOW-TEST",
         "tenant_id": "TEN-BALA-HQ",
         "timestamp": "2026-10-08T17:58:52.770551Z",
+        "feature_schema_version": "2.0.0",
+        "environmental": {
+          "max_temperature_c": 24.0,
+          "thermal_rise_rate_c_per_min": 0.0,
+          "particulate_peak_ppm": 0.0,
+          "particulate_surge_ratio": 1.0,
+          "hazard_index": 0.0
+        },
+        "spatial": {
+          "affected_zone_radius_m": 12.5,
+          "active_sensor_density_per_sqm": 0.0,
+          "distance_to_nearest_exit_m": 18.0,
+          "perimeter_isolation_pct": 95.0
+        },
+        "crowd": {
+          "estimated_occupancy": 14,
+          "crowd_density_per_sqm": 0.17,
+          "egress_velocity_mps": 1.2,
+          "flow_deceleration_rate": 0.2,
+          "corridor_congestion_risk": 0.128
+        },
+        "temporal": {
+          "incident_duration_minutes": 1.0,
+          "observation_frequency_hz": 0.2,
+          "volatility_index": 0.038
+        },
+        "evidence": {
+          "sensor_agreement_ratio": 0.8,
+          "cross_modal_conflict_delta": 0.04,
+          "fused_confidence_score": 0.88,
+          "modality_coverage_count": 1
+        },
+        "raw_reading_ids": []
+      },
+      {
+        "id": "FEAT-B28B2FCF",
+        "incident_id": "INC-SHADOW-TEST",
+        "tenant_id": "TEN-BALA-HQ",
+        "timestamp": "2026-10-09T05:16:07.729308Z",
+        "feature_schema_version": "2.0.0",
+        "environmental": {
+          "max_temperature_c": 24.0,
+          "thermal_rise_rate_c_per_min": 0.0,
+          "particulate_peak_ppm": 0.0,
+          "particulate_surge_ratio": 1.0,
+          "hazard_index": 0.0
+        },
+        "spatial": {
+          "affected_zone_radius_m": 12.5,
+          "active_sensor_density_per_sqm": 0.0,
+          "distance_to_nearest_exit_m": 18.0,
+          "perimeter_isolation_pct": 95.0
+        },
+        "crowd": {
+          "estimated_occupancy": 14,
+          "crowd_density_per_sqm": 0.17,
+          "egress_velocity_mps": 1.2,
+          "flow_deceleration_rate": 0.2,
+          "corridor_congestion_risk": 0.128
+        },
+        "temporal": {
+          "incident_duration_minutes": 1.0,
+          "observation_frequency_hz": 0.2,
+          "volatility_index": 0.038
+        },
+        "evidence": {
+          "sensor_agreement_ratio": 0.8,
+          "cross_modal_conflict_delta": 0.04,
+          "fused_confidence_score": 0.88,
+          "modality_coverage_count": 1
+        },
+        "raw_reading_ids": []
+      },
+      {
+        "id": "FEAT-9C8154CB",
+        "incident_id": "INC-SHADOW-TEST",
+        "tenant_id": "TEN-BALA-HQ",
+        "timestamp": "2026-10-09T05:23:09.058084Z",
         "feature_schema_version": "2.0.0",
         "environmental": {
           "max_temperature_c": 24.0,
@@ -2612,6 +3542,196 @@
           "modality_coverage_count": 1
         },
         "raw_reading_ids": [
+          "THM-1758528069",
+          "THM-1727328396",
+          "THM-1727046057",
+          "THM-1725463882",
+          "THM-1724333077",
+          "THM-1723589640"
+        ]
+      },
+      {
+        "id": "FEAT-ABA5C87A",
+        "incident_id": "INC-API-501",
+        "tenant_id": "TEN-BALA-HQ",
+        "timestamp": "2026-10-09T05:16:08.017972Z",
+        "feature_schema_version": "2.0.0",
+        "environmental": {
+          "max_temperature_c": 82.0,
+          "thermal_rise_rate_c_per_min": 8.29,
+          "particulate_peak_ppm": 0.0,
+          "particulate_surge_ratio": 1.0,
+          "hazard_index": 0.342
+        },
+        "spatial": {
+          "affected_zone_radius_m": 12.5,
+          "active_sensor_density_per_sqm": 0.0067,
+          "distance_to_nearest_exit_m": 18.0,
+          "perimeter_isolation_pct": 95.0
+        },
+        "crowd": {
+          "estimated_occupancy": 14,
+          "crowd_density_per_sqm": 0.17,
+          "egress_velocity_mps": 1.2,
+          "flow_deceleration_rate": 0.2,
+          "corridor_congestion_risk": 0.128
+        },
+        "temporal": {
+          "incident_duration_minutes": 712.2,
+          "observation_frequency_hz": 0.0,
+          "volatility_index": 0.278
+        },
+        "evidence": {
+          "sensor_agreement_ratio": 0.8,
+          "cross_modal_conflict_delta": 0.04,
+          "fused_confidence_score": 0.96,
+          "modality_coverage_count": 1
+        },
+        "raw_reading_ids": [
+          "THM-0516079400",
+          "THM-1758528069",
+          "THM-1727328396",
+          "THM-1727046057",
+          "THM-1725463882",
+          "THM-1724333077",
+          "THM-1723589640"
+        ]
+      },
+      {
+        "id": "FEAT-84462FDC",
+        "incident_id": "INC-API-501",
+        "tenant_id": "TEN-BALA-HQ",
+        "timestamp": "2026-10-09T05:16:08.041269Z",
+        "feature_schema_version": "2.0.0",
+        "environmental": {
+          "max_temperature_c": 82.0,
+          "thermal_rise_rate_c_per_min": 8.29,
+          "particulate_peak_ppm": 0.0,
+          "particulate_surge_ratio": 1.0,
+          "hazard_index": 0.342
+        },
+        "spatial": {
+          "affected_zone_radius_m": 12.5,
+          "active_sensor_density_per_sqm": 0.0067,
+          "distance_to_nearest_exit_m": 18.0,
+          "perimeter_isolation_pct": 95.0
+        },
+        "crowd": {
+          "estimated_occupancy": 14,
+          "crowd_density_per_sqm": 0.17,
+          "egress_velocity_mps": 1.2,
+          "flow_deceleration_rate": 0.2,
+          "corridor_congestion_risk": 0.128
+        },
+        "temporal": {
+          "incident_duration_minutes": 712.2,
+          "observation_frequency_hz": 0.0,
+          "volatility_index": 0.278
+        },
+        "evidence": {
+          "sensor_agreement_ratio": 0.8,
+          "cross_modal_conflict_delta": 0.04,
+          "fused_confidence_score": 0.96,
+          "modality_coverage_count": 1
+        },
+        "raw_reading_ids": [
+          "THM-0516079400",
+          "THM-1758528069",
+          "THM-1727328396",
+          "THM-1727046057",
+          "THM-1725463882",
+          "THM-1724333077",
+          "THM-1723589640"
+        ]
+      },
+      {
+        "id": "FEAT-FB492850",
+        "incident_id": "INC-API-501",
+        "tenant_id": "TEN-BALA-HQ",
+        "timestamp": "2026-10-09T05:23:09.152780Z",
+        "feature_schema_version": "2.0.0",
+        "environmental": {
+          "max_temperature_c": 82.0,
+          "thermal_rise_rate_c_per_min": 7.25,
+          "particulate_peak_ppm": 0.0,
+          "particulate_surge_ratio": 1.0,
+          "hazard_index": 0.342
+        },
+        "spatial": {
+          "affected_zone_radius_m": 12.5,
+          "active_sensor_density_per_sqm": 0.0067,
+          "distance_to_nearest_exit_m": 18.0,
+          "perimeter_isolation_pct": 95.0
+        },
+        "crowd": {
+          "estimated_occupancy": 14,
+          "crowd_density_per_sqm": 0.17,
+          "egress_velocity_mps": 1.2,
+          "flow_deceleration_rate": 0.2,
+          "corridor_congestion_risk": 0.128
+        },
+        "temporal": {
+          "incident_duration_minutes": 719.2,
+          "observation_frequency_hz": 0.0,
+          "volatility_index": 0.278
+        },
+        "evidence": {
+          "sensor_agreement_ratio": 0.8,
+          "cross_modal_conflict_delta": 0.04,
+          "fused_confidence_score": 0.96,
+          "modality_coverage_count": 1
+        },
+        "raw_reading_ids": [
+          "THM-0523090970",
+          "THM-0516079400",
+          "THM-1758528069",
+          "THM-1727328396",
+          "THM-1727046057",
+          "THM-1725463882",
+          "THM-1724333077",
+          "THM-1723589640"
+        ]
+      },
+      {
+        "id": "FEAT-18603105",
+        "incident_id": "INC-API-501",
+        "tenant_id": "TEN-BALA-HQ",
+        "timestamp": "2026-10-09T05:23:09.165211Z",
+        "feature_schema_version": "2.0.0",
+        "environmental": {
+          "max_temperature_c": 82.0,
+          "thermal_rise_rate_c_per_min": 7.25,
+          "particulate_peak_ppm": 0.0,
+          "particulate_surge_ratio": 1.0,
+          "hazard_index": 0.342
+        },
+        "spatial": {
+          "affected_zone_radius_m": 12.5,
+          "active_sensor_density_per_sqm": 0.0067,
+          "distance_to_nearest_exit_m": 18.0,
+          "perimeter_isolation_pct": 95.0
+        },
+        "crowd": {
+          "estimated_occupancy": 14,
+          "crowd_density_per_sqm": 0.17,
+          "egress_velocity_mps": 1.2,
+          "flow_deceleration_rate": 0.2,
+          "corridor_congestion_risk": 0.128
+        },
+        "temporal": {
+          "incident_duration_minutes": 719.2,
+          "observation_frequency_hz": 0.0,
+          "volatility_index": 0.278
+        },
+        "evidence": {
+          "sensor_agreement_ratio": 0.8,
+          "cross_modal_conflict_delta": 0.04,
+          "fused_confidence_score": 0.96,
+          "modality_coverage_count": 1
+        },
+        "raw_reading_ids": [
+          "THM-0523090970",
+          "THM-0516079400",
           "THM-1758528069",
           "THM-1727328396",
           "THM-1727046057",
@@ -3473,6 +4593,346 @@
           "sufficient_evidence": true,
           "reasoning": "Linear thermal projection at +10.9\u00b0C/min toward 150\u00b0C plenum boundary"
         }
+      },
+      {
+        "id": "PRED-EF2373A63A",
+        "incident_id": "INC-PRED-TEST",
+        "tenant_id": "TEN-BALA-HQ",
+        "generated_at": "2026-10-09T05:16:07.697727Z",
+        "model_version": "risk-ensemble-v2.4",
+        "feature_snapshot_id": "FEAT-7A54FA16",
+        "status": "HIGH_CONFIDENCE",
+        "data_quality_score": 0.833,
+        "feature_freshness_seconds": 0.0,
+        "coverage_score": 1.0,
+        "provenance": "sentra_ml_inference_cluster",
+        "fallback_mode": false,
+        "fallback_reason": null,
+        "severity": {
+          "predicted_severity": "SEV-1 Critical",
+          "probabilities": {
+            "SEV-1 Critical": 0.82,
+            "SEV-2 High": 0.14,
+            "SEV-3 Moderate": 0.03,
+            "SEV-4 Low": 0.01
+          },
+          "point_score": 0.82,
+          "uncertainty": {
+            "point_estimate": 0.82,
+            "lower_bound_90": 0.7,
+            "upper_bound_90": 0.94,
+            "confidence_level": 0.9,
+            "spread": 0.24
+          }
+        },
+        "escalation_risk": {
+          "risk_score": 0.65,
+          "uncertainty": {
+            "point_estimate": 0.65,
+            "lower_bound_90": 0.59,
+            "upper_bound_90": 0.71,
+            "confidence_level": 0.9,
+            "spread": 0.12
+          },
+          "time_horizon_minutes": 15,
+          "trend_direction": "holding_steady"
+        },
+        "evacuation_corridors": [
+          {
+            "corridor_id": "CORR-STAIR-01",
+            "corridor_name": "Central Main Atrium Stairwell 1",
+            "congestion_risk": 0.82,
+            "uncertainty": {
+              "point_estimate": 0.71,
+              "lower_bound_90": 0.59,
+              "upper_bound_90": 0.84,
+              "confidence_level": 0.9,
+              "spread": 0.24
+            },
+            "projected_pinch_point": true,
+            "reroute_recommended": true
+          },
+          {
+            "corridor_id": "CORR-STAIR-03",
+            "corridor_name": "Northwest Pressurized Stairwell 3",
+            "congestion_risk": 0.32,
+            "uncertainty": {
+              "point_estimate": 0.32,
+              "lower_bound_90": 0.26,
+              "upper_bound_90": 0.38,
+              "confidence_level": 0.9,
+              "spread": 0.12
+            },
+            "projected_pinch_point": false,
+            "reroute_recommended": false
+          }
+        ],
+        "hazard_persistence": {
+          "persistence_hours": 1.5,
+          "decay_rate_per_hour": 0.1,
+          "momentum": "stationary"
+        },
+        "critical_state": {
+          "time_to_critical_state_seconds": 473,
+          "critical_event_type": "thermal_flashover",
+          "sufficient_evidence": true,
+          "reasoning": "Linear thermal projection at +9.1\u00b0C/min toward 150\u00b0C plenum boundary"
+        }
+      },
+      {
+        "id": "PRED-89A46BA624",
+        "incident_id": "INC-PRED-TEST",
+        "tenant_id": "TEN-BALA-HQ",
+        "generated_at": "2026-10-09T05:16:07.710693Z",
+        "model_version": "risk-ensemble-v2.4",
+        "feature_snapshot_id": "FEAT-4CBFB876",
+        "status": "HEURISTIC_FALLBACK",
+        "data_quality_score": 0.833,
+        "feature_freshness_seconds": 0.0,
+        "coverage_score": 1.0,
+        "provenance": "sentra_ml_inference_cluster",
+        "fallback_mode": true,
+        "fallback_reason": "Operator simulated fallback or offline model safety trigger",
+        "severity": {
+          "predicted_severity": "SEV-1 Critical",
+          "probabilities": {
+            "SEV-1 Critical": 0.82,
+            "SEV-2 High": 0.14,
+            "SEV-3 Moderate": 0.03,
+            "SEV-4 Low": 0.01
+          },
+          "point_score": 0.82,
+          "uncertainty": {
+            "point_estimate": 0.82,
+            "lower_bound_90": 0.7,
+            "upper_bound_90": 0.94,
+            "confidence_level": 0.9,
+            "spread": 0.24
+          }
+        },
+        "escalation_risk": {
+          "risk_score": 0.65,
+          "uncertainty": {
+            "point_estimate": 0.65,
+            "lower_bound_90": 0.59,
+            "upper_bound_90": 0.71,
+            "confidence_level": 0.9,
+            "spread": 0.12
+          },
+          "time_horizon_minutes": 15,
+          "trend_direction": "holding_steady"
+        },
+        "evacuation_corridors": [
+          {
+            "corridor_id": "CORR-STAIR-01",
+            "corridor_name": "Central Main Atrium Stairwell 1",
+            "congestion_risk": 0.82,
+            "uncertainty": {
+              "point_estimate": 0.71,
+              "lower_bound_90": 0.59,
+              "upper_bound_90": 0.84,
+              "confidence_level": 0.9,
+              "spread": 0.24
+            },
+            "projected_pinch_point": true,
+            "reroute_recommended": true
+          },
+          {
+            "corridor_id": "CORR-STAIR-03",
+            "corridor_name": "Northwest Pressurized Stairwell 3",
+            "congestion_risk": 0.32,
+            "uncertainty": {
+              "point_estimate": 0.32,
+              "lower_bound_90": 0.26,
+              "upper_bound_90": 0.38,
+              "confidence_level": 0.9,
+              "spread": 0.12
+            },
+            "projected_pinch_point": false,
+            "reroute_recommended": false
+          }
+        ],
+        "hazard_persistence": {
+          "persistence_hours": 1.5,
+          "decay_rate_per_hour": 0.1,
+          "momentum": "stationary"
+        },
+        "critical_state": {
+          "time_to_critical_state_seconds": 473,
+          "critical_event_type": "thermal_flashover",
+          "sufficient_evidence": true,
+          "reasoning": "Linear thermal projection at +9.1\u00b0C/min toward 150\u00b0C plenum boundary"
+        }
+      },
+      {
+        "id": "PRED-85322D05E9",
+        "incident_id": "INC-PRED-TEST",
+        "tenant_id": "TEN-BALA-HQ",
+        "generated_at": "2026-10-09T05:23:09.025516Z",
+        "model_version": "risk-ensemble-v2.4",
+        "feature_snapshot_id": "FEAT-A51E955A",
+        "status": "HIGH_CONFIDENCE",
+        "data_quality_score": 0.829,
+        "feature_freshness_seconds": 0.0,
+        "coverage_score": 1.0,
+        "provenance": "sentra_ml_inference_cluster",
+        "fallback_mode": false,
+        "fallback_reason": null,
+        "severity": {
+          "predicted_severity": "SEV-1 Critical",
+          "probabilities": {
+            "SEV-1 Critical": 0.82,
+            "SEV-2 High": 0.14,
+            "SEV-3 Moderate": 0.03,
+            "SEV-4 Low": 0.01
+          },
+          "point_score": 0.82,
+          "uncertainty": {
+            "point_estimate": 0.82,
+            "lower_bound_90": 0.7,
+            "upper_bound_90": 0.94,
+            "confidence_level": 0.9,
+            "spread": 0.25
+          }
+        },
+        "escalation_risk": {
+          "risk_score": 0.69,
+          "uncertainty": {
+            "point_estimate": 0.69,
+            "lower_bound_90": 0.63,
+            "upper_bound_90": 0.75,
+            "confidence_level": 0.9,
+            "spread": 0.12
+          },
+          "time_horizon_minutes": 15,
+          "trend_direction": "holding_steady"
+        },
+        "evacuation_corridors": [
+          {
+            "corridor_id": "CORR-STAIR-01",
+            "corridor_name": "Central Main Atrium Stairwell 1",
+            "congestion_risk": 0.95,
+            "uncertainty": {
+              "point_estimate": 0.83,
+              "lower_bound_90": 0.71,
+              "upper_bound_90": 0.95,
+              "confidence_level": 0.9,
+              "spread": 0.25
+            },
+            "projected_pinch_point": true,
+            "reroute_recommended": true
+          },
+          {
+            "corridor_id": "CORR-STAIR-03",
+            "corridor_name": "Northwest Pressurized Stairwell 3",
+            "congestion_risk": 0.37,
+            "uncertainty": {
+              "point_estimate": 0.37,
+              "lower_bound_90": 0.31,
+              "upper_bound_90": 0.43,
+              "confidence_level": 0.9,
+              "spread": 0.12
+            },
+            "projected_pinch_point": false,
+            "reroute_recommended": false
+          }
+        ],
+        "hazard_persistence": {
+          "persistence_hours": 1.5,
+          "decay_rate_per_hour": 0.1,
+          "momentum": "expanding"
+        },
+        "critical_state": {
+          "time_to_critical_state_seconds": 552,
+          "critical_event_type": "thermal_flashover",
+          "sufficient_evidence": true,
+          "reasoning": "Linear thermal projection at +7.8\u00b0C/min toward 150\u00b0C plenum boundary"
+        }
+      },
+      {
+        "id": "PRED-EDC55DEEAF",
+        "incident_id": "INC-PRED-TEST",
+        "tenant_id": "TEN-BALA-HQ",
+        "generated_at": "2026-10-09T05:23:09.040629Z",
+        "model_version": "risk-ensemble-v2.4",
+        "feature_snapshot_id": "FEAT-82C7205C",
+        "status": "HEURISTIC_FALLBACK",
+        "data_quality_score": 0.829,
+        "feature_freshness_seconds": 0.0,
+        "coverage_score": 1.0,
+        "provenance": "sentra_ml_inference_cluster",
+        "fallback_mode": true,
+        "fallback_reason": "Operator simulated fallback or offline model safety trigger",
+        "severity": {
+          "predicted_severity": "SEV-1 Critical",
+          "probabilities": {
+            "SEV-1 Critical": 0.82,
+            "SEV-2 High": 0.14,
+            "SEV-3 Moderate": 0.03,
+            "SEV-4 Low": 0.01
+          },
+          "point_score": 0.82,
+          "uncertainty": {
+            "point_estimate": 0.82,
+            "lower_bound_90": 0.7,
+            "upper_bound_90": 0.94,
+            "confidence_level": 0.9,
+            "spread": 0.25
+          }
+        },
+        "escalation_risk": {
+          "risk_score": 0.69,
+          "uncertainty": {
+            "point_estimate": 0.69,
+            "lower_bound_90": 0.63,
+            "upper_bound_90": 0.75,
+            "confidence_level": 0.9,
+            "spread": 0.12
+          },
+          "time_horizon_minutes": 15,
+          "trend_direction": "holding_steady"
+        },
+        "evacuation_corridors": [
+          {
+            "corridor_id": "CORR-STAIR-01",
+            "corridor_name": "Central Main Atrium Stairwell 1",
+            "congestion_risk": 0.95,
+            "uncertainty": {
+              "point_estimate": 0.83,
+              "lower_bound_90": 0.71,
+              "upper_bound_90": 0.95,
+              "confidence_level": 0.9,
+              "spread": 0.25
+            },
+            "projected_pinch_point": true,
+            "reroute_recommended": true
+          },
+          {
+            "corridor_id": "CORR-STAIR-03",
+            "corridor_name": "Northwest Pressurized Stairwell 3",
+            "congestion_risk": 0.37,
+            "uncertainty": {
+              "point_estimate": 0.37,
+              "lower_bound_90": 0.31,
+              "upper_bound_90": 0.43,
+              "confidence_level": 0.9,
+              "spread": 0.12
+            },
+            "projected_pinch_point": false,
+            "reroute_recommended": false
+          }
+        ],
+        "hazard_persistence": {
+          "persistence_hours": 1.5,
+          "decay_rate_per_hour": 0.1,
+          "momentum": "expanding"
+        },
+        "critical_state": {
+          "time_to_critical_state_seconds": 552,
+          "critical_event_type": "thermal_flashover",
+          "sufficient_evidence": true,
+          "reasoning": "Linear thermal projection at +7.8\u00b0C/min toward 150\u00b0C plenum boundary"
+        }
       }
     ],
     "incident/INC-API-501": [
@@ -3904,44 +5364,214 @@
           "sufficient_evidence": false,
           "reasoning": "Sensor coverage or data quality insufficient to reliably calculate flashover threshold"
         }
+      },
+      {
+        "id": "PRED-5D2668B629",
+        "incident_id": "INC-API-501",
+        "tenant_id": "TEN-BALA-HQ",
+        "generated_at": "2026-10-09T05:16:08.012243Z",
+        "model_version": "risk-ensemble-v2.4",
+        "feature_snapshot_id": "FEAT-ABA5C87A",
+        "status": "LOW_COVERAGE",
+        "data_quality_score": 0.829,
+        "feature_freshness_seconds": 0.1,
+        "coverage_score": 0.33,
+        "provenance": "sentra_ml_inference_cluster",
+        "fallback_mode": true,
+        "fallback_reason": "Sensor modality coverage below required threshold (40%)",
+        "severity": {
+          "predicted_severity": "SEV-1 Critical",
+          "probabilities": {
+            "SEV-1 Critical": 0.82,
+            "SEV-2 High": 0.14,
+            "SEV-3 Moderate": 0.03,
+            "SEV-4 Low": 0.01
+          },
+          "point_score": 0.82,
+          "uncertainty": {
+            "point_estimate": 0.82,
+            "lower_bound_90": 0.56,
+            "upper_bound_90": 0.99,
+            "confidence_level": 0.9,
+            "spread": 0.51
+          }
+        },
+        "escalation_risk": {
+          "risk_score": 0.25,
+          "uncertainty": {
+            "point_estimate": 0.25,
+            "lower_bound_90": 0.13,
+            "upper_bound_90": 0.38,
+            "confidence_level": 0.9,
+            "spread": 0.26
+          },
+          "time_horizon_minutes": 15,
+          "trend_direction": "de-escalating"
+        },
+        "evacuation_corridors": [
+          {
+            "corridor_id": "CORR-STAIR-01",
+            "corridor_name": "Central Main Atrium Stairwell 1",
+            "congestion_risk": 0.15,
+            "uncertainty": {
+              "point_estimate": 0.13,
+              "lower_bound_90": 0.0,
+              "upper_bound_90": 0.38,
+              "confidence_level": 0.9,
+              "spread": 0.51
+            },
+            "projected_pinch_point": false,
+            "reroute_recommended": false
+          },
+          {
+            "corridor_id": "CORR-STAIR-03",
+            "corridor_name": "Northwest Pressurized Stairwell 3",
+            "congestion_risk": 0.12,
+            "uncertainty": {
+              "point_estimate": 0.12,
+              "lower_bound_90": 0.05,
+              "upper_bound_90": 0.19,
+              "confidence_level": 0.9,
+              "spread": 0.26
+            },
+            "projected_pinch_point": false,
+            "reroute_recommended": false
+          }
+        ],
+        "hazard_persistence": {
+          "persistence_hours": 0.8,
+          "decay_rate_per_hour": 0.25,
+          "momentum": "contained"
+        },
+        "critical_state": {
+          "time_to_critical_state_seconds": null,
+          "critical_event_type": "thermal_flashover",
+          "sufficient_evidence": false,
+          "reasoning": "Sensor coverage or data quality insufficient to reliably calculate flashover threshold"
+        }
+      },
+      {
+        "id": "PRED-2212EF5172",
+        "incident_id": "INC-API-501",
+        "tenant_id": "TEN-BALA-HQ",
+        "generated_at": "2026-10-09T05:23:09.144267Z",
+        "model_version": "risk-ensemble-v2.4",
+        "feature_snapshot_id": "FEAT-FB492850",
+        "status": "LOW_COVERAGE",
+        "data_quality_score": 0.825,
+        "feature_freshness_seconds": 0.0,
+        "coverage_score": 0.33,
+        "provenance": "sentra_ml_inference_cluster",
+        "fallback_mode": true,
+        "fallback_reason": "Sensor modality coverage below required threshold (40%)",
+        "severity": {
+          "predicted_severity": "SEV-1 Critical",
+          "probabilities": {
+            "SEV-1 Critical": 0.82,
+            "SEV-2 High": 0.14,
+            "SEV-3 Moderate": 0.03,
+            "SEV-4 Low": 0.01
+          },
+          "point_score": 0.82,
+          "uncertainty": {
+            "point_estimate": 0.82,
+            "lower_bound_90": 0.56,
+            "upper_bound_90": 0.99,
+            "confidence_level": 0.9,
+            "spread": 0.52
+          }
+        },
+        "escalation_risk": {
+          "risk_score": 0.25,
+          "uncertainty": {
+            "point_estimate": 0.25,
+            "lower_bound_90": 0.13,
+            "upper_bound_90": 0.38,
+            "confidence_level": 0.9,
+            "spread": 0.26
+          },
+          "time_horizon_minutes": 15,
+          "trend_direction": "de-escalating"
+        },
+        "evacuation_corridors": [
+          {
+            "corridor_id": "CORR-STAIR-01",
+            "corridor_name": "Central Main Atrium Stairwell 1",
+            "congestion_risk": 0.15,
+            "uncertainty": {
+              "point_estimate": 0.13,
+              "lower_bound_90": 0.0,
+              "upper_bound_90": 0.39,
+              "confidence_level": 0.9,
+              "spread": 0.52
+            },
+            "projected_pinch_point": false,
+            "reroute_recommended": false
+          },
+          {
+            "corridor_id": "CORR-STAIR-03",
+            "corridor_name": "Northwest Pressurized Stairwell 3",
+            "congestion_risk": 0.12,
+            "uncertainty": {
+              "point_estimate": 0.12,
+              "lower_bound_90": 0.05,
+              "upper_bound_90": 0.19,
+              "confidence_level": 0.9,
+              "spread": 0.26
+            },
+            "projected_pinch_point": false,
+            "reroute_recommended": false
+          }
+        ],
+        "hazard_persistence": {
+          "persistence_hours": 0.8,
+          "decay_rate_per_hour": 0.25,
+          "momentum": "contained"
+        },
+        "critical_state": {
+          "time_to_critical_state_seconds": null,
+          "critical_event_type": "thermal_flashover",
+          "sufficient_evidence": false,
+          "reasoning": "Sensor coverage or data quality insufficient to reliably calculate flashover threshold"
+        }
       }
     ]
   },
   "quality_reports": {
     "INC-QUALITY-TEST": {
       "incident_id": "INC-QUALITY-TEST",
-      "evaluated_at": "2026-10-08T17:58:52.706598Z",
-      "quality_score": 0.69,
+      "evaluated_at": "2026-10-09T05:23:09.002504Z",
+      "quality_score": 0.679,
       "coverage_score": 0.67,
       "freshness_seconds": 0.0,
       "conflicting_sensors_count": 1,
-      "stale_sensors_count": 8,
-      "total_readings_evaluated": 10,
+      "stale_sensors_count": 12,
+      "total_readings_evaluated": 14,
       "violations": [
         {
           "rule": "STALE_TELEMETRY",
-          "reading_id": "ENV-1727327369",
+          "reading_id": "ENV-0516076465",
           "sensor_id": "SNR-AIR-CONFLICT",
-          "description": "Sensor telemetry is 1880.0s old (exceeds 60.0s threshold)",
+          "description": "Sensor telemetry is 421.4s old (exceeds 60.0s threshold)",
           "severity": "warning"
         },
         {
           "rule": "STALE_TELEMETRY",
-          "reading_id": "THM-1727327335",
+          "reading_id": "THM-0516076420",
           "sensor_id": "SNR-THM-CONFLICT",
-          "description": "Sensor telemetry is 1880.0s old (exceeds 60.0s threshold)",
+          "description": "Sensor telemetry is 421.4s old (exceeds 60.0s threshold)",
           "severity": "warning"
         },
         {
           "rule": "STALE_TELEMETRY",
-          "reading_id": "ENV-1727044988",
+          "reading_id": "ENV-1758527028",
           "sensor_id": "SNR-AIR-CONFLICT",
-          "description": "Sensor telemetry is 1908.2s old (exceeds 60.0s threshold)",
+          "description": "Sensor telemetry is 41056.3s old (exceeds 60.0s threshold)",
           "severity": "warning"
         },
         {
           "rule": "CROSS_MODAL_CONFLICT",
-          "reading_id": "THM-1758526970",
+          "reading_id": "THM-0523089968",
           "sensor_id": "SNR-THM-CONFLICT",
           "description": "Thermal sensor reports critical hotspot (95.0\u00b0C) but ionization detector reports 0 particulate",
           "severity": "warning"
@@ -3950,66 +5580,66 @@
     },
     "INC-PRED-TEST": {
       "incident_id": "INC-PRED-TEST",
-      "evaluated_at": "2026-10-08T17:58:52.753233Z",
-      "quality_score": 0.84,
+      "evaluated_at": "2026-10-09T05:23:09.040664Z",
+      "quality_score": 0.829,
       "coverage_score": 1.0,
       "freshness_seconds": 0.0,
       "conflicting_sensors_count": 0,
-      "stale_sensors_count": 12,
-      "total_readings_evaluated": 15,
+      "stale_sensors_count": 18,
+      "total_readings_evaluated": 21,
       "violations": [
         {
           "rule": "STALE_TELEMETRY",
-          "reading_id": "CAM-1727327684",
+          "reading_id": "CAM-0516076939",
           "sensor_id": "SNR-CAM-P1",
-          "description": "Sensor telemetry is 1880.0s old (exceeds 60.0s threshold)",
+          "description": "Sensor telemetry is 421.3s old (exceeds 60.0s threshold)",
           "severity": "warning"
         },
         {
           "rule": "STALE_TELEMETRY",
-          "reading_id": "ENV-1727327652",
+          "reading_id": "ENV-0516076899",
           "sensor_id": "SNR-AIR-P1",
-          "description": "Sensor telemetry is 1880.0s old (exceeds 60.0s threshold)",
+          "description": "Sensor telemetry is 421.4s old (exceeds 60.0s threshold)",
           "severity": "warning"
         },
         {
           "rule": "STALE_TELEMETRY",
-          "reading_id": "THM-1727327619",
+          "reading_id": "THM-0516076858",
           "sensor_id": "SNR-THM-P1",
-          "description": "Sensor telemetry is 1880.0s old (exceeds 60.0s threshold)",
+          "description": "Sensor telemetry is 421.4s old (exceeds 60.0s threshold)",
           "severity": "warning"
         }
       ]
     },
     "INC-API-501": {
       "incident_id": "INC-API-501",
-      "evaluated_at": "2026-10-08T17:58:52.848502Z",
-      "quality_score": 0.833,
+      "evaluated_at": "2026-10-09T05:23:09.144322Z",
+      "quality_score": 0.825,
       "coverage_score": 0.33,
       "freshness_seconds": 0.0,
       "conflicting_sensors_count": 0,
-      "stale_sensors_count": 5,
-      "total_readings_evaluated": 6,
+      "stale_sensors_count": 7,
+      "total_readings_evaluated": 8,
       "violations": [
+        {
+          "rule": "STALE_TELEMETRY",
+          "reading_id": "THM-0516079400",
+          "sensor_id": "SNR-FLIR-API",
+          "description": "Sensor telemetry is 421.2s old (exceeds 60.0s threshold)",
+          "severity": "warning"
+        },
+        {
+          "rule": "STALE_TELEMETRY",
+          "reading_id": "THM-1758528069",
+          "sensor_id": "SNR-FLIR-API",
+          "description": "Sensor telemetry is 41056.3s old (exceeds 60.0s threshold)",
+          "severity": "warning"
+        },
         {
           "rule": "STALE_TELEMETRY",
           "reading_id": "THM-1727328396",
           "sensor_id": "SNR-FLIR-API",
-          "description": "Sensor telemetry is 1880.0s old (exceeds 60.0s threshold)",
-          "severity": "warning"
-        },
-        {
-          "rule": "STALE_TELEMETRY",
-          "reading_id": "THM-1727046057",
-          "sensor_id": "SNR-FLIR-API",
-          "description": "Sensor telemetry is 1908.2s old (exceeds 60.0s threshold)",
-          "severity": "warning"
-        },
-        {
-          "rule": "STALE_TELEMETRY",
-          "reading_id": "THM-1725463882",
-          "sensor_id": "SNR-FLIR-API",
-          "description": "Sensor telemetry is 1986.5s old (exceeds 60.0s threshold)",
+          "description": "Sensor telemetry is 42936.3s old (exceeds 60.0s threshold)",
           "severity": "warning"
         }
       ]
@@ -4219,13 +5849,93 @@
       "active_latency_ms": 14.5,
       "shadow_latency_ms": 22.8,
       "within_acceptable_threshold": true
+    },
+    {
+      "id": "DIV-C4AE4CBE",
+      "incident_id": "INC-SHADOW-TEST",
+      "timestamp": "2026-10-09T05:16:07.734469Z",
+      "active_model_id": "sentra-ensemble-risk-v2.4",
+      "active_prediction": 0.12,
+      "shadow_model_id": "sentra-transformer-crowd-v3.0",
+      "shadow_prediction": 0.115,
+      "divergence_delta": 0.005,
+      "active_latency_ms": 14.5,
+      "shadow_latency_ms": 22.8,
+      "within_acceptable_threshold": true
+    },
+    {
+      "id": "DIV-07B0C324",
+      "incident_id": "INC-SHADOW-TEST",
+      "timestamp": "2026-10-09T05:16:07.738705Z",
+      "active_model_id": "sentra-ensemble-risk-v2.4",
+      "active_prediction": 0.88,
+      "shadow_model_id": "sentra-transformer-crowd-v3.0",
+      "shadow_prediction": 0.115,
+      "divergence_delta": 0.765,
+      "active_latency_ms": 14.5,
+      "shadow_latency_ms": 22.8,
+      "within_acceptable_threshold": false
+    },
+    {
+      "id": "DIV-AFA52B70",
+      "incident_id": "INC-API-501",
+      "timestamp": "2026-10-09T05:16:08.050240Z",
+      "active_model_id": "sentra-ensemble-risk-v2.4",
+      "active_prediction": 0.25,
+      "shadow_model_id": "sentra-transformer-crowd-v3.0",
+      "shadow_prediction": 0.258,
+      "divergence_delta": 0.008,
+      "active_latency_ms": 14.5,
+      "shadow_latency_ms": 22.8,
+      "within_acceptable_threshold": true
+    },
+    {
+      "id": "DIV-C66CE07C",
+      "incident_id": "INC-SHADOW-TEST",
+      "timestamp": "2026-10-09T05:23:09.062361Z",
+      "active_model_id": "sentra-ensemble-risk-v2.4",
+      "active_prediction": 0.12,
+      "shadow_model_id": "sentra-transformer-crowd-v3.0",
+      "shadow_prediction": 0.115,
+      "divergence_delta": 0.005,
+      "active_latency_ms": 14.5,
+      "shadow_latency_ms": 22.8,
+      "within_acceptable_threshold": true
+    },
+    {
+      "id": "DIV-33187A5B",
+      "incident_id": "INC-SHADOW-TEST",
+      "timestamp": "2026-10-09T05:23:09.066784Z",
+      "active_model_id": "sentra-ensemble-risk-v2.4",
+      "active_prediction": 0.88,
+      "shadow_model_id": "sentra-transformer-crowd-v3.0",
+      "shadow_prediction": 0.115,
+      "divergence_delta": 0.765,
+      "active_latency_ms": 14.5,
+      "shadow_latency_ms": 22.8,
+      "within_acceptable_threshold": false
+    },
+    {
+      "id": "DIV-8E08BE4F",
+      "incident_id": "INC-API-501",
+      "timestamp": "2026-10-09T05:23:09.169796Z",
+      "active_model_id": "sentra-ensemble-risk-v2.4",
+      "active_prediction": 0.25,
+      "shadow_model_id": "sentra-transformer-crowd-v3.0",
+      "shadow_prediction": 0.258,
+      "divergence_delta": 0.008,
+      "active_latency_ms": 14.5,
+      "shadow_latency_ms": 22.8,
+      "within_acceptable_threshold": true
     }
   ],
   "idempotency_keys": [
     "IDEMP-TEST-9e709c4d",
-    "IDEMP-TEST-001",
+    "IDEMP-TEST-c06f0e9e",
     "IDEMP-TEST-ab0a4855",
-    "IDEMP-TEST-52f8b6d5"
+    "IDEMP-TEST-001",
+    "IDEMP-TEST-52f8b6d5",
+    "IDEMP-TEST-7e4a50b6"
   ],
-  "updated_at": "2026-10-08T17:58:52.870610+00:00"
+  "updated_at": "2026-10-09T05:23:09.169907+00:00"
 }

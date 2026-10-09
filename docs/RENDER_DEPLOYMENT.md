@@ -72,10 +72,10 @@ services:
 
 | Variable Name | Required | Default / Example | Purpose / Contract |
 | :--- | :---: | :--- | :--- |
-| `PYTHON_VERSION` | Yes | `3.12.0` | Enforces exact Python runtime consistency. |
+| `PYTHON_VERSION` | Yes | `3.12.8` | Enforces exact Python runtime consistency (also mirrored in `.python-version`). |
 | `APP_ENV` | Yes | `production` | Switches log verbosity and cookie security policies. |
 | `ALLOWED_ORIGINS` | Yes | `https://sentra-01.vercel.app,...` | Strict CORS origin whitelist for Cross-Origin requests. |
-| `JWT_SECRET` | Yes | Auto-generated | Signs and verifies user session JWTs. |
+| `JWT_SECRET` | Yes | Auto-generated | Signs and verifies user session JWTs (required $\ge 32$ chars in production). |
 | `SECRET_KEY` | Yes | Auto-generated | Session cookie encryption secret. |
 | `GEMINI_API_KEY` | Optional | `AIzaSy...` | Activates live Google Gemini 2.5 Flash / Pro multimodal inference. Fallback to calibrated deterministic baseline if unconfigured. |
 | `SENTRA_COOKIE_SECURE` | Yes | `true` | Restricts cookies to HTTPS-only contexts in production. |
@@ -83,34 +83,31 @@ services:
 
 ---
 
-## 4. Render MCP Integration & Remote Wrapper Architecture
+## 4. Production Startup Safety Gating & Diagnostic Codes
 
-To allow AI agents (including Antigravity) to monitor, inspect logs, and manage Render deployments via MCP without getting blocked by dynamic OAuth registration issues, Sentra includes a dedicated wrapper:
+Sentra implements strict production environment gating in `app/core/startup_checks.py`.
+
+### Startup Checks & Blocking Codes:
+- **`SEC_JWT_SECRET_BLOCKED`:**
+  - **Condition:** In production (`APP_ENV=production`), `JWT_SECRET` (or `SECRET_KEY`, `SENTRA_JWT_SECRET`) must be provided via environment variables with $\ge 32$ characters of entropy.
+  - **Behavior:** The application refuses to boot with an unmanaged ephemeral secret in production, preventing unexpected session loss across multi-instance restarts.
+  - **Safe Diagnostics:** Emits structured log event `startup_check_blocked` with `check_name`, `error_code`, `status=blocked`, and reason without leaking secret values.
+- **`SEC_RUNTIME_MODE_BLOCKED`:**
+  - **Condition:** Valid runtime mode (`production`, `staging`, `enterprise`, `development`).
+
+---
+
+## 5. Render MCP Integration & Authentication Policy
+
+To allow AI agents (including Antigravity) to monitor, inspect logs, and manage Render deployments via MCP without getting blocked by dynamic OAuth registration issues:
 
 ### Wrapper Location:
 `tools/render-mcp-wrapper.js`
 
-### Implementation Logic:
-```javascript
-const { spawn } = require('child_process');
-const apiKey = process.env.RENDER_API_KEY;
-const args = ['-y', 'mcp-remote', 'https://mcp.render.com/mcp'];
-
-if (apiKey && apiKey.trim().length > 0) {
-  args.push('--header', `Authorization: Bearer ${apiKey.trim()}`);
-}
-
-const child = spawn('npx', args, {
-  stdio: 'inherit',
-  shell: true,
-  env: process.env,
-});
-```
-
-### Purpose:
-- Intercepts remote MCP connection attempts to Render's official endpoint (`https://mcp.render.com/mcp`).
-- Injects standard HTTP `Authorization: Bearer <RENDER_API_KEY>` headers.
-- Allows direct querying of service status, environment variables, and build deployment logs.
+### Authentication Architecture:
+- The hosted Render MCP endpoint is `https://mcp.render.com/mcp`.
+- Render's MCP endpoint requires static Bearer token authentication: `Authorization: Bearer <RENDER_API_KEY>`.
+- When `RENDER_API_KEY` is not present in the environment, the wrapper reports a clean actionable error message rather than attempting an unsupported OAuth dynamic client registration.
 
 ---
 

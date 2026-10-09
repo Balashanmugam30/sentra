@@ -46,11 +46,12 @@ def run_startup_checks() -> dict[str, Any]:
         "postgres": tcp_dependency_check(settings.database_url, 5432),
         "redis": tcp_dependency_check(settings.redis_url, 6379),
     }
-    blocking_failures = [
-        check.as_dict()
-        for check in env_checks
-        if check.status == "fail" and check.name in {"jwt_secret", "runtime_mode"}
-    ]
+    blocking_failures = []
+    for check in env_checks:
+        if check.status == "fail" and check.name in {"jwt_secret", "runtime_mode"}:
+            c_dict = check.as_dict()
+            c_dict["error_code"] = f"SEC_{check.name.upper()}_BLOCKED"
+            blocking_failures.append(c_dict)
     return {
         "status": "blocked" if blocking_failures else "ready",
         "environment": settings.app_env,

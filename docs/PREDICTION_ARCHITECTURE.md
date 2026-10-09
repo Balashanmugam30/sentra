@@ -21,17 +21,20 @@ Every inference cycle consumes a 5-family feature snapshot calculated across rol
 
 ---
 
-## 3. Calibrated Uncertainty Intervals (90% Bounds)
-Emergency incident commanders must never be given single-point overconfident estimates without error bounds. Every prediction in Sentra provides a calibrated 90% confidence interval:
+## 3. Analytical Uncertainty Intervals (90% Nominal Bounds)
+Emergency incident commanders must never be given single-point overconfident estimates without error bounds. Every prediction in Sentra provides an analytical 90% uncertainty interval:
 $$\text{Interval}_{90} = [\text{lower\_bound}_{90}, \text{upper\_bound}_{90}]$$
-- **Epistemic Uncertainty:** Quantifies model parameter variance and training domain familiarity.
-- **Aleatoric Uncertainty:** Quantifies stochastic sensor noise and environmental measurement volatility.
-- **Calibration Guarantee:** Calibration error (ECE) evaluated continuously across validation datasets.
+- **Uncertainty Spread Formulation:** Driven analytically by sensor quality reports and modality coverage scores:
+  $$\text{Spread} = \min(0.40, \text{base\_spread} + (1.0 - \text{quality}) \cdot 0.25 + (1.0 - \text{coverage}) \cdot 0.20)$$
+- **Epistemic Factor:** Increases when sensory coverage drops or multi-sensor conflicts exist.
+- **Aleatoric Factor:** Reflects sensor noise variance across reporting transducers.
+- **Implementation Note:** In the current phase, these bounds are computed analytically via physics-informed formulas rather than empirically fitted calibration curves on historical disaster ground-truth datasets.
 
 ---
 
 ## 4. Honest Fallback Modes
 If input data fails quality audits or sensor dropout exceeds safety margins, the prediction engine refuses to hallucinate:
-- `INSUFFICIENT_EVIDENCE`: Telemetry coverage $<0.40$.
-- `LOW_COVERAGE`: Less than 2 distinct modalities reporting.
-- `HEURISTIC_FALLBACK`: Physical boundary rules engaged when neural models are degraded or explicitly requested by operators.
+- `INSUFFICIENT_EVIDENCE`: Telemetry coverage $<0.40$ or data quality $<0.50$.
+- `LOW_COVERAGE`: Sensor modality coverage below operational thresholds.
+- `HEURISTIC_FALLBACK`: Physical boundary rules engaged when upstream feeds are degraded or explicitly requested by operators.
+

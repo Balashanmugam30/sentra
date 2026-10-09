@@ -11,7 +11,7 @@ services:
     autoDeploy: true
     envVars:
       - key: PYTHON_VERSION
-        value: "3.12.0"
+        value: "3.12.8"
       - key: APP_ENV
         value: "production"
       - key: SENTRA_COOKIE_SECURE

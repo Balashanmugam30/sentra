@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import os
 from typing import Literal
 
 from app.core.config import settings
@@ -10,7 +11,7 @@ RuntimeMode = Literal["development", "staging", "production", "enterprise"]
 
 
 def current_runtime_mode() -> RuntimeMode:
-    raw = settings.app_env.strip().lower()
+    raw = (os.getenv("APP_ENV") or os.getenv("SENTRA_APP_ENV") or settings.app_env).strip().lower()
     if raw in {"prod", "production"}:
         return "production"
     if raw in {"stage", "staging"}:

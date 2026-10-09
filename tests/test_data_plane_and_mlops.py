@@ -34,6 +34,7 @@ def client():
 def test_ingestion_and_idempotency():
     """Verifies that multi-source telemetry is ingested and duplicate deliveries are safely ignored."""
     from uuid import uuid4
+
     unique_key = f"IDEMP-TEST-{uuid4().hex[:8]}"
     reading_payload = {
         "idempotency_key": unique_key,
@@ -61,19 +62,23 @@ def test_ingestion_range_validation():
     """Verifies that impossible physical measurements are strictly rejected."""
     # Negative particulate count
     with pytest.raises(IngestionError):
-        ingestion_pipeline.ingest_reading({
-            "incident_id": "INC-TEST-501",
-            "modality": "AIR_QUALITY",
-            "particulate_pm25": -15.0,
-        })
+        ingestion_pipeline.ingest_reading(
+            {
+                "incident_id": "INC-TEST-501",
+                "modality": "AIR_QUALITY",
+                "particulate_pm25": -15.0,
+            }
+        )
 
     # Implausible temperature > 1500°C
     with pytest.raises(IngestionError):
-        ingestion_pipeline.ingest_reading({
-            "incident_id": "INC-TEST-501",
-            "modality": "FLIR_THERMAL",
-            "temperature_celsius": 2500.0,
-        })
+        ingestion_pipeline.ingest_reading(
+            {
+                "incident_id": "INC-TEST-501",
+                "modality": "FLIR_THERMAL",
+                "temperature_celsius": 2500.0,
+            }
+        )
 
 
 def test_data_quality_scoring_and_conflicts():
@@ -81,21 +86,25 @@ def test_data_quality_scoring_and_conflicts():
     incident_id = "INC-QUALITY-TEST"
 
     # Ingest high thermal anomaly with 0 aerosol particulate to trigger conflict
-    ingestion_pipeline.ingest_reading({
-        "incident_id": incident_id,
-        "sensor_id": "SNR-THM-CONFLICT",
-        "modality": "FLIR_THERMAL",
-        "temperature_celsius": 95.0,
-        "ambient_celsius": 24.0,
-        "thermal_gradient_celsius": 71.0,
-    })
-    ingestion_pipeline.ingest_reading({
-        "incident_id": incident_id,
-        "sensor_id": "SNR-AIR-CONFLICT",
-        "modality": "AIR_QUALITY",
-        "particulate_pm25": 4.0,
-        "combustion_aerosol_ppm": 0.0,
-    })
+    ingestion_pipeline.ingest_reading(
+        {
+            "incident_id": incident_id,
+            "sensor_id": "SNR-THM-CONFLICT",
+            "modality": "FLIR_THERMAL",
+            "temperature_celsius": 95.0,
+            "ambient_celsius": 24.0,
+            "thermal_gradient_celsius": 71.0,
+        }
+    )
+    ingestion_pipeline.ingest_reading(
+        {
+            "incident_id": incident_id,
+            "sensor_id": "SNR-AIR-CONFLICT",
+            "modality": "AIR_QUALITY",
+            "particulate_pm25": 4.0,
+            "combustion_aerosol_ppm": 0.0,
+        }
+    )
 
     report = quality_engine.evaluate_incident_data(incident_id)
     assert report.total_readings_evaluated >= 2
@@ -108,19 +117,23 @@ def test_feature_engineering_extraction():
     """Verifies multi-dimensional feature extraction produces valid snapshot."""
     incident_id = "INC-FEAT-TEST"
 
-    ingestion_pipeline.ingest_reading({
-        "incident_id": incident_id,
-        "sensor_id": "SNR-THM-FEAT",
-        "modality": "FLIR_THERMAL",
-        "temperature_celsius": 68.0,
-    })
-    ingestion_pipeline.ingest_reading({
-        "incident_id": incident_id,
-        "sensor_id": "SNR-CAM-FEAT",
-        "modality": "CCTV_OPTICAL",
-        "crowd_count": 22,
-        "optical_flow_velocity_mps": 0.8,
-    })
+    ingestion_pipeline.ingest_reading(
+        {
+            "incident_id": incident_id,
+            "sensor_id": "SNR-THM-FEAT",
+            "modality": "FLIR_THERMAL",
+            "temperature_celsius": 68.0,
+        }
+    )
+    ingestion_pipeline.ingest_reading(
+        {
+            "incident_id": incident_id,
+            "sensor_id": "SNR-CAM-FEAT",
+            "modality": "CCTV_OPTICAL",
+            "crowd_count": 22,
+            "optical_flow_velocity_mps": 0.8,
+        }
+    )
 
     feat = feature_engine.extract_features(incident_id)
     assert feat.feature_schema_version == "2.0.0"
@@ -134,25 +147,31 @@ def test_prediction_engine_uncertainty_intervals():
     """Verifies calibrated uncertainty intervals and multi-task predictions."""
     incident_id = "INC-PRED-TEST"
 
-    ingestion_pipeline.ingest_reading({
-        "incident_id": incident_id,
-        "sensor_id": "SNR-THM-P1",
-        "modality": "FLIR_THERMAL",
-        "temperature_celsius": 78.4,
-    })
-    ingestion_pipeline.ingest_reading({
-        "incident_id": incident_id,
-        "sensor_id": "SNR-AIR-P1",
-        "modality": "AIR_QUALITY",
-        "particulate_pm25": 42.8,
-        "combustion_aerosol_ppm": 35.0,
-    })
-    ingestion_pipeline.ingest_reading({
-        "incident_id": incident_id,
-        "sensor_id": "SNR-CAM-P1",
-        "modality": "CCTV_OPTICAL",
-        "crowd_count": 18,
-    })
+    ingestion_pipeline.ingest_reading(
+        {
+            "incident_id": incident_id,
+            "sensor_id": "SNR-THM-P1",
+            "modality": "FLIR_THERMAL",
+            "temperature_celsius": 78.4,
+        }
+    )
+    ingestion_pipeline.ingest_reading(
+        {
+            "incident_id": incident_id,
+            "sensor_id": "SNR-AIR-P1",
+            "modality": "AIR_QUALITY",
+            "particulate_pm25": 42.8,
+            "combustion_aerosol_ppm": 35.0,
+        }
+    )
+    ingestion_pipeline.ingest_reading(
+        {
+            "incident_id": incident_id,
+            "sensor_id": "SNR-CAM-P1",
+            "modality": "CCTV_OPTICAL",
+            "crowd_count": 18,
+        }
+    )
 
     bundle = crisis_prediction_engine.predict(incident_id)
     assert bundle.status == PredictionStatus.HIGH_CONFIDENCE

@@ -338,8 +338,34 @@ async def soc_telemetry_middleware(request, call_next):
 async def startup_event() -> None:
     startup_checks = run_startup_checks()
     if startup_checks["status"] == "blocked":
-        log_event("critical", "startup_blocked", route="startup", status=503, checks=startup_checks)
-        raise RuntimeError("Sentra production startup checks failed")
+        trace_id = str(uuid4())
+        blocking = startup_checks.get("blocking_failures", [])
+        safe_blocked_summaries: list[str] = []
+        for bf in blocking:
+            check_name = bf.get("name", "unknown")
+            error_code = bf.get("error_code", f"SEC_{check_name.upper()}_BLOCKED")
+            reason = bf.get("detail", "Mandatory production requirement not met")
+            safe_blocked_summaries.append(f"{check_name} [{error_code}]: {reason}")
+            log_event(
+                "critical",
+                "startup_check_blocked",
+                check_name=check_name,
+                status="blocked",
+                error_code=error_code,
+                reason=reason,
+                route="startup",
+                trace_id=trace_id,
+            )
+        summary_str = "; ".join(safe_blocked_summaries) or "unknown blocking checks"
+        log_event(
+            "critical",
+            "startup_blocked",
+            route="startup",
+            status=503,
+            blocked_checks=safe_blocked_summaries,
+            trace_id=trace_id,
+        )
+        raise RuntimeError(f"Sentra production startup checks failed: {summary_str}")
     reset_incidents()
     if should_seed_demo_data():
         seed_demo_users()

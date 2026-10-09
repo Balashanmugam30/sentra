@@ -29,6 +29,7 @@ jobs:
           cache: pip
       - run: python -m pip install --upgrade pip
       - run: pip install -r requirements-dev.txt
+      - run: python -m pip check
       - run: ruff check app tests
       - run: black --check app/core/observability.py app/main.py app/auth/router.py app/routes/incident_routes.py tests
       - run: mypy --explicit-package-bases --follow-imports=skip app/core/observability.py app/main.py app/auth/router.py app/routes/incident_routes.py
