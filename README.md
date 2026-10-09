@@ -3,7 +3,7 @@
 <div align="center">
 
 [![Sentra OS](https://img.shields.io/badge/SENTRA-v2.5.0%20Production-0ea5e9?style=for-the-badge&logo=shield&logoColor=white)](https://sentra-01.vercel.app/)
-[![Release Tier](https://img.shields.io/badge/Release-PILOT__READY%20(Tier%20B)-10b981?style=for-the-badge&logo=checkmarx&logoColor=white)](docs/PRODUCTION_READINESS_MATRIX.md)
+[![Release Tier](https://img.shields.io/badge/Release-DEMO__READY%20(Tier%20A)%20%7C%20PILOT__CONDITIONAL-eab308?style=for-the-badge&logo=checkmarx&logoColor=white)](docs/PRODUCTION_READINESS_MATRIX.md)
 [![Next.js 16](https://img.shields.io/badge/Next.js-16%20Turbopack-black?style=for-the-badge&logo=next.js&logoColor=white)](https://nextjs.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.115-009688?style=for-the-badge&logo=fastapi&logoColor=white)](https://sentra-li7c.onrender.com/docs)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178c6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
@@ -221,7 +221,7 @@ sentra/
 ## 📚 Phase 9 Release Documentation & Specifications
 
 - [🗺️ Canonical 9-Phase Roadmap](docs/ROADMAP.md) — Comprehensive history and completion matrix across all 9 phases.
-- [🚦 Production Readiness Matrix](docs/PRODUCTION_READINESS_MATRIX.md) — Gate-by-gate audit and `PILOT_READY` (Tier B) certification.
+- [🚦 Production Readiness Matrix](docs/PRODUCTION_READINESS_MATRIX.md) — Gate-by-gate audit, DEMO_READY certification, and conditional PILOT_READY qualification.
 - [📖 Operator Release Runbook](docs/RELEASE_RUNBOOK.md) — Local execution, automated test suites, and diagnostic probes.
 - [🔄 Rollback & Disaster Recovery](docs/ROLLBACK_AND_RECOVERY.md) — Vercel/Render rollback protocols and SQLite snapshot restore.
 - [⚠️ Known Limitations & Boundaries](docs/KNOWN_LIMITATIONS.md) — Transparent disclosure of ephemeral disk, hardware honesty, and cloud sleep limits.

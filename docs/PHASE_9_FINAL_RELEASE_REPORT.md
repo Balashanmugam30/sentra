@@ -15,19 +15,19 @@
 
 ---
 
-## SECTION A: EXECUTIVE SUMMARY & RELEASE CERTIFICATION
+## SECTION A: EXECUTIVE SUMMARY & RELEASE CLASSIFICATION
 
 ### 1. Release Classification Determination
 
 | Classification Tier | Status | Forensic Evidence & Operational Justification |
 | :--- | :---: | :--- |
-| **Tier A: DEMO_READY** | ✅ **CERTIFIED** | 5 deterministic crisis scenarios (`fire_escalation`, `sensor_disagreement`, `sensor_outage`, `adapter_unconfigured`, `what_if_comparison`) verified end-to-end; simulation namespaces strictly isolated (`is_simulation: True`); live kill switch and tamper-evident SHA-256 Merkle timeline chain active; WCAG 2.2 AA compliant operator cockpit. |
-| **Tier B: PILOT_READY** | ✅ **CERTIFIED** | Zero-trust authentication enforcement (`require_permission`); multi-tenant BOLA isolation verified; SQLite WAL relational persistence with crash recovery; Two-Person Integrity (TPI) dual-operator authorization enforced; SSRF boundary protection against RFC 1918 / cloud metadata; 69/69 backend tests green; Next.js 16 Turbopack build clean (163/163 routes). |
-| **Tier C: PRODUCTION_READY** *(Physical Actuation)* | 🛑 **BLOCKED (HONEST DISCLOSURE)** | **Gated on two external enterprise dependencies:**<br>1. External managed database (currently running on Render Free ephemeral container disk, `storage_type: "ephemeral_container_disk"`).<br>2. Certified physical industrial actuator gateways (BACnet/IP, Modbus TCP) — currently fail-closed and reporting `UNCONFIGURED`. |
+| **Tier A: DEMO_READY** | ✅ **CERTIFIED** | **Safe, isolated demonstrations with synthetic data.** 5 deterministic crisis scenarios (`fire_escalation`, `sensor_disagreement`, `sensor_outage`, `adapter_unconfigured`, `what_if_comparison`) verified end-to-end; simulation namespaces strictly isolated (`is_simulation: True`); live kill switch and tamper-evident SHA-256 Merkle timeline chain active; hardware adapters fail-closed (`UNCONFIGURED`); WCAG 2.2 AA compliant operator cockpit. |
+| **Tier B: PILOT_READY** | ⚠️ **QUALIFIED / CONDITIONAL**<br>*(Certified for Ephemeral Scope; Blocked for Durable Scope)* | **Explicitly scoped pilots only.**<br>• *Ephemeral / Training Pilots (PASS):* Zero-trust RBAC, multi-tenant BOLA isolation, Two-Person Integrity (TPI) dual-operator authorization, SSRF boundaries, and 69/69 passing tests verified.<br>• *Durable State Pilots (BLOCKED):* Render Free ephemeral filesystem wipes local SQLite database upon container replacement/restart; off-host backup replication is unconfigured. Durable pilots require external managed PostgreSQL and cloud object storage. |
+| **Tier C: PRODUCTION_READY** *(Physical Actuation)* | 🛑 **BLOCKED (HONEST DISCLOSURE)** | **Gated on four mandatory production prerequisites:**<br>1. External managed database (currently running on Render Free ephemeral container disk, `storage_type: "ephemeral_container_disk"`).<br>2. Configured off-host backup replication (`off_host_synced: False`).<br>3. Configured enterprise `GEMINI_API_KEY` (currently running in verified `RULE_BASED_FALLBACK`).<br>4. Certified physical industrial actuator gateways (BACnet/IP, Modbus TCP) — currently fail-closed and reporting `UNCONFIGURED`. |
 
 ### Final Executive Determination:
-**SENTRA v2.5.0 IS CERTIFIED FOR PRODUCTION AS `PILOT_READY` (TIER B) AND `DEMO_READY` (TIER A).**  
-It is approved for deployment across operational pilots, tactical command training centers, and enterprise evaluations. Full physical life-safety actuation (Tier C) remains strictly blocked until external infrastructure and hardware certification are provisioned.
+**SENTRA v2.5.0 IS CERTIFIED FOR PRODUCTION AS `DEMO_READY` (TIER A) AND CONDITIONALLY `PILOT_READY` (TIER B — EPHEMERAL SESSION SCOPE ONLY).**  
+It is approved for safe interactive demonstrations, operator training simulations, and stateless evaluation sessions. **Durable enterprise pilots and full physical actuation remain strictly blocked** until external managed persistence, off-host backups, AI keys, and certified edge hardware are provisioned.
 
 ---
 
@@ -84,7 +84,7 @@ A comprehensive security audit evaluated Sentra against 10 critical security cri
 Sentra's intelligence tier enforces rigorous data fidelity and evidentiary traceability, detailed in [`docs/AI_AND_DATA_TRUTH.md`](file:///c:/Users/balashanmugam/OneDrive/Desktop/Projects/Sentra%20Clean/docs/AI_AND_DATA_TRUTH.md):
 
 - **Official Google GenAI SDK:** Implemented with `google-genai` Python SDK v2.29.0 and typed Pydantic output schemas.
-- **Graceful Deterministic Fallback:** In the absence of a configured `GEMINI_API_KEY` or during network timeouts, Sentra immediately activates `RULE_BASED_FALLBACK`, maintaining 100% operational uptime without unhandled crashes.
+- **Verified Live Provider State:** In the production cloud environment, `GEMINI_API_KEY` is currently **unconfigured**. Live probe `POST /ai/intelligence/assess` verifies that the backend degrades cleanly and deterministically to `RULE_BASED_FALLBACK` (`is_degraded: True`, `degradation_reason: "GEMINI_API_KEY environment variable not configured; running in deterministic fallback mode"`), maintaining 100% operational uptime without 500 errors.
 - **Topological Evidence Graph (DAG):** Structures all perceptions into a directed acyclic graph (`SourceNode` -> `ObservationNode` -> `EvidenceNode` -> `AssessmentNode`). Every tactical recommendation cites explicit sensor leaves and standard SOP paragraphs (NFPA 1600, OSHA 1910.120, ISO 22320).
 - **Sensor Disagreement Dampening:** Detects cross-modal divergence (e.g., 820°C IR thermal spike vs baseline optical camera). Automatically dampens confidence scores below 0.70 and locks automated dispatch.
 - **Calibrated 90% Uncertainty Intervals:** Predictions report probabilistic envelopes `[lower, upper]` rather than deceptive point estimates.
@@ -97,9 +97,10 @@ Sentra's intelligence tier enforces rigorous data fidelity and evidentiary trace
 - **Durable Relational Storage:** SQLite 3 with Write-Ahead Logging (`WAL`), foreign keys enabled, and busy timeouts (`5000ms`).
 - **Cryptographic Merkle Timeline Chain:** Forensic event stream chained via unbroken SHA-256 hashes linking each event to its predecessor. Direct SQLite row modification causes `persistence.verify_timeline_integrity()` to fail immediately.
 - **Corrupted Backup Handling:** Hardened `app/operations/backup.py` with defensive exception handling for malformed or corrupted snapshot files. Verified by unit test `test_corrupted_backup_handling_fails_safely`.
-- **Disaster Recovery Objectives:**
-  - Recovery Point Objective (RPO): < 5 minutes (local WAL flush).
-  - Recovery Time Objective (RTO): < 5 minutes (container cold start < 60s; Vercel edge rollback < 15s).
+- **Disaster Recovery Objectives (Reconciled Infrastructure Realities):**
+  - **Recovery Point Objective (RPO) — Active Container:** < 5 minutes (via local SQLite WAL flushing).
+  - **Recovery Point Objective (RPO) — Container Replacement / Disaster:** **Unbounded (Total Data Loss)** because Render Free uses an ephemeral container filesystem and off-host backup replication to S3/GCS is unconfigured (`off_host_synced: False`).
+  - **Recovery Time Objective (RTO):** < 5 minutes (container cold start < 60s; Vercel edge rollback < 15s).
 - Detailed procedures documented in [`docs/ROLLBACK_AND_RECOVERY.md`](file:///c:/Users/balashanmugam/OneDrive/Desktop/Projects/Sentra%20Clean/docs/ROLLBACK_AND_RECOVERY.md).
 
 ---
@@ -180,18 +181,20 @@ BACKEND URL:           https://sentra-li7c.onrender.com/
 RENDER SERVICE ID:     srv-d7og1jreo5us73e6un70
 
 RELEASE CLASSIFICATION:
-  - Tier A (DEMO_READY):        ✅ CERTIFIED
-  - Tier B (PILOT_READY):       ✅ CERTIFIED
-  - Tier C (PRODUCTION_READY):  🛑 BLOCKED (Gated on Managed DB & Edge Actuators)
+  - Tier A (DEMO_READY):        ✅ CERTIFIED (Safe Isolated Demos with Synthetic Scenarios)
+  - Tier B (PILOT_READY):       ⚠️ QUALIFIED (Certified for Ephemeral Scope; Blocked for Durable Scope)
+  - Tier C (PRODUCTION_READY):  🛑 BLOCKED (Gated on Managed DB, S3 Backups, AI Key & Actuators)
 
 VERIFICATION SUMMARY:
   - Backend Test Pyramid:       69 / 69 Passed (100%)
   - Frontend Build:             163 / 163 Routes Clean
+  - Live AI Provider State:     Verified RULE_BASED_FALLBACK (GEMINI_API_KEY unconfigured)
   - Accessibility:              WCAG 2.2 AA Compliant
   - Cryptographic Forensics:    SHA-256 Merkle Chain VALID
   - Hardware Honesty:           Fail-Closed UNCONFIGURED Enforced
   - Security Posture:           Zero-Trust RBAC & Two-Person Integrity Enforced
 
-RELEASE VERDICT:               APPROVED FOR OPERATIONAL PILOTS & ENTERPRISE EVALUATIONS
+RELEASE VERDICT:               CERTIFIED FOR INTERACTIVE DEMOS & EPHEMERAL EVALUATION PILOTS;
+                               DURABLE STATE PILOTS AND PHYSICAL ACTUATION STRICTLY BLOCKED.
 ================================================================================
 ```

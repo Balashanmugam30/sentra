@@ -12,10 +12,11 @@
 
 ## 1. Recovery Objectives (RPO & RTO)
 
-| Metric | Target | Current Realized State | Notes |
+| Metric | Target | Current Realized State | Notes & Infrastructure Reality |
 | :--- | :--- | :--- | :--- |
-| **Recovery Point Objective (RPO)** | < 15 minutes | < 5 minutes (local WAL snapshot) | Dependent on local SQLite WAL flush frequency; off-host sync currently unconfigured. |
-| **Recovery Time Objective (RTO)** | < 30 minutes | < 5 minutes | Container restart takes ~45-60 seconds on Render; Vercel edge rollback is near-instantaneous (<15s). |
+| **Recovery Point Objective (RPO) — Active Container** | < 15 minutes | < 5 minutes (local WAL flush) | **Within single active container instance only.** Local SQLite WAL recovers from in-process crashes. |
+| **Recovery Point Objective (RPO) — Container Recreation** | < 15 minutes | 🛑 **Unbounded (Total Loss)** | **Across container restart, redeploy, or host failure.** Render Free uses an ephemeral container disk and off-host backup replication is unconfigured (`off_host_synced: False`). |
+| **Recovery Time Objective (RTO)** | < 30 minutes | < 5 minutes | Container cold restart takes ~45-60 seconds on Render; Vercel edge rollback is near-instantaneous (<15s). |
 
 ---
 

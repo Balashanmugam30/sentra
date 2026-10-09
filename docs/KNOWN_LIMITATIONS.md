@@ -20,15 +20,18 @@ This document enumerates all known architectural constraints, infrastructure lim
 
 ## 2. Infrastructure & Persistence Limitations
 
-### 2.1 Ephemeral Container Disk Substrate
+### 2.1 Ephemeral Container Disk Substrate & RPO Reality
 - **Current Behavior:** The production backend on Render Free tier runs on an ephemeral container filesystem (`storage_type: "ephemeral_container_disk"`).
-- **Impact:** While SQLite Write-Ahead Logging (`WAL`) provides ACID guarantees during runtime, container restarts, redeployments, or sleep cycles reset local disk storage unless backed by persistent volumes.
-- **Remediation for Tier C:** Production deployment with real hardware actuation mandates migration to a managed external PostgreSQL instance (e.g., AWS RDS, Supabase Enterprise, or Render Managed PostgreSQL) with automated point-in-time recovery.
+- **Impact on Persistence & RPO:**
+  - While SQLite Write-Ahead Logging (`WAL`) provides ACID transaction integrity locally during process execution, container restarts, redeployments, or sleep evictions wipe the local container disk.
+  - **Recovery Point Objective (RPO) Reality:** RPO < 5 minutes applies **strictly within a single running container instance** (recovering from an in-process worker crash). Across container replacement, redeployment, or host destruction, **RPO is unbounded (total data loss)** because local files are destroyed.
+- **Impact on Pilots:** Ephemeral/training pilots are supported, but **durable state-preserving pilots are blocked** until an external database is attached.
+- **Remediation:** Production deployment with persistent state mandates migration to a managed external PostgreSQL instance (e.g., AWS RDS, Supabase Enterprise, or Render Managed PostgreSQL) with automated point-in-time recovery.
 
 ### 2.2 Off-Host Backup Synchronization
 - **Current Behavior:** Online SQLite snapshot generation and cryptographic checksumming are fully operational, but automated replication to off-host cloud object storage (Amazon S3 / Google Cloud Storage) is unconfigured by default (`off_host_synced: False`).
-- **Impact:** Backups are stored on the local container disk.
-- **Remediation for Tier C:** Provision S3 bucket credentials and set `SENTRA_BACKUP_S3_BUCKET` in the cloud environment.
+- **Impact:** Backups reside exclusively on the ephemeral container disk and are destroyed if the container is recreated.
+- **Remediation:** Provision an S3 bucket and credentials (`SENTRA_BACKUP_S3_BUCKET`, `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`) in the host environment.
 
 ### 2.3 Render Free Tier Sleep & Cold Starts
 - **Current Behavior:** On the free hosting plan, the Render container spins down after 15 minutes of inactivity.
@@ -52,9 +55,10 @@ This document enumerates all known architectural constraints, infrastructure lim
 
 ## 4. AI & Inference Boundaries
 
-### 4.1 Dependency on External Gemini API Key
-- **Current Behavior:** Deep multimodal perception (FLIR thermal analysis, camera frame interpretation) and natural-language SOP retrieval utilize Google Gemini 2.5 Flash / Pro via the official `google-genai` SDK.
-- **Fallback Behavior:** If `GEMINI_API_KEY` is omitted, invalid, or experiences network timeouts, Sentra immediately falls back to deterministic rule-based algorithms (`RULE_BASED_FALLBACK`). The application never crashes with unhandled 500 exceptions, but multimodal deep analysis is substituted with statistical threshold alerts.
+### 4.1 Dependency on External Gemini API Key & Verified Fallback
+- **Architecture:** The codebase natively integrates Google Gemini 2.5 Flash / Pro via the official `google-genai` Python SDK v2.29.0.
+- **Verified Live State:** In the production cloud environment, `GEMINI_API_KEY` is currently **unconfigured**.
+- **Verified Fallback Behavior:** As verified live via `POST /ai/intelligence/assess`, Sentra gracefully degrades to deterministic rule-based algorithms (`inference_source: "RULE_BASED_FALLBACK"`, `is_degraded: True`). The application maintains 100% uptime with zero 500 errors, but deep multimodal perception is replaced by calibrated heuristic thresholds until an API key is provided.
 
 ### 4.2 Hallucination Prevention & Evidentiary Bounds
 - **Current Behavior:** AI recommendations cannot execute autonomously without passing through the Topological Evidence Graph DAG and the Two-Person Integrity safety gate.
@@ -75,8 +79,9 @@ This document enumerates all known architectural constraints, infrastructure lim
 
 | Limitation Area | Current State | Impact on Tier A (Demo) | Impact on Tier B (Pilot) | Impact on Tier C (Physical) |
 | :--- | :--- | :---: | :---: | :---: |
-| **Storage Persistence** | Ephemeral Container Disk | None (Sandboxed) | Acceptable for pilot | 🛑 Blocking |
-| **Physical Actuation** | Fail-closed `UNCONFIGURED` | None (Simulated) | Acceptable for pilot | 🛑 Blocking |
-| **Off-Host Backups** | `off_host_synced: False` | None | Acceptable for pilot | 🛑 Blocking |
-| **Cloud Cold Start** | 45s idle spin-up | Minor demo delay | Minor pilot delay | 🛑 Blocking |
+| **Storage Persistence** | Ephemeral Container Disk | ✅ Supported (Sandboxed) | ⚠️ Pass for Ephemeral;<br>🛑 **Blocked for Durable** | 🛑 Blocking |
+| **Off-Host Backups** | `off_host_synced: False` | ✅ Supported | ⚠️ Pass for Ephemeral;<br>🛑 **Blocked for Durable** | 🛑 Blocking |
+| **Live AI Provider** | Rule-Based Fallback Active | ✅ Supported (Deterministic) | ✅ Supported (Heuristics) | 🛑 Blocking (Requires Key) |
+| **Physical Actuation** | Fail-closed `UNCONFIGURED` | ✅ Supported (Simulated) | ✅ Supported (Simulated) | 🛑 Blocking (Requires Gateways) |
+| **Cloud Cold Start** | 45s idle spin-up | Minor demo delay | Acceptable for pilot | 🛑 Blocking (Requires Paid Tier) |
 | **Multi-Region** | Single-Region (Oregon) | None | Minor latency | Acceptable |
