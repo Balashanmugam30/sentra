@@ -62,6 +62,10 @@ class ActionType(str, Enum):
     SENSOR_RECALIBRATION = "SENSOR_RECALIBRATION"
     DIAGNOSTIC_PING = "DIAGNOSTIC_PING"
     READ_STATUS = "READ_STATUS"
+    SIMULATE_EVACUATION = "SIMULATE_EVACUATION"
+    SIMULATE_PLUME = "SIMULATE_PLUME"
+    SIMULATE_STRUCTURAL = "SIMULATE_STRUCTURAL"
+    SIMULATE_GRID = "SIMULATE_GRID"
 
 
 class SafetyDecision(str, Enum):
@@ -140,6 +144,7 @@ class ActionProposalRecord(BaseModel):
     id: str
     incident_id: str
     tenant_id: str = "TEN-BALA-UNI"
+    plan_id: Optional[str] = None
     title: str
     description: str
     action_type: ActionType

@@ -100,6 +100,7 @@ class IncidentCommanderOrchestrator:
 
             proposal = ActionProposalRecord(
                 id=proposal_id,
+                plan_id=plan_id,
                 incident_id=incident_id,
                 tenant_id="TEN-BALA-UNI",
                 title=step_def.title,

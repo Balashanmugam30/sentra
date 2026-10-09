@@ -56,8 +56,8 @@ from app.operations.simulator import simulator_engine
 from app.operations.state_machine import IllegalStateTransitionError, lease_manager
 from app.operations.store import operations_store
 from app.operations.timeline import timeline_store
-from app.rbac.guard import require_permission
-from app.services.incident_service import get_all_incidents
+from app.rbac.guard import get_optional_identity, require_permission
+from app.services.incident_service import get_all_incidents, get_incident_by_id
 from app.tenancy.context import identity_tenant_cache_key
 
 logger = logging.getLogger(__name__)
@@ -208,13 +208,25 @@ def post_cancel_route(
 # ==============================================================================
 
 
+@router.get("/liveness")
+def get_operations_liveness() -> Dict[str, Any]:
+    """Public lightweight liveness probe for container orchestration."""
+    return {
+        "status": "ok",
+        "service": "sentra-operations",
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+    }
+
+
 @router.get("/readiness")
-def get_operations_readiness() -> Dict[str, Any]:
-    """Operational subsystem readiness check for Phase 6."""
+def get_operations_readiness(
+    identity: Optional[dict[str, object]] = Depends(get_optional_identity),
+) -> Dict[str, Any]:
+    """Operational subsystem readiness check for Phase 6 & Phase 7."""
     autonomy = operations_store.get_autonomy_state()
     playbooks = playbook_engine.list_playbooks()
     adapters = adapter_registry.list_adapters()
-    return {
+    res = {
         "status": "ready",
         "phase": 6,
         "engine": "Autonomous Crisis Operations",
@@ -224,6 +236,10 @@ def get_operations_readiness() -> Dict[str, Any]:
         "registered_adapters_count": len(adapters),
         "timestamp": datetime.now(timezone.utc).isoformat(),
     }
+    if identity:
+        res["security_phase"] = 7
+        res["durable_persistence"] = "SQLITE_WAL_ACID"
+    return res
 
 
 @router.get("/mode", response_model=AutonomyState)
@@ -271,6 +287,16 @@ def set_kill_switch_route(
     identity: dict[str, object] = Depends(require_permission("operations.manage")),
 ) -> AutonomyState:
     """Emergency stop: trip or reset the central operational kill switch."""
+    # Resetting kill-switch requires elevated admin privilege (admin / super_admin or system.admin)
+    if not payload.engaged:
+        role = str(identity.get("role") or "")
+        permissions = identity.get("permissions") or []
+        if role not in {"super_admin", "admin"} and "system.admin" not in permissions:
+            raise HTTPException(
+                status_code=403,
+                detail="Resetting the operational kill switch requires administrative authorization (admin role or system.admin permission).",
+            )
+
     user_id = str(identity.get("id") or identity.get("sub") or "unknown_operator")
     updated = operations_store.set_kill_switch(
         engaged=payload.engaged,
@@ -372,10 +398,19 @@ def get_incident_plan_route(
     incident_id: str,
     identity: dict[str, object] = Depends(require_permission("operations.manage")),
 ) -> ResponsePlanRecord:
-    """Retrieves latest tactical response plan for an incident."""
-    plan = operations_store.get_latest_plan_for_incident(incident_id)
+    """Retrieves latest tactical response plan for an incident with tenant isolation."""
+    caller_tenant = str(identity.get("tenant_id") or "SYSTEM")
+    plan = operations_store.get_latest_plan_for_incident(
+        incident_id=incident_id,
+        tenant_id=caller_tenant if caller_tenant != "SYSTEM" else None,
+    )
     if not plan:
         raise HTTPException(status_code=404, detail=f"No response plan found for incident '{incident_id}'.")
+    if caller_tenant != "SYSTEM" and plan.tenant_id != caller_tenant:
+        raise HTTPException(
+            status_code=403,
+            detail="Cross-tenant access violation: Plan does not belong to caller's tenant.",
+        )
     return plan
 
 
@@ -385,14 +420,19 @@ def list_proposals_route(
     status: Optional[str] = Query(None),
     identity: dict[str, object] = Depends(require_permission("operations.manage")),
 ) -> List[ActionProposalRecord]:
-    """Lists action proposals pending approval or execution."""
+    """Lists action proposals pending approval or execution with strict tenant filtering."""
     lifecycle_status = None
     if status:
         try:
             lifecycle_status = OperationLifecycleStatus(status.upper())
         except ValueError:
             pass
-    return operations_store.list_proposals(incident_id=incident_id, status=lifecycle_status)
+    caller_tenant = str(identity.get("tenant_id") or "SYSTEM")
+    return operations_store.list_proposals(
+        tenant_id=caller_tenant if caller_tenant != "SYSTEM" else None,
+        incident_id=incident_id,
+        status=lifecycle_status,
+    )
 
 
 @router.get("/proposals/{proposal_id}", response_model=ActionProposalRecord)
@@ -400,10 +440,16 @@ def get_proposal_route(
     proposal_id: str,
     identity: dict[str, object] = Depends(require_permission("operations.manage")),
 ) -> ActionProposalRecord:
-    """Retrieves single action proposal by ID."""
+    """Retrieves single action proposal by ID with tenant verification."""
     proposal = operations_store.get_proposal(proposal_id)
     if not proposal:
         raise HTTPException(status_code=404, detail=f"Proposal '{proposal_id}' not found.")
+    caller_tenant = str(identity.get("tenant_id") or "SYSTEM")
+    if caller_tenant != "SYSTEM" and proposal.tenant_id != caller_tenant:
+        raise HTTPException(
+            status_code=403,
+            detail="Cross-tenant access violation: Proposal does not belong to caller's tenant.",
+        )
     return proposal
 
 
@@ -412,17 +458,44 @@ def evaluate_proposal_safety_route(
     proposal_id: str,
     identity: dict[str, object] = Depends(require_permission("operations.manage")),
 ) -> Dict[str, Any]:
-    """Runs deterministic Action Safety Gate evaluation for a proposal."""
+    """Runs deterministic Action Safety Gate evaluation deriving real evidence confidence and adapter readiness."""
     proposal = operations_store.get_proposal(proposal_id)
     if not proposal:
         raise HTTPException(status_code=404, detail=f"Proposal '{proposal_id}' not found.")
+
+    caller_tenant = str(identity.get("tenant_id") or "SYSTEM")
+    if caller_tenant != "SYSTEM" and proposal.tenant_id != caller_tenant:
+        raise HTTPException(
+            status_code=403,
+            detail="Cross-tenant access violation: Proposal does not belong to caller's tenant.",
+        )
+
+    # Derive real evidence confidence from incident
+    evidence_confidence = 0.5
+    try:
+        inc = get_incident_by_id(proposal.incident_id)
+        if inc.confidence is not None:
+            evidence_confidence = float(inc.confidence)
+        elif inc.decision_confidence is not None:
+            evidence_confidence = float(inc.decision_confidence)
+        else:
+            evidence_confidence = 0.85
+    except Exception:
+        evidence_confidence = 0.5
+
+    # Derive real adapter configured status
+    adapter = adapter_registry.get_adapter_for_action(
+        action_type=proposal.action_type,
+        is_simulation=False,
+    )
+    target_adapter_configured = bool(adapter.configured and adapter.authenticated)
 
     autonomy = operations_store.get_autonomy_state()
     decision, reasons = safety_gate.evaluate_proposal(
         proposal=proposal,
         autonomy_state=autonomy,
-        evidence_confidence=0.88,
-        target_adapter_configured=True,
+        evidence_confidence=evidence_confidence,
+        target_adapter_configured=target_adapter_configured,
     )
     return {
         "proposal_id": proposal_id,
@@ -430,6 +503,8 @@ def evaluate_proposal_safety_route(
         "reasons": reasons,
         "autonomy_mode": autonomy.mode.value,
         "kill_switch_engaged": autonomy.kill_switch_engaged,
+        "evidence_confidence": evidence_confidence,
+        "target_adapter_configured": target_adapter_configured,
     }
 
 
@@ -440,14 +515,21 @@ def approve_proposal_route(
     request: Request,
     identity: dict[str, object] = Depends(require_permission("operations.manage")),
 ) -> ActionProposalRecord:
-    """Human operator authorizes an action proposal with hash verification."""
+    """Human operator authorizes an action proposal with hash verification and tenant isolation."""
     proposal = operations_store.get_proposal(proposal_id)
     if not proposal:
         raise HTTPException(status_code=404, detail=f"Proposal '{proposal_id}' not found.")
 
+    caller_tenant = str(identity.get("tenant_id") or "SYSTEM")
+    if caller_tenant != "SYSTEM" and proposal.tenant_id != caller_tenant:
+        raise HTTPException(
+            status_code=403,
+            detail="Cross-tenant access violation: Cannot approve proposal belonging to another tenant.",
+        )
+
     user_id = str(identity.get("id") or identity.get("sub") or "human_commander")
 
-    # Two-person integrity check: proposer cannot be approver for high/critical actions
+    # Two-person integrity check: proposer cannot be approver for any action proposal
     if proposal.proposer_id == user_id:
         raise HTTPException(
             status_code=403,
@@ -483,6 +565,7 @@ def approve_proposal_route(
 
         timeline_store.append_event(
             incident_id=proposal.incident_id,
+            tenant_id=proposal.tenant_id,
             event_type="PROPOSAL_APPROVED",
             source="human_operator",
             actor_id=user_id,
@@ -515,10 +598,17 @@ def reject_proposal_route(
     request: Request,
     identity: dict[str, object] = Depends(require_permission("operations.manage")),
 ) -> ActionProposalRecord:
-    """Human operator rejects an action proposal."""
+    """Human operator rejects an action proposal with tenant isolation."""
     proposal = operations_store.get_proposal(proposal_id)
     if not proposal:
         raise HTTPException(status_code=404, detail=f"Proposal '{proposal_id}' not found.")
+
+    caller_tenant = str(identity.get("tenant_id") or "SYSTEM")
+    if caller_tenant != "SYSTEM" and proposal.tenant_id != caller_tenant:
+        raise HTTPException(
+            status_code=403,
+            detail="Cross-tenant access violation: Cannot reject proposal belonging to another tenant.",
+        )
 
     user_id = str(identity.get("id") or identity.get("sub") or "human_commander")
     proposal.status = OperationLifecycleStatus.REJECTED
@@ -527,6 +617,7 @@ def reject_proposal_route(
 
     timeline_store.append_event(
         incident_id=proposal.incident_id,
+        tenant_id=proposal.tenant_id,
         event_type="PROPOSAL_REJECTED",
         source="human_operator",
         actor_id=user_id,
@@ -557,10 +648,17 @@ def execute_proposal_route(
     request: Request,
     identity: dict[str, object] = Depends(require_permission("operations.manage")),
 ) -> Dict[str, Any]:
-    """Dispatches approved action through designated execution adapter with idempotency."""
+    """Dispatches approved action through designated execution adapter with idempotency & tenant verification."""
     proposal = operations_store.get_proposal(proposal_id)
     if not proposal:
         raise HTTPException(status_code=404, detail=f"Proposal '{proposal_id}' not found.")
+
+    caller_tenant = str(identity.get("tenant_id") or "SYSTEM")
+    if caller_tenant != "SYSTEM" and proposal.tenant_id != caller_tenant:
+        raise HTTPException(
+            status_code=403,
+            detail="Cross-tenant access violation: Cannot execute proposal belonging to another tenant.",
+        )
 
     user_id = str(identity.get("id") or identity.get("sub") or "dispatcher")
 
@@ -580,12 +678,32 @@ def execute_proposal_route(
 
         autonomy = operations_store.get_autonomy_state()
 
+        # Derive real evidence confidence from incident
+        evidence_confidence = 0.5
+        try:
+            inc = get_incident_by_id(proposal.incident_id)
+            if inc.confidence is not None:
+                evidence_confidence = float(inc.confidence)
+            elif inc.decision_confidence is not None:
+                evidence_confidence = float(inc.decision_confidence)
+            else:
+                evidence_confidence = 0.85
+        except Exception:
+            evidence_confidence = 0.5
+
+        # Select adapter
+        adapter = adapter_registry.get_adapter_for_action(
+            action_type=proposal.action_type,
+            is_simulation=payload.is_simulation,
+        )
+        target_adapter_configured = bool(adapter.configured and adapter.authenticated)
+
         # Re-evaluate Safety Gate immediately before execution
         decision, reasons = safety_gate.evaluate_proposal(
             proposal=proposal,
             autonomy_state=autonomy,
-            evidence_confidence=0.88,
-            target_adapter_configured=True,
+            evidence_confidence=evidence_confidence,
+            target_adapter_configured=target_adapter_configured,
             is_simulation=payload.is_simulation,
         )
 
@@ -604,12 +722,6 @@ def execute_proposal_route(
         proposal.status = OperationLifecycleStatus.EXECUTING
         proposal.execution_idempotency_key = payload.idempotency_key
         operations_store.update_proposal(proposal)
-
-        # Select adapter
-        adapter = adapter_registry.get_adapter_for_action(
-            action_type=proposal.action_type,
-            is_simulation=payload.is_simulation,
-        )
 
         # Execute
         receipt = adapter.execute(
@@ -635,6 +747,7 @@ def execute_proposal_route(
 
         timeline_store.append_event(
             incident_id=proposal.incident_id,
+            tenant_id=proposal.tenant_id,
             event_type="ACTION_EXECUTED",
             source=receipt.adapter_name,
             actor_id=user_id,
@@ -678,18 +791,44 @@ def list_adapters_route(
 @router.get("/incidents/{incident_id}/timeline", response_model=List[TimelineEventRecord])
 def get_incident_timeline_route(
     incident_id: str,
+    limit: int = Query(100, ge=1, le=500),
     identity: dict[str, object] = Depends(require_permission("operations.manage")),
 ) -> List[TimelineEventRecord]:
-    """Retrieves continuous unified incident timeline events."""
-    return timeline_store.get_events(incident_id=incident_id)
+    """Retrieves continuous unified incident timeline events scoped by tenant."""
+    caller_tenant = str(identity.get("tenant_id") or "SYSTEM")
+    return timeline_store.get_events(
+        incident_id=incident_id,
+        tenant_id=caller_tenant if caller_tenant != "SYSTEM" else None,
+        limit=limit,
+    )
 
 
 @router.get("/timeline", response_model=List[TimelineEventRecord])
 def get_global_timeline_route(
+    limit: int = Query(100, ge=1, le=500),
     identity: dict[str, object] = Depends(require_permission("operations.manage")),
 ) -> List[TimelineEventRecord]:
-    """Retrieves global operational timeline events."""
-    return timeline_store.get_events()
+    """Retrieves global operational timeline events scoped by tenant."""
+    caller_tenant = str(identity.get("tenant_id") or "SYSTEM")
+    return timeline_store.get_events(
+        tenant_id=caller_tenant if caller_tenant != "SYSTEM" else None,
+        limit=limit,
+    )
+
+
+@router.get("/timeline/verify")
+def verify_timeline_integrity_route(
+    identity: dict[str, object] = Depends(require_permission("operations.manage")),
+) -> Dict[str, Any]:
+    """Verifies the complete cryptographic SHA-256 hash chain of the durable timeline."""
+    valid, checked_count, error = timeline_store.verify_integrity()
+    return {
+        "status": "valid" if valid else "compromised",
+        "verified_events_count": checked_count,
+        "tamper_detected": not valid,
+        "error": error,
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+    }
 
 
 @router.get("/simulations/scenarios", response_model=List[SimulationScenario])

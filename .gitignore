@@ -49,4 +49,8 @@ app/offline/runtime_state.json
 .sentra_secret_key
 data/.sentra_secret_key
 *.secret_key
+*.db
+*.db-wal
+*.db-shm
+data/operations/*.db*
 

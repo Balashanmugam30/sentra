@@ -20,20 +20,27 @@ from app.rbac.permissions import (
 from app.tenancy.provisioning import tenancy_store
 
 
-def build_identity(user: dict[str, object], *, session_id: str | None = None) -> dict[str, object]:
+def build_identity(
+    user: dict[str, object],
+    *,
+    session_id: str | None = None,
+    tenant_id: str | None = None,
+) -> dict[str, object]:
     role = normalize_role(str(user["role"]))
     permissions = get_permissions_for_role(role)
-    tenant = tenancy_store.resolve_context(user)
+    token_tenant = str(tenant_id or user.get("tenant_id") or "").strip()
+    tenant = tenancy_store.resolve_context(user, requested_tenant_id=token_tenant or None)
+    resolved_tenant = token_tenant if token_tenant else str(tenant["tenant_id"])
     return {
         "id": str(user["user_id"]),
         "name": str(user["name"]),
         "email": str(user["email"]),
         "role": role,
-        "tenant_id": str(tenant["tenant_id"]),
-        "organization_name": str(tenant["organization_name"]),
-        "organization_slug": str(tenant["organization_slug"]),
-        "org_role": str(tenant["org_role"]),
-        "plan": str(tenant["plan"]["plan_name"]),
+        "tenant_id": resolved_tenant,
+        "organization_name": str(tenant.get("organization_name") or "Sentra Operational Command"),
+        "organization_slug": str(tenant.get("organization_slug") or "sentra-ops"),
+        "org_role": str(tenant.get("org_role") or "owner"),
+        "plan": str(tenant["plan"]["plan_name"]) if isinstance(tenant.get("plan"), dict) and "plan_name" in tenant["plan"] else "business",
         "permissions": permissions,
         "accessible_modules": get_accessible_modules_for_permissions(permissions),
         "security_level": get_security_level_for_role(role),
@@ -51,7 +58,12 @@ def build_identity(user: dict[str, object], *, session_id: str | None = None) ->
 def get_current_identity(
     context: AuthContext = Depends(get_current_auth_context),
 ) -> dict[str, object]:
-    return build_identity(context.user, session_id=str(context.payload.get("sid") or "") or None)
+    token_tenant = str(context.payload.get("tenant_id") or "") or None
+    return build_identity(
+        context.user,
+        session_id=str(context.payload.get("sid") or "") or None,
+        tenant_id=token_tenant,
+    )
 
 
 def get_optional_identity(
@@ -76,7 +88,12 @@ def get_optional_identity(
     if user is None or not user["is_active"]:
         return None
 
-    return build_identity(user, session_id=str(payload.get("sid") or "") or None)
+    token_tenant = str(payload.get("tenant_id") or "") or None
+    return build_identity(
+        user,
+        session_id=str(payload.get("sid") or "") or None,
+        tenant_id=token_tenant,
+    )
 
 
 def require_permission(permission: str) -> Callable[[dict[str, object]], dict[str, object]]:

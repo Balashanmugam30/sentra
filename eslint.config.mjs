@@ -3,7 +3,18 @@ import nextVitals from "eslint-config-next/core-web-vitals";
 const config = [
   ...nextVitals,
   {
-    ignores: ["**/.next/**", ".venv/**", "venv/**", "node_modules/**"],
+    ignores: [
+      "**/.next/**",
+      ".venv/**",
+      "venv/**",
+      "node_modules/**",
+      "data/**",
+      "logs/**",
+      "test-results/**",
+      "docs/**",
+      "infra/**",
+      "firmware/**",
+    ],
   },
   {
     rules: {
