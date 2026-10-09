@@ -7,7 +7,7 @@ from datetime import datetime, timezone
 import os
 from typing import Any
 
-from app.core.config import settings
+from app.core.config import resolve_jwt_secret, settings
 from app.core.runtime_mode import current_runtime_mode, is_production_like, runtime_profile
 from app.core.runtime_cache import get_runtime_cache_stats
 from app.soc.telemetry import get_recent_telemetry
@@ -34,17 +34,17 @@ def _status(ok: bool, warning: bool = False) -> str:
 
 def validate_environment() -> list[ReadinessCheck]:
     production_like = is_production_like()
-    secret_from_env = bool(os.getenv("JWT_SECRET") or os.getenv("SECRET_KEY") or os.getenv("SENTRA_JWT_SECRET"))
-    jwt_is_ephemeral = is_production_like() and not secret_from_env
+    jwt_secret_val, secret_source, jwt_is_ephemeral = resolve_jwt_secret()
     origins = settings.cors_origins
     wildcard_origin = "*" in origins
     stripe_ready = bool(settings.stripe_secret_key and settings.stripe_webhook_secret)
-    jwt_secret_val = (
-        os.getenv("JWT_SECRET")
-        or os.getenv("SECRET_KEY")
-        or os.getenv("SENTRA_JWT_SECRET")
-        or settings.auth_jwt_secret
-    )
+
+    jwt_ok = not jwt_is_ephemeral and len(jwt_secret_val) >= 32
+    if jwt_ok:
+        jwt_detail = f"JWT secret verified via {secret_source} ({len(jwt_secret_val)} chars entropy)."
+    else:
+        jwt_detail = "JWT/secret key must come from environment with sufficient entropy in production."
+
     checks = [
         ReadinessCheck(
             "runtime_mode",
@@ -54,9 +54,9 @@ def validate_environment() -> list[ReadinessCheck]:
         ),
         ReadinessCheck(
             "jwt_secret",
-            _status(not jwt_is_ephemeral and len(jwt_secret_val) >= 32),
+            _status(jwt_ok),
             12,
-            "JWT/secret key must come from environment with sufficient entropy in production.",
+            jwt_detail,
         ),
         ReadinessCheck(
             "secure_cookies",

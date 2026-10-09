@@ -89,8 +89,8 @@ Sentra implements strict production environment gating in `app/core/startup_chec
 
 ### Startup Checks & Blocking Codes:
 - **`SEC_JWT_SECRET_BLOCKED`:**
-  - **Condition:** In production (`APP_ENV=production`), `JWT_SECRET` (or `SECRET_KEY`, `SENTRA_JWT_SECRET`) must be provided via environment variables with $\ge 32$ characters of entropy.
-  - **Behavior:** The application refuses to boot with an unmanaged ephemeral secret in production, preventing unexpected session loss across multi-instance restarts.
+  - **Condition:** In production (`APP_ENV=production`), `JWT_SECRET` (or `SECRET_KEY`, `SENTRA_JWT_SECRET`) must be provided via environment variables with $\ge 32$ characters of entropy, OR generated and persisted via the hosted instance secure key store (`data/.sentra_secret_key` on single-instance / Render deployments with `RENDER=true` or `SENTRA_PERSIST_SECRET=true`).
+  - **Behavior:** The application refuses to boot with an unmanaged ephemeral in-memory secret in production, preventing unexpected session loss across multi-instance restarts while allowing zero-configuration boot on Render.
   - **Safe Diagnostics:** Emits structured log event `startup_check_blocked` with `check_name`, `error_code`, `status=blocked`, and reason without leaking secret values.
 - **`SEC_RUNTIME_MODE_BLOCKED`:**
   - **Condition:** Valid runtime mode (`production`, `staging`, `enterprise`, `development`).

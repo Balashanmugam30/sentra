@@ -10,6 +10,67 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
+def get_secret_store_path() -> Path:
+    explicit = os.getenv("SENTRA_SECRET_KEY_PATH")
+    if explicit and explicit.strip():
+        return Path(explicit.strip())
+    return Path(__file__).resolve().parents[2] / "data" / ".sentra_secret_key"
+
+
+def resolve_jwt_secret() -> tuple[str, str, bool]:
+    """
+    Resolve the JWT authentication secret and its provenance.
+
+    Returns:
+        (secret_value, source_name, is_ephemeral)
+
+    Provenance sources:
+        - 'environment': Explicitly injected via JWT_SECRET, SECRET_KEY, or SENTRA_JWT_SECRET.
+        - 'file_persisted': Persisted secure cryptographic token on disk (e.g. Render hosted single-instance runtime).
+        - 'ephemeral_memory': In-memory ephemeral CSPRNG secret (blocks production readiness).
+    """
+    # 1. Environment variables take absolute precedence
+    for env_var in ("JWT_SECRET", "SECRET_KEY", "SENTRA_JWT_SECRET"):
+        val = os.getenv(env_var)
+        if val and val.strip():
+            return val.strip(), "environment", False
+
+    raw_env = (os.getenv("APP_ENV") or os.getenv("SENTRA_APP_ENV") or "development").strip().lower()
+    is_production_mode = raw_env in {"production", "prod", "enterprise"}
+
+    # 2. Check if persistent secret storage is enabled
+    persist_enabled = bool(
+        os.getenv("RENDER")
+        or os.getenv("RENDER_SERVICE_ID")
+        or os.getenv("SENTRA_PERSIST_SECRET", "").lower() in ("true", "1")
+        or os.getenv("SENTRA_SECRET_KEY_PATH")
+    )
+
+    if persist_enabled:
+        secret_file = get_secret_store_path()
+        try:
+            if secret_file.is_file():
+                content = secret_file.read_text(encoding="utf-8").strip()
+                if len(content) >= 32:
+                    return content, "file_persisted", False
+
+            # Generate and persist a 48-byte URL-safe CSPRNG secret (64 characters, 384 bits entropy)
+            new_secret = secrets.token_urlsafe(48)
+            secret_file.parent.mkdir(parents=True, exist_ok=True)
+            flags = os.O_WRONLY | os.O_CREAT | os.O_TRUNC
+            mode = 0o600
+            fd = os.open(str(secret_file), flags, mode)
+            with open(fd, "w", encoding="utf-8") as f:
+                f.write(new_secret)
+            return new_secret, "file_persisted", False
+        except OSError:
+            pass
+
+    # 3. Ephemeral memory fallback
+    ephemeral_secret = secrets.token_urlsafe(48)
+    return ephemeral_secret, "ephemeral_memory", is_production_mode
+
+
 @dataclass(frozen=True)
 class Settings:
     app_env: str = os.getenv("APP_ENV", os.getenv("SENTRA_APP_ENV", "development"))
@@ -24,14 +85,7 @@ class Settings:
         "ALLOWED_ORIGINS",
         "http://localhost,http://localhost:3000,http://127.0.0.1:3000,https://sentra-01.vercel.app",
     )
-    auth_jwt_secret: str = field(
-        default_factory=lambda: (
-            os.getenv("JWT_SECRET")
-            or os.getenv("SECRET_KEY")
-            or os.getenv("SENTRA_JWT_SECRET")
-            or secrets.token_urlsafe(48)
-        )
-    )
+    auth_jwt_secret: str = field(default_factory=lambda: resolve_jwt_secret()[0])
     auth_jwt_algorithm: str = os.getenv("SENTRA_JWT_ALGORITHM", "HS256")
     auth_access_token_minutes: int = int(os.getenv("SENTRA_ACCESS_TOKEN_MINUTES", "15"))
     auth_refresh_token_days: int = int(os.getenv("SENTRA_REFRESH_TOKEN_DAYS", "7"))
@@ -116,7 +170,9 @@ class Settings:
     stripe_secret_key: str = os.getenv("STRIPE_SECRET_KEY", "")
     stripe_webhook_secret: str = os.getenv("STRIPE_WEBHOOK_SECRET", "")
     stripe_publishable_key: str = os.getenv("STRIPE_PUBLISHABLE_KEY", "")
-    firebase_project_id: str = os.getenv("FIREBASE_PROJECT_ID", os.getenv("NEXT_PUBLIC_FIREBASE_PROJECT_ID", "sentra-01"))
+    firebase_project_id: str = os.getenv(
+        "FIREBASE_PROJECT_ID", os.getenv("NEXT_PUBLIC_FIREBASE_PROJECT_ID", "sentra-01")
+    )
     firebase_service_account_path: str = os.getenv(
         "FIREBASE_SERVICE_ACCOUNT_PATH",
         str(Path(__file__).resolve().parents[1] / "firebase-service-account.json"),

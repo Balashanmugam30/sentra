@@ -80,3 +80,40 @@ def test_startup_event_raises_descriptive_error_when_blocked():
         assert "SEC_JWT_SECRET_BLOCKED" in err_msg
         # Ensure no actual secret or key value is dumped
         assert "Bearer" not in err_msg
+
+
+def test_startup_checks_ready_on_render_with_auto_persisted_secret(tmp_path):
+    """Verify that on Render runtime, missing env secret auto-persists a secure key and passes checks."""
+    test_secret_file = str(tmp_path / ".sentra_secret_key")
+    with patch.dict(
+        os.environ,
+        {
+            "APP_ENV": "production",
+            "RENDER": "true",
+            "SENTRA_SECRET_KEY_PATH": test_secret_file,
+        },
+        clear=False,
+    ):
+        for key in ["JWT_SECRET", "SECRET_KEY", "SENTRA_JWT_SECRET"]:
+            os.environ.pop(key, None)
+
+        result = run_startup_checks()
+        assert result["status"] == "ready"
+        assert len(result["blocking_failures"]) == 0
+
+        jwt_check = next((c for c in result["checks"] if c["name"] == "jwt_secret"), None)
+        assert jwt_check is not None
+        assert jwt_check["status"] == "pass"
+        assert "file_persisted" in jwt_check["detail"]
+
+        # Confirm the secret was actually saved with >= 32 chars
+        with open(test_secret_file, "r", encoding="utf-8") as f:
+            saved_secret = f.read().strip()
+        assert len(saved_secret) >= 32
+
+        # Second run should read and reuse the exact same persisted key
+        second_result = run_startup_checks()
+        assert second_result["status"] == "ready"
+        second_jwt_check = next((c for c in second_result["checks"] if c["name"] == "jwt_secret"), None)
+        assert second_jwt_check is not None
+        assert second_jwt_check["status"] == "pass"

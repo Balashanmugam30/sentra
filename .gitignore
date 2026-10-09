@@ -46,3 +46,7 @@ logs/
 # Local runtime state
 .sentra_*_store.json
 app/offline/runtime_state.json
+.sentra_secret_key
+data/.sentra_secret_key
+*.secret_key
+

@@ -16,6 +16,8 @@ services:
         value: "production"
       - key: SENTRA_COOKIE_SECURE
         value: "true"
+      - key: SENTRA_PERSIST_SECRET
+        value: "true"
       - key: JWT_SECRET
         generateValue: true
       - key: SECRET_KEY

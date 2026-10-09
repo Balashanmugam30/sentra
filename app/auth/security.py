@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from datetime import datetime, timedelta, timezone
+import os
 from typing import Any
 from uuid import uuid4
 
@@ -9,6 +10,14 @@ import jwt
 from fastapi import HTTPException, status
 
 from app.core.config import settings
+
+
+def get_auth_jwt_secret() -> str:
+    for env_var in ("JWT_SECRET", "SECRET_KEY", "SENTRA_JWT_SECRET"):
+        val = os.getenv(env_var)
+        if val and val.strip():
+            return val.strip()
+    return settings.auth_jwt_secret
 
 
 def utc_now() -> datetime:
@@ -56,7 +65,7 @@ def create_access_token(
         "exp": expires_at,
         "iat": utc_now(),
     }
-    token = jwt.encode(payload, settings.auth_jwt_secret, algorithm=settings.auth_jwt_algorithm)
+    token = jwt.encode(payload, get_auth_jwt_secret(), algorithm=settings.auth_jwt_algorithm)
     return token, expires_at
 
 
@@ -70,7 +79,7 @@ def create_refresh_token(*, user_id: str) -> tuple[str, str, datetime]:
         "exp": expires_at,
         "iat": utc_now(),
     }
-    token = jwt.encode(payload, settings.auth_jwt_secret, algorithm=settings.auth_jwt_algorithm)
+    token = jwt.encode(payload, get_auth_jwt_secret(), algorithm=settings.auth_jwt_algorithm)
     return token, session_id, expires_at
 
 
@@ -82,7 +91,7 @@ def decode_token(token: str, *, expected_type: str) -> dict[str, Any]:
     try:
         payload = jwt.decode(
             token,
-            settings.auth_jwt_secret,
+            get_auth_jwt_secret(),
             algorithms=[settings.auth_jwt_algorithm],
         )
     except jwt.PyJWTError as error:
