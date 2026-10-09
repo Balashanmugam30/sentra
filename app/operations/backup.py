@@ -34,6 +34,8 @@ class BackupMetadata:
     table_counts: Dict[str, int]
     timeline_chain_valid: bool
     status: str
+    off_host_synced: bool = False
+    durability_note: str = "Local disk snapshot; off-host cloud object storage unconfigured"
 
 
 class OperationsBackupManager:
@@ -46,7 +48,8 @@ class OperationsBackupManager:
     def create_backup(self, target_directory: Optional[str] = None) -> BackupMetadata:
         """
         Creates an online, non-blocking, crash-consistent snapshot using SQLite's
-        native backup API. Computes SHA-256 checksum and inventory counts.
+        native backup API. Computes SHA-256 checksum, inventory counts, and verifies
+        real cryptographic timeline hash chain integrity.
         """
         if not target_directory:
             backup_dir = self.db_path.parent / "backups"
@@ -96,6 +99,9 @@ class OperationsBackupManager:
         finally:
             verify_conn.close()
 
+        # Verify real timeline cryptographic chain integrity
+        chain_valid, _, _ = self.persistence.verify_timeline_integrity()
+
         # Write companion metadata JSON
         meta = BackupMetadata(
             backup_id=backup_id,
@@ -105,8 +111,10 @@ class OperationsBackupManager:
             size_bytes=size_bytes,
             sha256_checksum=sha256_hash,
             table_counts=table_counts,
-            timeline_chain_valid=True,
-            status="SUCCESS",
+            timeline_chain_valid=chain_valid,
+            status="SUCCESS" if chain_valid else "CORRUPTED_CHAIN",
+            off_host_synced=False,
+            durability_note="Local disk snapshot; off-host cloud object storage unconfigured",
         )
 
         meta_file = backup_dir / f"{backup_id}.meta.json"

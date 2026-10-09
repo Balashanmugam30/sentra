@@ -126,6 +126,41 @@ export interface AdapterRecord {
   supported_actions: string[];
 }
 
+export interface DemoScenarioDefinition {
+  scenario_id: string;
+  title: string;
+  category: string;
+  description: string;
+  primary_hazard: string;
+  target_zones: string[];
+  initial_telemetry: Record<string, unknown>;
+  expected_safety_decision: string;
+  invariants: string[];
+}
+
+export interface DemoScenarioRunResult {
+  scenario_id: string;
+  run_id: string;
+  status: string;
+  title: string;
+  category: string;
+  incident_id: string;
+  safety_decision: string;
+  safety_reasons: string[];
+  action_execution: {
+    action: string;
+    outcome: string;
+    proposal_id?: string;
+    target_zone?: string;
+    receipt?: Record<string, unknown>;
+    projection?: Record<string, unknown>;
+  } | null;
+  events_emitted: string[];
+  timeline_chain_valid: boolean;
+  total_timeline_events: number;
+  timestamp: string;
+}
+
 const API_BASE = "/api/v1/operations";
 
 async function fetchJson<T>(url: string, options?: RequestInit): Promise<T> {
@@ -231,6 +266,17 @@ export const operationsService = {
     return fetchJson<SimulationResult>(`${API_BASE}/simulations/run`, {
       method: "POST",
       body: JSON.stringify(payload),
+    });
+  },
+
+  async listDemoScenarios(): Promise<DemoScenarioDefinition[]> {
+    return fetchJson<DemoScenarioDefinition[]>(`${API_BASE}/demo/scenarios`);
+  },
+
+  async runDemoScenario(scenarioId: string): Promise<DemoScenarioRunResult> {
+    return fetchJson<DemoScenarioRunResult>(`${API_BASE}/demo/run`, {
+      method: "POST",
+      body: JSON.stringify({ scenario_id: scenarioId }),
     });
   },
 };

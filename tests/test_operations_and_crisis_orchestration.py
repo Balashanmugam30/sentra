@@ -518,12 +518,25 @@ def auth_headers():
 
 def test_api_readiness(auth_headers):
     client = TestClient(app)
-    response = client.get(f"{settings.api_prefix}/operations/readiness")
+    # 1. Unauthenticated request must be rejected (401 or 403)
+    unauth_resp = client.get(f"{settings.api_prefix}/operations/readiness")
+    assert unauth_resp.status_code in (401, 403)
+
+    # 2. Public liveness probe must succeed without authentication
+    live_resp = client.get(f"{settings.api_prefix}/operations/liveness")
+    assert live_resp.status_code == 200
+    assert live_resp.json()["status"] == "ok"
+    assert live_resp.json()["service"] == "sentra-operations"
+
+    # 3. Authenticated request receives full readiness and durability diagnostics
+    response = client.get(f"{settings.api_prefix}/operations/readiness", headers=auth_headers)
     assert response.status_code == 200
     data = response.json()
     assert data["status"] == "ready"
-    assert data["phase"] == 6
+    assert data["phase"] >= 6
     assert data["active_playbooks_count"] >= 5
+    assert "durability" in data
+    assert data["durability"]["backend"] == "sqlite3_wal"
 
 
 def test_api_autonomy_mode_lifecycle(auth_headers):

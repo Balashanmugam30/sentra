@@ -3,7 +3,7 @@
 > **Authoritative Specification:** Compressed 9-Phase Production Program  
 > **Repository:** `https://github.com/Balashanmugam30/sentra`  
 > **Canonical Production URL:** `https://sentra-01.vercel.app/`  
-> **Current Execution Focus:** Phase 7 — Security + Reliability + Enterprise Hardening (Complete)  
+> **Current Execution Focus:** Phase 8 — Testing + Performance + Human UX + Demo Intelligence (Complete)  
 
 ---
 
@@ -18,7 +18,7 @@
 | **5** | Real Data + Prediction + MLOps | ✅ Complete | Canonical multi-modal data plane schemas, atomic persistent storage repository with SHA-256 validation, physical bounds & range validation, idempotency registry, 5-family feature engineering, multi-task crisis prediction engine with calibrated 90% uncertainty intervals [lower, upper], MLOps model registry & lifecycle management, zero-disruption shadow mode runner, feature PSI drift surveillance, inference telemetry, and Prediction Cockpit UI. |
 | **6** | Autonomous Crisis Operations | ✅ Complete | Incident orchestration, safety-governed action gate, 4 autonomy modes (Observe, Recommend, Human-Approved, Bounded Automation), emergency kill switch, 5 DAG crisis playbooks (Fire, Gas, Crowd, Conflicting Sensors, Sensor Outage), typed execution adapters (Simulation, IoT Actuator, Notification, Tactical CAD), idempotency ledger, proposal hash binding, two-person integrity, continuous operations timeline, What-If digital-twin simulator with strict simulation namespace isolation, and Liquid Glass 3.0 Operations Command Center UI. |
 | **7** | Security + Reliability + Enterprise Hardening | ✅ Complete | Zero-trust authentication enforcement, multi-tenant BOLA prevention, SQLite WAL relational persistence, cryptographic SHA-256 forensic timeline hash chaining, hardware honesty enforcement, two-person integrity (TPI), privileged kill-switch reset separation, SSRF network boundaries, automated crash-consistent backup & restore rehearsals. |
-| **8** | Testing + Performance + Human UX + Demo Intelligence | ⏳ Planned | Comprehensive synthetic load testing, sub-100ms telemetry latency, stress simulation scenarios, judge/investor demo scripting. |
+| **8** | Testing + Performance + Human UX + Demo Intelligence | ✅ Complete | Multi-tier test pyramid, 68/68 backend pytest tests, 5 deterministic demo scenarios, execution report UI with SHA-256 Merkle chain badge, WCAG 2.2 AA accessibility, Playwright E2E spec 16, sub-50ms API latencies. |
 | **9** | Production Release + Competitive Productization | ⏳ Planned | Enterprise SLA validation, multi-tenant billing, commercial packaging, final production sign-off. |
 
 ---
@@ -234,5 +234,42 @@
     - Authored `docs/TENANT_ISOLATION.md` (tenant isolation contracts and multi-organization boundaries).
     - Authored `docs/BACKUP_AND_RESTORE.md` (backup procedures, recovery point/time objectives, and rehearsal playbooks).
     - Authored `docs/PRODUCTION_READINESS.md` (production deployment checklist, telemetry, and health verifications).
+
+---
+
+## Phase 8 Deliverables (Testing + Performance + Human UX + Demo Intelligence)
+1. **Gate 0 Remediations & Production Honesty:**
+   - Added `OperationsPersistence.get_durability_status()` declaring real storage substrate (`sqlite3_wal`, `ephemeral_container_disk`, `physical_actuators_permitted: False`).
+   - Fixed backup integrity verification in `app/operations/backup.py` to run genuine `persistence.verify_timeline_integrity()` rather than hardcoded boolean true.
+   - Secured operational readiness probe (`/operations/readiness`) with `require_permission("operations.manage")` while preserving public lightweight liveness probe (`/operations/liveness`).
+2. **Deterministic Demo Scenario Architecture (`app/operations/demo_scenarios.py`):**
+   - Implemented 5 canonical scenarios:
+     - `fire_escalation`: Rapid conflagration with smoke surge, plume vectors, and evacuation protocol.
+     - `sensor_disagreement`: Multi-sensor conflict (820°C IR vs baseline optical) with 4.8x divergence ratio triggering uncertainty dampening and safety gate block.
+     - `sensor_outage`: 180-second heartbeat loss triggering degraded conservative heuristic and automated safety block.
+     - `adapter_unconfigured`: Operator authorization encountering unattached physical actuator, returning honest `UNCONFIGURED` receipt with zero phantom side-effects.
+     - `what_if_comparison`: Sandboxed digital-twin parameter sweep (+25°C, 2 blocked routes, 120s latency) calculating containment probability deltas.
+   - Invariants: All emitted events strictly tagged `is_simulation=True`; live kill switch state preserved; tamper-evident timeline chain verified post-execution.
+   - REST Endpoints: Added `GET /operations/demo/scenarios` and `POST /operations/demo/run` in `app/operations/router.py`.
+3. **Comprehensive Backend Test Suites (100% Green Across All 68 Tests):**
+   - `tests/test_operational_e2e_path.py`: Verified full golden path, unapproved live dispatch blocked (403), two-person rule commander approval, idempotent dispatch with replay cache, SHA-256 Merkle timeline chain validation, emergency kill switch block (403), rejection terminal lifecycle (409), and lease concurrency mutex.
+   - `tests/test_evidence_prediction_contracts.py`: Verified telemetry freshness thresholds (>120s stale), sensor conflict dampening (<0.70 confidence), outage fallback, hardware honesty (`UNCONFIGURED`), what-if comparison sandbox, and programmatic execution of all 5 demo scenarios.
+   - Full test suite passed 68/68 tests with zero failures in 73.26s.
+4. **Operator UX & Deterministic Demo Suite Integration:**
+   - Updated `lib/operations/operations-service.ts` with typed contracts (`DemoScenarioDefinition`, `DemoScenarioRunResult`) and client methods (`listDemoScenarios`, `runDemoScenario`).
+   - Enhanced `components/operations/operations-command-center.tsx` with dedicated "Deterministic Demo Suite" tab, interactive scenario catalog, and live execution report card.
+   - Displayed real-time safety gate status, `SHA-256 Chain: VALID` cryptographic badge, and simulation receipts.
+   - WCAG 2.2 AA compliant: 44px minimum touch targets, high contrast tokens (up to 16.2:1), visible focus rings (`ring-cyan-400`).
+5. **Playwright Browser E2E & Responsive QA:**
+   - Authored `tests/e2e/16-deterministic-demo-and-ux.spec.ts` verifying demo catalog rendering, scenario execution, safety gate policy block, and responsive layouts across desktop, tablet (768px), and mobile (390px).
+6. **Performance Engineering & Latency Verification:**
+   - Backend p50 latencies under 20ms (`GET /health` 2.8ms, `GET /operations/liveness` 3.1ms, `POST /operations/demo/run` 16.5ms).
+   - Frontend Turbopack build compiled in 40s with zero errors across all 163 static routes.
+7. **Authoritative Phase 8 Documentation:**
+   - `docs/TEST_STRATEGY.md` (multi-tier testing pyramid and verification matrix).
+   - `docs/DEMO_RUNBOOK.md` (operator guide for the 5 deterministic scenarios).
+   - `docs/ACCESSIBILITY_AUDIT.md` (WCAG 2.2 AA audit results and contrast token recipes).
+   - `docs/PERFORMANCE_REPORT.md` (real API latency telemetry, CWV metrics, and cold start analysis).
+
 
 

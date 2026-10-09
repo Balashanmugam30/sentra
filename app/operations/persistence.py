@@ -721,6 +721,45 @@ class OperationsPersistence:
 
             return True, len(rows), None
 
+    def get_durability_status(self) -> Dict[str, Any]:
+        """
+        Honest architectural diagnostic of operations persistence durability.
+        Reports whether current storage is ephemeral container disk or durable external RDBMS.
+        """
+        has_database_url = bool(os.getenv("DATABASE_URL") or os.getenv("SUPABASE_DB_URL"))
+        is_render_env = bool(os.getenv("RENDER") or os.getenv("RENDER_SERVICE_ID"))
+        has_persistent_disk = bool(os.getenv("RENDER_DISK_PATH") or os.getenv("PERSISTENT_STORAGE_PATH"))
+
+        if has_database_url:
+            storage_type = "managed_rdbms"
+            durability_level = "durable_external"
+            physical_permitted = False
+            advisory = "External database configured. Physical actuator dispatches remain unconfigured/disabled."
+        elif is_render_env and not has_persistent_disk:
+            storage_type = "ephemeral_container_disk"
+            durability_level = "ephemeral_degraded"
+            physical_permitted = False
+            advisory = (
+                "Render Free ephemeral container disk active. SQLite WAL is crash-consistent locally "
+                "but does not survive redeployments. Physical actuator dispatches strictly disabled."
+            )
+        else:
+            storage_type = "local_filesystem_wal"
+            durability_level = "local_durable"
+            physical_permitted = False
+            advisory = "Local filesystem SQLite WAL persistence active. Physical actuation disabled."
+
+        return {
+            "backend": "sqlite3_wal",
+            "db_path": str(self.db_path),
+            "storage_type": storage_type,
+            "durability_level": durability_level,
+            "is_ephemeral": durability_level == "ephemeral_degraded",
+            "physical_actuators_permitted": physical_permitted,
+            "tamper_evident_audit": True,
+            "advisory": advisory,
+        }
+
     def clear_all_for_tests(self) -> None:
         """Clears all operations tables and resets state for automated test runs."""
         with self._lock:

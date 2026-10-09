@@ -342,6 +342,94 @@
       "invited_by": "system",
       "joined_at": "2026-10-08T17:27:33.341040+00:00",
       "active": true
+    },
+    {
+      "user_id": "USR-f663121f10",
+      "tenant_id": "TEN-BALA-UNI",
+      "email": "alice@tenant-alpha.local",
+      "name": "Alice Alpha",
+      "role": "viewer",
+      "department": "Observers",
+      "invited_by": "system",
+      "joined_at": "2026-10-09T13:10:08.302023+00:00",
+      "active": true
+    },
+    {
+      "user_id": "USR-188f446226",
+      "tenant_id": "TEN-BALA-UNI",
+      "email": "bob@tenant-beta.local",
+      "name": "Bob Beta",
+      "role": "viewer",
+      "department": "Observers",
+      "invited_by": "system",
+      "joined_at": "2026-10-09T13:10:08.445977+00:00",
+      "active": true
+    },
+    {
+      "user_id": "USR-6e226092c1",
+      "tenant_id": "TEN-BALA-UNI",
+      "email": "approver@tenant-alpha.local",
+      "name": "Alpha Approver",
+      "role": "viewer",
+      "department": "Observers",
+      "invited_by": "system",
+      "joined_at": "2026-10-09T13:10:09.296073+00:00",
+      "active": true
+    },
+    {
+      "user_id": "USR-8e2412a2f7",
+      "tenant_id": "TEN-BALA-UNI",
+      "email": "sysadmin@sentra.local",
+      "name": "System Admin",
+      "role": "viewer",
+      "department": "Observers",
+      "invited_by": "system",
+      "joined_at": "2026-10-09T13:10:09.806062+00:00",
+      "active": true
+    },
+    {
+      "user_id": "USR-8e2412a2f7",
+      "tenant_id": "TEN-BALA-MFG",
+      "email": "sysadmin@sentra.local",
+      "name": "System Admin",
+      "role": "owner",
+      "department": "Command",
+      "invited_by": "system",
+      "joined_at": "2026-10-09T13:10:09.806084+00:00",
+      "active": true
+    },
+    {
+      "user_id": "USR-8e2412a2f7",
+      "tenant_id": "TEN-BALA-HOSP",
+      "email": "sysadmin@sentra.local",
+      "name": "System Admin",
+      "role": "owner",
+      "department": "Command",
+      "invited_by": "system",
+      "joined_at": "2026-10-09T13:10:09.806090+00:00",
+      "active": true
+    },
+    {
+      "user_id": "USR-01afe5b285",
+      "tenant_id": "TEN-BALA-UNI",
+      "email": "bob@sentra.local",
+      "name": "Commander Bob",
+      "role": "viewer",
+      "department": "Observers",
+      "invited_by": "system",
+      "joined_at": "2026-10-09T13:10:29.538533+00:00",
+      "active": true
+    },
+    {
+      "user_id": "USR-03fd8a004d",
+      "tenant_id": "TEN-BALA-UNI",
+      "email": "commander@sentra.local",
+      "name": "Commander Sarah",
+      "role": "viewer",
+      "department": "Observers",
+      "invited_by": "system",
+      "joined_at": "2026-10-09T13:25:37.845640+00:00",
+      "active": true
     }
   ],
   "usage": [
@@ -382,7 +470,13 @@
     "USR-14d1352f6f": "TEN-BALA-UNI",
     "USR-60b800ef3b": "TEN-BALA-UNI",
     "USR-087707d244": "TEN-BALA-UNI",
-    "USR-e2a2183b96": "TEN-BALA-UNI"
+    "USR-e2a2183b96": "TEN-BALA-UNI",
+    "USR-f663121f10": "TEN-BALA-UNI",
+    "USR-188f446226": "TEN-BALA-UNI",
+    "USR-6e226092c1": "TEN-BALA-UNI",
+    "USR-8e2412a2f7": "TEN-BALA-UNI",
+    "USR-01afe5b285": "TEN-BALA-UNI",
+    "USR-03fd8a004d": "TEN-BALA-UNI"
   },
   "invites": [],
   "events": []

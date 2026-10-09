@@ -47,16 +47,19 @@ from app.operations.schemas import (
     OperationsLiveResponse,
     OrchestrateIncidentRequest,
     RejectProposalRequest,
+    RunDemoScenarioRequest,
     RunSimulationRequest,
     RunTestRequest,
     RunTestResponse,
     SetAutonomyModeRequest,
 )
+from app.operations.demo_scenarios import demo_engine
+from app.operations.persistence import persistence
 from app.operations.simulator import simulator_engine
 from app.operations.state_machine import IllegalStateTransitionError, lease_manager
 from app.operations.store import operations_store
 from app.operations.timeline import timeline_store
-from app.rbac.guard import get_optional_identity, require_permission
+from app.rbac.guard import require_permission
 from app.services.incident_service import get_all_incidents, get_incident_by_id
 from app.tenancy.context import identity_tenant_cache_key
 
@@ -220,26 +223,25 @@ def get_operations_liveness() -> Dict[str, Any]:
 
 @router.get("/readiness")
 def get_operations_readiness(
-    identity: Optional[dict[str, object]] = Depends(get_optional_identity),
+    identity: dict[str, object] = Depends(require_permission("operations.manage")),
 ) -> Dict[str, Any]:
-    """Operational subsystem readiness check for Phase 6 & Phase 7."""
+    """Operational subsystem readiness check with honest durability diagnostics for Phase 8."""
     autonomy = operations_store.get_autonomy_state()
     playbooks = playbook_engine.list_playbooks()
     adapters = adapter_registry.list_adapters()
-    res = {
+    durability = persistence.get_durability_status()
+    return {
         "status": "ready",
-        "phase": 6,
-        "engine": "Autonomous Crisis Operations",
+        "phase": 8,
+        "engine": "Autonomous Crisis Operations & Deterministic Intelligence",
         "autonomy_mode": autonomy.mode.value,
         "kill_switch_engaged": autonomy.kill_switch_engaged,
         "active_playbooks_count": len(playbooks),
         "registered_adapters_count": len(adapters),
+        "security_phase": 7,
+        "durability": durability,
         "timestamp": datetime.now(timezone.utc).isoformat(),
     }
-    if identity:
-        res["security_phase"] = 7
-        res["durable_persistence"] = "SQLITE_WAL_ACID"
-    return res
 
 
 @router.get("/mode", response_model=AutonomyState)
@@ -541,6 +543,12 @@ def approve_proposal_route(
         raise HTTPException(status_code=409, detail="Proposal is currently locked by another concurrent operation.")
 
     try:
+        if proposal.status != OperationLifecycleStatus.AWAITING_APPROVAL:
+            raise HTTPException(
+                status_code=409,
+                detail=f"Cannot approve proposal in status '{proposal.status.value}'. Must be AWAITING_APPROVAL.",
+            )
+
         now = datetime.now(timezone.utc)
         if now > proposal.expires_at:
             proposal.status = OperationLifecycleStatus.EXPIRED
@@ -608,6 +616,12 @@ def reject_proposal_route(
         raise HTTPException(
             status_code=403,
             detail="Cross-tenant access violation: Cannot reject proposal belonging to another tenant.",
+        )
+
+    if proposal.status != OperationLifecycleStatus.AWAITING_APPROVAL:
+        raise HTTPException(
+            status_code=409,
+            detail=f"Cannot reject proposal in status '{proposal.status.value}'. Must be AWAITING_APPROVAL.",
         )
 
     user_id = str(identity.get("id") or identity.get("sub") or "human_commander")
@@ -707,12 +721,25 @@ def execute_proposal_route(
             is_simulation=payload.is_simulation,
         )
 
+        if proposal.status == OperationLifecycleStatus.REJECTED:
+            raise HTTPException(
+                status_code=409,
+                detail="Cannot execute rejected action proposal.",
+            )
+
         if decision == SafetyDecision.DENY:
             raise HTTPException(
                 status_code=403,
                 detail=f"Safety Gate DENIED execution: {'; '.join(reasons)}",
             )
-        if decision == SafetyDecision.REQUIRE_HUMAN_APPROVAL and proposal.status != OperationLifecycleStatus.APPROVED:
+        if (
+            (
+                decision in {SafetyDecision.REQUIRE_HUMAN_APPROVAL, SafetyDecision.ALLOW_RECOMMENDATION}
+                or autonomy.mode in {AutonomyMode.MODE_1_RECOMMEND, AutonomyMode.MODE_2_HUMAN_APPROVED}
+            )
+            and proposal.status != OperationLifecycleStatus.APPROVED
+            and not payload.is_simulation
+        ):
             raise HTTPException(
                 status_code=403,
                 detail="Action requires prior verified operator approval before dispatch.",
@@ -902,3 +929,45 @@ def run_simulation_route(
         risk_score=10,
     )
     return result
+
+
+@router.get("/demo/scenarios")
+def get_demo_scenarios(
+    identity: dict[str, object] = Depends(require_permission("operations.manage")),
+) -> List[Dict[str, Any]]:
+    """Returns catalog of deterministic Phase 8 demo crisis scenarios."""
+    return demo_engine.list_scenarios()
+
+
+@router.post("/demo/run")
+def run_demo_scenario(
+    request: Request,
+    payload: RunDemoScenarioRequest,
+    identity: dict[str, object] = Depends(require_permission("operations.manage")),
+) -> Dict[str, Any]:
+    """Executes a deterministic demonstration scenario with strict simulation isolation."""
+    user_id = str(identity.get("id") or identity.get("sub") or "operator_demo")
+    tenant_id = str(identity.get("tenant_id") or "tenant_sentra_demo")
+    try:
+        result = demo_engine.run_scenario(
+            scenario_id=payload.scenario_id,
+            operator_id=user_id,
+            tenant_id=tenant_id,
+        )
+    except ValueError as err:
+        raise HTTPException(status_code=404, detail=str(err)) from err
+
+    append_audit_event(
+        category="operations",
+        action="demo_scenario_run",
+        severity="low",
+        target_module="operations",
+        status="success",
+        reason=f"Deterministic demo scenario run: {payload.scenario_id}",
+        request=request,
+        identity=identity,
+        target_id=result["run_id"],
+        risk_score=5,
+    )
+    return result
+

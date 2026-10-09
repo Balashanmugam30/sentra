@@ -141,3 +141,8 @@ class RunSimulationRequest(BaseModel):
     sensor_outage_zones: list[str] = Field(default_factory=list)
     blocked_routes: list[str] = Field(default_factory=list)
     dispatch_delay_seconds: int = 0
+
+
+class RunDemoScenarioRequest(BaseModel):
+    scenario_id: str = Field(..., min_length=2)
+
