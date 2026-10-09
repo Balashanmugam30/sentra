@@ -111,10 +111,19 @@ export function useAuth() {
     const localSession = getLocalAuthSession();
 
     if (localSession?.user) {
+      const now = Date.now();
+      const existingExpiresAt = localSession.accessTokenExpiresAt
+        ? new Date(localSession.accessTokenExpiresAt).getTime()
+        : NaN;
+      const safeExpiresAt =
+        !Number.isNaN(existingExpiresAt) && existingExpiresAt > now + 60_000
+          ? localSession.accessTokenExpiresAt
+          : expirationFromNow(86400);
+
       applyAuthSession({
         accessToken: localSession.accessToken ?? "demo-token-restored",
         refreshToken: localSession.refreshToken,
-        expiresAt: localSession.accessTokenExpiresAt ?? expirationFromNow(86400),
+        expiresAt: safeExpiresAt,
         refreshedAt: localSession.tokenRefreshedAt ?? new Date().toISOString(),
         user: {
           ...localSession.user,
@@ -171,6 +180,24 @@ export function useAuth() {
 
   const login = useCallback(
     async (payload: LoginPayload, options?: AuthSessionOptions) => {
+      // 1. Try real backend login first so the operator receives genuine server JWTs
+      try {
+        const result = await loginRequest(payload);
+        if (result.ok && result.data) {
+          applyAuthSession({
+            accessToken: result.data.access_token,
+            refreshToken: result.data.refresh_token,
+            expiresAt: expirationFromNow(result.data.expires_in),
+            refreshedAt: new Date().toISOString(),
+            user: mapBackendUserToAuthUser(result.data.user),
+            options,
+          });
+          return result;
+        }
+      } catch {
+        // Backend unavailable, fallback to local/demo user below
+      }
+
       const demoCredential = findDemoCredential(payload.email);
       if (
         demoCredential &&
@@ -231,23 +258,6 @@ export function useAuth() {
             user: demoUser,
           },
         };
-      }
-
-      try {
-        const result = await loginRequest(payload);
-        if (result.ok && result.data) {
-          applyAuthSession({
-            accessToken: result.data.access_token,
-            refreshToken: result.data.refresh_token,
-            expiresAt: expirationFromNow(result.data.expires_in),
-            refreshedAt: new Date().toISOString(),
-            user: mapBackendUserToAuthUser(result.data.user),
-            options,
-          });
-          return result;
-        }
-      } catch {
-        // Backend unavailable, fallback to demo user
       }
 
       const fallbackCred = DEMO_AUTH_CREDENTIALS[0]!;

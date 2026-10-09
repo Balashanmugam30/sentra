@@ -105,9 +105,13 @@ export const useAuthStore = create<AuthState>()(
           rememberDevice: resolvedRememberDevice,
           lastActivityAt: now,
           sessionWarningAt: getSessionWarningAt(now, resolvedRememberDevice),
-          sessionExpiresAt: accessTokenExpiresAt
-            ? new Date(accessTokenExpiresAt).getTime()
-            : now + SESSION_DEVICE_MAX_AGE_SECONDS * 1000,
+          sessionExpiresAt: (() => {
+            const parsed = accessTokenExpiresAt ? new Date(accessTokenExpiresAt).getTime() : NaN;
+            if (!Number.isNaN(parsed) && parsed > now + 60_000) {
+              return parsed;
+            }
+            return now + (resolvedRememberDevice ? SESSION_DEVICE_MAX_AGE_SECONDS * 1000 : 24 * 60 * 60 * 1000);
+          })(),
           timeoutWarningDismissedAt: null,
           authStatus: "authenticated",
           isAuthenticated: true,
@@ -133,9 +137,13 @@ export const useAuthStore = create<AuthState>()(
           return {
             lastActivityAt: now,
             sessionWarningAt: getSessionWarningAt(now, state.rememberDevice),
-            sessionExpiresAt: state.accessTokenExpiresAt
-              ? new Date(state.accessTokenExpiresAt).getTime()
-              : getSessionExpiresAt(now, state.rememberDevice),
+            sessionExpiresAt: (() => {
+              const parsed = state.accessTokenExpiresAt ? new Date(state.accessTokenExpiresAt).getTime() : NaN;
+              if (!Number.isNaN(parsed) && parsed > now + 60_000) {
+                return parsed;
+              }
+              return getSessionExpiresAt(now, state.rememberDevice);
+            })(),
             timeoutWarningDismissedAt: null,
           };
         }),

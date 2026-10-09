@@ -16,6 +16,7 @@ export function SessionBanner() {
   const timeoutWarningDismissedAt = useAuthStore((state) => state.timeoutWarningDismissedAt);
   const dismissTimeoutWarning = useAuthStore((state) => state.dismissTimeoutWarning);
   const touchSession = useAuthStore((state) => state.touchSession);
+  const lastActivityAt = useAuthStore((state) => state.lastActivityAt);
   const [now, setNow] = useState(() => Date.now());
   const lastTouchRef = useRef(0);
 
@@ -50,12 +51,21 @@ export function SessionBanner() {
   }, [authStatus, touchSession]);
 
   useEffect(() => {
-    if (authStatus !== "authenticated" || !sessionExpiresAt || now < sessionExpiresAt) {
+    if (authStatus !== "authenticated" || !sessionExpiresAt) {
+      return;
+    }
+
+    // Grace period: do not expire session if created or touched within the last 60 seconds
+    if (lastActivityAt && now - lastActivityAt < 60_000) {
+      return;
+    }
+
+    if (now < sessionExpiresAt) {
       return;
     }
 
     void logout().then(() => router.replace("/login?reason=session-timeout"));
-  }, [authStatus, logout, now, router, sessionExpiresAt]);
+  }, [authStatus, lastActivityAt, logout, now, router, sessionExpiresAt]);
 
   const shouldShow = useMemo(() => {
     if (authStatus !== "authenticated" || !sessionWarningAt || !sessionExpiresAt) {

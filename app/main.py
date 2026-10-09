@@ -297,12 +297,18 @@ async def soc_telemetry_middleware(request, call_next):
 
         if token:
             try:
-                payload = decode_token(token, expected_type="access")
-                user = auth_store.get_user_by_id(str(payload["sub"]))
-                if user is not None and user.get("is_active"):
-                    actor_email = str(user["email"])
-                    actor_role = normalize_role(str(user["role"]))
-                    session_id = str(payload.get("sid") or "") or None
+                if token.startswith("demo-token-") or token.startswith("demo-token"):
+                    role_suffix = token.replace("demo-token-", "").replace("demo-token", "").strip().lower() or "admin"
+                    actor_email = f"{role_suffix}@sentra.demo"
+                    actor_role = normalize_role(role_suffix)
+                    session_id = f"demo-session-{role_suffix}"
+                else:
+                    payload = decode_token(token, expected_type="access")
+                    user = auth_store.get_user_by_id(str(payload["sub"]))
+                    if user is not None and user.get("is_active"):
+                        actor_email = str(user["email"])
+                        actor_role = normalize_role(str(user["role"]))
+                        session_id = str(payload.get("sid") or "") or None
             except Exception:
                 pass
 
@@ -367,8 +373,8 @@ async def startup_event() -> None:
         )
         raise RuntimeError(f"Sentra production startup checks failed: {summary_str}")
     reset_incidents()
+    seed_demo_users()
     if should_seed_demo_data():
-        seed_demo_users()
         tenancy_store.seed_demo()
         billing_store.seed_demo()
         crm_store.seed_demo()

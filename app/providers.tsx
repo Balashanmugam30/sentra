@@ -165,6 +165,10 @@ export function AppProviders({ children }: { children: React.ReactNode }) {
       }
 
       const localSession = getLocalAuthSession();
+      if (!localSession || localSession.accessToken?.startsWith("demo-token-")) {
+        return;
+      }
+
       const needsHeartbeat = Date.now() - lastHeartbeatAt >= 5 * 60_000;
       const expiringSoon = isAccessTokenExpiringSoon(localSession, 120_000);
 
@@ -172,16 +176,24 @@ export function AppProviders({ children }: { children: React.ReactNode }) {
         return;
       }
 
+      if (!localSession.refreshToken) {
+        return;
+      }
+
       const refreshed = await apiClient.ensureSession(true);
       if (!refreshed && !cancelled) {
-        apiClient.clearAuthAndRedirect();
+        const expiresAt = localSession.accessTokenExpiresAt
+          ? new Date(localSession.accessTokenExpiresAt).getTime()
+          : NaN;
+        if (!Number.isNaN(expiresAt) && Date.now() >= expiresAt) {
+          apiClient.clearAuthAndRedirect();
+        }
         return;
       }
 
       lastHeartbeatAt = Date.now();
     };
 
-    void heartbeat();
     const intervalId = window.setInterval(() => {
       void heartbeat();
     }, 60_000);

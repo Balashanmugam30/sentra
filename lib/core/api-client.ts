@@ -516,9 +516,13 @@ function willSessionExpireSoon() {
     return false;
   }
 
+  if (session.accessToken?.startsWith("demo-token-")) {
+    return false;
+  }
+
   const expiresAt = new Date(session.accessTokenExpiresAt).getTime();
   if (Number.isNaN(expiresAt)) {
-    return true;
+    return false;
   }
 
   return expiresAt - Date.now() <= SESSION_EXPIRY_SKEW_MS;
@@ -601,6 +605,10 @@ async function refreshAccessToken() {
       return false;
     }
 
+    if (session.accessToken?.startsWith("demo-token-") || session.refreshToken?.startsWith("demo-refresh-")) {
+      return true;
+    }
+
     try {
       const response = await performFetch(
         normalizePath("/auth/refresh"),
@@ -678,13 +686,44 @@ async function executeRequest<T>(
     const response = await performFetch(url, options);
 
     if (response.status === 401 && options.auth !== "none" && !options.skipRefresh && attempt === 0) {
+      const currentSession = getLocalAuthSession();
+      const isDemoToken = Boolean(
+        currentSession?.accessToken?.startsWith("demo-token-") ||
+        currentSession?.refreshToken?.startsWith("demo-refresh-"),
+      );
+
+      // Demo sessions should never be redirected to login on background 401s
+      if (isDemoToken) {
+        const durationMs = Math.round(performance.now() - startedAt);
+        trackRequestMetric({
+          at: Date.now(),
+          durationMs,
+          failed: true,
+        });
+        return {
+          success: false,
+          error: toApiError(401, "Protected data temporarily unavailable in demo mode.", "AUTH_UNAUTHORIZED", false),
+          meta: {
+            status: 401,
+            durationMs,
+            fromCache: false,
+          },
+        };
+      }
+
       const refreshed = await refreshAccessToken();
       if (refreshed) {
         return executeRequest<T>(path, options, attempt + 1);
       }
 
-      clearAuthState();
-      redirectToLogin();
+      // ONLY redirect to login if this request was an explicit auth verification route (/auth/me, /auth/refresh)
+      // Never wipe the session and redirect for background data polls (e.g. /geo/live, /soc/live, /operations/*)
+      const isAuthVerificationPath = path.startsWith("/auth/") && path !== "/auth/login";
+      if (isAuthVerificationPath) {
+        clearAuthState();
+        redirectToLogin();
+      }
+
       const durationMs = Math.round(performance.now() - startedAt);
       trackRequestMetric({
         at: Date.now(),
@@ -693,7 +732,7 @@ async function executeRequest<T>(
       });
       return {
         success: false,
-        error: toApiError(401, "Session expired. Please sign in again.", "AUTH_EXPIRED", false),
+        error: toApiError(401, "Session expired or unauthorized.", "AUTH_EXPIRED", false),
         meta: {
           status: 401,
           durationMs,
@@ -840,13 +879,22 @@ export const apiClient = {
       const response = await performFetch(normalizePath(path), options);
 
       if (response.status === 401 && options.auth !== "none" && !options.skipRefresh && attempt === 0) {
-        const refreshed = await refreshAccessToken();
-        if (refreshed) {
-          return this.fetchResponse(path, options, attempt + 1);
-        }
+        const currentSession = getLocalAuthSession();
+        const isDemoToken = Boolean(
+          currentSession?.accessToken?.startsWith("demo-token-") ||
+          currentSession?.refreshToken?.startsWith("demo-refresh-"),
+        );
+        if (!isDemoToken) {
+          const refreshed = await refreshAccessToken();
+          if (refreshed) {
+            return this.fetchResponse(path, options, attempt + 1);
+          }
 
-        clearAuthState();
-        redirectToLogin();
+          if (path.startsWith("/auth/") && path !== "/auth/login") {
+            clearAuthState();
+            redirectToLogin();
+          }
+        }
       }
 
       return response;
@@ -867,6 +915,10 @@ export const apiClient = {
   },
 
   clearAuthAndRedirect(message?: string) {
+    const session = getLocalAuthSession();
+    if (session?.accessToken?.startsWith("demo-token-")) {
+      return;
+    }
     clearAuthState();
     redirectToLogin(message);
   },

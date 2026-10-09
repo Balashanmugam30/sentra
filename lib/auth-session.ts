@@ -151,13 +151,21 @@ export function clearLocalAuthSession() {
 }
 
 export function isAccessTokenExpiringSoon(session: LocalAuthSession | null, withinMs = 90_000) {
-  if (!session?.accessTokenExpiresAt) {
+  if (!session?.accessToken) {
     return true;
+  }
+
+  if (session.accessToken.startsWith("demo-token-")) {
+    return false;
+  }
+
+  if (!session.accessTokenExpiresAt) {
+    return false;
   }
 
   const expiresAt = new Date(session.accessTokenExpiresAt).getTime();
   if (Number.isNaN(expiresAt)) {
-    return true;
+    return false;
   }
 
   return expiresAt - Date.now() <= withinMs;
