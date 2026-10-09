@@ -106,17 +106,9 @@ def _make_step(definition: dict[str, object]) -> OperationStepRecord:
 
 def _workflow_to_dict(workflow: OperationWorkflowRecord) -> dict[str, object]:
     completed_steps = sum(1 for step in workflow.steps if step.status == "completed")
-    progress_percent = (
-        100
-        if not workflow.steps
-        else round((completed_steps / len(workflow.steps)) * 100)
-    )
+    progress_percent = 100 if not workflow.steps else round((completed_steps / len(workflow.steps)) * 100)
     current_step = next(
-        (
-            step.title
-            for step in workflow.steps
-            if step.status not in TERMINAL_STATUSES and step.status != "completed"
-        ),
+        (step.title for step in workflow.steps if step.status not in TERMINAL_STATUSES and step.status != "completed"),
         None,
     )
 
@@ -466,9 +458,7 @@ def get_live_operations_snapshot(incidents: list[Incident]) -> dict[str, object]
     failed_today = sum(
         1
         for workflow in _workflow_store
-        if workflow.status == "failed"
-        and workflow.completed_at is not None
-        and workflow.completed_at.date() == today
+        if workflow.status == "failed" and workflow.completed_at is not None and workflow.completed_at.date() == today
     )
 
     return {
@@ -637,7 +627,9 @@ def resume_workflow(workflow_id: str, incidents: list[Incident], *, actor: str =
         raise ValueError(f"Workflow '{workflow_id}' not found")
 
     approval_step = _approval_step_for(workflow)
-    workflow.status = "awaiting_approval" if approval_step is not None and approval_step.approved_at is None else "running"
+    workflow.status = (
+        "awaiting_approval" if approval_step is not None and approval_step.approved_at is None else "running"
+    )
     emit_operation_event(
         "workflow.resumed",
         {

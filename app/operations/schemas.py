@@ -99,3 +99,45 @@ class CancelRequest(BaseModel):
 class CancelResponse(BaseModel):
     status: Literal["cancelled"]
     workflow: OperationWorkflow
+
+
+# Phase 6 Schemas
+
+
+class SetAutonomyModeRequest(BaseModel):
+    mode: str
+    reason: str = Field(..., min_length=3)
+
+
+class KillSwitchRequest(BaseModel):
+    engaged: bool
+    reason: str = Field(..., min_length=3)
+
+
+class OrchestrateIncidentRequest(BaseModel):
+    simulated: bool = False
+
+
+class ApproveProposalRequest(BaseModel):
+    notes: str | None = None
+
+
+class RejectProposalRequest(BaseModel):
+    rejection_reason: str = Field(..., min_length=3)
+
+
+class ExecuteProposalRequest(BaseModel):
+    idempotency_key: str = Field(..., min_length=5)
+    simulate_timeout: bool = False
+    is_simulation: bool = False
+
+
+class RunSimulationRequest(BaseModel):
+    scenario_id: str | None = None
+    name: str | None = None
+    incident_id: str = "INC-DEFAULT"
+    ambient_temp_delta: float = 0.0
+    spread_rate_mult: float = 1.0
+    sensor_outage_zones: list[str] = Field(default_factory=list)
+    blocked_routes: list[str] = Field(default_factory=list)
+    dispatch_delay_seconds: int = 0

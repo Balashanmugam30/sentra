@@ -3,7 +3,20 @@
 // Hosted Render MCP Endpoint: https://mcp.render.com/mcp
 // Authentication contract: Authorization: Bearer <RENDER_API_KEY>
 
-const apiKey = process.env.RENDER_API_KEY?.trim();
+let apiKey = process.env.RENDER_API_KEY?.trim();
+
+if (!apiKey && process.platform === 'win32') {
+  try {
+    const { execSync } = require('child_process');
+    const out = execSync(
+      'powershell.exe -NoProfile -Command "[System.Environment]::GetEnvironmentVariable(\'RENDER_API_KEY\', \'User\')"',
+      { encoding: 'utf-8', stdio: ['pipe', 'pipe', 'ignore'] }
+    );
+    if (out && out.trim()) {
+      apiKey = out.trim();
+    }
+  } catch (_) {}
+}
 
 if (!apiKey) {
   console.error(

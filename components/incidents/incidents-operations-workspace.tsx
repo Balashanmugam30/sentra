@@ -22,6 +22,7 @@ import type { LiveIncident, LiveIncidentStatus } from "@/lib/engines/incident-in
 import { IncidentIntelligenceDashboard } from "@/components/analytics/premium-charts";
 import { IncidentIntelligencePanel } from "@/components/intelligence/incident-intelligence-panel";
 import { PredictionCockpitPanel } from "@/components/predictions/prediction-cockpit-panel";
+import { OperationsCommandCenter } from "@/components/operations/operations-command-center";
 
 function severityToStatus(severity: number): StatusType {
   if (severity >= 5) return "critical";
@@ -508,6 +509,9 @@ export function IncidentsOperationsWorkspace() {
                 <PredictionCockpitPanel
                   initialIncidentId={selectedIncident.id}
                 />
+
+                {/* Autonomous Crisis Operations & Safety-Governed Action Orchestration (Phase 6) */}
+                <OperationsCommandCenter />
 
                 {/* Continuous Chronological Timeline */}
                 <GlassPanel tier="subtle" className="flex flex-col gap-4 p-6">
