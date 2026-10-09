@@ -2,15 +2,17 @@
 
 <div align="center">
 
-[![Sentra OS](https://img.shields.io/badge/SENTRA-v2.4.0%20Production-0ea5e9?style=for-the-badge&logo=shield&logoColor=white)](https://sentra-01.vercel.app/)
+[![Sentra OS](https://img.shields.io/badge/SENTRA-v2.5.0%20Production-0ea5e9?style=for-the-badge&logo=shield&logoColor=white)](https://sentra-01.vercel.app/)
+[![Release Tier](https://img.shields.io/badge/Release-PILOT__READY%20(Tier%20B)-10b981?style=for-the-badge&logo=checkmarx&logoColor=white)](docs/PRODUCTION_READINESS_MATRIX.md)
 [![Next.js 16](https://img.shields.io/badge/Next.js-16%20Turbopack-black?style=for-the-badge&logo=next.js&logoColor=white)](https://nextjs.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.115-009688?style=for-the-badge&logo=fastapi&logoColor=white)](https://sentra-li7c.onrender.com/docs)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178c6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-CSS%20v4-38bdf8?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
 [![License](https://img.shields.io/badge/License-Proprietary-red?style=for-the-badge)](LICENSE)
 
 ### 🛰️ The Autonomous Neural Backbone for Mission-Critical Facilities & Emergency Operations
 
-**[🖥️ Launch Desktop Command Center](https://sentra-01.vercel.app/app)** &nbsp;•&nbsp; **[📱 Open Integrated Field Mobile](https://sentra-01.vercel.app/mobile)** &nbsp;•&nbsp; **[🌐 Public Showcase](https://sentra-01.vercel.app/)**
+**[🖥️ Launch Desktop Command Center](https://sentra-01.vercel.app/app)** &nbsp;•&nbsp; **[📱 Open Integrated Field Mobile](https://sentra-01.vercel.app/mobile)** &nbsp;•&nbsp; **[⚡ Backend API Docs](https://sentra-li7c.onrender.com/docs)** &nbsp;•&nbsp; **[🌐 Public Showcase](https://sentra-01.vercel.app/)**
 
 </div>
 
@@ -206,20 +208,36 @@ sentra/
 
 ---
 
-## 🚀 Deployment
+## 🚀 Deployment & Canonical Infrastructure
 
-| Target | Deployment URL | Description |
-| :--- | :--- | :--- |
-| **Primary Production Command OS** | [sentra-01.vercel.app](https://sentra-01.vercel.app/) | Production Vercel deployment with full command center (`/app`) and unified field mobile (`/mobile`) |
-| **Legacy Standalone Deployment** | [sentra-xi.vercel.app](https://sentra-xi.vercel.app/) | Legacy standalone mobile deployment (consolidated into primary) |
+| Target | Deployment URL | Description | Status |
+| :--- | :--- | :--- | :---: |
+| **Primary Production Command OS** | [sentra-01.vercel.app](https://sentra-01.vercel.app/) | Production Vercel deployment with full command center (`/app`) and unified field mobile (`/mobile`) | ✅ Live (Vercel Edge) |
+| **Canonical Operations Backend** | [sentra-li7c.onrender.com](https://sentra-li7c.onrender.com/) | FastAPI crisis orchestration core, SQLite WAL persistence, multimodal inference | ✅ Live (Render Oregon) |
+| **Backend API Documentation** | [sentra-li7c.onrender.com/docs](https://sentra-li7c.onrender.com/docs) | Interactive Swagger UI API documentation and endpoint schema contracts | ✅ Live |
+
+---
+
+## 📚 Phase 9 Release Documentation & Specifications
+
+- [🗺️ Canonical 9-Phase Roadmap](docs/ROADMAP.md) — Comprehensive history and completion matrix across all 9 phases.
+- [🚦 Production Readiness Matrix](docs/PRODUCTION_READINESS_MATRIX.md) — Gate-by-gate audit and `PILOT_READY` (Tier B) certification.
+- [📖 Operator Release Runbook](docs/RELEASE_RUNBOOK.md) — Local execution, automated test suites, and diagnostic probes.
+- [🔄 Rollback & Disaster Recovery](docs/ROLLBACK_AND_RECOVERY.md) — Vercel/Render rollback protocols and SQLite snapshot restore.
+- [⚠️ Known Limitations & Boundaries](docs/KNOWN_LIMITATIONS.md) — Transparent disclosure of ephemeral disk, hardware honesty, and cloud sleep limits.
+- [📊 Final Verification Matrix](docs/FINAL_VERIFICATION_MATRIX.md) — Forensic quality audit, 69/69 passing tests, and sub-10ms latency metrics.
+- [🛡️ Security Threat Model & Review](docs/SECURITY_REVIEW.md) — 10-point security audit across RBAC, BOLA, SSRF, and credential hygiene.
+- [🧠 AI & Data Truth Disclosures](docs/AI_AND_DATA_TRUTH.md) — Multimodal perception, Topological Evidence DAG, and uncertainty intervals.
+- [💡 Product Positioning & Architecture](docs/PRODUCT_POSITIONING.md) — Market analysis, competitive comparison vs legacy CAD, and moat definitions.
 
 ---
 
 ## 🛡️ Security, Privacy & Compliance
 
-- **End-to-End Session Guard**: Automatic inactive device lockouts, secure refresh tokens, and multi-tenant domain isolation.
-- **Zero-Trust Role Enforcement**: Granular cryptographic permission checks on every route, action, and telemetry pipe.
-- **Audit-Grade Traceability**: Tamper-evident activity logs adhering to SOC2 Type II, ISO 27001, and NIST emergency management standards.
+- **Zero-Trust Role Enforcement**: Granular cryptographic permission checks (`require_permission`) on every route, action, and telemetry pipe.
+- **Two-Person Integrity (TPI)**: Mandatory independent second-operator authorization for high-stakes tactical dispatches.
+- **Fail-Closed Hardware Honesty**: Unconfigured physical actuators honestly declare `UNCONFIGURED` with zero simulated side-effects.
+- **Audit-Grade Traceability**: Tamper-evident activity logs protected by unbroken forward SHA-256 Merkle chain hashes adhering to SOC2, ISO 27001, and NFPA standards.
 
 ---
 

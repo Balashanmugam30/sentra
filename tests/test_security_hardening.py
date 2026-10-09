@@ -9,6 +9,7 @@ from __future__ import annotations
 from datetime import datetime, timedelta, timezone
 import hashlib
 import json
+from pathlib import Path
 import sqlite3
 import pytest
 from starlette.testclient import TestClient
@@ -643,3 +644,25 @@ def test_automated_backup_and_restore_rehearsal(tmp_path):
     assert rehearsal["rehearsal_passed"] is True
     assert rehearsal["timeline_chain_valid"] is True
     assert rehearsal["rehearsal_status"] == "RESTORE_VERIFIED"
+
+
+def test_corrupted_backup_handling_fails_safely(tmp_path):
+    """Corrupted backup file fails checksum and restore rehearsal safely without affecting live database."""
+    meta = backup_manager.create_backup(target_directory=str(tmp_path))
+    assert meta.status == "SUCCESS"
+
+    # Deliberately corrupt backup file
+    backup_file = Path(meta.backup_file_path)
+    with open(backup_file, "r+b") as f:
+        f.seek(100)
+        f.write(b"CORRUPTED_ZERO_BYTE_OVERWRITE_0000000000000000")
+
+    # Checksum mismatch detected
+    valid, details = backup_manager.verify_backup(str(backup_file), expected_sha256=meta.sha256_checksum)
+    assert valid is False
+    assert details.get("error") in ("Checksum mismatch", "SQLite integrity check failed")
+
+    # Restore rehearsal safely flags failure
+    rehearsal = backup_manager.rehearse_restore(str(backup_file))
+    assert rehearsal["rehearsal_passed"] is False
+    assert rehearsal["step_failed"] == "verify_backup"

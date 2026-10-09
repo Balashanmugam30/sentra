@@ -152,18 +152,24 @@ class OperationsBackupManager:
                 "expected_sha256": expected_sha256,
             }
 
-        conn = sqlite3.connect(str(path))
         try:
-            cursor = conn.cursor()
-            cursor.execute("PRAGMA integrity_check")
-            integrity_rows = cursor.fetchall()
-            if not integrity_rows or integrity_rows[0][0] != "ok":
-                return False, {
-                    "error": "SQLite integrity check failed",
-                    "details": [r[0] for r in integrity_rows],
-                }
-        finally:
-            conn.close()
+            conn = sqlite3.connect(str(path))
+            try:
+                cursor = conn.cursor()
+                cursor.execute("PRAGMA integrity_check")
+                integrity_rows = cursor.fetchall()
+                if not integrity_rows or integrity_rows[0][0] != "ok":
+                    return False, {
+                        "error": "SQLite integrity check failed",
+                        "details": [r[0] for r in integrity_rows],
+                    }
+            finally:
+                conn.close()
+        except (sqlite3.DatabaseError, sqlite3.OperationalError) as err:
+            return False, {
+                "error": "SQLite integrity check failed",
+                "details": str(err),
+            }
 
         return True, {
             "status": "VALID",

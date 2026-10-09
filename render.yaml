@@ -25,4 +25,4 @@ services:
       - key: ALLOWED_ORIGINS
         value: "https://sentra-01.vercel.app,http://localhost:3000,http://127.0.0.1:3000"
       - key: SENTRA_ENABLE_DEMO_SEED
-        value: "true"
+        value: "false"
