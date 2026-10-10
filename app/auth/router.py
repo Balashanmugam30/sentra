@@ -178,7 +178,9 @@ def _issue_session(user: dict[str, object], response: Response) -> AuthResponse:
 
 @router.post("/bootstrap-admin", response_model=BootstrapAdminResponse)
 def bootstrap_admin(request: Request, payload: BootstrapAdminRequest) -> BootstrapAdminResponse:
-    if auth_store.has_users():
+    if auth_store.get_user_by_email(payload.email) is not None:
+        raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="Admin bootstrap already completed")
+    if any(str(u.get("role")) == "super_admin" for u in auth_store.list_users()):
         raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="Admin bootstrap already completed")
     user = auth_store.create_user(
         name=payload.name,
