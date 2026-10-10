@@ -264,6 +264,7 @@ def firebase_login(payload: FirebaseLoginRequest, request: Request, response: Re
         user = synced["local_user"]
     except Exception:
         import jwt as pyjwt
+
         claims = pyjwt.decode(payload.id_token, options={"verify_signature": False})
         email = str(claims.get("email") or f"{claims.get('sub')}@firebase.sentra.local").strip().lower()
         name = str(claims.get("name") or email.split("@")[0] or "Sentra Operator")
@@ -345,7 +346,11 @@ def refresh_session(
     if refresh_token.startswith("demo-refresh-") or refresh_token.startswith("demo-"):
         role_suffix = refresh_token.replace("demo-refresh-", "").replace("demo-", "").strip().lower() or "admin"
         demo_match = next(
-            (d for d in DEMO_USERS if normalize_role(d["role"]) == normalize_role(role_suffix) or d["role"] == role_suffix),
+            (
+                d
+                for d in DEMO_USERS
+                if normalize_role(d["role"]) == normalize_role(role_suffix) or d["role"] == role_suffix
+            ),
             DEMO_USERS[0],
         )
         user = auth_store.get_user_by_email(demo_match["email"])

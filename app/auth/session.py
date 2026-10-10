@@ -90,6 +90,7 @@ def _resolve_demo_context(token: str) -> AuthContext | None:
 def _resolve_firebase_fallback_context(token: str) -> AuthContext | None:
     try:
         import jwt as pyjwt
+
         claims = pyjwt.decode(token, options={"verify_signature": False})
         iss = str(claims.get("iss") or "")
         if "securetoken.google.com" in iss or "firebase" in iss:
@@ -135,7 +136,11 @@ def get_current_auth_context(
     credentials: HTTPAuthorizationCredentials | None = Depends(bearer_scheme),
 ) -> AuthContext:
     access_cookie_name = request.app.state.settings.auth_access_cookie_name
-    token = credentials.credentials if credentials and credentials.scheme.lower() == "bearer" else request.cookies.get(access_cookie_name)
+    token = (
+        credentials.credentials
+        if credentials and credentials.scheme.lower() == "bearer"
+        else request.cookies.get(access_cookie_name)
+    )
     if not token:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Authentication required")
 
