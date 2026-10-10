@@ -11,11 +11,18 @@ from starlette.testclient import TestClient
 
 from app.auth.store import auth_store
 from app.main import app
+from app.rbac.store import seed_demo_users
+
+
+@pytest.fixture(autouse=True)
+def ensure_demo_users() -> None:
+    seed_demo_users()
 
 
 @pytest.fixture
 def client() -> TestClient:
-    return TestClient(app)
+    with TestClient(app) as test_client:
+        yield test_client
 
 
 def test_demo_user_login_seeded(client: TestClient) -> None:
