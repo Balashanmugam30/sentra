@@ -192,11 +192,15 @@ export function useAuth() {
           });
           return result;
         }
+        const rawDetail = result.error?.detail;
+        const detail = rawDetail?.includes("temporarily syncing")
+          ? "Authentication server was temporarily starting up. Please try again in a few moments."
+          : rawDetail ?? "Invalid email or password";
         return {
           ok: false as const,
-          error: result.error ?? {
-            detail: "Invalid email or password",
-            status: 401,
+          error: {
+            detail,
+            status: result.error?.status ?? 401,
           },
         };
       } catch {
@@ -229,11 +233,15 @@ export function useAuth() {
           });
           return result;
         }
+        const rawDetail = result.error?.detail;
+        const detail = rawDetail?.includes("temporarily syncing")
+          ? "Authentication server was temporarily starting up. Please try again in a few moments."
+          : rawDetail ?? "Firebase authentication was rejected by the server.";
         return {
           ok: false as const,
-          error: result.error ?? {
-            detail: "Firebase authentication was rejected by the server.",
-            status: 401,
+          error: {
+            detail,
+            status: result.error?.status ?? 401,
           },
         };
       } catch {

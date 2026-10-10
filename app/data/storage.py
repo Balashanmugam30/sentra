@@ -89,7 +89,16 @@ class DataPlaneStorage:
         }
         serialized = json.dumps(payload, indent=2, default=str)
         temp_path.write_text(serialized, encoding="utf-8")
-        temp_path.replace(self.store_path)
+        try:
+            temp_path.replace(self.store_path)
+        except OSError:
+            # Windows/OneDrive file-locking fallback
+            self.store_path.write_text(serialized, encoding="utf-8")
+            if temp_path.exists():
+                try:
+                    temp_path.unlink()
+                except OSError:
+                    pass
 
     # -----------------------------------------------------------------------
     # Idempotency & Deduplication

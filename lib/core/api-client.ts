@@ -127,7 +127,7 @@ function resolveApiBaseUrl() {
 }
 
 const API_BASE_URL = resolveApiBaseUrl();
-const DEFAULT_TIMEOUT_MS = 12_000;
+const DEFAULT_TIMEOUT_MS = 30_000;
 const NETWORK_RETRY_DELAY_MS = 1_000;
 const SESSION_EXPIRY_SKEW_MS = 90_000;
 const TRANSIENT_STATUSES = new Set([408, 425, 429, 500, 502, 503, 504]);
@@ -136,7 +136,7 @@ const MAX_SAFE_GET_RETRIES = GET_RETRY_BACKOFF_MS.length;
 const CIRCUIT_FAILURE_THRESHOLD = 4;
 const CIRCUIT_COOLDOWN_MS = 30_000;
 const SLOW_ENDPOINT_THRESHOLD_MS = 2_000;
-const LIVE_DELAYED_MESSAGE = "Live data temporarily syncing. Showing verified state.";
+export const LIVE_DELAYED_MESSAGE = "Live data temporarily syncing. Showing verified state.";
 
 const performanceListeners = new Set<() => void>();
 const requestMetrics: RequestMetric[] = [];
@@ -386,17 +386,20 @@ function getDefaultPriority(path: string): RequestPriority {
 }
 
 function getDefaultTimeoutMs(path: string, priority: RequestPriority) {
+  if (path.includes("/auth/")) {
+    return 45_000;
+  }
   if (priority === "critical") {
-    return 6_000;
+    return 20_000;
   }
   if (priority === "high") {
-    return 8_000;
+    return 20_000;
   }
   if (priority === "low" || path.includes("/history") || path.includes("/analytics")) {
-    return 15_000;
+    return 30_000;
   }
   if (priority === "background") {
-    return 18_000;
+    return 35_000;
   }
   return DEFAULT_TIMEOUT_MS;
 }
@@ -559,6 +562,7 @@ async function performFetch(
     headers.set("Authorization", `Bearer ${session.accessToken}`);
   }
 
+  const timeoutMs = options.timeoutMs ?? (url.includes("/auth/") ? 45_000 : DEFAULT_TIMEOUT_MS);
   const controller = new AbortController();
   const timeout = window.setTimeout(() => {
     controller.abort(
@@ -566,7 +570,7 @@ async function performFetch(
         ? undefined
         : new DOMException("SENTRA_REQUEST_TIMEOUT", "AbortError"),
     );
-  }, options.timeoutMs ?? DEFAULT_TIMEOUT_MS);
+  }, timeoutMs);
 
   activeRequests += 1;
   notifyPerformanceListeners();
@@ -666,6 +670,13 @@ async function executeRequest<T>(
   const startedAt = performance.now();
   const url = normalizePath(path);
   const method = options.method ?? "GET";
+  const priority = options.priority ?? getDefaultPriority(path);
+  const timeoutMs = options.timeoutMs ?? getDefaultTimeoutMs(path, priority);
+  const effectiveOptions: RequestOptions = {
+    ...options,
+    priority,
+    timeoutMs,
+  };
   const circuitKey = createCircuitKey(path, method);
   const circuit = getCircuit(circuitKey);
 
@@ -693,7 +704,7 @@ async function executeRequest<T>(
   }
 
   try {
-    const response = await performFetch(url, options);
+    const response = await performFetch(url, effectiveOptions);
 
     if (response.status === 401 && options.auth !== "none" && !options.skipRefresh && attempt === 0) {
       const refreshed = await refreshAccessToken();
@@ -743,7 +754,8 @@ async function executeRequest<T>(
       }
 
       const recoverableGetFailure = canRetryRequest(path, options, response.status);
-      const clientMessage = recoverableGetFailure ? LIVE_DELAYED_MESSAGE : message;
+      const clientMessage =
+        recoverableGetFailure && !path.includes("/auth/") ? LIVE_DELAYED_MESSAGE : message;
       recordCircuitFailure(circuitKey, message);
       trackSlowEndpoint(circuitKey, durationMs);
       trackRequestMetric({
@@ -793,8 +805,14 @@ async function executeRequest<T>(
       durationMs,
       failed: true,
     });
+    const isTelemetryGet =
+      (options.method ?? "GET") === "GET" && !path.includes("/auth/") && canRetryRequest(path, options);
     const message = aborted
-      ? LIVE_DELAYED_MESSAGE
+      ? path.includes("/auth/")
+        ? "Authentication server timed out. The service may be starting up; please try again in a few moments."
+        : isTelemetryGet
+        ? LIVE_DELAYED_MESSAGE
+        : "Request timed out. Please try again."
       : error instanceof Error
       ? error.message
       : "Unable to reach the backend service.";
@@ -839,7 +857,9 @@ export const apiClient = {
       });
     }
 
-    const envelope = await executeRequest<T>(path, options);
+    const priority = options.priority ?? getDefaultPriority(path);
+    const timeoutMs = options.timeoutMs ?? getDefaultTimeoutMs(path, priority);
+    const envelope = await executeRequest<T>(path, { ...options, priority, timeoutMs });
     if (envelope.success) {
       invalidateDataCache();
     }
@@ -849,7 +869,7 @@ export const apiClient = {
   async requestData<T>(path: string, options: RequestOptions = {}) {
     const envelope = await this.request<T>(path, options);
     if (!envelope.success) {
-      if ((options.method ?? "GET") === "GET" && envelope.error.retryable) {
+      if ((options.method ?? "GET") === "GET" && envelope.error.retryable && !path.includes("/auth/")) {
         return {
           stale: true,
           message: LIVE_DELAYED_MESSAGE,

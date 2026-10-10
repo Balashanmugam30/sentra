@@ -261,7 +261,11 @@ export function LoginForm() {
   const exchangeFirebaseToken = async (idToken: string) => {
     const session = await loginWithFirebaseToken(idToken, { rememberDevice });
     if (!session.ok) {
-      setError(session.error?.detail ?? "Firebase login succeeded, but Sentra session creation failed.");
+      const errorMessage =
+        session.error?.detail?.includes("temporarily syncing")
+          ? "Authentication server was temporarily starting up. Please click continue again to enter."
+          : session.error?.detail ?? "Firebase login succeeded, but Sentra session creation failed.";
+      setError(errorMessage);
       return false;
     }
 
@@ -277,7 +281,11 @@ export function LoginForm() {
     setIsSubmitting(false);
 
     if (!result.ok) {
-      setError(result.error?.detail ?? "Unable to sign in.");
+      const errorMessage =
+        result.error?.detail?.includes("temporarily syncing")
+          ? "Authentication server was temporarily starting up. Please click continue again to enter."
+          : result.error?.detail ?? "Unable to sign in.";
+      setError(errorMessage);
       return;
     }
 

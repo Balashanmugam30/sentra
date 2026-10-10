@@ -12,7 +12,7 @@ import type {
   RefreshPayload,
 } from "@/lib/auth/types";
 import { getLocalAuthSession } from "@/lib/auth-session";
-import { apiClient } from "@/lib/core/api-client";
+import { apiClient, LIVE_DELAYED_MESSAGE } from "@/lib/core/api-client";
 
 async function authRequest<T>(
   path: string,
@@ -21,6 +21,7 @@ async function authRequest<T>(
     body?: unknown;
     skipRefresh?: boolean;
     auth?: "auto" | "none";
+    timeoutMs?: number;
   } = {},
 ): Promise<ApiResult<T>> {
   const envelope = await apiClient.request<T>(`/auth${path}`, {
@@ -28,11 +29,18 @@ async function authRequest<T>(
     body: init.body,
     auth: init.auth ?? "auto",
     skipRefresh: init.skipRefresh ?? false,
+    timeoutMs: init.timeoutMs ?? 45_000,
   });
 
   if (envelope.success) {
     return { ok: true, data: envelope.data };
   }
+
+  const rawDetail = envelope.error.message;
+  const detail =
+    rawDetail === LIVE_DELAYED_MESSAGE || rawDetail?.includes("temporarily syncing")
+      ? "Authentication server is initializing. Please try again in a few moments."
+      : rawDetail;
 
   return {
     ok: false,
@@ -41,7 +49,7 @@ async function authRequest<T>(
       title: "Authentication request failed",
       status: envelope.error.status,
       code: envelope.error.code,
-      detail: envelope.error.message,
+      detail,
     },
   };
 }
