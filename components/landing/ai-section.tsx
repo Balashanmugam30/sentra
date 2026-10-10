@@ -1,72 +1,104 @@
 "use client";
 
 import { motion } from "framer-motion";
+
+import { InteractiveCard } from "@/components/landing/interactive-card";
 import { fadeUp, revealTransition, revealViewport, staggerContainer } from "@/components/landing/motion";
 import { SectionWrapper } from "@/components/landing/section-wrapper";
 
 export function AISection() {
   return (
-    <SectionWrapper className="bg-slate-50/50 py-24 border-t border-slate-200/60" id="ai-engine">
+    <SectionWrapper className="bg-gradient-to-b from-transparent via-black/60 to-black" id="ai-engine">
       <motion.div
-        className="grid items-center gap-12 lg:grid-cols-2"
+        className="grid items-center gap-16 md:grid-cols-2"
         initial="hidden"
         transition={revealTransition}
         variants={staggerContainer}
         viewport={revealViewport}
         whileInView="show"
       >
-        <motion.div variants={fadeUp} className="order-2 lg:order-1">
-          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-[0_8px_30px_rgb(0,0,0,0.06)]">
-            <div className="flex items-center justify-between border-b border-slate-100 pb-4 mb-5">
-              <div>
-                <span className="text-[0.65rem] font-semibold uppercase tracking-wider text-slate-600">AI Council Advisory</span>
-                <h4 className="font-display text-lg font-bold text-slate-900">Explainable Decision Log</h4>
+        <motion.div
+          className="order-2 md:order-1"
+          variants={fadeUp}
+        >
+          <InteractiveCard className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl transition-all duration-300 hover:bg-white/10">
+            <div className="space-y-5">
+              <div className="space-y-2">
+                <p className="text-sm uppercase tracking-[0.18em] text-white/45">AI Model Surface</p>
+              <p className="text-xl font-medium text-white">Explainable recommendations under pressure</p>
               </div>
-              <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200">
-                Confidence 94.2%
-              </span>
-            </div>
 
-            <div className="space-y-4">
-              {[
-                { label: "Hazard Spread Model", score: "94%", detail: "Chemical plume dispersion bounded to Zone C corridor" },
-                { label: "Evacuation Path Clearance", score: "88%", detail: "Alternative stairwell Route-2 validated unobstructed" },
-                { label: "Resource Allocation Feasibility", score: "97%", detail: "3 Hazmat crews dispatched within 4-minute radius" },
-              ].map((item, idx) => (
-                <div key={idx} className="p-3.5 rounded-xl border border-slate-100 bg-slate-50/60">
-                  <div className="flex items-center justify-between text-xs font-bold text-slate-800 mb-1.5">
-                    <span>{item.label}</span>
-                    <span className="text-blue-600">{item.score}</span>
+              <div className="rounded-[1.5rem] border border-white/10 bg-[linear-gradient(180deg,rgba(168,85,247,0.14),rgba(255,255,255,0.02))] p-5">
+                <div className="flex items-center justify-between">
+                  <div className="space-y-2">
+                    <div className="h-2 w-20 rounded-full bg-white/15" />
+                    <div className="h-2 w-32 rounded-full bg-white/10" />
                   </div>
-                  <div className="w-full bg-slate-200 h-2 rounded-full overflow-hidden mb-2">
-                    <div className="bg-blue-600 h-full rounded-full" style={{ width: item.score }} />
+                  <div className="rounded-full border border-white/10 bg-white/10 px-3 py-1 text-xs text-white/60">
+                    Active
                   </div>
-                  <p className="text-[0.75rem] text-slate-500 leading-snug">{item.detail}</p>
                 </div>
-              ))}
+
+                <div className="mt-6 space-y-4">
+                  {[
+                    { label: "Hazard spread confidence", width: "84%" },
+                    { label: "Occupancy routing confidence", width: "72%" },
+                    { label: "Alert dispatch readiness", width: "91%" },
+                  ].map((bar) => (
+                    <div className="space-y-2" key={bar.label}>
+                      <div className="flex items-center justify-between text-xs text-white/55">
+                        <span>{bar.label}</span>
+                        <span>{bar.width}</span>
+                      </div>
+                      <div className="h-2 rounded-full bg-white/10">
+                        <motion.div
+                          animate={{ opacity: [0.7, 1, 0.8] }}
+                          className="h-full rounded-full bg-[linear-gradient(90deg,rgba(168,85,247,0.9),rgba(34,211,238,0.55),rgba(59,130,246,0.35))]"
+                          style={{ width: bar.width }}
+                          transition={{ duration: 4.5, ease: "easeInOut", repeat: Number.POSITIVE_INFINITY }}
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="grid gap-3 sm:grid-cols-3">
+                {["Fuse", "Model", "Recommend"].map((item) => (
+                  <div className="rounded-2xl border border-white/10 bg-white/5 p-4" key={item}>
+                    <div className="h-2 w-12 rounded-full bg-white/15" />
+                    <p className="mt-4 text-sm text-white/70">{item}</p>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
+          </InteractiveCard>
         </motion.div>
 
-        <motion.div variants={fadeUp} className="order-1 lg:order-2 space-y-6">
-          <div className="inline-flex items-center gap-2 rounded-full border border-indigo-200 bg-indigo-50 px-3 py-1 text-xs font-semibold text-indigo-700">
-            Explainable AI
-          </div>
-          <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 leading-tight">
-            Evidence-backed recommendations under extreme pressure
-          </h2>
-          <p className="text-base sm:text-lg leading-relaxed text-slate-600">
-            Sentra AI does not make opaque decisions. Every ranking provides mathematical confidence, blast radius projections, source telemetry citations, and plain-language reasoning.
-          </p>
-          <div className="pt-2">
-            <a
-              href="/login"
-              className="inline-flex items-center gap-2 text-sm font-semibold text-blue-600 hover:text-blue-700"
-            >
-              <span>Explore AI Council audit trails</span>
-              <span>&rarr;</span>
-            </a>
-          </div>
+        <motion.div className="order-1 max-w-xl space-y-6 md:order-2" variants={staggerContainer}>
+          <motion.h2 className="text-4xl font-semibold leading-tight tracking-tight text-white md:text-5xl" variants={fadeUp}>
+            Product depth beyond a dashboard
+          </motion.h2>
+          <motion.p className="max-w-xl text-base leading-7 text-white/70" variants={fadeUp}>
+            Sentra interprets live inputs, models consequence, and turns operational complexity into decisions a responder, executive, or judge can understand quickly.
+          </motion.p>
+
+          <motion.div className="grid gap-4 sm:grid-cols-2" variants={staggerContainer}>
+            {[
+              "Live signal fusion",
+              "Predictive impact modeling",
+              "Adaptive route recommendations",
+              "Executive-ready summaries",
+            ].map((item) => (
+              <motion.div
+                className="rounded-2xl border border-white/10 bg-white/5 px-4 py-4 text-sm text-white/70 backdrop-blur-xl"
+                key={item}
+                variants={fadeUp}
+              >
+                {item}
+              </motion.div>
+            ))}
+          </motion.div>
         </motion.div>
       </motion.div>
     </SectionWrapper>

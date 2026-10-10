@@ -1,108 +1,128 @@
 "use client";
 
 import { motion } from "framer-motion";
+
+import { InteractiveCard } from "@/components/landing/interactive-card";
 import { fadeUp, revealTransition, revealViewport, staggerContainer } from "@/components/landing/motion";
 import { SectionWrapper } from "@/components/landing/section-wrapper";
 
 export function SystemPreviewSection() {
   return (
-    <SectionWrapper className="bg-white py-24 border-t border-slate-200/60" id="system">
+    <SectionWrapper className="bg-gradient-to-b from-transparent via-black/60 to-black" id="system">
       <motion.div
-        className="grid items-center gap-12 lg:grid-cols-2"
+        className="grid items-center gap-16 md:grid-cols-2"
         initial="hidden"
         transition={revealTransition}
         variants={staggerContainer}
         viewport={revealViewport}
         whileInView="show"
       >
-        <motion.div variants={fadeUp} className="space-y-6">
-          <div className="inline-flex items-center gap-2 rounded-full border border-teal-200 bg-teal-50 px-3 py-1 text-xs font-semibold text-teal-700">
-            Unified Interface
-          </div>
-          <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 leading-tight">
-            One single surface for command, trust, and execution
-          </h2>
-          <p className="text-base sm:text-lg leading-relaxed text-slate-600">
-            Sentra eliminates fragmented tool chains. Field telemetry, spatial geometry, autonomous AI recommendations, and executive timelines synchronize across every role simultaneously.
-          </p>
-
-          <div className="space-y-3.5 pt-2">
-            {[
-              { title: "Deterministic Crisis Scenarios", desc: "Chemical spill, flash flood, structural collapse, cyber-physical fault, and fire." },
-              { title: "Sub-Second State Synchronization", desc: "WebSocket backplane delivering real-time telemetry across all open nodes." },
-              { title: "Safe Actuator Safeguards", desc: "Simulations remain fully sandboxed; no genuine actuators or public alerts trigger without human confirmation." },
-            ].map((item, idx) => (
-              <div key={idx} className="flex items-start gap-3.5">
-                <div className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-blue-100 text-blue-600">
-                  <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M5 13l4 4L19 7" />
-                  </svg>
-                </div>
-                <div>
-                  <h4 className="text-sm font-semibold text-slate-900">{item.title}</h4>
-                  <p className="text-xs text-slate-500 mt-0.5">{item.desc}</p>
-                </div>
-              </div>
-            ))}
+        <motion.div variants={fadeUp}>
+          <div className="max-w-xl space-y-6">
+            <motion.h2 className="text-4xl font-semibold leading-tight tracking-tight text-white">
+              One product surface for command, trust, and action
+            </motion.h2>
+            <p className="max-w-xl text-base leading-7 text-white/70">
+              Sentra brings live monitoring, operational context, AI recommendations, and executive evidence into a single coordinated interface.
+            </p>
           </div>
         </motion.div>
 
-        {/* System Surface Mockup / Visual Card */}
-        <motion.div variants={fadeUp} className="relative">
-          <div className="rounded-2xl border border-slate-200 bg-slate-50/80 p-5 shadow-[0_8px_30px_rgb(0,0,0,0.06)] backdrop-blur-md">
-            {/* Header bar */}
-            <div className="flex items-center justify-between border-b border-slate-200 pb-3 mb-4">
-              <div className="flex items-center gap-2">
-                <div className="h-3 w-3 rounded-full bg-red-400" />
-                <div className="h-3 w-3 rounded-full bg-amber-400" />
-                <div className="h-3 w-3 rounded-full bg-emerald-400" />
-                <span className="ml-2 font-mono text-xs font-semibold text-slate-500">sentra-command://live-twin</span>
-              </div>
-              <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-xs font-medium bg-emerald-100 text-emerald-800 border border-emerald-200">
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-600 animate-pulse" />
-                Live Telemetry
-              </span>
-            </div>
-
-            {/* Simulated Operations Grid */}
-            <div className="space-y-3">
-              <div className="grid grid-cols-3 gap-3">
-                <div className="rounded-xl border border-slate-200 bg-white p-3 shadow-xs">
-                  <div className="text-[0.65rem] font-semibold uppercase tracking-wider text-slate-600">Active Incidents</div>
-                  <div className="mt-1 font-display text-xl font-bold text-slate-900">03</div>
-                  <div className="text-[0.65rem] text-blue-600 mt-0.5">All monitored</div>
-                </div>
-                <div className="rounded-xl border border-slate-200 bg-white p-3 shadow-xs">
-                  <div className="text-[0.65rem] font-semibold uppercase tracking-wider text-slate-600">Response Readiness</div>
-                  <div className="mt-1 font-display text-xl font-bold text-emerald-600">98.4%</div>
-                  <div className="text-[0.65rem] text-slate-600 mt-0.5">Optimal state</div>
-                </div>
-                <div className="rounded-xl border border-slate-200 bg-white p-3 shadow-xs">
-                  <div className="text-[0.65rem] font-semibold uppercase tracking-wider text-slate-600">Digital Twin Health</div>
-                  <div className="mt-1 font-display text-xl font-bold text-slate-900">100%</div>
-                  <div className="text-[0.65rem] text-slate-600 mt-0.5">8 Nodes online</div>
-                </div>
-              </div>
-
-              {/* Feed Card */}
-              <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-xs">
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-xs font-bold text-slate-800">Incident Feed • Sector Delta 4</span>
-                  <span className="font-mono text-[0.65rem] text-slate-600">14:02:18 UTC</span>
-                </div>
+        <motion.div
+          className="flex flex-col gap-6"
+          transition={{ staggerChildren: 0.15 }}
+          variants={staggerContainer}
+        >
+          <InteractiveCard className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl transition-all duration-300 hover:bg-white/10">
+            <motion.div
+              className="space-y-6"
+              transition={revealTransition}
+              variants={fadeUp}
+            >
+              <div className="flex items-center justify-between rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3">
                 <div className="space-y-2">
-                  <div className="flex items-center justify-between p-2 rounded-lg bg-amber-50/80 border border-amber-200 text-xs">
-                    <span className="font-semibold text-amber-900">Warning: Thermal Threshold 42°C</span>
-                    <span className="font-medium text-amber-700">Zone B West</span>
+                  <p className="text-sm uppercase tracking-[0.18em] text-white/45">Command Surface</p>
+                  <p className="text-xl font-medium text-white/90">Unified operational intelligence</p>
+                </div>
+                <div className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/70">
+                  Live
+                </div>
+              </div>
+
+              <div className="grid gap-4">
+                <div className="rounded-[1.5rem] border border-white/10 bg-[linear-gradient(135deg,rgba(168,85,247,0.22),rgba(34,211,238,0.1),rgba(255,255,255,0.02))] p-5">
+                  <div className="flex items-center justify-between gap-4">
+                    <div className="space-y-2">
+                      <div className="h-2 w-24 rounded-full bg-white/20" />
+                      <div className="h-2 w-44 rounded-full bg-white/10" />
+                    </div>
+                    <div className="flex gap-2">
+                      <div className="h-2 w-2 rounded-full bg-white/30" />
+                      <div className="h-2 w-2 rounded-full bg-white/20" />
+                      <div className="h-2 w-2 rounded-full bg-white/15" />
+                    </div>
                   </div>
-                  <div className="flex items-center justify-between p-2 rounded-lg bg-blue-50/80 border border-blue-200 text-xs">
-                    <span className="font-semibold text-blue-900">AI Dispatch: Auto-Route Unit R-04</span>
-                    <span className="font-medium text-blue-700">ETA 3.2m</span>
+
+                  <div className="mt-6 h-40 rounded-[1.4rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.02))] p-5">
+                    <div className="space-y-3">
+                      <div className="h-2 w-28 rounded-full bg-white/15" />
+                      <div className="h-2 w-3/4 rounded-full bg-white/10" />
+                    </div>
+                    <div className="mt-6 space-y-4">
+                      {["78%", "64%", "91%"].map((width, index) => (
+                        <div className="space-y-2" key={width}>
+                          <div className="h-2 rounded-full bg-white/10">
+                            <motion.div
+                              animate={{ opacity: [0.82, 1, 0.86] }}
+                              className="h-full rounded-full bg-[linear-gradient(90deg,rgba(168,85,247,0.9),rgba(34,211,238,0.55),rgba(59,130,246,0.36))]"
+                              style={{ width }}
+                              transition={{
+                                duration: 4 + index,
+                                ease: "easeInOut",
+                                repeat: Number.POSITIVE_INFINITY,
+                              }}
+                            />
+                          </div>
+                          <div className="h-2 w-1/3 rounded-full bg-white/8" />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="grid gap-4 md:grid-cols-3">
+                  <div className="rounded-[1.5rem] border border-white/10 bg-white/5 p-5">
+                    <div className="mb-4 h-2 w-20 rounded-full bg-white/15" />
+                    <div className="h-24 rounded-2xl bg-[linear-gradient(180deg,rgba(168,85,247,0.18),rgba(255,255,255,0.03))]" />
+                  </div>
+                  <div className="rounded-[1.5rem] border border-white/10 bg-white/5 p-5">
+                    <div className="mb-4 h-2 w-16 rounded-full bg-white/15" />
+                    <div className="grid gap-2">
+                      <div className="h-2 rounded-full bg-white/10" />
+                      <div className="h-2 w-4/5 rounded-full bg-white/10" />
+                      <div className="h-2 w-3/5 rounded-full bg-[linear-gradient(90deg,rgba(168,85,247,0.65),rgba(34,211,238,0.35))]" />
+                    </div>
+                    <div className="mt-5 flex gap-2">
+                      <div className="h-8 w-8 rounded-xl border border-white/10 bg-white/5" />
+                      <div className="h-8 w-8 rounded-xl border border-white/10 bg-white/5" />
+                      <div className="h-8 w-8 rounded-xl border border-white/10 bg-white/5" />
+                    </div>
+                  </div>
+                  <div className="rounded-[1.5rem] border border-white/10 bg-white/5 p-5">
+                    <div className="mb-4 flex items-center justify-between">
+                      <div className="h-2 w-16 rounded-full bg-white/15" />
+                      <div className="h-2 w-10 rounded-full bg-white/10" />
+                    </div>
+                    <div className="relative h-24 rounded-2xl border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.02))]">
+                      <div className="absolute left-[14%] top-[24%] h-10 w-14 rounded-2xl border border-white/10 bg-white/5" />
+                      <div className="absolute right-[14%] top-[28%] h-10 w-16 rounded-2xl border border-white/10 bg-white/5" />
+                      <div className="absolute bottom-[24%] left-[20%] h-2 w-[50%] rounded-full bg-[linear-gradient(90deg,rgba(168,85,247,0.82),rgba(34,211,238,0.56),rgba(59,130,246,0.36))]" />
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
+            </motion.div>
+          </InteractiveCard>
         </motion.div>
       </motion.div>
     </SectionWrapper>

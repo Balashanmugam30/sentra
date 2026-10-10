@@ -1,63 +1,56 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Link from "next/link";
+
+import { AuroraBackground } from "@/components/landing/aurora-background";
+import { MagneticButton } from "@/components/landing/magnetic-button";
 import { fadeUp, revealTransition, revealViewport, staggerContainer } from "@/components/landing/motion";
-import { WaveAccent } from "@/components/brand/wave-accent";
 
 export function CTASection() {
   return (
     <section
-      className="relative flex min-h-[60vh] w-full items-center justify-center overflow-hidden bg-white px-4 sm:px-6 lg:px-8 py-28 text-center border-t border-slate-200/60"
+      className="relative flex min-h-screen w-full items-center justify-center overflow-hidden bg-gradient-to-b from-transparent via-black/60 to-black px-5 py-24 sm:px-8"
       id="open"
     >
-      <WaveAccent variant="subtle" />
-
-      <div className="relative z-10 mx-auto w-full max-w-4xl">
-        <motion.div
-          className="space-y-8"
-          initial="hidden"
-          transition={revealTransition}
-          variants={staggerContainer}
-          viewport={revealViewport}
-          whileInView="show"
-        >
-          <motion.div variants={fadeUp} className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3.5 py-1 text-xs font-semibold text-blue-700">
-            Enterprise Deployment Ready
-          </motion.div>
-
-          <motion.h2
-            className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-slate-900 leading-tight"
-            variants={fadeUp}
-          >
-            Ready for calm, auditable crisis intelligence?
-          </motion.h2>
-
-          <motion.p
-            className="mx-auto max-w-2xl text-base sm:text-lg leading-relaxed text-slate-600"
-            variants={fadeUp}
-          >
-            Access the Sentra Command OS. Explore live telemetry streams, execute deterministic crisis scenarios, and inspect AI Council reasoning.
-          </motion.p>
-
+      <AuroraBackground className="absolute inset-0 z-20" placement="cta" />
+      <div className="relative z-30 mx-auto w-full max-w-[1200px] text-center">
+        <div className="absolute left-1/2 top-1/2 -z-10 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#8B5CF6]/18 blur-3xl" />
+        <div className="absolute left-[18%] top-[28%] -z-10 h-24 w-24 rounded-full border border-white/10 bg-white/[0.035] blur-[1px]" />
+        <div className="absolute bottom-[22%] right-[20%] -z-10 h-16 w-16 rounded-full border border-white/10 bg-cyan-200/[0.055] blur-[0.5px]" />
+        <div className="relative z-30 w-full">
           <motion.div
-            className="flex flex-wrap items-center justify-center gap-4 pt-4"
-            variants={fadeUp}
+            className="relative z-10 space-y-7"
+            initial="hidden"
+            transition={revealTransition}
+            variants={staggerContainer}
+            viewport={revealViewport}
+            whileInView="show"
           >
-            <Link
-              href="/login"
-              className="inline-flex items-center justify-center rounded-xl bg-blue-600 px-8 py-4 text-base font-semibold text-white shadow-sm transition hover:bg-blue-700 hover:shadow active:scale-[0.98]"
+            <motion.p className="text-xs font-semibold uppercase tracking-[0.34em] text-white/46" variants={fadeUp}>
+              Sentra Command OS
+            </motion.p>
+            <motion.h2
+              className="mx-auto max-w-5xl text-5xl font-semibold tracking-[-0.07em] text-white md:text-7xl lg:text-8xl"
+              variants={fadeUp}
             >
-              Get Started with Sentra
-            </Link>
-            <Link
-              href="/app"
-              className="inline-flex items-center justify-center rounded-xl border border-slate-200 bg-white px-8 py-4 text-base font-semibold text-slate-700 shadow-sm transition hover:bg-slate-50 hover:border-slate-300 active:scale-[0.98]"
+              Command clarity is here.
+            </motion.h2>
+            <motion.p className="mx-auto max-w-xl text-base leading-7 text-white/58 md:text-lg" variants={fadeUp}>
+              Step into a calmer way to see incidents, decisions, and response in one intelligent operating surface.
+            </motion.p>
+            <motion.div
+              className="mx-auto inline-flex items-center justify-center pt-1"
+              variants={fadeUp}
             >
-              Enter Live Console
-            </Link>
+              <MagneticButton
+                className="inline-flex items-center justify-center rounded-full border border-white/18 bg-white/[0.08] px-8 py-4 text-[1.25rem] font-semibold text-white shadow-[0_0_44px_rgba(255,255,255,0.08)] backdrop-blur-xl transition hover:bg-white/[0.13]"
+                href="/login"
+              >
+                Get Started
+              </MagneticButton>
+            </motion.div>
           </motion.div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
