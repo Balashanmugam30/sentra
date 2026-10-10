@@ -102,7 +102,7 @@ export function CommandWorkspace({
             {activeIncidents.length ? (
               activeIncidents.map((incident) => (
                 <article
-                  className="sentra-incident-row rounded-[24px] border border-white/10 bg-black/18 p-4 transition hover:border-white/18 hover:bg-white/[0.055]"
+                  className="sentra-incident-row rounded-2xl border border-white/[0.08] bg-[linear-gradient(135deg,rgba(255,255,255,0.04)_0%,rgba(255,255,255,0.01)_100%)] p-4.5 backdrop-blur-xl transition hover:border-cyan-400/30 hover:bg-white/[0.06] hover:shadow-[0_8px_30px_rgba(0,0,0,0.35),0_0_20px_rgba(56,189,248,0.08)]"
                   key={incident.id}
                 >
                   {(() => {
@@ -116,22 +116,22 @@ export function CommandWorkspace({
                       <>
                   <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                     <div className="min-w-0">
-                      <p className="text-sm font-semibold text-white">{getIncidentTitle(incident)}</p>
+                      <p className="font-display text-sm font-semibold text-white tracking-tight">{getIncidentTitle(incident)}</p>
                       <p className="mt-2 text-sm leading-6 text-white/54">
                         {incident.ai_summary || incident.description || incident.recommended_action || "Awaiting AI summary."}
                       </p>
                     </div>
-                    <span className={`sentra-severity-chip w-fit rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] ${statusTone(incident.status)}`}>
+                    <span className={`sentra-severity-chip w-fit rounded-full border px-3 py-1 font-mono text-[0.66rem] font-bold uppercase tracking-[0.16em] ${statusTone(incident.status)}`}>
                       {incident.priority || incident.status}
                     </span>
                   </div>
-                  <div className="mt-4 flex flex-wrap gap-2 text-xs text-white/42">
-                    <span>{incident.location || "Unknown location"}</span>
-                    <span>Severity {incident.severity}</span>
-                    {liveIncident.lifecycle_status ? <span>{liveIncident.lifecycle_status}</span> : null}
-                    {liveIncident.eta_minutes ? <span>ETA {liveIncident.eta_minutes}m</span> : null}
-                    {liveIncident.spread_probability ? <span>Spread {liveIncident.spread_probability}%</span> : null}
-                    {incident.decision_confidence ? <span>AI {incident.decision_confidence}%</span> : null}
+                  <div className="mt-4 flex flex-wrap gap-2 font-mono text-[0.68rem] text-white/45">
+                    <span className="rounded-md border border-white/8 bg-white/[0.03] px-2 py-0.5">{incident.location || "Unknown location"}</span>
+                    <span className="rounded-md border border-white/8 bg-white/[0.03] px-2 py-0.5">SEV {incident.severity}</span>
+                    {liveIncident.lifecycle_status ? <span className="rounded-md border border-white/8 bg-white/[0.03] px-2 py-0.5">{liveIncident.lifecycle_status}</span> : null}
+                    {liveIncident.eta_minutes ? <span className="rounded-md border border-sky-400/20 bg-sky-500/10 text-sky-300 px-2 py-0.5">ETA {liveIncident.eta_minutes}m</span> : null}
+                    {liveIncident.spread_probability ? <span className="rounded-md border border-amber-400/20 bg-amber-500/10 text-amber-300 px-2 py-0.5">Spread {liveIncident.spread_probability}%</span> : null}
+                    {incident.decision_confidence ? <span className="rounded-md border border-emerald-400/20 bg-emerald-500/10 text-emerald-300 px-2 py-0.5">AI {incident.decision_confidence}%</span> : null}
                   </div>
                   {liveIncident.timeline_logs?.[0] ? (
                     <p className="mt-3 rounded-2xl border border-white/10 bg-white/[0.045] px-3 py-2 text-xs leading-5 text-white/62">

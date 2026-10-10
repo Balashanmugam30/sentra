@@ -636,13 +636,13 @@ export function LuxurySidebar({
               </p>
               <p className="mt-1 truncate text-sm font-semibold text-white">{workspaceLabel}</p>
               <p className="mt-1 truncate text-xs text-white/42">{userLabel}</p>
-              <div className="mt-3 flex flex-wrap items-center gap-2">
-                <span className="sentra-sidebar-live-chip">
+              <div className="mt-3 flex flex-wrap items-center gap-1.5 font-mono text-[0.68rem]">
+                <span className="sentra-sidebar-live-chip font-sans">
                   <span className="sentra-sidebar-live-dot" />
                   Live
                 </span>
-                <span className="sentra-sidebar-micro-stat">Ready {executiveReadiness}%</span>
-                <span className="sentra-sidebar-micro-stat">Threat {threatScore}%</span>
+                <span className="sentra-sidebar-micro-stat">RDY {executiveReadiness}%</span>
+                <span className="sentra-sidebar-micro-stat">THR {threatScore}%</span>
               </div>
             </div>
             <RoleBadge compact role={user?.role} />

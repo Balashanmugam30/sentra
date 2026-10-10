@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Geist, Geist_Mono, Manrope } from "next/font/google";
 
 import { AppProviders } from "@/app/providers";
 import { ErrorBoundary } from "@/components/system/ErrorBoundary";
@@ -9,10 +9,22 @@ import { SENTRA_POSITIONING } from "@/lib/product-positioning";
 
 import "./globals.css";
 
-const inter = Inter({
+const manrope = Manrope({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-display",
+});
+
+const geist = Geist({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-sans",
+});
+
+const geistMono = Geist_Mono({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-mono",
 });
 
 export const metadata: Metadata = {
@@ -59,22 +71,19 @@ export default function RootLayout({
   const themeScript = `
     (() => {
       const saved = localStorage.getItem("sentra-theme");
-      const theme = ["system", "dark", "light"].includes(saved ?? "") ? saved : "system";
-      const resolved = theme === "system"
-        ? window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
-        : theme;
-      document.documentElement.dataset.theme = resolved;
+      const theme = saved === "light" ? "light" : "dark";
+      document.documentElement.dataset.theme = theme;
       document.documentElement.dataset.themeMode = theme;
-      document.documentElement.style.colorScheme = resolved;
+      document.documentElement.style.colorScheme = theme;
     })();
   `;
 
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className="dark" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
-      <body className={`${inter.variable} antialiased`}>
+      <body className={`${manrope.variable} ${geist.variable} ${geistMono.variable} font-sans antialiased`}>
         <SmoothScroll />
         <AppProviders>
           <ErrorBoundary>{children}</ErrorBoundary>

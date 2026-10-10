@@ -76,16 +76,32 @@ function HeroMetricPill({ stat }: { stat: HeroStat }) {
           : stat.value * 8;
   const progress = Math.max(9, Math.min(100, progressValue));
 
+  const toneGlows = {
+    calm: "border-sky-400/20 bg-[linear-gradient(135deg,rgba(14,165,233,0.08)_0%,rgba(255,255,255,0.02)_100%)] shadow-[0_12px_36px_rgba(0,0,0,0.35),0_0_24px_rgba(56,189,248,0.06)]",
+    danger: "border-rose-400/25 bg-[linear-gradient(135deg,rgba(244,63,94,0.08)_0%,rgba(255,255,255,0.02)_100%)] shadow-[0_12px_36px_rgba(0,0,0,0.35),0_0_24px_rgba(244,63,94,0.06)]",
+    success: "border-emerald-400/20 bg-[linear-gradient(135deg,rgba(16,185,129,0.08)_0%,rgba(255,255,255,0.02)_100%)] shadow-[0_12px_36px_rgba(0,0,0,0.35),0_0_24px_rgba(16,185,129,0.06)]",
+    warning: "border-amber-400/20 bg-[linear-gradient(135deg,rgba(245,158,11,0.08)_0%,rgba(255,255,255,0.02)_100%)] shadow-[0_12px_36px_rgba(0,0,0,0.35),0_0_24px_rgba(245,158,11,0.06)]",
+  };
+
+  const toneBar = {
+    calm: "from-sky-500 to-cyan-300 shadow-[0_0_10px_rgba(56,189,248,0.5)]",
+    danger: "from-rose-500 to-rose-300 shadow-[0_0_10px_rgba(244,63,94,0.5)]",
+    success: "from-emerald-500 to-teal-300 shadow-[0_0_10px_rgba(16,185,129,0.5)]",
+    warning: "from-amber-500 to-yellow-300 shadow-[0_0_10px_rgba(245,158,11,0.5)]",
+  };
+
+  const currentTone = stat.tone ?? "calm";
+
   return (
     <div
       aria-label={`${stat.label}: ${stat.prefix ?? ""}${stat.value}${stat.suffix ?? ""}`}
-      className={`sentra-phase7-kpi-pill sentra-phase11-kpi-pill sentra-phase12-kpi-pill sentra-phase11-kpi-${stat.tone ?? "calm"}`}
+      className={`sentra-phase7-kpi-pill sentra-phase12-kpi-pill relative overflow-hidden rounded-2xl border p-4 backdrop-blur-xl transition hover:translate-y-[-2px] ${toneGlows[currentTone]}`}
     >
       <div className="flex items-start justify-between gap-3">
-        <p className="text-[0.62rem] font-semibold uppercase tracking-[0.22em] text-white/42">{stat.label}</p>
-        <span className={`sentra-phase12-kpi-dot is-${stat.tone ?? "calm"}`} />
+        <p className="font-mono text-[0.66rem] font-bold uppercase tracking-[0.2em] text-white/50">{stat.label}</p>
+        <span className={`sentra-phase12-kpi-dot is-${currentTone}`} />
       </div>
-      <p className="mt-1.5 text-2xl font-semibold tracking-[-0.05em] text-white tabular-nums">
+      <p className="mt-2 font-mono text-2xl font-bold tracking-tight text-white tabular-nums">
         {stat.prefix}
         <CountUp
           decimals={stat.decimals ?? 0}
@@ -96,9 +112,9 @@ function HeroMetricPill({ stat }: { stat: HeroStat }) {
         />
         {stat.suffix}
       </p>
-      <div className="mt-4 h-1.5 overflow-hidden rounded-full bg-white/[0.07]">
+      <div className="mt-3.5 h-1 overflow-hidden rounded-full bg-white/[0.08]">
         <div
-          className={`sentra-phase12-kpi-progress is-${stat.tone ?? "calm"}`}
+          className={`h-full rounded-full bg-gradient-to-r ${toneBar[currentTone]}`}
           style={{ width: `${progress}%` }}
         />
       </div>

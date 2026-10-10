@@ -45,9 +45,9 @@ export function ExecutiveWorkspace({
               ["Compliance score", `${soc.live?.health_score ?? metrics.systemHealth}% security posture with audit-ready SOC telemetry.`],
               ["Resilience score", `${resilience}% resilience posture across security, response, and digital twin signals.`],
             ].map(([label, value]) => (
-              <div className="rounded-[24px] border border-white/10 bg-black/18 p-4" key={label}>
-                <p className="text-[0.68rem] font-semibold uppercase tracking-[0.22em] text-amber-100/46">{label}</p>
-                <p className="mt-3 text-sm leading-6 text-white/62">{value}</p>
+              <div className="rounded-2xl border border-white/[0.08] bg-[linear-gradient(135deg,rgba(255,255,255,0.05)_0%,rgba(255,255,255,0.015)_100%)] p-4.5 backdrop-blur-xl shadow-[0_8px_30px_rgba(0,0,0,0.3)]" key={label}>
+                <p className="font-mono text-[0.66rem] font-bold uppercase tracking-[0.22em] text-amber-200/60">{label}</p>
+                <p className="mt-3 text-sm leading-6 text-white/70">{value}</p>
               </div>
             ))}
           </div>
@@ -57,15 +57,15 @@ export function ExecutiveWorkspace({
           <SectionTitle eyebrow="Strategic recommendations" title="Next board actions" />
           <div className="mt-5 space-y-3">
             {(activeIncidents.length ? activeIncidents : incidents.slice(0, 2)).map((incident, index) => (
-              <div className="rounded-[22px] border border-white/10 bg-white/[0.04] p-4" key={`${incident.id}-${index}`}>
-                <p className="text-sm font-semibold text-white">{getIncidentTitle(incident)}</p>
+              <div className="rounded-2xl border border-white/[0.08] bg-[linear-gradient(135deg,rgba(255,255,255,0.04)_0%,rgba(255,255,255,0.01)_100%)] p-4.5 backdrop-blur-xl" key={`${incident.id}-${index}`}>
+                <p className="font-display text-sm font-semibold text-white tracking-tight">{getIncidentTitle(incident)}</p>
                 <p className="mt-2 text-sm leading-6 text-white/54">
                   {incident.recommended_action || incident.ai_summary || "Maintain executive monitoring and keep response reserves staged."}
                 </p>
               </div>
             ))}
             {!incidents.length ? (
-              <div className="rounded-[22px] border border-white/10 bg-white/[0.04] p-4 text-sm leading-6 text-white/54">
+              <div className="rounded-2xl border border-white/[0.08] bg-white/[0.03] p-4 text-sm leading-6 text-white/54">
                 No incident-driven executive actions. Continue readiness monitoring.
               </div>
             ) : null}
@@ -90,13 +90,13 @@ export function ExecutiveWorkspace({
             ["Downtime prevented", `$${(executiveLive.downtimePrevented / 1_000_000).toFixed(1)}M`, 82],
             ["Recovery ETA", `${executiveLive.nextRecoveryEta}m`, 74],
           ].map(([label, value, score]) => (
-            <div className="rounded-[24px] border border-white/10 bg-black/18 p-4" key={label}>
+            <div className="rounded-2xl border border-white/[0.08] bg-[linear-gradient(135deg,rgba(255,255,255,0.05)_0%,rgba(255,255,255,0.015)_100%)] p-4.5 backdrop-blur-xl shadow-[0_8px_30px_rgba(0,0,0,0.3)]" key={label}>
               <div className="flex items-center justify-between">
-                <p className="text-sm font-semibold text-white">{label}</p>
-                <p className="text-sm text-cyan-100">{String(value)}</p>
+                <p className="font-display text-sm font-semibold text-white">{label}</p>
+                <p className="font-mono text-sm font-bold text-cyan-200">{String(value)}</p>
               </div>
-              <div className="mt-4 h-2 overflow-hidden rounded-full bg-white/8">
-                <div className="h-full rounded-full bg-gradient-to-r from-blue-400 via-cyan-300 to-emerald-300" style={{ width: `${Number(score)}%` }} />
+              <div className="mt-4 h-1.5 overflow-hidden rounded-full bg-white/10">
+                <div className="h-full rounded-full bg-gradient-to-r from-blue-400 via-cyan-300 to-emerald-300 shadow-[0_0_10px_rgba(56,189,248,0.4)]" style={{ width: `${Number(score)}%` }} />
               </div>
             </div>
           ))}

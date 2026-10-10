@@ -57,7 +57,7 @@ export function WorkspaceShell({
       <motion.section
         aria-labelledby={`sentra-${mode}-workspace-title`}
         className={cn(
-          "sentra-workspace-hero sentra-phase7-hero sentra-phase11-hero sentra-phase12-hero rounded-[36px] border border-white/10 p-5 shadow-[0_28px_80px_rgba(0,0,0,0.32)] backdrop-blur-2xl md:p-7",
+          "sentra-workspace-hero relative overflow-hidden rounded-[32px] border border-white/[0.12] bg-[linear-gradient(135deg,rgba(255,255,255,0.06)_0%,rgba(255,255,255,0.015)_100%)] p-6 shadow-[0_24px_64px_rgba(0,0,0,0.48),inset_0_1px_0_rgba(255,255,255,0.18)] backdrop-blur-2xl before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-gradient-to-r before:from-transparent before:via-white/30 before:to-transparent md:p-8",
           `sentra-phase7-hero-${mode}`,
         )}
         data-mode={mode}
@@ -71,24 +71,24 @@ export function WorkspaceShell({
         <span aria-hidden="true" className="sentra-phase12-hero-scanline" />
         <div className="grid gap-7 xl:grid-cols-[minmax(0,1fr)_minmax(360px,560px)] xl:items-start">
           <div className="min-w-0 pt-1">
-            <p className="sentra-phase12-eyebrow text-[0.7rem] font-semibold uppercase tracking-[0.28em] text-cyan-100/54">
+            <p className="sentra-phase12-eyebrow font-mono text-[0.68rem] font-bold uppercase tracking-[0.26em] text-cyan-300/80">
               {eyebrow}
             </p>
             <h1
-              className="sentra-phase12-hero-title mt-3 max-w-4xl text-4xl font-semibold tracking-[-0.06em] text-white md:text-6xl"
+              className="sentra-phase12-hero-title font-display mt-3 max-w-4xl text-3xl font-bold tracking-tight text-white md:text-5xl lg:text-6xl bg-gradient-to-r from-white via-white/95 to-white/70 bg-clip-text text-transparent"
               id={`sentra-${mode}-workspace-title`}
             >
               {title}
             </h1>
-            <p className="sentra-phase12-hero-copy mt-4 max-w-3xl text-sm leading-6 text-white/62 md:text-base">
+            <p className="sentra-phase12-hero-copy font-sans mt-3.5 max-w-3xl text-sm leading-relaxed text-white/65 md:text-base">
               {description}
             </p>
             <div className="sentra-workspace-hero-actions mt-7 flex flex-wrap gap-3">
               {heroActions[mode].map((action) => (
                 <Link
                   className={cn(
-                    "sentra-hero-action-button",
-                    action.tone === "primary" ? "is-primary" : "is-secondary",
+                    "sentra-hero-action-button rounded-xl border border-white/12 bg-white/[0.05] px-4 py-2.5 text-xs font-semibold text-white/90 backdrop-blur-xl transition hover:border-cyan-400/35 hover:bg-white/[0.1] hover:text-white hover:shadow-[0_0_20px_rgba(56,189,248,0.15)]",
+                    action.tone === "primary" ? "border-cyan-400/30 bg-cyan-500/15 text-cyan-100 shadow-[0_0_20px_rgba(56,189,248,0.18)]" : "",
                   )}
                   href={action.href}
                   key={action.href}

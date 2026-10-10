@@ -18,11 +18,23 @@ body {
   overflow-x: hidden;
   overflow-y: auto;
   margin: 0;
-  background: #05070b;
+  background: #030712;
   color: #ffffff;
-  font-family: var(--font-body), var(--font-sans), system-ui, sans-serif;
+  font-family: var(--font-sans), system-ui, sans-serif;
   letter-spacing: -0.011em;
   text-rendering: geometricPrecision;
+}
+
+.font-display {
+  font-family: var(--font-display), system-ui, sans-serif;
+}
+
+.font-mono {
+  font-family: var(--font-mono), monospace;
+}
+
+.font-sans {
+  font-family: var(--font-sans), system-ui, sans-serif;
 }
 
 .app-container {
@@ -3302,29 +3314,33 @@ select:focus {
     transform: none;
   }
 }
-/* Final authenticated app theme: premium black enterprise OS. */
+/* ==========================================================================
+   SENTRA LIQUID GLASS 3.0 LUXURY SYSTEM
+   Obsidian Midnight Environment + Translucent Frosted Glass + Ambient Depth
+   ========================================================================== */
+
 .sentra-auth-shell {
   --sentra-sidebar-width: 280px;
-  --sentra-app-bg: #050505;
-  --sentra-app-bg-secondary: #070707;
-  --sentra-app-panel: #0b0b0b;
-  --sentra-app-panel-elevated: #111111;
-  --sentra-app-hover: #181818;
-  --sentra-app-active: #232323;
-  --sentra-app-border: rgba(255, 255, 255, 0.06);
-  --sentra-app-border-strong: rgba(255, 255, 255, 0.12);
+  --sentra-app-bg: #030712;
+  --sentra-app-bg-secondary: #050b18;
+  --sentra-app-panel: rgba(15, 23, 42, 0.45);
+  --sentra-app-panel-elevated: rgba(255, 255, 255, 0.04);
+  --sentra-app-hover: rgba(255, 255, 255, 0.08);
+  --sentra-app-active: rgba(56, 189, 248, 0.12);
+  --sentra-app-border: rgba(255, 255, 255, 0.09);
+  --sentra-app-border-strong: rgba(255, 255, 255, 0.16);
   --sentra-app-text: #ffffff;
-  --sentra-app-muted: #a1a1aa;
-  --sentra-app-soft: #71717a;
-  --sentra-app-faint: rgba(255, 255, 255, 0.24);
-  --sentra-app-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
-  --sentra-app-shadow-lg: 0 24px 70px rgba(0, 0, 0, 0.56);
+  --sentra-app-muted: rgba(226, 232, 240, 0.65);
+  --sentra-app-soft: rgba(226, 232, 240, 0.42);
+  --sentra-app-faint: rgba(255, 255, 255, 0.18);
+  --sentra-app-shadow: 0 16px 48px rgba(0, 0, 0, 0.45);
+  --sentra-app-shadow-lg: 0 24px 64px rgba(0, 0, 0, 0.58);
   --sentra-app-radius: 28px;
   --sentra-app-radius-sm: 18px;
   --sentra-app-ease: 220ms cubic-bezier(0.22, 1, 0.36, 1);
-  --sentra-app-danger: #ff7d7d;
-  --sentra-app-warning: #f4c56a;
-  --sentra-app-success: #d7f6df;
+  --sentra-app-danger: #f87171;
+  --sentra-app-warning: #fbbf24;
+  --sentra-app-success: #34d399;
   --text: var(--sentra-app-text);
   --foreground: var(--sentra-app-text);
   --surface: var(--sentra-app-panel);
@@ -3332,55 +3348,57 @@ select:focus {
   --border: var(--sentra-app-border);
   --sentra-text-muted: var(--sentra-app-muted);
   --sentra-shadow-panel: var(--sentra-app-shadow);
-  --sentra-shadow-floating: var(--sentra-app-shadow);
+  --sentra-shadow-floating: var(--sentra-app-shadow-lg);
   background: var(--sentra-app-bg);
   color: var(--sentra-app-text);
-}
-
-html[data-theme="light"] .sentra-auth-shell {
-  --sentra-app-bg: #f7f7f8;
-  --sentra-app-bg-secondary: #f1f1f2;
-  --sentra-app-panel: #ffffff;
-  --sentra-app-panel-elevated: #fafafa;
-  --sentra-app-hover: #f1f1f2;
-  --sentra-app-active: #eaeaea;
-  --sentra-app-border: rgba(0, 0, 0, 0.08);
-  --sentra-app-border-strong: rgba(0, 0, 0, 0.14);
-  --sentra-app-text: #111111;
-  --sentra-app-muted: #52525b;
-  --sentra-app-soft: #71717a;
-  --sentra-app-faint: rgba(0, 0, 0, 0.22);
-  --sentra-app-shadow: 0 12px 34px rgba(15, 23, 42, 0.08);
-  --sentra-app-shadow-lg: 0 24px 60px rgba(15, 23, 42, 0.11);
-  --sentra-app-danger: #b4232f;
-  --sentra-app-warning: #8a5b00;
-  --sentra-app-success: #166534;
+  height: 100vh;
+  min-height: 0;
+  overflow: hidden;
 }
 
 .app-container.sentra-auth-shell {
   min-height: 100vh;
   background:
-    radial-gradient(circle at 54% -18%, rgba(255, 255, 255, 0.045), transparent 30rem),
-    linear-gradient(180deg, var(--sentra-app-bg-secondary), var(--sentra-app-bg) 42%);
+    radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.1), transparent 50rem),
+    radial-gradient(circle at 85% 60%, rgba(147, 51, 234, 0.08), transparent 45rem),
+    radial-gradient(circle at 10% 70%, rgba(59, 130, 246, 0.07), transparent 40rem),
+    #030712;
   color: var(--sentra-app-text);
 }
 
-.sentra-auth-shell .grid-layer,
-.sentra-auth-shell .depth-glow,
+.sentra-auth-shell .grid-layer {
+  display: block !important;
+  opacity: 0.22 !important;
+  pointer-events: none !important;
+}
+
+.sentra-auth-shell .depth-glow {
+  display: block !important;
+  opacity: 0.65 !important;
+  pointer-events: none !important;
+}
+
 .sentra-auth-shell .cursor-glow {
-  display: none !important;
+  display: block !important;
+  opacity: 0.45 !important;
+  pointer-events: none !important;
 }
 
 .sentra-auth-shell .sentra-shell-main {
-  min-width: 0;
-  margin-left: calc(var(--sentra-sidebar-width) + 24px);
+  height: 100vh !important;
+  min-height: 0 !important;
+  margin-left: calc(var(--sentra-sidebar-width) + 24px) !important;
+  overflow: hidden !important;
   opacity: 1 !important;
   visibility: visible !important;
   pointer-events: auto !important;
 }
 
 .sentra-auth-shell .sentra-shell-scroll {
-  padding-bottom: 2rem;
+  min-height: 0 !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  padding-bottom: 2.5rem;
   background: transparent;
   scroll-padding-top: 6.5rem;
 }
@@ -3395,55 +3413,59 @@ html[data-theme="light"] .sentra-auth-shell {
   pointer-events: auto !important;
 }
 
+/* TOPBAR */
 .sentra-auth-shell .sentra-topbar {
-  min-height: 92px;
-  background: color-mix(in srgb, var(--sentra-app-bg) 94%, transparent);
+  min-height: 76px;
+  background: transparent !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
 }
 
 .sentra-auth-shell .sentra-topbar-inner {
-  min-height: 76px;
-  border: 1px solid var(--sentra-app-border) !important;
-  border-radius: 28px !important;
-  background: var(--sentra-app-panel) !important;
-  box-shadow: var(--sentra-app-shadow) !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
+  min-height: 64px;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-radius: 26px !important;
+  background: linear-gradient(145deg, rgba(16, 24, 44, 0.68) 0%, rgba(8, 13, 28, 0.78) 100%) !important;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5), 0 0 24px rgba(56, 189, 248, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+  backdrop-filter: blur(24px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
 }
 
 .sentra-auth-shell .sentra-topbar-breadcrumb {
-  flex: 0 1 300px;
+  flex: 0 1 auto !important;
 }
 
 .sentra-auth-shell .sentra-command-search {
   display: flex;
-  width: 420px;
-  max-width: 420px;
-  height: 52px;
-  flex: 0 1 420px;
+  width: 360px;
+  max-width: 360px;
+  height: 44px;
+  flex: 0 1 360px;
   align-items: center;
   justify-content: space-between;
-  gap: 0.85rem;
-  border: 1px solid var(--sentra-app-border) !important;
-  border-radius: 16px !important;
-  background: var(--sentra-app-panel-elevated) !important;
-  padding: 0 0.95rem;
-  color: var(--sentra-app-muted) !important;
-  text-align: left;
-  box-shadow: none !important;
-  transition: background var(--sentra-app-ease), border-color var(--sentra-app-ease), transform var(--sentra-app-ease);
+  gap: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 999px !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+  padding: 0 1rem;
+  color: rgba(255, 255, 255, 0.6) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+  transition: all 0.2s ease;
 }
 
 .sentra-auth-shell .sentra-command-search:hover {
-  border-color: var(--sentra-app-border-strong) !important;
-  background: var(--sentra-app-hover) !important;
+  border-color: rgba(56, 189, 248, 0.35) !important;
+  background: rgba(255, 255, 255, 0.07) !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
   transform: translateY(-1px);
 }
 
 .sentra-auth-shell .sentra-search-icon {
   display: inline-flex;
-  color: var(--sentra-app-soft);
+  color: rgba(56, 189, 248, 0.7);
 }
 
 .sentra-auth-shell .sentra-command-search-placeholder {
@@ -3452,22 +3474,29 @@ html[data-theme="light"] .sentra-auth-shell {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  color: var(--sentra-app-muted);
-  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.82rem;
   font-weight: 500;
 }
 
 .sentra-auth-shell .sentra-command-search kbd,
 .sentra-auth-shell kbd {
-  border: 1px solid var(--sentra-app-border) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
   border-radius: 999px !important;
-  background: var(--sentra-app-bg) !important;
-  color: var(--sentra-app-soft) !important;
-  padding: 0.36rem 0.58rem;
+  background: rgba(0, 0, 0, 0.35) !important;
+  color: rgba(255, 255, 255, 0.65) !important;
+  padding: 0.2rem 0.5rem;
+  font-family: var(--font-mono), monospace;
   font-size: 0.62rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
+}
+
+@media (max-width: 768px) {
+  .sentra-auth-shell .sentra-command-search {
+    display: none !important;
+  }
 }
 
 .sentra-auth-shell .sentra-topbar-right {
@@ -3477,1428 +3506,43 @@ html[data-theme="light"] .sentra-auth-shell {
 .sentra-auth-shell .sentra-topbar-mode-switcher,
 .sentra-auth-shell .sentra-phase12-mode-switcher,
 .sentra-auth-shell .sentra-mode-capsule {
-  min-height: 46px;
-  border: 1px solid var(--sentra-app-border) !important;
+  min-height: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
   border-radius: 999px !important;
-  background: var(--sentra-app-panel-elevated) !important;
-  box-shadow: none !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
+  background: rgba(255, 255, 255, 0.035) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
 }
 
 .sentra-auth-shell .sentra-topbar-mode-pill,
 .sentra-auth-shell .sentra-phase12-mode-button {
-  min-height: 38px;
+  min-height: 32px;
   border-radius: 999px !important;
-  padding-inline: 1rem;
-  color: var(--sentra-app-muted) !important;
-  font-size: 0.84rem;
-  font-weight: 700;
-  transition: background var(--sentra-app-ease), color var(--sentra-app-ease), transform var(--sentra-app-ease);
+  padding-inline: 0.85rem;
+  color: rgba(255, 255, 255, 0.55) !important;
+  font-size: 0.78rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
 }
 
 .sentra-auth-shell .sentra-topbar-mode-pill:hover,
 .sentra-auth-shell .sentra-phase12-mode-button:hover {
-  background: var(--sentra-app-hover) !important;
-  color: var(--sentra-app-text) !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #ffffff !important;
 }
 
 .sentra-auth-shell .sentra-topbar-mode-pill.is-active,
 .sentra-auth-shell .sentra-mode-active,
 .sentra-auth-shell .sentra-mode-active-pill,
 .sentra-auth-shell .sentra-phase12-mode-button.is-active {
-  color: var(--sentra-app-text) !important;
-  border-color: var(--sentra-app-border-strong) !important;
-  background: var(--sentra-app-active) !important;
-  box-shadow: none !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(56, 189, 248, 0.4) !important;
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.22) 0%, rgba(99, 102, 241, 0.16) 100%) !important;
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.2) !important;
 }
 
-.sentra-auth-shell .sentra-app-sidebar,
-.sentra-auth-shell .sentra-luxury-sidebar,
-.sentra-auth-shell .sentra-phase12-sidebar {
-  inset: 20px auto 20px 20px;
-  width: var(--sentra-sidebar-width);
-  gap: 1.05rem;
-  padding: 1.15rem;
-  border: 1px solid var(--sentra-app-border) !important;
-  border-radius: 30px;
-  background: var(--sentra-app-panel) !important;
-  box-shadow: var(--sentra-app-shadow-lg) !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-}
-
-.sentra-auth-shell .sentra-app-sidebar.is-collapsed,
-.sentra-auth-shell .sentra-luxury-sidebar.is-collapsed,
-.sentra-auth-shell .sentra-phase12-sidebar.is-collapsed {
-  width: 88px;
-  padding-inline: 0.8rem;
-}
-
-.sentra-auth-shell .sentra-app-sidebar::after,
-.sentra-auth-shell .sentra-luxury-sidebar::after,
-.sentra-auth-shell .sentra-phase12-sidebar::after {
-  display: none !important;
-  content: none !important;
-}
-
-.sentra-auth-shell .sentra-sidebar-brand {
-  padding-bottom: 1rem;
-  border-bottom: 1px solid var(--sentra-app-border);
-}
-
-.sentra-auth-shell .sentra-sidebar-mark {
-  border: 1px solid var(--sentra-app-border-strong) !important;
-  background: var(--sentra-app-active) !important;
-  color: var(--sentra-app-text) !important;
-  box-shadow: none !important;
-}
-
-.sentra-auth-shell .sentra-workspace-card,
-.sentra-auth-shell .sentra-shell-collapse,
-.sentra-auth-shell .sentra-sidebar-profile-card {
-  border: 1px solid var(--sentra-app-border) !important;
-  background: var(--sentra-app-panel-elevated) !important;
-  box-shadow: none !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-}
-
-.sentra-auth-shell .sentra-workspace-card {
-  border-radius: 24px;
-  padding: 1.05rem;
-}
-
-.sentra-auth-shell .sentra-sidebar-nav-scroll {
-  display: flex;
-  min-height: 0;
-  flex: 1;
-  flex-direction: column;
-  gap: 0.9rem;
-  overflow-y: auto;
-  padding-right: 0.15rem;
-}
-
-.sentra-auth-shell .sentra-sidebar-bottom {
-  margin-top: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  padding-top: 0.85rem;
-  border-top: 1px solid var(--sentra-app-border);
-}
-
-.sentra-auth-shell .sentra-sidebar-section-label,
-.sentra-auth-shell .sentra-ui-label,
-.sentra-auth-shell .sentra-phase12-eyebrow,
-.sentra-auth-shell .sentra-obsidian-eyebrow {
-  color: var(--sentra-app-soft) !important;
-  letter-spacing: 0.24em;
-  text-shadow: none !important;
-}
-
-.sentra-auth-shell .sentra-luxury-nav-item,
-.sentra-auth-shell .sentra-shell-nav-item {
-  min-height: 52px;
-  border: 1px solid transparent !important;
-  border-radius: 16px !important;
-  color: var(--sentra-app-muted) !important;
-  transition: background var(--sentra-app-ease), border-color var(--sentra-app-ease), color var(--sentra-app-ease), transform var(--sentra-app-ease);
-}
-
-.sentra-auth-shell .sentra-luxury-nav-item:hover,
-.sentra-auth-shell .sentra-shell-nav-item:hover,
-.sentra-auth-shell .sentra-shell-collapse:hover {
-  transform: translateY(-1px);
-  color: var(--sentra-app-text) !important;
-  border-color: var(--sentra-app-border) !important;
-  background: var(--sentra-app-hover) !important;
-  box-shadow: none !important;
-}
-
-.sentra-auth-shell .sentra-luxury-nav-item.is-active,
-.sentra-auth-shell .sentra-shell-nav-item.is-active {
-  color: var(--sentra-app-text) !important;
-  border-color: var(--sentra-app-border-strong) !important;
-  background: var(--sentra-app-active) !important;
-  box-shadow: inset 3px 0 0 var(--sentra-app-text) !important;
-}
-
-.sentra-auth-shell .sentra-shell-active-indicator {
-  display: none !important;
-}
-
-.sentra-auth-shell .sentra-shell-nav-label span:last-child,
-.sentra-auth-shell .sentra-phase12-hero-copy {
-  color: var(--sentra-app-muted) !important;
-}
-
-.sentra-auth-shell .sentra-sidebar-live-chip,
-.sentra-auth-shell .sentra-sidebar-micro-stat,
-.sentra-auth-shell .sentra-topbar-mode-chip,
-.sentra-auth-shell .sentra-decision-chip {
-  color: var(--sentra-app-muted) !important;
-  border-color: var(--sentra-app-border) !important;
-  background: var(--sentra-app-panel) !important;
-}
-
-.sentra-auth-shell .sentra-sidebar-live-dot,
-.sentra-auth-shell .sentra-phase12-kpi-dot {
-  background: var(--sentra-app-text) !important;
-  box-shadow: none !important;
-}
-
-.sentra-auth-shell .glass-panel,
-.sentra-auth-shell .glass-nav,
-.sentra-auth-shell .sentra-phase12-hero,
-.sentra-auth-shell .sentra-workspace-hero,
-.sentra-auth-shell .sentra-phase12-panel,
-.sentra-auth-shell .sentra-phase12-chart-panel,
-.sentra-auth-shell .sentra-phase12-kpi-card,
-.sentra-auth-shell .sentra-obsidian-panel,
-.sentra-auth-shell .sentra-empty-state-premium,
-.sentra-auth-shell .sentra-ai-recommendations-feed,
-.sentra-auth-shell .sentra-crisis-command-bar,
-.sentra-auth-shell .sentra-obsidian-command-bar {
-  border: 1px solid var(--sentra-app-border) !important;
-  background: var(--sentra-app-panel) !important;
-  box-shadow: var(--sentra-app-shadow) !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-}
-
-.sentra-auth-shell .sentra-workspace-hero {
-  min-height: 390px;
-  border-radius: 32px;
-  padding: clamp(2rem, 3.6vw, 3rem) !important;
-}
-
-.sentra-auth-shell .sentra-phase12-hero-title {
-  max-width: 780px;
-  font-weight: 680;
-  letter-spacing: -0.075em;
-  line-height: 0.96;
-}
-
-.sentra-auth-shell .sentra-workspace-hero-actions {
-  align-items: center;
-}
-
-.sentra-auth-shell .sentra-hero-action-button,
-.sentra-auth-shell .sentra-command-link,
-.sentra-auth-shell .sentra-crisis-command-bar button,
-.sentra-auth-shell .sentra-decision-button {
-  display: inline-flex;
-  min-height: 46px;
-  align-items: center;
-  justify-content: center;
-  border-radius: 18px;
-  border: 1px solid var(--sentra-app-border) !important;
-  background: var(--sentra-app-panel-elevated) !important;
-  padding: 0.8rem 1.1rem;
-  color: var(--sentra-app-text) !important;
-  font-size: 0.9rem;
-  font-weight: 650;
-  text-decoration: none;
-  transition: background var(--sentra-app-ease), border-color var(--sentra-app-ease), transform var(--sentra-app-ease);
-}
-
-.sentra-auth-shell .sentra-hero-action-button.is-primary,
-.sentra-auth-shell .sentra-decision-button.is-approve {
-  background: var(--sentra-app-text) !important;
-  color: var(--sentra-app-bg) !important;
-  border-color: var(--sentra-app-text) !important;
-  box-shadow: none !important;
-}
-
-.sentra-auth-shell .sentra-hero-action-button:hover,
-.sentra-auth-shell .sentra-command-link:hover,
-.sentra-auth-shell .sentra-crisis-command-bar button:hover,
-.sentra-auth-shell .sentra-decision-button:hover {
-  transform: translateY(-1px);
-  border-color: var(--sentra-app-border-strong) !important;
-  background: var(--sentra-app-hover) !important;
-}
-
-.sentra-auth-shell .sentra-hero-action-button.is-primary:hover,
-.sentra-auth-shell .sentra-decision-button.is-approve:hover {
-  background: color-mix(in srgb, var(--sentra-app-text) 88%, var(--sentra-app-panel)) !important;
-}
-
-.sentra-auth-shell .sentra-command-link-danger,
-.sentra-auth-shell .sentra-crisis-command-bar button:first-child {
-  border-color: color-mix(in srgb, var(--sentra-app-danger) 38%, var(--sentra-app-border)) !important;
-  background: color-mix(in srgb, var(--sentra-app-danger) 13%, var(--sentra-app-panel-elevated)) !important;
-  color: var(--sentra-app-text) !important;
-}
-
-.sentra-auth-shell .sentra-phase7-kpi-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1rem;
-}
-
-.sentra-auth-shell .sentra-phase12-kpi-pill,
-.sentra-auth-shell .sentra-obsidian-stat,
-.sentra-auth-shell .sentra-obsidian-list-card,
-.sentra-auth-shell .sentra-incident-row,
-.sentra-auth-shell .sentra-ai-recommendation-card,
-.sentra-auth-shell .sentra-decision-chip {
-  border: 1px solid var(--sentra-app-border) !important;
-  background: var(--sentra-app-panel-elevated) !important;
-  box-shadow: none !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-}
-
-.sentra-auth-shell .sentra-phase12-kpi-pill {
-  min-height: 112px;
-  border-radius: 24px;
-  padding: 1.1rem;
-}
-
-.sentra-auth-shell .sentra-phase12-kpi-pill::before {
-  background: none !important;
-}
-
-.sentra-auth-shell .sentra-phase12-kpi-progress,
-.sentra-auth-shell .sentra-phase12-kpi-progress.is-success,
-.sentra-auth-shell .sentra-phase12-kpi-progress.is-warning,
-.sentra-auth-shell .sentra-phase12-kpi-progress.is-calm {
-  background: var(--sentra-app-text) !important;
-  box-shadow: none !important;
-}
-
-.sentra-auth-shell .sentra-phase12-kpi-dot.is-danger,
-.sentra-auth-shell .sentra-phase12-kpi-progress.is-danger,
-.sentra-auth-shell .sentra-severity-chip[class*="rose"] {
-  background: var(--sentra-app-danger) !important;
-}
-
-.sentra-auth-shell .sentra-phase7-grid-row {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 1.5rem;
-}
-
-.sentra-auth-shell .sentra-phase7-grid-row > * {
-  min-width: 0;
-}
-
-.sentra-auth-shell .sentra-ai-recommendations-feed,
-.sentra-auth-shell [data-section-id="command-incidents"] {
-  min-height: 500px;
-}
-
-.sentra-auth-shell .sentra-incident-row,
-.sentra-auth-shell .sentra-ai-recommendation-card {
-  transition: background var(--sentra-app-ease), border-color var(--sentra-app-ease), transform var(--sentra-app-ease);
-}
-
-.sentra-auth-shell .sentra-incident-row:hover,
-.sentra-auth-shell .sentra-ai-recommendation-card:hover {
-  transform: translateY(-1px);
-  border-color: var(--sentra-app-border-strong) !important;
-  background: var(--sentra-app-hover) !important;
-}
-
-.sentra-auth-shell .sentra-severity-chip {
-  color: var(--sentra-app-muted) !important;
-}
-
-.sentra-auth-shell .sentra-copilot-root {
-  right: 1.35rem;
-  bottom: 1.35rem;
-}
-
-.sentra-auth-shell .sentra-copilot-root > button {
-  min-height: 58px;
-  border: 1px solid var(--sentra-app-border-strong) !important;
-  background: var(--sentra-app-panel) !important;
-  box-shadow: var(--sentra-app-shadow) !important;
-  color: var(--sentra-app-text) !important;
-}
-
-.sentra-auth-shell .sentra-copilot-root > button span:first-child {
-  background: var(--sentra-app-active) !important;
-  color: var(--sentra-app-text) !important;
-}
-
-.sentra-auth-shell .sentra-profile-menu-item {
-  display: flex;
-  height: 2.75rem;
-  width: 100%;
-  align-items: center;
-  border-radius: 1rem;
-  padding-inline: 1rem;
-  font-size: 0.9rem;
-  font-weight: 600;
-  transition: background var(--sentra-app-ease), transform var(--sentra-app-ease);
-}
-
-.sentra-auth-shell .sentra-profile-menu {
-  border-color: var(--sentra-app-border) !important;
-  background: var(--sentra-app-panel) !important;
-  box-shadow: var(--sentra-app-shadow-lg) !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-}
-
-.sentra-auth-shell .sentra-profile-menu-item:hover {
-  background: var(--sentra-app-hover) !important;
-}
-
-.sentra-auth-shell [class*="text-cyan-"],
-.sentra-auth-shell [class*="text-sky-"],
-.sentra-auth-shell [class*="text-blue-"],
-.sentra-auth-shell [class*="text-emerald-"],
-.sentra-auth-shell [class*="text-green-"],
-.sentra-auth-shell [class*="text-amber-"] {
-  color: var(--sentra-app-muted) !important;
-}
-
-.sentra-auth-shell [class*="bg-cyan-"],
-.sentra-auth-shell [class*="bg-sky-"],
-.sentra-auth-shell [class*="bg-blue-"],
-.sentra-auth-shell [class*="bg-emerald-"],
-.sentra-auth-shell [class*="bg-green-"],
-.sentra-auth-shell [class*="bg-amber-"] {
-  background-color: var(--sentra-app-active) !important;
-}
-
-.sentra-auth-shell [class*="border-cyan-"],
-.sentra-auth-shell [class*="border-sky-"],
-.sentra-auth-shell [class*="border-blue-"],
-.sentra-auth-shell [class*="border-emerald-"],
-.sentra-auth-shell [class*="border-green-"],
-.sentra-auth-shell [class*="border-amber-"] {
-  border-color: var(--sentra-app-border-strong) !important;
-}
-
-html[data-theme="light"] .sentra-auth-shell .text-white,
-html[data-theme="light"] .sentra-auth-shell [class*="text-white/"] {
-  color: var(--sentra-app-text) !important;
-}
-
-html[data-theme="light"] .sentra-auth-shell [class*="bg-white/"] {
-  background-color: var(--sentra-app-panel-elevated) !important;
-}
-
-html[data-theme="light"] .sentra-auth-shell [class*="border-white/"] {
-  border-color: var(--sentra-app-border) !important;
-}
-
-@media (min-width: 1280px) {
-  .sentra-auth-shell .sentra-phase7-grid-row {
-    grid-template-columns: minmax(0, 1fr) minmax(390px, 0.95fr);
-  }
-}
-
-@media (max-width: 1280px) {
-  .sentra-auth-shell .sentra-topbar-inner {
-    align-items: stretch;
-    flex-wrap: wrap;
-  }
-
-  .sentra-auth-shell .sentra-command-search {
-    order: 3;
-    width: 100%;
-    max-width: none;
-    flex: 1 1 100%;
-  }
-}
-
-@media (max-width: 1024px) {
-  .sentra-auth-shell .sentra-shell-main {
-    margin-left: 0;
-  }
-
-  .sentra-auth-shell .sentra-topbar {
-    min-height: auto;
-  }
-
-  .sentra-auth-shell .sentra-app-sidebar,
-  .sentra-auth-shell .sentra-luxury-sidebar,
-  .sentra-auth-shell .sentra-phase12-sidebar,
-  .sentra-auth-shell .sentra-app-sidebar.is-collapsed,
-  .sentra-auth-shell .sentra-luxury-sidebar.is-collapsed,
-  .sentra-auth-shell .sentra-phase12-sidebar.is-collapsed {
-    width: min(280px, calc(100vw - 24px));
-  }
-}
-
-@media (max-width: 768px) {
-  .sentra-auth-shell .sentra-workspace-hero {
-    min-height: auto;
-    padding: 1.35rem !important;
-    border-radius: 26px;
-  }
-
-  .sentra-auth-shell .sentra-phase12-hero-title {
-    font-size: clamp(2.35rem, 13vw, 4rem);
-  }
-
-  .sentra-auth-shell .sentra-phase7-kpi-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .sentra-auth-shell .sentra-topbar-breadcrumb,
-  .sentra-auth-shell .sentra-topbar-right {
-    flex: 1 1 100%;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .sentra-auth-shell *,
-  .sentra-auth-shell *::before,
-  .sentra-auth-shell *::after {
-    transition-duration: 0.01ms !important;
-    animation-duration: 0.01ms !important;
-  }
-}
-
-/* Final convergence layer for authenticated Sentra routes. Keep public landing/login untouched. */
-.sentra-auth-shell {
-  --sentra-app-bg: var(--sentra-os-bg, #030712);
-  --sentra-app-bg-secondary: var(--sentra-os-bg, #030712);
-  --sentra-app-panel: var(--sentra-os-panel, rgba(8, 14, 28, 0.88));
-  --sentra-app-panel-elevated: var(--sentra-os-card, rgba(15, 23, 42, 0.72));
-  --sentra-app-hover: var(--sentra-os-hover, rgba(30, 58, 95, 0.5));
-  --sentra-app-active: var(--sentra-os-active, rgba(14, 116, 144, 0.4));
-  --sentra-app-border: var(--sentra-os-border, rgba(148, 163, 184, 0.12));
-  --sentra-app-border-strong: var(--sentra-os-border-strong, rgba(56, 189, 248, 0.28));
-  --sentra-app-text: var(--sentra-os-text, #f8fafc);
-  --sentra-app-muted: var(--sentra-os-muted, #94a3b8);
-  --sentra-app-soft: color-mix(in srgb, var(--sentra-app-muted) 72%, transparent);
-  --sentra-app-shadow: var(--sentra-os-shadow, 0 16px 48px -8px rgba(0, 0, 0, 0.65), 0 0 24px rgba(6, 182, 212, 0.1));
-  --sentra-app-shadow-lg: var(--sentra-os-shadow, 0 28px 80px rgba(0, 0, 0, 0.75), 0 0 40px rgba(6, 182, 212, 0.15));
-  --sentra-text-muted: var(--sentra-app-muted);
-  --sentra-text-soft: var(--sentra-app-soft);
-  --sentra-border-subtle: var(--sentra-app-border);
-  --sentra-border-strong: var(--sentra-app-border-strong);
-  --sentra-surface: var(--sentra-app-panel);
-  --sentra-surface-strong: var(--sentra-app-panel-elevated);
-  --sentra-input-surface: var(--sentra-app-panel-elevated);
-  --text: var(--sentra-app-text);
-  --foreground: var(--sentra-app-text);
-  --surface: var(--sentra-app-panel);
-  --surface-strong: var(--sentra-app-panel-elevated);
-  --border: var(--sentra-app-border);
-}
-
-.app-container.sentra-auth-shell {
-  background:
-    radial-gradient(circle at 12% 8%, rgba(56, 189, 248, 0.08), transparent 32rem),
-    radial-gradient(circle at 88% 12%, rgba(99, 102, 241, 0.09), transparent 30rem),
-    radial-gradient(circle at 50% 90%, rgba(14, 165, 233, 0.05), transparent 42rem),
-    linear-gradient(180deg, var(--sentra-app-bg), #02050e 100%) !important;
-}
-
-.sentra-auth-shell .pointer-events-none.fixed.inset-0,
-.sentra-auth-shell .pointer-events-none.absolute.inset-0 {
-  display: none !important;
-}
-
-.sentra-auth-shell main {
-  min-height: auto !important;
-  background: transparent !important;
-  color: var(--sentra-app-text) !important;
-}
-
-.sentra-auth-shell .sentra-shell-main {
-  margin-left: calc(var(--sentra-sidebar-width) + 24px) !important;
-}
-
-.sentra-auth-shell .sentra-analytics-shell,
-.sentra-auth-shell main > .relative.z-10,
-.sentra-auth-shell main > .mx-auto,
-.sentra-auth-shell .settings-container {
-  width: 100%;
-  min-width: 0;
-}
-
-.sentra-auth-shell .sentra-radial-hub {
-  position: relative;
-  display: grid;
-  place-items: center;
-  min-height: 238px;
-  margin: 0.15rem 0 0.25rem;
-  isolation: isolate;
-}
-
-.sentra-auth-shell .sentra-radial-orbit {
-  position: absolute;
-  inset: 24px;
-  border: 1px solid var(--sentra-app-border);
-  border-radius: 999px;
-  background:
-    radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--sentra-app-text) 5%, transparent), transparent 42%),
-    var(--sentra-app-panel-elevated);
-  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--sentra-app-text) 7%, transparent);
-  animation: sentraRadialDrift 36s linear infinite;
-}
-
-.sentra-auth-shell .sentra-radial-center,
-.sentra-auth-shell .sentra-radial-node {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid var(--sentra-app-border);
-  color: var(--sentra-app-muted);
-  text-decoration: none;
-  transition:
-    background var(--sentra-app-ease),
-    border-color var(--sentra-app-ease),
-    color var(--sentra-app-ease),
-    transform var(--sentra-app-ease),
-    opacity var(--sentra-app-ease);
-}
-
-.sentra-auth-shell .sentra-radial-center {
-  z-index: 3;
-  width: 74px;
-  height: 74px;
-  flex-direction: column;
-  gap: 0.35rem;
-  border-radius: 28px;
-  background: var(--sentra-app-active);
-  color: var(--sentra-app-text);
-  transform: translate(-50%, -50%);
-  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--sentra-app-text) 10%, transparent);
-}
-
-.sentra-auth-shell .sentra-radial-center span {
-  font-size: 0.58rem;
-  font-weight: 800;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-}
-
-.sentra-auth-shell .sentra-radial-node {
-  z-index: 4;
-  width: 42px;
-  height: 42px;
-  border-radius: 999px;
-  background: var(--sentra-app-panel);
-}
-
-.sentra-auth-shell .sentra-radial-node span {
-  position: absolute;
-  left: 50%;
-  top: calc(100% + 0.42rem);
-  max-width: 86px;
-  transform: translateX(-50%);
-  border: 1px solid var(--sentra-app-border);
-  border-radius: 999px;
-  background: var(--sentra-app-panel);
-  color: var(--sentra-app-text);
-  opacity: 0;
-  padding: 0.28rem 0.5rem;
-  pointer-events: none;
-  font-size: 0.62rem;
-  font-weight: 700;
-  line-height: 1;
-  text-align: center;
-  white-space: nowrap;
-  box-shadow: var(--sentra-app-shadow);
-  transition: opacity var(--sentra-app-ease), transform var(--sentra-app-ease);
-}
-
-.sentra-auth-shell .sentra-radial-node:hover,
-.sentra-auth-shell .sentra-radial-node.is-active {
-  z-index: 6;
-  border-color: var(--sentra-app-border-strong);
-  background: var(--sentra-app-active);
-  color: var(--sentra-app-text);
-}
-
-.sentra-auth-shell .sentra-radial-node:hover span,
-.sentra-auth-shell .sentra-radial-node.is-active span {
-  opacity: 1;
-  transform: translateX(-50%) translateY(-2px);
-}
-
-.sentra-auth-shell .sentra-radial-node.is-locked {
-  opacity: 0.58;
-}
-
-.sentra-auth-shell .sentra-radial-node i {
-  position: absolute;
-  right: -1px;
-  top: -1px;
-  width: 9px;
-  height: 9px;
-  border-radius: 999px;
-  background: var(--sentra-app-muted);
-}
-
-.sentra-auth-shell .sentra-nav-lock {
-  display: inline-flex;
-  width: 1rem;
-  height: 1rem;
-  flex: 0 0 auto;
-  color: var(--sentra-app-soft);
-}
-
-.sentra-auth-shell .sentra-radial-hub,
-.sentra-auth-shell .sentra-radial-orbit,
-.sentra-auth-shell .sentra-radial-center,
-.sentra-auth-shell .sentra-radial-node {
-  display: none !important;
-}
-
-.sentra-auth-shell .sentra-radial-hub.is-collapsed {
-  min-height: 96px;
-}
-
-.sentra-auth-shell .sentra-radial-hub.is-collapsed .sentra-radial-orbit {
-  inset: 5px;
-}
-
-.sentra-auth-shell .sentra-radial-hub.is-collapsed .sentra-radial-center {
-  width: 48px;
-  height: 48px;
-  border-radius: 18px;
-}
-
-.sentra-auth-shell .sentra-radial-hub.is-collapsed .sentra-radial-node {
-  width: 22px;
-  height: 22px;
-}
-
-.sentra-auth-shell .sentra-radial-hub.is-collapsed .sentra-radial-node svg {
-  width: 0.76rem;
-  height: 0.76rem;
-}
-
-@keyframes sentraRadialDrift {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.sentra-auth-shell .sentra-theme-choice {
-  display: flex;
-  min-height: 98px;
-  flex-direction: column;
-  justify-content: space-between;
-  border: 1px solid var(--sentra-app-border);
-  border-radius: 22px;
-  background: var(--sentra-app-panel-elevated);
-  padding: 1rem;
-  color: var(--sentra-app-muted);
-  text-align: left;
-  transition:
-    background var(--sentra-app-ease),
-    border-color var(--sentra-app-ease),
-    color var(--sentra-app-ease),
-    transform var(--sentra-app-ease);
-}
-
-.sentra-auth-shell .sentra-theme-choice span {
-  color: var(--sentra-app-text);
-  font-weight: 750;
-}
-
-.sentra-auth-shell .sentra-theme-choice small {
-  color: var(--sentra-app-muted);
-  font-size: 0.74rem;
-}
-
-.sentra-auth-shell .sentra-theme-choice:hover,
-.sentra-auth-shell .sentra-theme-choice.is-active {
-  transform: translateY(-1px);
-  border-color: var(--sentra-app-border-strong);
-  background: var(--sentra-app-active);
-}
-
-.sentra-auth-shell .sentra-system-status-chip,
-.sentra-auth-shell .sentra-role-chip {
-  display: inline-flex;
-  min-height: 2.5rem;
-  align-items: center;
-  gap: 0.45rem;
-  border: 1px solid var(--sentra-app-border);
-  border-radius: 999px;
-  background: var(--sentra-app-panel-elevated);
-  color: var(--sentra-app-text);
-  padding: 0 0.85rem;
-  font-size: 0.68rem;
-  font-weight: 800;
-  letter-spacing: 0.14em;
-  line-height: 1;
-  text-transform: uppercase;
-  transition: background var(--sentra-app-ease), border-color var(--sentra-app-ease), transform var(--sentra-app-ease);
-}
-
-.sentra-auth-shell .sentra-system-status-chip:hover,
-.sentra-auth-shell .sentra-role-chip:hover {
-  transform: translateY(-1px);
-  border-color: var(--sentra-app-border-strong);
-  background: var(--sentra-app-hover);
-}
-
-.sentra-auth-shell .sentra-system-status-dot {
-  width: 0.48rem;
-  height: 0.48rem;
-  border-radius: 999px;
-  background: #35d07f;
-  box-shadow: 0 0 0 4px rgba(53, 208, 127, 0.1);
-  animation: sentraStatusPulse 2.4s ease-in-out infinite;
-}
-
-.sentra-auth-shell .sentra-system-status-chip.is-syncing .sentra-system-status-dot {
-  background: #d6b76b;
-  box-shadow: 0 0 0 4px rgba(214, 183, 107, 0.1);
-}
-
-.sentra-auth-shell .sentra-system-status-chip.is-offline .sentra-system-status-dot {
-  background: #d36a6a;
-  box-shadow: 0 0 0 4px rgba(211, 106, 106, 0.1);
-}
-
-@keyframes sentraStatusPulse {
-  0%,
-  100% {
-    opacity: 0.75;
-  }
-  50% {
-    opacity: 1;
-  }
-}
-
-.sentra-auth-shell .sentra-notification-button {
-  position: relative;
-  display: inline-flex;
-  width: 2.75rem;
-  height: 2.75rem;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid var(--sentra-app-border);
-  border-radius: 999px;
-  background: var(--sentra-app-panel-elevated);
-  color: var(--sentra-app-muted);
-  transition: background var(--sentra-app-ease), border-color var(--sentra-app-ease), color var(--sentra-app-ease), transform var(--sentra-app-ease);
-}
-
-.sentra-auth-shell .sentra-notification-button:hover {
-  transform: translateY(-1px);
-  border-color: var(--sentra-app-border-strong);
-  background: var(--sentra-app-hover);
-  color: var(--sentra-app-text);
-}
-
-.sentra-auth-shell .sentra-notification-count {
-  position: absolute;
-  right: -0.15rem;
-  top: -0.15rem;
-  display: inline-flex;
-  min-width: 1.15rem;
-  height: 1.15rem;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid var(--sentra-app-bg);
-  border-radius: 999px;
-  background: var(--sentra-app-text);
-  color: var(--sentra-app-bg);
-  font-size: 0.62rem;
-  font-weight: 800;
-}
-
-.sentra-auth-shell .sentra-notification-panel {
-  position: absolute;
-  right: 0;
-  top: 3.55rem;
-  z-index: 80;
-  width: min(380px, calc(100vw - 2rem));
-  overflow: hidden;
-  border: 1px solid var(--sentra-app-border);
-  border-radius: 24px;
-  background: var(--sentra-app-panel);
-  box-shadow: var(--sentra-app-shadow-lg);
-  animation: sentraDrawerIn 180ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.sentra-auth-shell .sentra-notification-panel-header {
-  border-bottom: 1px solid var(--sentra-app-border);
-  padding: 1rem;
-}
-
-.sentra-auth-shell .sentra-notification-panel-header p:last-child {
-  margin-top: 0.3rem;
-  color: var(--sentra-app-muted);
-  font-size: 0.86rem;
-}
-
-.sentra-auth-shell .sentra-notification-eyebrow {
-  color: var(--sentra-app-soft);
-  font-size: 0.66rem;
-  font-weight: 800;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-}
-
-.sentra-auth-shell .sentra-notification-list {
-  max-height: 360px;
-  overflow-y: auto;
-  padding: 0.8rem;
-}
-
-.sentra-auth-shell .sentra-notification-card {
-  margin-bottom: 0.55rem;
-  border: 1px solid var(--sentra-app-border);
-  border-radius: 18px;
-  background: var(--sentra-app-panel-elevated);
-  padding: 0.85rem;
-}
-
-.sentra-auth-shell .sentra-notification-title {
-  color: var(--sentra-app-text);
-  font-size: 0.88rem;
-  font-weight: 750;
-}
-
-.sentra-auth-shell .sentra-notification-body {
-  margin-top: 0.45rem;
-  color: var(--sentra-app-muted);
-  font-size: 0.78rem;
-  line-height: 1.55;
-}
-
-.sentra-auth-shell .sentra-notification-time {
-  display: block;
-  margin-top: 0.6rem;
-  color: var(--sentra-app-soft);
-  font-size: 0.68rem;
-  font-weight: 700;
-}
-
-.sentra-auth-shell .sentra-notification-severity {
-  border: 1px solid var(--sentra-app-border);
-  border-radius: 999px;
-  background: var(--sentra-app-panel);
-  color: var(--sentra-app-muted);
-  padding: 0.28rem 0.48rem;
-  font-size: 0.55rem;
-  font-weight: 800;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-.sentra-auth-shell .sentra-notification-severity.is-critical {
-  border-color: color-mix(in srgb, var(--sentra-app-danger) 36%, var(--sentra-app-border));
-  color: var(--sentra-app-danger);
-}
-
-.sentra-auth-shell .sentra-notification-severity.is-warning {
-  border-color: color-mix(in srgb, var(--sentra-app-warning) 36%, var(--sentra-app-border));
-  color: var(--sentra-app-warning);
-}
-
-.sentra-auth-shell .sentra-notification-severity.is-success {
-  color: #35d07f;
-}
-
-@keyframes sentraDrawerIn {
-  from {
-    opacity: 0;
-    transform: translateY(-8px) scale(0.98);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-.sentra-auth-shell .sentra-app-sidebar,
-.sentra-auth-shell .sentra-topbar-inner,
-.sentra-auth-shell .glass-panel,
-.sentra-auth-shell .glass-nav,
-.sentra-auth-shell .sentra-phase12-hero,
-.sentra-auth-shell .sentra-workspace-hero,
-.sentra-auth-shell .sentra-phase12-panel,
-.sentra-auth-shell .sentra-phase12-chart-panel,
-.sentra-auth-shell .sentra-analytics-panel,
-.sentra-auth-shell .sentra-obsidian-panel,
-.sentra-auth-shell .sentra-empty-state-premium,
-.sentra-auth-shell .sentra-ai-recommendations-feed,
-.sentra-auth-shell .sentra-crisis-command-bar,
-.sentra-auth-shell .sentra-obsidian-command-bar,
-.sentra-auth-shell header[class*="rounded"],
-.sentra-auth-shell section[class*="rounded"],
-.sentra-auth-shell div[class*="rounded"] {
-  color: var(--sentra-app-text);
-}
-
-.sentra-auth-shell header[class*="bg-white/"],
-.sentra-auth-shell section[class*="bg-white/"],
-.sentra-auth-shell div[class*="bg-white/"],
-.sentra-auth-shell article[class*="bg-white/"],
-.sentra-auth-shell header[class*="bg-black/"],
-.sentra-auth-shell section[class*="bg-black/"],
-.sentra-auth-shell div[class*="bg-black/"],
-.sentra-auth-shell article[class*="bg-black/"] {
-  border-color: var(--sentra-app-border) !important;
-  background: var(--sentra-app-panel-elevated) !important;
-  box-shadow: none !important;
-}
-
-.sentra-auth-shell .sentra-app-card,
-.sentra-auth-shell .sentra-map-card,
-.sentra-auth-shell .sentra-premium-map,
-.sentra-auth-shell .sentra-analytics-panel,
-.sentra-auth-shell .sentra-phase12-panel,
-.sentra-auth-shell .sentra-phase12-chart-panel {
-  border: 1px solid var(--sentra-app-border) !important;
-  border-radius: 28px !important;
-  background: var(--sentra-app-panel) !important;
-  box-shadow: var(--sentra-app-shadow) !important;
-}
-
-.sentra-auth-shell .sentra-map-card {
-  position: relative;
-  overflow: hidden;
-  min-height: 370px;
-  background:
-    linear-gradient(90deg, color-mix(in srgb, var(--sentra-app-text) 4%, transparent) 1px, transparent 1px),
-    linear-gradient(0deg, color-mix(in srgb, var(--sentra-app-text) 4%, transparent) 1px, transparent 1px),
-    var(--sentra-app-bg) !important;
-  background-size: 48px 48px, 48px 48px, auto !important;
-}
-
-.sentra-auth-shell .sentra-map-card::before {
-  position: absolute;
-  inset: 7%;
-  content: "";
-  border: 1px solid color-mix(in srgb, var(--sentra-app-text) 12%, transparent);
-  border-radius: 45% 52% 48% 42%;
-  background: color-mix(in srgb, var(--sentra-app-text) 4%, transparent);
-}
-
-.sentra-auth-shell .sentra-map-marker {
-  position: absolute;
-  z-index: 3;
-  transform: translate(-50%, -50%);
-}
-
-.sentra-auth-shell .sentra-map-marker-dot {
-  display: grid;
-  width: 14px;
-  height: 14px;
-  place-items: center;
-  border: 2px solid var(--sentra-app-bg);
-  border-radius: 999px;
-  background: var(--sentra-app-text);
-  box-shadow: 0 0 0 7px color-mix(in srgb, var(--sentra-app-text) 10%, transparent);
-}
-
-.sentra-auth-shell .sentra-map-marker.is-critical .sentra-map-marker-dot {
-  background: var(--sentra-app-danger);
-}
-
-.sentra-auth-shell .sentra-map-marker.is-elevated .sentra-map-marker-dot {
-  background: var(--sentra-app-warning);
-}
-
-.sentra-auth-shell .sentra-map-tooltip {
-  position: absolute;
-  left: 50%;
-  bottom: calc(100% + 0.8rem);
-  min-width: 150px;
-  transform: translateX(-50%);
-  border: 1px solid var(--sentra-app-border);
-  border-radius: 16px;
-  background: var(--sentra-app-panel);
-  padding: 0.7rem;
-  opacity: 0;
-  pointer-events: none;
-  box-shadow: var(--sentra-app-shadow);
-  transition: opacity var(--sentra-app-ease), transform var(--sentra-app-ease);
-}
-
-.sentra-auth-shell .sentra-map-marker:hover .sentra-map-tooltip {
-  opacity: 1;
-  transform: translateX(-50%) translateY(-2px);
-}
-
-.sentra-auth-shell .sentra-map-route {
-  stroke: color-mix(in srgb, var(--sentra-app-text) 34%, transparent);
-}
-
-.sentra-auth-shell .sentra-map-safe-zone {
-  fill: color-mix(in srgb, var(--sentra-app-text) 5%, transparent);
-  stroke: color-mix(in srgb, var(--sentra-app-text) 18%, transparent);
-}
-
-.sentra-auth-shell [class*="shadow-cyan"],
-.sentra-auth-shell [class*="shadow-blue"],
-.sentra-auth-shell [class*="shadow-indigo"],
-.sentra-auth-shell [class*="shadow-emerald"],
-.sentra-auth-shell [class*="shadow-purple"] {
-  box-shadow: var(--sentra-app-shadow) !important;
-}
-
-.sentra-auth-shell [class*="text-cyan-"],
-.sentra-auth-shell [class*="text-sky-"],
-.sentra-auth-shell [class*="text-blue-"],
-.sentra-auth-shell [class*="text-indigo-"],
-.sentra-auth-shell [class*="text-purple-"],
-.sentra-auth-shell [class*="text-emerald-"],
-.sentra-auth-shell [class*="text-green-"] {
-  color: var(--sentra-app-muted) !important;
-}
-
-.sentra-auth-shell [class*="border-cyan-"],
-.sentra-auth-shell [class*="border-sky-"],
-.sentra-auth-shell [class*="border-blue-"],
-.sentra-auth-shell [class*="border-indigo-"],
-.sentra-auth-shell [class*="border-purple-"],
-.sentra-auth-shell [class*="border-emerald-"],
-.sentra-auth-shell [class*="border-green-"] {
-  border-color: var(--sentra-app-border) !important;
-}
-
-.sentra-auth-shell [class*="bg-cyan-"],
-.sentra-auth-shell [class*="bg-sky-"],
-.sentra-auth-shell [class*="bg-blue-"],
-.sentra-auth-shell [class*="bg-indigo-"],
-.sentra-auth-shell [class*="bg-purple-"],
-.sentra-auth-shell [class*="bg-emerald-"],
-.sentra-auth-shell [class*="bg-green-"] {
-  background-color: var(--sentra-app-active) !important;
-}
-
-.sentra-auth-shell [class*="bg-[linear-gradient"],
-.sentra-auth-shell [class*="bg-[radial-gradient"],
-.sentra-auth-shell [class*="bg-gradient-to"] {
-  background: var(--sentra-app-panel-elevated) !important;
-}
-
-.sentra-auth-shell [class*="backdrop-blur"] {
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-}
-
-.sentra-auth-shell .sentra-copilot-root > button {
-  min-height: 3.1rem !important;
-  border: 1px solid var(--sentra-app-border-strong) !important;
-  border-radius: 999px !important;
-  background: var(--sentra-app-panel) !important;
-  color: var(--sentra-app-text) !important;
-  box-shadow: var(--sentra-app-shadow) !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-}
-
-.sentra-auth-shell .sentra-copilot-root > button:hover {
-  transform: translateY(-1px);
-  background: var(--sentra-app-hover) !important;
-}
-
-.sentra-auth-shell .sentra-copilot-root > button span:first-child {
-  background: var(--sentra-app-active) !important;
-  color: var(--sentra-app-text) !important;
-  box-shadow: none !important;
-}
-
-.sentra-auth-shell .sentra-copilot-root > button span:first-child span {
-  display: none !important;
-}
-
-.sentra-auth-shell #ask-sentra-panel {
-  border-color: var(--sentra-app-border) !important;
-  background: var(--sentra-app-panel) !important;
-  box-shadow: var(--sentra-app-shadow-lg) !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-}
-
-.sentra-auth-shell #ask-sentra-panel [class*="text-cyan"],
-.sentra-auth-shell #ask-sentra-panel [class*="text-white/"] {
-  color: var(--sentra-app-muted) !important;
-}
-
-.sentra-auth-shell #ask-sentra-panel h2,
-.sentra-auth-shell #ask-sentra-panel .text-white {
-  color: var(--sentra-app-text) !important;
-}
-
-.sentra-auth-shell #ask-sentra-panel [class*="bg-cyan"],
-.sentra-auth-shell #ask-sentra-panel [class*="bg-white/"],
-.sentra-auth-shell #ask-sentra-panel [class*="bg-black/"] {
-  background: var(--sentra-app-panel-elevated) !important;
-}
-
-@media (max-width: 1024px) {
-  .sentra-auth-shell .sentra-shell-main {
-    margin-left: 0 !important;
-  }
-}
-
-/* Final bug-fix layer: sidebar access, AI Council, and neutral Ask Sentra surfaces. */
-.sentra-auth-shell .sentra-app-sidebar,
-.sentra-auth-shell .sentra-luxury-sidebar,
-.sentra-auth-shell .sentra-phase12-sidebar {
-  display: flex !important;
-  max-height: calc(100vh - 40px);
-  overflow: hidden !important;
-}
-
-.sentra-auth-shell .sentra-sidebar-brand,
-.sentra-auth-shell .sentra-workspace-card {
-  flex: 0 0 auto;
-}
-
-.sentra-auth-shell .sentra-sidebar-nav-scroll {
-  flex: 1 1 auto !important;
-  min-height: 0 !important;
-  overflow-x: hidden !important;
-  overflow-y: auto !important;
-  overscroll-behavior: contain;
-  padding-right: 0.2rem;
-  scroll-behavior: smooth;
-  scrollbar-width: none;
-}
-
-.sentra-auth-shell .sentra-sidebar-nav-scroll::-webkit-scrollbar {
-  width: 0;
-  height: 0;
-}
-
-.sentra-auth-shell .sentra-sidebar-bottom {
-  position: sticky;
-  bottom: 0;
-  z-index: 2;
-  flex: 0 0 auto;
-  background: var(--sentra-app-panel) !important;
-}
-
-.sentra-auth-shell .sentra-shell-collapse {
-  display: flex !important;
-  min-height: 48px;
-  width: 100%;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 0.7rem;
-  border: 1px solid var(--sentra-app-border-strong) !important;
-  border-radius: 999px !important;
-  background: var(--sentra-app-panel-elevated) !important;
-  color: var(--sentra-app-text) !important;
-  opacity: 1 !important;
-  padding: 0 1rem;
-}
-
-.sentra-auth-shell .sentra-shell-collapse svg {
-  flex: 0 0 auto;
-  color: currentColor !important;
-}
-
-.sentra-auth-shell .sentra-shell-collapse:hover {
-  background: var(--sentra-app-hover) !important;
-  border-color: var(--sentra-app-border-strong) !important;
-  color: var(--sentra-app-text) !important;
-}
-
-.sentra-auth-shell .sentra-app-sidebar.is-collapsed .sentra-shell-collapse,
-.sentra-auth-shell .sentra-luxury-sidebar.is-collapsed .sentra-shell-collapse,
-.sentra-auth-shell .sentra-phase12-sidebar.is-collapsed .sentra-shell-collapse {
-  justify-content: center;
-  padding-inline: 0;
-}
-
-.sentra-auth-shell .sentra-ask-dock {
-  min-height: 52px;
-  border: 1px solid var(--sentra-app-border-strong);
-  border-radius: 999px;
-  background: var(--sentra-app-panel);
-  color: var(--sentra-app-text);
-  box-shadow: var(--sentra-app-shadow);
-  padding: 0.55rem 0.9rem;
-  transition: background var(--sentra-app-ease), border-color var(--sentra-app-ease), transform var(--sentra-app-ease);
-}
-
-.sentra-auth-shell .sentra-ask-dock:hover {
-  border-color: var(--sentra-app-border-strong);
-  background: var(--sentra-app-hover);
-}
-
-.sentra-auth-shell .sentra-ask-dock-icon {
-  position: relative;
-  display: flex;
-  width: 2.25rem;
-  height: 2.25rem;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid var(--sentra-app-border);
-  border-radius: 999px;
-  background: var(--sentra-app-active);
-  color: var(--sentra-app-text);
-  font-weight: 800;
-}
-
-.sentra-auth-shell .sentra-ask-dock-icon > span {
-  display: none;
-}
-
-.sentra-auth-shell .sentra-ask-panel {
-  border: 1px solid var(--sentra-app-border);
-  border-radius: 30px;
-  background: var(--sentra-app-panel);
-  box-shadow: var(--sentra-app-shadow-lg);
-  color: var(--sentra-app-text);
-}
-
-.sentra-auth-shell .sentra-ask-panel-header,
-.sentra-auth-shell .sentra-ask-panel-footer {
-  border-color: var(--sentra-app-border);
-  background: var(--sentra-app-panel-elevated);
-}
-
-.sentra-auth-shell .sentra-ask-panel-header {
-  border-bottom: 1px solid var(--sentra-app-border);
-}
-
-.sentra-auth-shell .sentra-ask-panel-footer {
-  border-top: 1px solid var(--sentra-app-border);
-}
-
-.sentra-auth-shell .sentra-ask-close,
-.sentra-auth-shell .sentra-ask-prompt,
-.sentra-auth-shell .sentra-ask-submit,
-.sentra-auth-shell .sentra-council-action {
-  border: 1px solid var(--sentra-app-border);
-  border-radius: 999px;
-  background: var(--sentra-app-panel);
-  color: var(--sentra-app-text);
-  font-size: 0.78rem;
-  font-weight: 700;
-  transition: background var(--sentra-app-ease), border-color var(--sentra-app-ease), transform var(--sentra-app-ease);
-}
-
-.sentra-auth-shell .sentra-ask-close,
-.sentra-auth-shell .sentra-ask-prompt {
-  padding: 0.45rem 0.75rem;
-}
-
-.sentra-auth-shell .sentra-ask-submit,
-.sentra-auth-shell .sentra-council-action {
-  padding: 0.75rem 1rem;
-}
-
-.sentra-auth-shell .sentra-council-action.is-secondary {
-  color: var(--sentra-app-muted);
-}
-
-.sentra-auth-shell .sentra-ask-close:hover,
-.sentra-auth-shell .sentra-ask-prompt:hover,
-.sentra-auth-shell .sentra-ask-submit:hover,
-.sentra-auth-shell .sentra-council-action:hover {
-  transform: translateY(-1px);
-  background: var(--sentra-app-hover);
-}
-
-.sentra-auth-shell .sentra-ask-input {
-  min-width: 0;
-  flex: 1 1 auto;
-  border: 1px solid var(--sentra-app-border);
-  border-radius: 999px;
-  background: var(--sentra-app-panel);
-  color: var(--sentra-app-text);
-  outline: none;
-  padding: 0.75rem 1rem;
-  font-size: 0.88rem;
-}
-
-.sentra-auth-shell .sentra-ask-input::placeholder {
-  color: var(--sentra-app-soft);
-}
-
-.sentra-auth-shell .sentra-ask-input:focus {
-  border-color: var(--sentra-app-border-strong);
-}
-
-.sentra-auth-shell .sentra-ask-message {
-  border: 1px solid var(--sentra-app-border);
-  border-radius: 24px;
-  background: var(--sentra-app-panel-elevated);
-  color: var(--sentra-app-muted);
-  padding: 0.8rem 1rem;
-  font-size: 0.88rem;
-  line-height: 1.65;
-}
-
-.sentra-auth-shell .sentra-ask-message.is-user {
-  margin-left: 2rem;
-  color: var(--sentra-app-text);
-}
-
-.sentra-auth-shell .sentra-ask-thinking {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  border: 1px solid var(--sentra-app-border);
-  border-radius: 999px;
-  background: var(--sentra-app-panel-elevated);
-  color: var(--sentra-app-muted);
-  padding: 0.5rem 0.9rem;
-  font-size: 0.75rem;
-  font-weight: 700;
-}
-
-.sentra-auth-shell .sentra-ask-thinking > span {
-  width: 0.5rem;
-  height: 0.5rem;
-  border-radius: 999px;
-  background: var(--sentra-app-text);
-  animation: sentraSoftPulse 1.4s ease-in-out infinite;
-}
-
-@keyframes sentraSoftPulse {
-  0%,
-  100% {
-    opacity: 0.42;
-  }
-  50% {
-    opacity: 1;
-  }
-}
-
-.sentra-auth-shell .sentra-ai-council-hero,
-.sentra-auth-shell .sentra-council-action {
-  color: var(--sentra-app-text);
-}
-
-@media (max-height: 820px) {
-  .sentra-auth-shell .sentra-app-sidebar,
-  .sentra-auth-shell .sentra-luxury-sidebar,
-  .sentra-auth-shell .sentra-phase12-sidebar {
-    gap: 0.75rem;
-    padding: 0.9rem;
-  }
-
-  .sentra-auth-shell .sentra-workspace-card {
-    padding: 0.85rem;
-  }
-
-  .sentra-auth-shell .sentra-luxury-nav-item,
-  .sentra-auth-shell .sentra-shell-nav-item {
-    min-height: 48px;
-  }
-}
-
-/* Final sidebar scrolling fix: 100vh shell with a dedicated scrollable menu region. */
-.sentra-auth-shell {
-  height: 100vh;
-  min-height: 0;
-  overflow: hidden;
-}
-
+/* SIDEBAR */
 .sentra-auth-shell .sentra-app-sidebar,
 .sentra-auth-shell .sentra-luxury-sidebar,
 .sentra-auth-shell .sentra-phase12-sidebar {
@@ -4916,30 +3560,51 @@ html[data-theme="light"] .sentra-auth-shell [class*="border-white/"] {
   overflow: hidden !important;
   gap: 0 !important;
   border-radius: 0 28px 28px 0 !important;
-  padding: 1rem !important;
+  padding: 1.15rem !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-left: none !important;
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.68) 0%, rgba(3, 7, 18, 0.82) 100%) !important;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
+  backdrop-filter: blur(28px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(180%) !important;
 }
 
 .sentra-auth-shell .sentra-app-sidebar.is-collapsed,
 .sentra-auth-shell .sentra-luxury-sidebar.is-collapsed,
 .sentra-auth-shell .sentra-phase12-sidebar.is-collapsed {
   width: 88px !important;
+  padding-inline: 0.8rem !important;
 }
 
 .sentra-auth-shell .sentra-sidebar-brand {
   position: sticky;
   top: 0;
   z-index: 4;
-  margin-bottom: 1rem;
-  flex: none !important;
-  background: var(--sentra-app-panel) !important;
+  margin-bottom: 0.85rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: transparent !important;
+}
+
+.sentra-auth-shell .sentra-sidebar-mark {
+  border: 1px solid rgba(56, 189, 248, 0.4) !important;
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.25) 0%, rgba(99, 102, 241, 0.2) 100%) !important;
+  color: #38bdf8 !important;
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.25) !important;
 }
 
 .sentra-auth-shell .sentra-workspace-card {
   position: sticky;
-  top: 72px;
+  top: 68px;
   z-index: 3;
-  margin-bottom: 1rem;
-  flex: none !important;
+  margin-bottom: 0.85rem;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 20px !important;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.015) 100%) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  padding: 0.95rem;
 }
 
 .sentra-auth-shell .sentra-sidebar-nav-scroll {
@@ -4949,87 +3614,243 @@ html[data-theme="light"] .sentra-auth-shell [class*="border-white/"] {
   overflow-x: hidden !important;
   overflow-y: auto !important;
   overscroll-behavior: contain;
-  padding-right: 0.35rem;
+  padding-right: 0.25rem;
   padding-bottom: 1rem;
   scroll-behavior: smooth;
-  scrollbar-color: var(--sentra-app-border-strong) transparent;
-  scrollbar-gutter: stable;
   scrollbar-width: thin;
-  -webkit-overflow-scrolling: touch;
-  pointer-events: auto !important;
-  touch-action: pan-y;
-}
-
-.sentra-auth-shell .sentra-sidebar-nav-scroll:focus {
-  outline: none;
-}
-
-.sentra-auth-shell .sentra-sidebar-nav-scroll:focus-visible {
-  box-shadow: inset 0 0 0 1px var(--sentra-app-border-strong);
+  scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
 }
 
 .sentra-auth-shell .sentra-sidebar-nav-scroll::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 4px;
 }
-
-.sentra-auth-shell .sentra-sidebar-nav-scroll::-webkit-scrollbar-track {
-  background: transparent;
-}
-
 .sentra-auth-shell .sentra-sidebar-nav-scroll::-webkit-scrollbar-thumb {
-  border: 2px solid transparent;
+  background: rgba(255, 255, 255, 0.15);
   border-radius: 999px;
-  background: var(--sentra-app-border-strong);
-  background-clip: content-box;
-}
-
-.sentra-auth-shell .sentra-sidebar-nav-scroll::-webkit-scrollbar-thumb:hover {
-  background: var(--sentra-app-muted);
-  background-clip: content-box;
-}
-
-.sentra-auth-shell .sentra-sidebar-section:first-child {
-  margin-top: 0 !important;
 }
 
 .sentra-auth-shell .sentra-sidebar-bottom {
-  position: sticky !important;
-  bottom: 0 !important;
+  position: sticky;
+  bottom: 0;
   z-index: 4;
-  margin-top: 0 !important;
-  flex: none !important;
-  padding-top: 0.9rem !important;
-  background: var(--sentra-app-panel) !important;
+  margin-top: 0;
+  padding-top: 0.85rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background: transparent !important;
 }
 
-.sentra-auth-shell .sentra-mobile-nav-backdrop {
-  pointer-events: none !important;
+.sentra-auth-shell .sentra-shell-collapse {
+  display: flex !important;
+  min-height: 44px;
+  width: 100%;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.7rem;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 999px !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+  color: rgba(255, 255, 255, 0.7) !important;
+  backdrop-filter: blur(14px) !important;
+  padding: 0 0.9rem;
+  transition: all 0.2s ease;
 }
 
-.sentra-auth-shell .sentra-mobile-nav-backdrop.is-open {
-  pointer-events: auto !important;
+.sentra-auth-shell .sentra-shell-collapse:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(255, 255, 255, 0.16) !important;
+  color: #ffffff !important;
 }
 
-.sentra-auth-shell .grid-layer,
-.sentra-auth-shell .depth-glow,
-.sentra-auth-shell .cursor-glow {
-  pointer-events: none !important;
+.sentra-auth-shell .sentra-app-sidebar.is-collapsed .sentra-shell-collapse,
+.sentra-auth-shell .sentra-luxury-sidebar.is-collapsed .sentra-shell-collapse,
+.sentra-auth-shell .sentra-phase12-sidebar.is-collapsed .sentra-shell-collapse {
+  justify-content: center;
+  padding-inline: 0;
 }
 
-.sentra-auth-shell .sentra-shell-main {
-  height: 100vh !important;
-  min-height: 0 !important;
-  margin-left: calc(var(--sentra-sidebar-width) + 24px) !important;
-  overflow: hidden !important;
+.sentra-auth-shell .sentra-luxury-nav-item,
+.sentra-auth-shell .sentra-shell-nav-item {
+  min-height: 46px;
+  border: 1px solid transparent !important;
+  border-radius: 14px !important;
+  color: rgba(255, 255, 255, 0.6) !important;
+  transition: all 0.2s ease;
 }
 
-.sentra-auth-shell .sentra-shell-scroll {
-  min-height: 0 !important;
-  overflow-x: hidden !important;
-  overflow-y: auto !important;
+.sentra-auth-shell .sentra-luxury-nav-item:hover,
+.sentra-auth-shell .sentra-shell-nav-item:hover {
+  transform: translateX(2px);
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  background: rgba(255, 255, 255, 0.06) !important;
 }
 
+.sentra-auth-shell .sentra-luxury-nav-item.is-active,
+.sentra-auth-shell .sentra-shell-nav-item.is-active {
+  color: #ffffff !important;
+  border-color: rgba(56, 189, 248, 0.35) !important;
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.16) 0%, rgba(99, 102, 241, 0.08) 100%) !important;
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.18) !important;
+}
+
+.sentra-auth-shell .sentra-shell-active-indicator {
+  display: block !important;
+  width: 3px;
+  height: 20px;
+  border-radius: 999px;
+  background: #38bdf8;
+  box-shadow: 0 0 12px #38bdf8;
+  margin-left: auto;
+}
+
+/* CARDS AND GLASS SURFACES */
+.sentra-auth-shell .glass-panel,
+.sentra-auth-shell .glass-nav,
+.sentra-auth-shell .sentra-phase12-hero,
+.sentra-auth-shell .sentra-workspace-hero,
+.sentra-auth-shell .sentra-phase12-panel,
+.sentra-auth-shell .sentra-phase12-chart-panel,
+.sentra-auth-shell .sentra-phase12-kpi-card,
+.sentra-auth-shell .sentra-obsidian-panel,
+.sentra-auth-shell .sentra-empty-state-premium,
+.sentra-auth-shell .sentra-ai-recommendations-feed,
+.sentra-auth-shell .sentra-crisis-command-bar,
+.sentra-auth-shell .sentra-obsidian-command-bar {
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.015) 100%) !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
+  backdrop-filter: blur(24px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+}
+
+.sentra-auth-shell .sentra-workspace-hero {
+  min-height: 360px;
+  border-radius: 32px;
+  padding: clamp(1.75rem, 3.2vw, 2.75rem) !important;
+}
+
+.sentra-auth-shell .sentra-phase12-hero-title {
+  max-width: 780px;
+  font-family: var(--font-display), sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+}
+
+.sentra-auth-shell .sentra-phase7-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.sentra-auth-shell .sentra-phase12-kpi-pill {
+  min-height: 108px;
+  border-radius: 22px;
+  padding: 1.1rem;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.015) 100%) !important;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.sentra-auth-shell .sentra-phase12-kpi-pill:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.18) !important;
+  box-shadow: 0 16px 44px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+}
+
+/* ASK SENTRA */
+.sentra-auth-shell .sentra-ask-dock {
+  min-height: 52px;
+  border: 1px solid rgba(56, 189, 248, 0.3) !important;
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(16, 24, 44, 0.8) 0%, rgba(8, 13, 28, 0.9) 100%) !important;
+  color: #ffffff;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4), 0 0 24px rgba(56, 189, 248, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  padding: 0.55rem 1rem;
+  transition: all 0.2s ease;
+}
+
+.sentra-auth-shell .sentra-ask-dock:hover {
+  transform: translateY(-2px);
+  border-color: rgba(56, 189, 248, 0.5) !important;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), 0 0 32px rgba(56, 189, 248, 0.3) !important;
+}
+
+.sentra-auth-shell #ask-sentra-panel {
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  border-radius: 28px !important;
+  background: linear-gradient(145deg, rgba(16, 24, 44, 0.78) 0%, rgba(8, 13, 28, 0.88) 100%) !important;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6), 0 0 36px rgba(56, 189, 248, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+  backdrop-filter: blur(32px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(32px) saturate(180%) !important;
+}
+
+.sentra-auth-shell .sentra-ask-panel-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.sentra-auth-shell .sentra-ask-panel-footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.sentra-auth-shell .sentra-ask-input {
+  min-width: 0;
+  flex: 1 1 auto;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.35);
+  color: #ffffff;
+  outline: none;
+  padding: 0.75rem 1rem;
+  font-size: 0.88rem;
+  backdrop-filter: blur(12px);
+  transition: border-color 0.2s ease;
+}
+
+.sentra-auth-shell .sentra-ask-input:focus {
+  border-color: rgba(56, 189, 248, 0.4);
+}
+
+.sentra-auth-shell .sentra-ask-prompt {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.75rem;
+  padding: 0.4rem 0.75rem;
+  transition: all 0.2s ease;
+}
+
+.sentra-auth-shell .sentra-ask-prompt:hover {
+  background: rgba(255, 255, 255, 0.09);
+  color: #ffffff;
+  border-color: rgba(56, 189, 248, 0.3);
+}
+
+.sentra-auth-shell .sentra-ask-submit {
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.3) 0%, rgba(99, 102, 241, 0.25) 100%);
+  color: #ffffff;
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 0.65rem 1.15rem;
+  transition: all 0.2s ease;
+}
+
+.sentra-auth-shell .sentra-ask-submit:hover:not(:disabled) {
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.45) 0%, rgba(99, 102, 241, 0.35) 100%);
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.3);
+}
+
+/* RESPONSIVE */
 @media (max-width: 1024px) {
   .sentra-auth-shell .sentra-app-sidebar,
   .sentra-auth-shell .sentra-luxury-sidebar,
@@ -5039,6 +3860,7 @@ html[data-theme="light"] .sentra-auth-shell [class*="border-white/"] {
   .sentra-auth-shell .sentra-phase12-sidebar.is-collapsed {
     width: min(300px, 92vw) !important;
     transform: translateX(calc(-100% - 16px));
+    transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .sentra-auth-shell .sentra-app-sidebar.is-mobile-open,
@@ -5052,24 +3874,14 @@ html[data-theme="light"] .sentra-auth-shell [class*="border-white/"] {
   }
 }
 
-@media (max-height: 740px) {
-  .sentra-auth-shell .sentra-app-sidebar,
-  .sentra-auth-shell .sentra-luxury-sidebar,
-  .sentra-auth-shell .sentra-phase12-sidebar {
-    padding: 0.8rem !important;
+@media (max-width: 768px) {
+  .sentra-auth-shell .sentra-workspace-hero {
+    min-height: auto;
+    padding: 1.35rem !important;
+    border-radius: 26px;
   }
 
-  .sentra-auth-shell .sentra-sidebar-brand,
-  .sentra-auth-shell .sentra-workspace-card {
-    margin-bottom: 0.65rem;
-  }
-
-  .sentra-auth-shell .sentra-workspace-card {
-    padding: 0.75rem !important;
-  }
-
-  .sentra-auth-shell .sentra-shell-nav-item,
-  .sentra-auth-shell .sentra-luxury-nav-item {
-    min-height: 46px !important;
+  .sentra-auth-shell .sentra-phase7-kpi-grid {
+    grid-template-columns: 1fr;
   }
 }

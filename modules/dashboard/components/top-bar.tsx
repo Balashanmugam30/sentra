@@ -174,43 +174,34 @@ export function TopBar({ onOpenCommand, onOpenNav }: TopBarProps) {
 
   return (
     <>
-      <header className="sentra-topbar sticky top-0 z-50 px-4 py-4 md:px-6 lg:px-8">
-        <div className="sentra-topbar-inner glass-panel mx-auto flex min-h-16 w-full max-w-[1600px] items-center justify-between gap-4 rounded-[30px] px-4 py-3 md:px-5">
+      <header className="sentra-topbar sticky top-0 z-50 px-4 py-3.5 md:px-6 lg:px-8">
+        <div className="sentra-topbar-inner glass-panel mx-auto flex min-h-16 w-full max-w-[1600px] items-center justify-between gap-4 rounded-[26px] border border-white/[0.12] bg-[linear-gradient(145deg,rgba(16,24,44,0.68)_0%,rgba(8,13,28,0.78)_100%)] px-4 py-2.5 shadow-[0_16px_48px_rgba(0,0,0,0.5),0_0_24px_rgba(56,189,248,0.06),inset_0_1px_0_rgba(255,255,255,0.2)] backdrop-blur-2xl md:px-5">
           <div className="sentra-topbar-breadcrumb flex min-w-0 items-center gap-3">
             <button
               aria-label="Open navigation"
-              className="sentra-mobile-menu-button inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.06] text-white/78 transition hover:border-cyan-200/24 hover:bg-white/10 lg:hidden"
+              className="sentra-mobile-menu-button inline-flex h-10 w-10 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.06] text-white/78 transition hover:border-cyan-200/24 hover:bg-white/10 lg:hidden"
               onClick={onOpenNav}
               type="button"
             >
               <span className="h-4 w-4 border-y-2 border-current before:mt-[5px] before:block before:border-t-2 before:border-current" />
             </button>
             <div className="min-w-0">
-              <p className="sentra-ui-label text-[0.62rem] font-bold uppercase tracking-[0.26em] text-white/48">
-                Current workspace
-              </p>
-              <div className="mt-1 flex min-w-0 flex-wrap items-center gap-2">
-                <span className="sentra-topbar-mode-chip rounded-full border border-white/12 bg-white/[0.055] px-2.5 py-1 text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-white/78">
+              <nav
+                aria-label="Breadcrumb"
+                className="flex min-w-0 items-center gap-2 text-xs font-semibold text-white/90"
+              >
+                <span className="font-mono text-[0.66rem] font-bold uppercase tracking-wider text-cyan-300 bg-cyan-500/10 border border-cyan-400/25 px-2.5 py-0.5 rounded-full shadow-[0_0_12px_rgba(56,189,248,0.15)]">
                   {workspaceModeLabels[workspaceMode]}
                 </span>
-                <nav
-                  aria-label="Breadcrumb"
-                  className="flex min-w-0 items-center gap-2 text-sm font-semibold text-white"
-                >
-                  {breadcrumb.map((crumb, index) => (
-                    <span className="flex min-w-0 items-center gap-2" key={`${crumb}-${index}`}>
-                      {index > 0 ? <span className="text-white/22">/</span> : null}
-                      <span className={index === breadcrumb.length - 1 ? "truncate" : "text-white/48"}>
-                        {crumb}
-                      </span>
-                    </span>
-                  ))}
-                </nav>
-              </div>
+                <span className="text-white/25">/</span>
+                <span className="truncate font-display text-sm font-semibold tracking-tight text-white">
+                  {breadcrumb[breadcrumb.length - 1] ?? "Dashboard"}
+                </span>
+              </nav>
             </div>
           </div>
 
-          <button className="sentra-command-search" onClick={onOpenCommand} type="button">
+          <button className="sentra-command-search hidden md:flex" onClick={onOpenCommand} type="button">
             <span className="sentra-search-icon" aria-hidden="true">
               <svg
                 className="h-5 w-5"
@@ -232,6 +223,25 @@ export function TopBar({ onOpenCommand, onOpenNav }: TopBarProps) {
           </button>
 
           <div className="sentra-topbar-right relative flex shrink-0 items-center gap-2 md:gap-3">
+              <button
+                aria-label="Search commands"
+                className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/[0.06] text-white/70 transition hover:bg-white/12 hover:text-white md:hidden"
+                onClick={onOpenCommand}
+                type="button"
+              >
+                <svg
+                  className="h-4 w-4"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  viewBox="0 0 24 24"
+                >
+                  <circle cx="11" cy="11" r="6.5" />
+                  <path d="m16 16 4 4" />
+                </svg>
+              </button>
               <div
                 aria-label="Quick mode switch"
                 className="sentra-topbar-mode-switcher hidden items-center gap-1 rounded-full border border-white/10 bg-white/[0.04] p-1 backdrop-blur-xl xl:flex"
@@ -259,7 +269,7 @@ export function TopBar({ onOpenCommand, onOpenNav }: TopBarProps) {
               </div>
               <span
                 aria-label={`Realtime status ${realtimeBadge.label}`}
-                className={`sentra-system-status-chip is-${realtimeBadge.tone}`}
+                className={`sentra-system-status-chip is-${realtimeBadge.tone} hidden sm:inline-flex`}
                 suppressHydrationWarning
               >
                 <span className="sentra-system-status-dot" />
