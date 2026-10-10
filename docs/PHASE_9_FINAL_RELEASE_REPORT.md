@@ -127,14 +127,18 @@ Sentra's productization and commercial strategy are detailed in [`docs/PRODUCT_O
 
 ### 1. Backend Automated Test Pyramid (Pytest)
 ```
-tests/test_operational_e2e_path.py .................. [ 7 passed ]
-tests/test_evidence_prediction_contracts.py ......... [ 5 passed ]
+tests/test_demo_auth_and_session.py ................. [ 5 passed ]
+tests/test_operational_e2e_path.py .................. [ 4 passed ]
+tests/test_evidence_prediction_contracts.py ......... [ 6 passed ]
 tests/test_security_hardening.py .................... [ 14 passed ]
 tests/test_operations_and_crisis_orchestration.py ... [ 23 passed ]
-tests/test_data_plane_and_prediction.py ............. [ 20 passed ]
-======================= 69 passed in 24.27s =======================
+tests/test_data_plane_and_mlops.py .................. [ 8 passed ]
+tests/test_enterprise_platform.py ................... [ 3 passed ]
+tests/test_intelligence_layer.py .................... [ 6 passed ]
+tests/test_startup_checks.py ........................ [ 5 passed ]
+======================= 74 passed in 25.18s =======================
 ```
-**Pass Rate: 100% (69 / 69 tests passing with zero failures or regressions).**
+**Pass Rate: 100% (74 / 74 tests passing with zero failures or regressions).**
 
 ### 2. Frontend Production Compilation (Next.js 16 + Turbopack)
 - **Routes Compiled:** 163 unique static and dynamic routes.
@@ -186,7 +190,7 @@ RELEASE CLASSIFICATION:
   - Tier C (PRODUCTION_READY):  🛑 BLOCKED (Gated on Managed DB, S3 Backups, AI Key & Actuators)
 
 VERIFICATION SUMMARY:
-  - Backend Test Pyramid:       69 / 69 Passed (100%)
+  - Backend Test Pyramid:       74 / 74 Passed (100%)
   - Frontend Build:             163 / 163 Routes Clean
   - Live AI Provider State:     Verified RULE_BASED_FALLBACK (GEMINI_API_KEY unconfigured)
   - Accessibility:              WCAG 2.2 AA Compliant

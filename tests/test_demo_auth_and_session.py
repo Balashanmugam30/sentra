@@ -1,7 +1,7 @@
 # tests/test_demo_auth_and_session.py
 """
-Regression tests for Sentra demo authentication, session retention,
-and synthetic demo token acceptance.
+Zero-trust security tests for Sentra demo authentication, session retention,
+cryptographic token validation, and strict rejection of synthetic bypass tokens.
 """
 
 from __future__ import annotations
@@ -19,7 +19,7 @@ def client() -> TestClient:
 
 
 def test_demo_user_login_seeded(client: TestClient) -> None:
-    """Test that POST /auth/login succeeds for all canonical demo accounts."""
+    """Test that POST /auth/login succeeds for canonical demo accounts with real JWTs."""
     demo_accounts = [
         ("admin@sentra.demo", "admin"),
         ("manager@sentra.demo", "security_manager"),
@@ -41,59 +41,96 @@ def test_demo_user_login_seeded(client: TestClient) -> None:
         assert data["user"]["email"] == email
         assert data["user"]["role"] == expected_role
 
+        # Verify access token is a real JWT (header.payload.signature)
+        token_parts = data["access_token"].split(".")
+        assert len(token_parts) == 3, f"Expected signed JWT, got: {data['access_token']}"
 
-def test_demo_token_header_accepted(client: TestClient) -> None:
+
+def test_synthetic_tokens_strictly_rejected_401(client: TestClient) -> None:
     """
-    Test that endpoints requiring auth accept client-side synthetic demo tokens
-    (e.g., demo-token-admin, demo-token-manager, demo-token-responder) without HTTP 401.
+    Test Gate 4 zero-trust enforcement: synthetic demo tokens
+    (e.g., demo-token-admin, demo-token-manager) must be strictly rejected with HTTP 401.
     """
-    roles = [
-        "admin",
-        "manager",
-        "security_manager",
-        "commander",
-        "staff",
-        "responder",
-        "analyst",
+    synthetic_tokens = [
+        "demo-token-admin",
+        "demo-token-manager",
+        "demo-token-security_manager",
+        "demo-token-commander",
+        "demo-token-staff",
+        "demo-token-responder",
+        "demo-token-analyst",
+        "demo-token-restored",
     ]
 
-    for role in roles:
-        demo_token = f"demo-token-{role}"
-        # Test protected me endpoint (accessible to all authenticated users)
+    for token in synthetic_tokens:
         response = client.get(
             "/auth/me",
-            headers={"Authorization": f"Bearer {demo_token}"},
+            headers={"Authorization": f"Bearer {token}"},
         )
-        assert response.status_code == 200, f"Synthetic demo token rejected for {role}: {response.text}"
-        payload = response.json()
-        assert payload["email"].endswith("@sentra.demo")
-
-    # Test /geo/live for roles that have geo permissions (admin, manager, commander)
-    for privileged_role in ["admin", "manager", "security_manager", "commander"]:
-        demo_token = f"demo-token-{privileged_role}"
-        geo_res = client.get(
-            "/geo/live",
-            headers={"Authorization": f"Bearer {demo_token}"},
-        )
-        assert geo_res.status_code == 200, f"/geo/live rejected demo token {demo_token}"
+        assert (
+            response.status_code == 401
+        ), f"Zero-trust violation: synthetic token '{token}' was accepted (got {response.status_code})"
 
 
-def test_demo_refresh_endpoint(client: TestClient) -> None:
-    """Test that /auth/refresh accepts demo-refresh-* tokens."""
+def test_synthetic_refresh_token_rejected_401(client: TestClient) -> None:
+    """Test that /auth/refresh strictly rejects synthetic demo-refresh-* tokens."""
     response = client.post(
         "/auth/refresh",
         json={"refresh_token": "demo-refresh-admin"},
     )
-    assert response.status_code == 200, f"Refresh failed: {response.text}"
-    data = response.json()
-    assert "access_token" in data
-    assert "refresh_token" in data
+    assert (
+        response.status_code == 401
+    ), f"Zero-trust violation: synthetic refresh token was accepted (got {response.status_code})"
 
 
-def test_invalid_token_returns_401(client: TestClient) -> None:
-    """Test that genuinely invalid tokens are correctly rejected with 401."""
-    response = client.get(
-        "/auth/me",
-        headers={"Authorization": "Bearer totally-invalid-random-garbage-token"},
+def test_wrong_password_rejected(client: TestClient) -> None:
+    """Test that incorrect passwords are rejected with 401."""
+    response = client.post(
+        "/auth/login",
+        json={"email": "admin@sentra.demo", "password": "WrongPassword999!"},
     )
     assert response.status_code == 401
+
+
+def test_real_jwt_lifecycle(client: TestClient) -> None:
+    """Test full authenticated lifecycle: login, access protected route, refresh token."""
+    login_res = client.post(
+        "/auth/login",
+        json={"email": "admin@sentra.demo", "password": "SentraDemo!2026"},
+    )
+    assert login_res.status_code == 200
+    login_data = login_res.json()
+    access_token = login_data["access_token"]
+    refresh_token = login_data["refresh_token"]
+
+    # Access /auth/me with genuine JWT
+    me_res = client.get(
+        "/auth/me",
+        headers={"Authorization": f"Bearer {access_token}"},
+    )
+    assert me_res.status_code == 200
+    assert me_res.json()["email"] == "admin@sentra.demo"
+
+    # Access /geo/live with genuine JWT
+    geo_res = client.get(
+        "/geo/live",
+        headers={"Authorization": f"Bearer {access_token}"},
+    )
+    assert geo_res.status_code == 200
+
+    # Refresh session using genuine refresh token
+    refresh_res = client.post(
+        "/auth/refresh",
+        json={"refresh_token": refresh_token},
+    )
+    assert refresh_res.status_code == 200
+    refreshed_data = refresh_res.json()
+    new_access_token = refreshed_data["access_token"]
+    assert new_access_token != access_token
+
+    # Verify new token works
+    me_refreshed = client.get(
+        "/auth/me",
+        headers={"Authorization": f"Bearer {new_access_token}"},
+    )
+    assert me_refreshed.status_code == 200

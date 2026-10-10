@@ -21,7 +21,7 @@ Sentra v2.5.0 has undergone end-to-end verification across automated testing, st
 +------------------------------------+-------------------+----------------+
 | VERIFICATION DIMENSION             | STATUS            | SCORE / VALUE  |
 +------------------------------------+-------------------+----------------+
-| Automated Backend Test Pyramid     | PASS              | 69 / 69 (100%) |
+| Automated Backend Test Pyramid     | PASS              | 74 / 74 (100%) |
 | Frontend Production Compilation    | PASS              | 163/163 Routes |
 | Static Code Analysis (Ruff/Types)  | PASS              | Clean          |
 | WCAG 2.2 AA Accessibility Audit    | PASS              | 100% Compliant |
@@ -41,12 +41,16 @@ Executed via Python 3.12 and Pytest:
 
 | Test Suite File | Test Scope | Tests Run | Passed | Failed |
 | :--- | :--- | :---: | :---: | :---: |
-| [`tests/test_operational_e2e_path.py`](file:///c:/Users/balashanmugam/OneDrive/Desktop/Projects/Sentra%20Clean/tests/test_operational_e2e_path.py) | Full operational golden path, Two-Person Integrity, proposal approval, idempotent replay, kill-switch trip/block, rejection terminal state | 7 | 7 | 0 |
-| [`tests/test_evidence_prediction_contracts.py`](file:///c:/Users/balashanmugam/OneDrive/Desktop/Projects/Sentra%20Clean/tests/test_evidence_prediction_contracts.py) | Sensor freshness aging, cross-modal conflict dampening, hardware honesty (`UNCONFIGURED`), what-if comparison, all 5 deterministic scenarios | 5 | 5 | 0 |
+| [`tests/test_demo_auth_and_session.py`](file:///c:/Users/balashanmugam/OneDrive/Desktop/Projects/Sentra%20Clean/tests/test_demo_auth_and_session.py) | Zero-trust authentication, fail-closed synthetic token rejection, Bcrypt password verification, real JWT access and refresh lifecycle | 5 | 5 | 0 |
+| [`tests/test_operational_e2e_path.py`](file:///c:/Users/balashanmugam/OneDrive/Desktop/Projects/Sentra%20Clean/tests/test_operational_e2e_path.py) | Full operational golden path, Two-Person Integrity, proposal approval, idempotent replay, kill-switch trip/block, rejection terminal state | 4 | 4 | 0 |
+| [`tests/test_evidence_prediction_contracts.py`](file:///c:/Users/balashanmugam/OneDrive/Desktop/Projects/Sentra%20Clean/tests/test_evidence_prediction_contracts.py) | Sensor freshness aging, cross-modal conflict dampening, hardware honesty (`UNCONFIGURED`), what-if comparison, all 5 deterministic scenarios | 6 | 6 | 0 |
 | [`tests/test_security_hardening.py`](file:///c:/Users/balashanmugam/OneDrive/Desktop/Projects/Sentra%20Clean/tests/test_security_hardening.py) | Zero-trust RBAC, BOLA isolation, probe separation, TPI self-approval prevention, privileged kill-switch reset, SSRF blocking, SQLite backup & restore rehearsals, corrupted backup safety | 14 | 14 | 0 |
 | [`tests/test_operations_and_crisis_orchestration.py`](file:///c:/Users/balashanmugam/OneDrive/Desktop/Projects/Sentra%20Clean/tests/test_operations_and_crisis_orchestration.py) | Crisis playbooks (Fire, Gas, Crowd, Outage), autonomy modes, proposal hash binding, digital twin sandbox, adapter execution | 23 | 23 | 0 |
-| [`tests/test_data_plane_and_prediction.py`](file:///c:/Users/balashanmugam/OneDrive/Desktop/Projects/Sentra%20Clean/tests/test_data_plane_and_prediction.py) | Data plane schema validation, physical range enforcement, feature engineering, multi-task calibrated prediction, shadow mode, PSI drift | 20 | 20 | 0 |
-| **TOTAL** | **Comprehensive Multi-Tier Test Pyramid** | **69** | **69** | **0** |
+| [`tests/test_data_plane_and_mlops.py`](file:///c:/Users/balashanmugam/OneDrive/Desktop/Projects/Sentra%20Clean/tests/test_data_plane_and_mlops.py) | Data plane schema validation, physical range enforcement, feature engineering, multi-task calibrated prediction, shadow mode, PSI drift | 8 | 8 | 0 |
+| [`tests/test_enterprise_platform.py`](file:///c:/Users/balashanmugam/OneDrive/Desktop/Projects/Sentra%20Clean/tests/test_enterprise_platform.py) | Enterprise multi-tenancy, license key limits, audit trail export | 3 | 3 | 0 |
+| [`tests/test_intelligence_layer.py`](file:///c:/Users/balashanmugam/OneDrive/Desktop/Projects/Sentra%20Clean/tests/test_intelligence_layer.py) | Multi-agent deliberation, evidence DAG, safety policy | 6 | 6 | 0 |
+| [`tests/test_startup_checks.py`](file:///c:/Users/balashanmugam/OneDrive/Desktop/Projects/Sentra%20Clean/tests/test_startup_checks.py) | Production fail-fast startup checks, JWT secret entropy | 5 | 5 | 0 |
+| **TOTAL** | **Comprehensive Multi-Tier Test Pyramid** | **74** | **74** | **0** |
 
 *Execution Duration: 24.27 seconds.*
 

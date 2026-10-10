@@ -110,20 +110,20 @@ export function useAuth() {
     setAuthLoading();
     const localSession = getLocalAuthSession();
 
-    if (localSession?.user) {
+    if (localSession?.user && localSession?.accessToken) {
       const now = Date.now();
       const existingExpiresAt = localSession.accessTokenExpiresAt
         ? new Date(localSession.accessTokenExpiresAt).getTime()
         : NaN;
-      const safeExpiresAt =
-        !Number.isNaN(existingExpiresAt) && existingExpiresAt > now + 60_000
-          ? localSession.accessTokenExpiresAt
-          : expirationFromNow(86400);
+      if (!Number.isNaN(existingExpiresAt) && existingExpiresAt <= now) {
+        clearLocalAuthState();
+        return { ok: false as const };
+      }
 
       applyAuthSession({
-        accessToken: localSession.accessToken ?? "demo-token-restored",
+        accessToken: localSession.accessToken,
         refreshToken: localSession.refreshToken,
-        expiresAt: safeExpiresAt,
+        expiresAt: localSession.accessTokenExpiresAt ?? expirationFromNow(86400),
         refreshedAt: localSession.tokenRefreshedAt ?? new Date().toISOString(),
         user: {
           ...localSession.user,
@@ -180,7 +180,6 @@ export function useAuth() {
 
   const login = useCallback(
     async (payload: LoginPayload, options?: AuthSessionOptions) => {
-      // 1. Try real backend login first so the operator receives genuine server JWTs
       try {
         const result = await loginRequest(payload);
         if (result.ok && result.data) {
@@ -194,118 +193,22 @@ export function useAuth() {
           });
           return result;
         }
-      } catch {
-        // Backend unavailable, fallback to local/demo user below
-      }
-
-      const demoCredential = findDemoCredential(payload.email);
-      if (
-        demoCredential &&
-        (!payload.password ||
-          payload.password === demoCredential.password ||
-          payload.password === "SentraDemo!2026" ||
-          payload.password === "Admin12345!" ||
-          payload.password.length >= 6)
-      ) {
-        const demoUser: BackendAuthUser = {
-          id: `usr_${demoCredential.role}_demo`,
-          name: demoCredential.label,
-          email: demoCredential.email,
-          role: demoCredential.role,
-          permissions:
-            demoCredential.role === "admin"
-              ? ALL_SECURITY_PERMISSIONS
-              : ROLE_PERMISSIONS[demoCredential.role] ?? ALL_SECURITY_PERMISSIONS,
-          accessible_modules: [
-            "all",
-            "dashboard",
-            "command",
-            "executive",
-            "crisis",
-            "incidents",
-            "live-twin",
-            "ai-council",
-            "map",
-            "analytics",
-            "mobile",
-            "iot",
-            "security",
-            "operations",
-          ],
-          tenant_id: "tenant-sentra-global",
-          organization_name: "Sentra Global Operations",
-          organization_slug: "sentra-global",
-          org_role: "commander",
-          plan: "enterprise_defense",
-          last_login: new Date().toISOString(),
-        };
-        const mapped = mapBackendUserToAuthUser(demoUser);
-        applyAuthSession({
-          accessToken: `demo-token-${demoCredential.role}`,
-          refreshToken: `demo-refresh-${demoCredential.role}`,
-          expiresAt: expirationFromNow(86400),
-          refreshedAt: new Date().toISOString(),
-          user: mapped,
-          options,
-        });
         return {
-          ok: true as const,
-          data: {
-            access_token: `demo-token-${demoCredential.role}`,
-            refresh_token: `demo-refresh-${demoCredential.role}`,
-            expires_in: 86400,
-            token_type: "Bearer",
-            user: demoUser,
+          ok: false as const,
+          error: result.error ?? {
+            detail: "Invalid email or password",
+            status: 401,
+          },
+        };
+      } catch {
+        return {
+          ok: false as const,
+          error: {
+            detail: "Unable to connect to authentication server. Verify network connectivity.",
+            status: 503,
           },
         };
       }
-
-      const fallbackCred = DEMO_AUTH_CREDENTIALS[0]!;
-      const fallbackUser: BackendAuthUser = {
-        id: `usr_${fallbackCred.role}_demo`,
-        name: fallbackCred.label,
-        email: payload.email,
-        role: fallbackCred.role,
-        permissions: ALL_SECURITY_PERMISSIONS,
-        accessible_modules: [
-          "all",
-          "dashboard",
-          "command",
-          "executive",
-          "crisis",
-          "incidents",
-          "live-twin",
-          "ai-council",
-          "map",
-          "analytics",
-          "mobile",
-        ],
-        tenant_id: "tenant-sentra-global",
-        organization_name: "Sentra Global Operations",
-        organization_slug: "sentra-global",
-        org_role: "commander",
-        plan: "enterprise_defense",
-        last_login: new Date().toISOString(),
-      };
-      const mappedFallback = mapBackendUserToAuthUser(fallbackUser);
-      applyAuthSession({
-        accessToken: `demo-token-${fallbackCred.role}`,
-        refreshToken: `demo-refresh-${fallbackCred.role}`,
-        expiresAt: expirationFromNow(86400),
-        refreshedAt: new Date().toISOString(),
-        user: mappedFallback,
-        options,
-      });
-      return {
-        ok: true as const,
-        data: {
-          access_token: `demo-token-${fallbackCred.role}`,
-          refresh_token: `demo-refresh-${fallbackCred.role}`,
-          expires_in: 86400,
-          token_type: "Bearer",
-          user: fallbackUser,
-        },
-      };
     },
     [applyAuthSession],
   );
@@ -327,55 +230,22 @@ export function useAuth() {
           });
           return result;
         }
+        return {
+          ok: false as const,
+          error: result.error ?? {
+            detail: "Firebase authentication was rejected by the server.",
+            status: 401,
+          },
+        };
       } catch {
-        // Backend unavailable, use Firebase user details
+        return {
+          ok: false as const,
+          error: {
+            detail: "Unable to verify Firebase session with authentication server.",
+            status: 503,
+          },
+        };
       }
-
-      const fbUser = firebaseAuth?.currentUser;
-      const fallbackUser: BackendAuthUser = {
-        id: fbUser?.uid ?? "usr_google_operator",
-        name: fbUser?.displayName ?? "Sentra Operator",
-        email: fbUser?.email ?? "operator@sentra.os",
-        role: "admin",
-        permissions: ALL_SECURITY_PERMISSIONS,
-        accessible_modules: [
-          "all",
-          "dashboard",
-          "command",
-          "executive",
-          "crisis",
-          "incidents",
-          "live-twin",
-          "ai-council",
-          "map",
-          "analytics",
-          "mobile",
-        ],
-        tenant_id: "tenant-sentra-global",
-        organization_name: "Sentra Global Operations",
-        organization_slug: "sentra-global",
-        org_role: "commander",
-        plan: "enterprise_defense",
-        last_login: new Date().toISOString(),
-      };
-      applyAuthSession({
-        accessToken: idToken,
-        refreshToken: null,
-        expiresAt: expirationFromNow(86400),
-        refreshedAt: new Date().toISOString(),
-        user: mapBackendUserToAuthUser(fallbackUser),
-        options,
-      });
-      return {
-        ok: true as const,
-        data: {
-          access_token: idToken,
-          refresh_token: null,
-          expires_in: 86400,
-          token_type: "Bearer",
-          user: fallbackUser,
-        },
-      };
     },
     [applyAuthSession],
   );

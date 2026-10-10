@@ -297,18 +297,12 @@ async def soc_telemetry_middleware(request, call_next):
 
         if token:
             try:
-                if token.startswith("demo-token-") or token.startswith("demo-token"):
-                    role_suffix = token.replace("demo-token-", "").replace("demo-token", "").strip().lower() or "admin"
-                    actor_email = f"{role_suffix}@sentra.demo"
-                    actor_role = normalize_role(role_suffix)
-                    session_id = f"demo-session-{role_suffix}"
-                else:
-                    payload = decode_token(token, expected_type="access")
-                    user = auth_store.get_user_by_id(str(payload["sub"]))
-                    if user is not None and user.get("is_active"):
-                        actor_email = str(user["email"])
-                        actor_role = normalize_role(str(user["role"]))
-                        session_id = str(payload.get("sid") or "") or None
+                payload = decode_token(token, expected_type="access")
+                user = auth_store.get_user_by_id(str(payload["sub"]))
+                if user is not None and user.get("is_active"):
+                    actor_email = str(user["email"])
+                    actor_role = normalize_role(str(user["role"]))
+                    session_id = str(payload.get("sid") or "") or None
             except Exception:
                 pass
 

@@ -22,6 +22,8 @@ This report summarizes the multi-axis security audit conducted for the **Phase 9
 | **SEC-08** | Corrupted Backup Handling Fail-Closed | **MEDIUM** | **RESOLVED** | `verify_backup()` catches `sqlite3.DatabaseError` and checksum mismatches, safely failing restore rehearsals without live database contamination. Proved in `test_corrupted_backup_handling_fails_safely`. |
 | **SEC-09** | Production Demo-Seed Data Contamination | **LOW** | **RESOLVED** | `should_seed_demo_data()` returns False when `APP_ENV=production`. `render.yaml` explicitly set to `SENTRA_ENABLE_DEMO_SEED=false`. |
 | **SEC-10** | Secure Cookie Transmission | **LOW** | **CONFIGURED** | Cookies enforce `Secure; HttpOnly; SameSite=Lax` when `SENTRA_COOKIE_SECURE=true` in production mode. |
+| **SEC-11** | Synthetic Token & Role Bypass Elimination | **CRITICAL** | **RESOLVED** | Removed synthetic `demo-token-*` and `demo-refresh-*` bypass strings. All sessions require genuine cryptographic JWTs signed with HMAC-SHA256. Fails closed with `HTTP 401 Unauthorized`. Verified in `tests/test_demo_auth_and_session.py`. |
+| **SEC-12** | Strict Cryptographic Password Verification | **CRITICAL** | **RESOLVED** | Removed demo password bypasses (`is_demo_pass`). Login strictly enforces `verify_password()` against stored Bcrypt hashes in `auth_store`. Invalid passwords fail closed with `HTTP 401`. |
 
 ---
 

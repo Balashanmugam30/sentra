@@ -165,7 +165,7 @@ export function AppProviders({ children }: { children: React.ReactNode }) {
       }
 
       const localSession = getLocalAuthSession();
-      if (!localSession || localSession.accessToken?.startsWith("demo-token-")) {
+      if (!localSession) {
         return;
       }
 

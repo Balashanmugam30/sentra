@@ -155,10 +155,6 @@ export function isAccessTokenExpiringSoon(session: LocalAuthSession | null, with
     return true;
   }
 
-  if (session.accessToken.startsWith("demo-token-")) {
-    return false;
-  }
-
   if (!session.accessTokenExpiresAt) {
     return false;
   }
