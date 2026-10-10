@@ -36,6 +36,7 @@ export interface BootstrapAdminPayload {
   email: string;
   password: string;
   name: string;
+  secret?: string;
 }
 
 export interface ChangePasswordPayload {

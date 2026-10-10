@@ -506,6 +506,21 @@ function redirectToLogin(message = "Session expired. Please sign in again.") {
     return;
   }
 
+  const currentPath = window.location.pathname;
+  if (
+    currentPath === "/login" ||
+    currentPath.startsWith("/login/") ||
+    currentPath === "/" ||
+    currentPath.startsWith("/site")
+  ) {
+    return;
+  }
+
+  const session = getLocalAuthSession();
+  if (!session?.accessToken) {
+    return;
+  }
+
   setAuthNotice(message);
   const target = `${window.location.origin}/login?reason=session-expired`;
   if (window.location.href !== target) {
@@ -687,9 +702,10 @@ async function executeRequest<T>(
       }
 
       // ONLY redirect to login if this request was an explicit auth verification route (/auth/me, /auth/refresh)
-      // Never wipe the session and redirect for background data polls (e.g. /geo/live, /soc/live, /operations/*)
+      // AND only if the client possessed an active session token that failed
+      const hadSession = Boolean(getLocalAuthSession()?.accessToken);
       const isAuthVerificationPath = path.startsWith("/auth/") && path !== "/auth/login";
-      if (isAuthVerificationPath) {
+      if (isAuthVerificationPath && hadSession) {
         clearAuthState();
         redirectToLogin();
       }
@@ -854,7 +870,8 @@ export const apiClient = {
           return this.fetchResponse(path, options, attempt + 1);
         }
 
-        if (path.startsWith("/auth/") && path !== "/auth/login") {
+        const hadSession = Boolean(getLocalAuthSession()?.accessToken);
+        if (path.startsWith("/auth/") && path !== "/auth/login" && hadSession) {
           clearAuthState();
           redirectToLogin();
         }

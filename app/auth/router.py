@@ -178,6 +178,14 @@ def _issue_session(user: dict[str, object], response: Response) -> AuthResponse:
 
 @router.post("/bootstrap-admin", response_model=BootstrapAdminResponse)
 def bootstrap_admin(request: Request, payload: BootstrapAdminRequest) -> BootstrapAdminResponse:
+    if settings.auth_bootstrap_secret:
+        header_secret = request.headers.get("x-bootstrap-secret")
+        provided_secret = payload.secret or header_secret
+        if not provided_secret or provided_secret != settings.auth_bootstrap_secret:
+            raise HTTPException(
+                status_code=status.HTTP_403_FORBIDDEN,
+                detail="Invalid or missing bootstrap secret",
+            )
     if auth_store.get_user_by_email(payload.email) is not None:
         raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="Admin bootstrap already completed")
     if any(str(u.get("role")) == "super_admin" for u in auth_store.list_users()):

@@ -110,12 +110,34 @@ export function useAuth() {
     setAuthLoading();
     const localSession = getLocalAuthSession();
 
+    if (!localSession?.accessToken && !localSession?.refreshToken) {
+      clearLocalAuthState();
+      return { ok: false as const };
+    }
+
     if (localSession?.user && localSession?.accessToken) {
       const now = Date.now();
       const existingExpiresAt = localSession.accessTokenExpiresAt
         ? new Date(localSession.accessTokenExpiresAt).getTime()
         : NaN;
       if (!Number.isNaN(existingExpiresAt) && existingExpiresAt <= now) {
+        if (localSession.refreshToken) {
+          try {
+            const refreshed = await refreshSessionRequest();
+            if (refreshed.ok && refreshed.data) {
+              applyAuthSession({
+                accessToken: refreshed.data.access_token,
+                refreshToken: refreshed.data.refresh_token,
+                expiresAt: expirationFromNow(refreshed.data.expires_in),
+                refreshedAt: new Date().toISOString(),
+                user: mapBackendUserToAuthUser(refreshed.data.user),
+              });
+              return { ok: true as const };
+            }
+          } catch {
+            // refresh failed
+          }
+        }
         clearLocalAuthState();
         return { ok: false as const };
       }
@@ -133,45 +155,22 @@ export function useAuth() {
       return { ok: true as const };
     }
 
-    try {
-      const me = await getCurrentUser();
-      if (me.ok && me.data) {
-        const mappedUser = mapBackendUserToAuthUser({
-          id: me.data.id,
-          name: me.data.name,
-          email: me.data.email,
-          role: me.data.role,
-          permissions: me.data.permissions,
-          accessible_modules: me.data.accessible_modules,
-          last_login: me.data.last_login,
-        });
-        applyAuthSession({
-          accessToken: localSession?.accessToken ?? null,
-          refreshToken: localSession?.refreshToken ?? null,
-          expiresAt: me.data.session_expires_at,
-          refreshedAt: new Date().toISOString(),
-          user: mappedUser,
-        });
-        return { ok: true as const };
+    if (localSession?.refreshToken) {
+      try {
+        const refreshed = await refreshSessionRequest();
+        if (refreshed.ok && refreshed.data) {
+          applyAuthSession({
+            accessToken: refreshed.data.access_token,
+            refreshToken: refreshed.data.refresh_token,
+            expiresAt: expirationFromNow(refreshed.data.expires_in),
+            refreshedAt: new Date().toISOString(),
+            user: mapBackendUserToAuthUser(refreshed.data.user),
+          });
+          return { ok: true as const };
+        }
+      } catch {
+        // Backend unavailable
       }
-    } catch {
-      // Backend unavailable
-    }
-
-    try {
-      const refreshed = await refreshSessionRequest();
-      if (refreshed.ok && refreshed.data) {
-        applyAuthSession({
-          accessToken: refreshed.data.access_token,
-          refreshToken: refreshed.data.refresh_token,
-          expiresAt: expirationFromNow(refreshed.data.expires_in),
-          refreshedAt: new Date().toISOString(),
-          user: mapBackendUserToAuthUser(refreshed.data.user),
-        });
-        return { ok: true as const };
-      }
-    } catch {
-      // Backend unavailable
     }
 
     clearLocalAuthState();

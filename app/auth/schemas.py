@@ -44,6 +44,7 @@ class BootstrapAdminRequest(BaseModel):
     email: str
     password: str = Field(..., min_length=10)
     name: str = Field(..., min_length=2)
+    secret: str | None = None
 
 
 class LoginRequest(BaseModel):

@@ -93,6 +93,7 @@ class Settings:
     auth_refresh_cookie_name: str = os.getenv("SENTRA_REFRESH_COOKIE_NAME", "sentra_refresh_token")
     auth_cookie_secure: bool = os.getenv("SENTRA_COOKIE_SECURE", "false").lower() == "true"
     auth_cookie_domain: str | None = os.getenv("SENTRA_COOKIE_DOMAIN") or None
+    auth_bootstrap_secret: str = os.getenv("SENTRA_BOOTSTRAP_SECRET", os.getenv("BOOTSTRAP_SECRET", ""))
     auth_store_path: str = field(
         default_factory=lambda: os.getenv(
             "SENTRA_AUTH_STORE_PATH",

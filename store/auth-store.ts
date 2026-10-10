@@ -210,10 +210,21 @@ export const useAuthStore = create<AuthState>()(
         activeSessions: state.activeSessions,
         currentDeviceId: state.currentDeviceId,
         rememberDevice: state.rememberDevice,
-        lastActivityAt: state.lastActivityAt,
-        sessionWarningAt: state.sessionWarningAt,
-        sessionExpiresAt: state.sessionExpiresAt,
       }),
+      onRehydrateStorage: () => (state) => {
+        if (!state) return;
+        const now = Date.now();
+        const parsed = state.accessTokenExpiresAt ? new Date(state.accessTokenExpiresAt).getTime() : NaN;
+        if (!state.accessToken || (!Number.isNaN(parsed) && parsed <= now)) {
+          state.clearSession();
+        } else {
+          state.lastActivityAt = now;
+          state.sessionWarningAt = getSessionWarningAt(now, state.rememberDevice);
+          state.sessionExpiresAt = !Number.isNaN(parsed) && parsed > now
+            ? parsed
+            : now + (state.rememberDevice ? SESSION_DEVICE_MAX_AGE_SECONDS * 1000 : 24 * 60 * 60 * 1000);
+        }
+      },
     },
   ),
 );

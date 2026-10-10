@@ -255,6 +255,7 @@ export function LoginForm() {
   const resetMessages = () => {
     setError("");
     setNotice("");
+    setSessionTimeoutVisible(false);
   };
 
   const exchangeFirebaseToken = async (idToken: string) => {
@@ -451,6 +452,7 @@ export function LoginForm() {
     setAuthStep("password");
     setNotice(`${label} access filled. Continue when ready.`);
     setError("");
+    setSessionTimeoutVisible(false);
   };
 
   const ctaLabel =

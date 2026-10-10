@@ -141,3 +141,49 @@ def test_real_jwt_lifecycle(client: TestClient) -> None:
         headers={"Authorization": f"Bearer {new_access_token}"},
     )
     assert me_refreshed.status_code == 200
+
+
+def test_bootstrap_admin_secret_enforced(client: TestClient) -> None:
+    """Test that /auth/bootstrap-admin enforces secret when configured."""
+    from app.core.config import settings
+
+    orig = settings.auth_bootstrap_secret
+    object.__setattr__(settings, "auth_bootstrap_secret", "secret-key-12345")
+    try:
+        # Missing secret should be rejected with 403
+        unauth = client.post(
+            "/auth/bootstrap-admin",
+            json={
+                "email": "fresh-admin@sentra.demo",
+                "password": "ValidPassword123!",
+                "name": "Fresh Admin",
+            },
+        )
+        assert unauth.status_code == 403
+
+        # Wrong secret should be rejected with 403
+        wrong = client.post(
+            "/auth/bootstrap-admin",
+            json={
+                "email": "fresh-admin@sentra.demo",
+                "password": "ValidPassword123!",
+                "name": "Fresh Admin",
+                "secret": "wrong-secret",
+            },
+        )
+        assert wrong.status_code == 403
+
+        # Correct secret in payload or header should pass secret check (may 409 if admin exists)
+        valid = client.post(
+            "/auth/bootstrap-admin",
+            json={
+                "email": "fresh-admin@sentra.demo",
+                "password": "ValidPassword123!",
+                "name": "Fresh Admin",
+                "secret": "secret-key-12345",
+            },
+        )
+        assert valid.status_code in {200, 409}
+    finally:
+        object.__setattr__(settings, "auth_bootstrap_secret", orig)
+

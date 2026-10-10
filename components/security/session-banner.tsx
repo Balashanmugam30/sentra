@@ -55,12 +55,17 @@ export function SessionBanner() {
       return;
     }
 
-    // Grace period: do not expire session if created or touched within the last 60 seconds
-    if (lastActivityAt && now - lastActivityAt < 60_000) {
+    const resolvedExpiresAt = typeof sessionExpiresAt === "number" ? sessionExpiresAt : new Date(sessionExpiresAt).getTime();
+    if (Number.isNaN(resolvedExpiresAt)) {
       return;
     }
 
-    if (now < sessionExpiresAt) {
+    // Grace period: do not expire session if created or touched within the last 120 seconds
+    if (lastActivityAt && now - lastActivityAt < 120_000) {
+      return;
+    }
+
+    if (now < resolvedExpiresAt) {
       return;
     }
 
