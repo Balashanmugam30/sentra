@@ -1,90 +1,107 @@
 "use client";
 
 import { motion } from "framer-motion";
-
-import { InteractiveCard } from "@/components/landing/interactive-card";
 import { fadeUp, revealTransition, revealViewport, staggerContainer } from "@/components/landing/motion";
 import { SectionWrapper } from "@/components/landing/section-wrapper";
 
 const cards = [
   {
     title: "AI Decision Engine",
-    description: "Ranked response options that explain urgency, confidence, impact, and next action.",
-    preview: "decision",
+    description: "Ranked response options that explain urgency, confidence, blast radius impact, and immediate next action.",
+    tag: "Intelligence",
+    badgeColor: "bg-blue-50 text-blue-700 border-blue-200",
   },
   {
-    title: "Real-time Monitoring",
-    description: "Continuous signal fusion across incidents, facilities, responders, alerts, and live risk.",
-    preview: "monitoring",
+    title: "Real-time Sensor Monitoring",
+    description: "Continuous telemetry fusion across structural detectors, facility gates, atmospheric monitors, and live risk states.",
+    tag: "Telemetry",
+    badgeColor: "bg-emerald-50 text-emerald-700 border-emerald-200",
   },
   {
-    title: "Smart Routing",
-    description: "Adaptive route logic for responders, evacuation paths, disabled occupants, and blocked exits.",
-    preview: "routing",
+    title: "Smart Evacuation Routing",
+    description: "Dynamic route calculation adapting in real time to fire progression, structural debris, and occupancy density.",
+    tag: "Operations",
+    badgeColor: "bg-teal-50 text-teal-700 border-teal-200",
   },
   {
-    title: "Digital Twin Operations",
-    description: "Facility state, hazards, occupancy, responders, and routes in one operational twin.",
-    preview: "sensor",
+    title: "Digital Twin TwinOps",
+    description: "Interactive 3D and 2D spatial layouts displaying live hazard plumes, responder locations, and facility barriers.",
+    tag: "Spatial",
+    badgeColor: "bg-indigo-50 text-indigo-700 border-indigo-200",
   },
   {
-    title: "Predictive Modeling",
-    description: "Forward-looking spread, congestion, ETA drift, and business exposure before teams commit.",
-    preview: "prediction",
+    title: "Predictive Spread Modeling",
+    description: "Forward-looking simulation models calculating chemical and thermal diffusion before teams commit resources.",
+    tag: "Prediction",
+    badgeColor: "bg-purple-50 text-purple-700 border-purple-200",
   },
   {
-    title: "Executive Storytelling",
-    description: "Board-ready summaries that translate response quality into risk, recovery, and continuity.",
-    preview: "coordination",
+    title: "Executive Crisis Governance",
+    description: "Automated boardroom summaries, timeline auditing, compliance logging, and operational SLA reporting.",
+    tag: "Governance",
+    badgeColor: "bg-slate-100 text-slate-700 border-slate-200",
   },
 ] as const;
 
 export function FeatureSection() {
   return (
-    <SectionWrapper className="bg-gradient-to-b from-transparent via-black/60 to-black" id="features">
+    <SectionWrapper className="bg-slate-50/50 py-24 border-t border-slate-200/60" id="features">
       <motion.div
-        className="w-full space-y-12"
+        className="w-full space-y-16"
         initial="hidden"
         transition={revealTransition}
         variants={staggerContainer}
         viewport={revealViewport}
         whileInView="show"
       >
-        <motion.div className="max-w-2xl space-y-6" variants={fadeUp}>
-          <motion.h2 className="text-4xl font-semibold leading-tight tracking-tight text-white/90">
-            Built for intelligent response
+        <motion.div className="max-w-2xl space-y-4" variants={fadeUp}>
+          <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-semibold text-slate-600 shadow-sm">
+            Core Architecture
+          </div>
+          <motion.h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-slate-900">
+            Engineered for high-consequence operations
           </motion.h2>
-          <p className="max-w-xl text-base leading-7 text-white/70">
-            Sentra unifies live operations, AI reasoning, executive reporting, and digital twin awareness in a system designed for high-consequence environments.
+          <p className="text-base sm:text-lg leading-relaxed text-slate-600">
+            Sentra unifies telemetry, spatial digital twins, autonomous AI advisory, and executive oversight into one calm, reliable operating surface.
           </p>
         </motion.div>
 
         <motion.div
-            className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
-            transition={{ staggerChildren: 0.15 }}
-            variants={staggerContainer}
-          >
+          className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
+          transition={{ staggerChildren: 0.1 }}
+          variants={staggerContainer}
+        >
           {cards.map((card, index) => (
-            <InteractiveCard
+            <motion.div
               key={card.title}
-              className="rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl transition-all duration-300 hover:bg-white/10"
+              variants={fadeUp}
+              transition={{ ...revealTransition, delay: index * 0.03 }}
+              className="group relative flex flex-col justify-between rounded-2xl border border-slate-200 bg-white p-7 shadow-[0_2px_12px_-4px_rgba(0,0,0,0.04)] transition-all duration-200 hover:-translate-y-1 hover:border-blue-300 hover:shadow-[0_12px_24px_-8px_rgba(37,99,235,0.08)]"
             >
-              <motion.div
-                transition={{ ...revealTransition, delay: index * 0.02 }}
-                variants={fadeUp}
-              >
-                <div className="space-y-4">
-                  <div className="relative h-14 overflow-hidden rounded-2xl border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.04),rgba(255,255,255,0.01))]">
-                    <div className="absolute left-4 top-1/2 h-8 w-8 -translate-y-1/2 rounded-full bg-[linear-gradient(135deg,rgba(168,85,247,0.75),rgba(34,211,238,0.55),rgba(59,130,246,0.38))]" />
-                    <div className="absolute right-4 top-1/2 h-1.5 w-20 -translate-y-1/2 rounded-full bg-white/10" />
-                    <div className="absolute right-4 top-1/2 h-1.5 w-12 -translate-y-1/2 rounded-full bg-[linear-gradient(90deg,rgba(168,85,247,0.65),rgba(34,211,238,0.45))]" />
-                  </div>
-                  <p className="text-lg font-medium text-white/90">{card.title}</p>
-                  <p className="text-sm leading-6 text-white/70">{card.description}</p>
-                  <p className="text-xs uppercase tracking-[0.18em] text-white/40">{card.preview}</p>
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border ${card.badgeColor}`}>
+                    {card.tag}
+                  </span>
+                  <span className="text-slate-300 group-hover:text-blue-500 transition-colors">
+                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                  </span>
                 </div>
-              </motion.div>
-            </InteractiveCard>
+                <h3 className="font-display text-xl font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
+                  {card.title}
+                </h3>
+                <p className="text-sm leading-relaxed text-slate-600">
+                  {card.description}
+                </p>
+              </div>
+
+              <div className="mt-6 pt-4 border-t border-slate-100 flex items-center gap-2 text-xs font-semibold text-slate-500 group-hover:text-blue-600">
+                <span>View capability telemetry</span>
+                <span>&rarr;</span>
+              </div>
+            </motion.div>
           ))}
         </motion.div>
       </motion.div>

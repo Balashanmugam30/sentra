@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Route } from "next";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 
 import { useAuth } from "@/lib/auth/use-auth";
@@ -13,6 +13,7 @@ import { liveSyncEngine, type LiveSyncSnapshot } from "@/services/realtime/live-
 import { useWorkspace } from "@/lib/workspace/useWorkspace";
 import { useLiveDataStore } from "@/lib/realtime/live-data-store";
 import { useLiveDataEngine } from "@/lib/realtime/use-live-data";
+import { SentraLogo } from "@/components/brand/sentra-logo";
 
 import { ProfileDropdown } from "@/modules/dashboard/components/profile-dropdown";
 import { ProfileModal } from "@/modules/dashboard/components/profile-modal";
@@ -27,38 +28,37 @@ const workspaceModeLabels = {
 };
 
 const topBarModes = [
-  { label: "Command", mode: "command" },
   { label: "Executive", mode: "executive" },
+  { label: "Command", mode: "command" },
   { label: "Demo", mode: "demo" },
   { label: "Crisis", mode: "crisis" },
+] as const;
+
+const primaryNav = [
+  { label: "Dashboard", href: "/app" as Route, match: ["/app"] },
+  { label: "Incidents", href: "/app/incidents" as Route, match: ["/app/incidents", "/incidents"] },
+  { label: "Operations", href: "/operations/execution" as Route, match: ["/operations"] },
+  { label: "Analytics", href: "/app/analytics" as Route, match: ["/app/analytics", "/analytics"] },
+  { label: "AI Council", href: "/app/ai-council" as Route, match: ["/app/ai-council", "/ai-council"] },
+  { label: "Live Twin", href: "/twin/live" as Route, match: ["/twin", "/live-twin"] },
+] as const;
+
+const moreNav = [
+  { label: "SOC Console", href: "/soc" as Route, desc: "Security operations center" },
+  { label: "Predictive AI", href: "/twin/predictive" as Route, desc: "Hazard & risk spread models" },
+  { label: "Resources", href: "/operations/resources" as Route, desc: "Equipment & staging capacity" },
+  { label: "Recovery", href: "/operations/recovery" as Route, desc: "Continuity & post-crisis plans" },
+  { label: "Field Mobile App", href: "/mobile/home" as Route, desc: "Responder field companion" },
+  { label: "Cloud Tenants", href: "/cloud/tenants" as Route, desc: "Multi-tenant orchestration" },
+  { label: "Board Reports", href: "/board/executive" as Route, desc: "Audit-ready boardroom evidence" },
+  { label: "Team & Access", href: "/security/users" as Route, desc: "RBAC & organization directory" },
+  { label: "Settings", href: "/app/settings" as Route, desc: "Appearance & session preferences" },
 ] as const;
 
 type TopBarProps = {
   onOpenCommand?: () => void;
   onOpenNav?: () => void;
 };
-
-function getBreadcrumb(pathname: string) {
-  const segments = pathname
-    .split("/")
-    .filter(Boolean)
-    .map((segment) =>
-      segment
-        .split("-")
-        .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
-        .join(" "),
-    );
-
-  if (segments.length === 0) {
-    return ["Sentra"];
-  }
-
-  if (segments[0] === "App") {
-    return ["Command", segments[1] ?? "Dashboard"];
-  }
-
-  return segments.slice(0, 3);
-}
 
 export function TopBar({ onOpenCommand, onOpenNav }: TopBarProps) {
   const router = useRouter();
@@ -71,20 +71,17 @@ export function TopBar({ onOpenCommand, onOpenNav }: TopBarProps) {
   const markNotificationsRead = useLiveDataStore((state) => state.markNotificationsRead);
   const user = useAuthStore((state) => state.user);
   const { logout } = useAuth();
+
   const [menuOpen, setMenuOpen] = useState(false);
   const [notificationsOpen, setNotificationsOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
+  const [moreOpen, setMoreOpen] = useState(false);
+  const moreRef = useRef<HTMLDivElement | null>(null);
+
   const [profileName, setProfileName] = useState(() => {
-    if (typeof window === "undefined") {
-      return "";
-    }
-
+    if (typeof window === "undefined") return "";
     const stored = window.localStorage.getItem(PROFILE_STORAGE_KEY);
-
-    if (!stored) {
-      return "";
-    }
-
+    if (!stored) return "";
     try {
       const parsed = JSON.parse(stored) as { name?: string };
       return parsed.name?.trim() || "";
@@ -93,17 +90,11 @@ export function TopBar({ onOpenCommand, onOpenNav }: TopBarProps) {
       return "";
     }
   });
+
   const [profileUsername, setProfileUsername] = useState(() => {
-    if (typeof window === "undefined") {
-      return "";
-    }
-
+    if (typeof window === "undefined") return "";
     const stored = window.localStorage.getItem(PROFILE_STORAGE_KEY);
-
-    if (!stored) {
-      return "";
-    }
-
+    if (!stored) return "";
     try {
       const parsed = JSON.parse(stored) as { username?: string };
       return parsed.username?.trim() || "";
@@ -112,6 +103,7 @@ export function TopBar({ onOpenCommand, onOpenNav }: TopBarProps) {
       return "";
     }
   });
+
   const [draftName, setDraftName] = useState("");
   const [draftUsername, setDraftUsername] = useState("");
   const [liveSnapshot, setLiveSnapshot] = useState<LiveSyncSnapshot | null>(() =>
@@ -120,16 +112,10 @@ export function TopBar({ onOpenCommand, onOpenNav }: TopBarProps) {
 
   const resolvedName = profileName.trim() || user?.displayName || "Sentra User";
   const resolvedUsername = profileUsername.trim() || user?.username || user?.email?.split("@")[0] || "sentra-user";
-  const breadcrumb = useMemo(() => getBreadcrumb(pathname), [pathname]);
   const unreadCount = notifications.filter((notification) => !notification.read).length;
 
   const avatarLabel = useMemo(() => {
-    const base =
-      resolvedName ||
-      user?.email?.trim() ||
-      user?.phoneNumber?.trim() ||
-      "S";
-
+    const base = resolvedName || user?.email?.trim() || user?.phoneNumber?.trim() || "S";
     return base
       .split(/[\s@._-]+/)
       .filter(Boolean)
@@ -147,24 +133,26 @@ export function TopBar({ onOpenCommand, onOpenNav }: TopBarProps) {
     return unsubscribe;
   }, []);
 
+  // Close "More" dropdown when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (moreRef.current && !moreRef.current.contains(event.target as Node)) {
+        setMoreOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   const realtimeBadge = useMemo(() => {
     const snapshot = liveSnapshot;
     if (!snapshot || !snapshot.online || snapshot.status === "offline") {
-      return {
-        label: "Offline",
-        tone: "offline",
-      };
+      return { label: "Offline", tone: "offline" };
     }
     if (snapshot.status === "connected" && snapshot.socketHealthScore >= 75) {
-      return {
-        label: "System Live",
-        tone: "live",
-      };
+      return { label: "System Live", tone: "live" };
     }
-    return {
-      label: "Syncing",
-      tone: "syncing",
-    };
+    return { label: "Syncing", tone: "syncing" };
   }, [liveSnapshot]);
 
   const handleLogout = async () => {
@@ -172,199 +160,228 @@ export function TopBar({ onOpenCommand, onOpenNav }: TopBarProps) {
     router.replace("/login");
   };
 
+  const isNavActive = (item: (typeof primaryNav)[number]) => {
+    if (item.href === "/app") {
+      return pathname === "/app";
+    }
+    return item.match.some((prefix) => pathname.startsWith(prefix));
+  };
+
   return (
     <>
-      <header className="sentra-topbar sticky top-0 z-50 px-4 py-3.5 md:px-6 lg:px-8">
-        <div className="sentra-topbar-inner glass-panel mx-auto flex min-h-16 w-full max-w-[1600px] items-center justify-between gap-4 rounded-[26px] border border-white/[0.12] bg-[linear-gradient(145deg,rgba(16,24,44,0.68)_0%,rgba(8,13,28,0.78)_100%)] px-4 py-2.5 shadow-[0_16px_48px_rgba(0,0,0,0.5),0_0_24px_rgba(56,189,248,0.06),inset_0_1px_0_rgba(255,255,255,0.2)] backdrop-blur-2xl md:px-5">
-          <div className="sentra-topbar-breadcrumb flex min-w-0 items-center gap-3">
+      <header className="sticky top-0 z-40 w-full border-b border-slate-200/80 bg-white/95 backdrop-blur-xl transition-all shadow-[0_1px_3px_rgba(0,0,0,0.03)]">
+        <div className="mx-auto flex h-16 w-full max-w-[1600px] items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
+          {/* Left: Brand + Hamburger + Mode Pills */}
+          <div className="flex items-center gap-4 min-w-0">
             <button
-              aria-label="Open navigation"
-              className="sentra-mobile-menu-button inline-flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-700 transition hover:bg-slate-50 dark:border-white/10 dark:bg-white/[0.06] dark:text-white lg:hidden"
+              aria-label="Open navigation menu"
+              className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-700 transition hover:bg-slate-50 lg:hidden"
               onClick={onOpenNav}
               type="button"
             >
-              <span className="h-3.5 w-3.5 border-y-2 border-current before:mt-[4px] before:block before:border-t-2 before:border-current" />
+              <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
             </button>
-            <div className="min-w-0">
-              <nav
-                aria-label="Breadcrumb"
-                className="flex min-w-0 items-center gap-2 text-xs font-medium text-slate-500 dark:text-slate-400"
-              >
-                <span className="font-mono text-[0.66rem] font-semibold uppercase tracking-wider text-slate-700 bg-slate-100 border border-slate-200 dark:text-cyan-300 dark:bg-cyan-500/10 dark:border-cyan-400/25 px-2 py-0.5 rounded">
-                  {workspaceModeLabels[workspaceMode]}
-                </span>
-                <span className="text-slate-300 dark:text-slate-600">/</span>
-                <span className="truncate font-display text-sm font-semibold tracking-tight text-slate-900 dark:text-white">
-                  {breadcrumb[breadcrumb.length - 1] ?? "Dashboard"}
-                </span>
-              </nav>
+
+            <SentraLogo size="sm" href="/app" className="shrink-0" />
+
+            {/* Quick Mode Switcher Pills */}
+            <div
+              aria-label="Workspace Mode Switcher"
+              className="hidden xl:inline-flex items-center gap-1 rounded-xl border border-slate-200 bg-slate-100/70 p-1"
+              role="tablist"
+            >
+              {topBarModes.map((item) => {
+                const selected = item.mode === workspaceMode;
+                return (
+                  <button
+                    aria-selected={selected}
+                    className={`px-2.5 py-1 text-xs font-semibold rounded-lg transition-all ${
+                      selected
+                        ? "bg-white text-blue-600 shadow-xs"
+                        : "text-slate-600 hover:text-slate-900 hover:bg-slate-200/50"
+                    }`}
+                    key={item.mode}
+                    onClick={() => {
+                      setWorkspaceMode(item.mode);
+                      router.push(`/app?mode=${item.mode}` as Route);
+                    }}
+                    role="tab"
+                    type="button"
+                  >
+                    {item.label}
+                  </button>
+                );
+              })}
             </div>
           </div>
 
-          <button className="sentra-command-search hidden md:flex" onClick={onOpenCommand} type="button">
-            <span className="sentra-search-icon" aria-hidden="true">
-              <svg
-                className="h-5 w-5"
-                fill="none"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="1.8"
-                viewBox="0 0 24 24"
-              >
-                <circle cx="11" cy="11" r="6.5" />
-                <path d="m16 16 4 4" />
-              </svg>
-            </span>
-            <span className="sentra-command-search-placeholder">
-              Search commands, routes, incidents...
-            </span>
-            <kbd>Ctrl K</kbd>
-          </button>
-
-          <div className="sentra-topbar-right relative flex shrink-0 items-center gap-2 md:gap-3">
-              <button
-                aria-label="Search commands"
-                className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-700 transition hover:bg-slate-50 dark:border-white/10 dark:bg-white/[0.06] dark:text-white md:hidden"
-                onClick={onOpenCommand}
-                type="button"
-              >
-                <svg
-                  className="h-4 w-4"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  viewBox="0 0 24 24"
+          {/* Center: Horizontal Primary Navigation Bar (Desktop) */}
+          <nav
+            aria-label="Primary Application Navigation"
+            className="hidden lg:flex items-center gap-1 text-sm font-medium text-slate-600"
+          >
+            {primaryNav.map((item) => {
+              const active = isNavActive(item);
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                    active
+                      ? "bg-blue-50 text-blue-600 shadow-xs"
+                      : "text-slate-600 hover:text-slate-900 hover:bg-slate-100/80"
+                  }`}
                 >
-                  <circle cx="11" cy="11" r="6.5" />
-                  <path d="m16 16 4 4" />
+                  {item.label}
+                </Link>
+              );
+            })}
+
+            {/* "More" Dropdown Menu */}
+            <div className="relative" ref={moreRef}>
+              <button
+                type="button"
+                onClick={() => setMoreOpen((prev) => !prev)}
+                className={`inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                  moreOpen ? "bg-slate-100 text-slate-900" : "text-slate-600 hover:text-slate-900 hover:bg-slate-100/80"
+                }`}
+              >
+                <span>More</span>
+                <svg
+                  className={`h-3.5 w-3.5 transition-transform ${moreOpen ? "rotate-180" : ""}`}
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
                 </svg>
               </button>
-              <div
-                aria-label="Quick mode switch"
-                className="sentra-topbar-mode-switcher hidden items-center gap-1 rounded-full border border-white/10 bg-white/[0.04] p-1 backdrop-blur-xl xl:flex"
-                role="tablist"
-              >
-                {topBarModes.map((item) => {
-                  const selected = item.mode === workspaceMode;
 
-                  return (
-                    <button
-                      aria-selected={selected}
-                      className={`sentra-topbar-mode-pill ${selected ? "is-active" : ""}`}
-                      key={item.mode}
-                      onClick={() => {
-                        setWorkspaceMode(item.mode);
-                        router.push(`/app?mode=${item.mode}` as Route);
-                      }}
-                      role="tab"
-                      type="button"
-                    >
-                      {item.label}
-                    </button>
-                  );
-                })}
-              </div>
-              <span
-                aria-label={`Realtime status ${realtimeBadge.label}`}
-                className={`sentra-system-status-chip is-${realtimeBadge.tone} hidden sm:inline-flex`}
-                suppressHydrationWarning
-              >
-                <span className="sentra-system-status-dot" />
-                {realtimeBadge.label}
-              </span>
-              <Link
-                className="hidden sm:inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-semibold text-slate-700 transition hover:bg-slate-100 dark:border-sky-400/25 dark:bg-sky-500/10 dark:text-sky-200"
-                href={"/mobile" as Route}
-                title="Switch to Mobile Field Operations App"
-              >
-                <span className="text-sm">📱</span>
-                <span>Mobile Ops</span>
-              </Link>
-              <RoleBadge compact role={user?.role} />
-              <div className="relative hidden sm:block">
+              {moreOpen && (
+                <div className="absolute left-0 mt-2 w-64 rounded-2xl border border-slate-200 bg-white p-2 shadow-xl ring-1 ring-black/5 z-50">
+                  <div className="px-3 py-1.5 text-[0.65rem] font-bold uppercase tracking-wider text-slate-600 border-b border-slate-100 mb-1">
+                    Extended Modules
+                  </div>
+                  <div className="space-y-0.5">
+                    {moreNav.map((item) => (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        onClick={() => setMoreOpen(false)}
+                        className="flex flex-col px-3 py-2 rounded-xl text-left hover:bg-slate-50 transition-colors"
+                      >
+                        <span className="text-xs font-semibold text-slate-800">{item.label}</span>
+                        <span className="text-[0.65rem] text-slate-600 mt-0.5">{item.desc}</span>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          </nav>
+
+          {/* Right: Search + Telemetry + Notifications + Profile */}
+          <div className="flex shrink-0 items-center gap-2.5 sm:gap-3">
+            {/* Command Search Trigger */}
+            <button
+              aria-label="Search commands"
+              className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50/80 px-3 py-1.5 text-xs text-slate-600 transition hover:border-slate-300 hover:bg-white"
+              onClick={onOpenCommand}
+              type="button"
+            >
+              <svg className="h-4 w-4 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <circle cx="11" cy="11" r="7" strokeWidth="2" />
+                <path d="m16 16 4 4" strokeWidth="2" strokeLinecap="round" />
+              </svg>
+              <span className="hidden sm:inline">Search...</span>
+              <kbd className="hidden sm:inline-flex px-1.5 py-0.5 text-[0.65rem] font-semibold bg-white border border-slate-200 rounded text-slate-500">
+                ⌘K
+              </kbd>
+            </button>
+
+            {/* Realtime Telemetry Badge */}
+            <div
+              className={`hidden md:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold border ${
+                realtimeBadge.tone === "live"
+                  ? "bg-emerald-50 text-emerald-700 border-emerald-200"
+                  : "bg-slate-100 text-slate-600 border-slate-200"
+              }`}
+            >
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              <span>{realtimeBadge.label}</span>
+            </div>
+
+            {/* Notifications Bell */}
+            <div className="relative">
               <button
-                aria-label="View notifications"
+                aria-label="Notifications"
                 aria-expanded={notificationsOpen}
-                className="sentra-notification-button"
+                className="relative inline-flex h-9 w-9 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-600 transition hover:bg-slate-50 hover:text-slate-900"
                 onClick={() => {
-                  setNotificationsOpen((current) => !current);
+                  setNotificationsOpen((prev) => !prev);
                   markNotificationsRead();
                 }}
                 type="button"
               >
-                <svg
-                  aria-hidden="true"
-                  className="h-5 w-5"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="1.75"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M15 17H9" />
-                  <path d="M18 10a6 6 0 1 0-12 0c0 7-3 7-3 8h18c0-1-3-1-3-8" />
-                  <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
                 </svg>
-                {unreadCount > 0 ? <span className="sentra-notification-count">{unreadCount}</span> : null}
-              </button>
-              {notificationsOpen ? (
-                <div className="sentra-notification-panel">
-                  <div className="sentra-notification-panel-header">
-                    <p className="sentra-notification-eyebrow">
-                      Notification center
-                    </p>
-                    <p>Live command events and AI updates.</p>
-                  </div>
-                  <div className="sentra-notification-list">
-                    {notifications.slice(0, 7).map((notification) => (
-                      <article
-                        className="sentra-notification-card"
-                        key={notification.id}
-                      >
-                        <div className="flex items-start justify-between gap-3">
-                          <p className="sentra-notification-title">{notification.title}</p>
-                          <span className={`sentra-notification-severity is-${notification.severity}`}>
-                            {notification.severity}
-                          </span>
-                        </div>
-                        <p className="sentra-notification-body">{notification.message}</p>
-                        <time className="sentra-notification-time" dateTime={notification.timestamp}>
-                          {new Date(notification.timestamp).toLocaleTimeString([], {
-                            hour: "2-digit",
-                            minute: "2-digit",
-                          })}
-                        </time>
-                      </article>
-                    ))}
-                  </div>
-                </div>
-              ) : null}
-              </div>
-              <button
-                aria-expanded={menuOpen}
-                aria-haspopup="menu"
-                className="relative inline-flex h-9 w-9 items-center justify-center overflow-hidden rounded-full border border-slate-200 bg-white text-xs font-semibold text-slate-800 shadow-sm transition hover:border-slate-300 dark:border-slate-700 dark:bg-slate-800 dark:text-white"
-                onClick={() => setMenuOpen((current) => !current)}
-                type="button"
-              >
-                {user?.photoURL ? (
-                  <Image
-                    alt={profileName || user?.displayName || user?.email || "Sentra profile"}
-                    className="object-cover"
-                    fill
-                    referrerPolicy="no-referrer"
-                    sizes="44px"
-                    src={user.photoURL}
-                    unoptimized
-                  />
-                ) : (
-                  avatarLabel || "S"
+                {unreadCount > 0 && (
+                  <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-600 text-[0.625rem] font-bold text-white">
+                    {unreadCount}
+                  </span>
                 )}
               </button>
+
+              {notificationsOpen && (
+                <div className="absolute right-0 mt-2 w-80 rounded-2xl border border-slate-200 bg-white p-3 shadow-xl z-50">
+                  <div className="flex items-center justify-between pb-2 mb-2 border-b border-slate-100">
+                    <span className="text-xs font-bold text-slate-800">Notification Center</span>
+                    <span className="text-[0.65rem] text-slate-600">{notifications.length} events</span>
+                  </div>
+                  <div className="max-h-64 overflow-y-auto space-y-2">
+                    {notifications.slice(0, 6).map((notif) => (
+                      <div key={notif.id} className="p-2.5 rounded-xl bg-slate-50 border border-slate-100 text-xs">
+                        <div className="flex items-center justify-between font-semibold text-slate-900">
+                          <span>{notif.title}</span>
+                          <span className="text-[0.65rem] text-slate-600">{notif.severity}</span>
+                        </div>
+                        <p className="text-slate-600 text-[0.7rem] mt-0.5">{notif.message}</p>
+                      </div>
+                    ))}
+                    {notifications.length === 0 && (
+                      <p className="text-xs text-slate-600 text-center py-4">No active notifications</p>
+                    )}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <RoleBadge compact role={user?.role} />
+
+            {/* Profile Avatar */}
+            <button
+              aria-expanded={menuOpen}
+              aria-haspopup="menu"
+              className="relative inline-flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full border border-slate-200 bg-slate-100 text-xs font-bold text-slate-700 shadow-xs transition hover:border-slate-300"
+              onClick={() => setMenuOpen((prev) => !prev)}
+              type="button"
+            >
+              {user?.photoURL ? (
+                <Image
+                  alt={resolvedName}
+                  className="object-cover"
+                  fill
+                  sizes="36px"
+                  src={user.photoURL}
+                  unoptimized
+                />
+              ) : (
+                avatarLabel || "S"
+              )}
+            </button>
 
             <ProfileDropdown
               email={user?.email}

@@ -12,9 +12,16 @@ export function useTheme() {
   const setTheme = useUiStore((state) => state.setTheme);
 
   useEffect(() => {
-    const saved = window.localStorage.getItem(STORAGE_KEY) as AppTheme | null;
-    if (saved) {
-      setTheme(saved);
+    try {
+      const saved = window.localStorage.getItem(STORAGE_KEY) as AppTheme | null;
+      if (saved === "dark") {
+        window.localStorage.setItem(STORAGE_KEY, "light");
+        setTheme("light");
+      } else if (saved) {
+        setTheme(saved);
+      }
+    } catch {
+      setTheme("light");
     }
   }, [setTheme]);
 

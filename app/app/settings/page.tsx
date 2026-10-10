@@ -104,21 +104,19 @@ export default function SettingsPage() {
           title="Appearance"
         >
           <div className="grid gap-6 md:grid-cols-[minmax(0,1fr)_320px]">
-            <div className="grid gap-3 sm:grid-cols-3">
-              {(["light", "dark", "system"] as const).map((option) => (
+            <div className="grid gap-3 sm:grid-cols-2">
+              {(["light", "system"] as const).map((option) => (
                 <button
                   className={`sentra-theme-choice ${theme === option ? "is-active" : ""}`}
                   key={option}
                   onClick={() => setTheme(option)}
                   type="button"
                 >
-                  <span>{option === "system" ? "System" : option === "dark" ? "Dark" : "Light"}</span>
+                  <span>{option === "system" ? "Adaptive System" : "Enterprise Light"}</span>
                   <small>
                     {option === "system"
-                      ? "Follows OS"
-                      : option === "dark"
-                        ? "Black OS"
-                        : "Clean light"}
+                      ? "Calibrated to device"
+                      : "Standard porcelain interface"}
                   </small>
                 </button>
               ))}

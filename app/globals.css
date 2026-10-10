@@ -1121,14 +1121,10 @@ select:focus {
   gap: 1rem;
   overflow: hidden;
   padding: 1rem;
-  border-radius: 32px;
-  background:
-    radial-gradient(circle at 0% 0%, rgba(139, 92, 246, 0.14), transparent 18rem),
-    radial-gradient(circle at 100% 12%, rgba(34, 211, 238, 0.11), transparent 16rem),
-    rgba(5, 7, 11, 0.76);
-  box-shadow:
-    0 24px 70px rgba(0, 0, 0, 0.42),
-    inset 1px 0 0 rgba(34, 211, 238, 0.12);
+  border-radius: 20px;
+  border: 1px solid var(--border, #e2e8f0);
+  background: var(--surface, #ffffff);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
   transition:
     width 260ms ease,
     transform 260ms ease,
@@ -3450,7 +3446,7 @@ select:focus {
 .sentra-auth-shell .sentra-shell-main {
   height: 100vh !important;
   min-height: 0 !important;
-  margin-left: calc(var(--sentra-sidebar-width) + 24px) !important;
+  margin-left: 0 !important;
   overflow: hidden !important;
   opacity: 1 !important;
   visibility: visible !important;
@@ -3718,47 +3714,42 @@ select:focus {
   box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6) !important;
 }
 
-/* SIDEBAR */
-.sentra-auth-shell .sentra-app-sidebar,
-.sentra-auth-shell .sentra-luxury-sidebar,
-.sentra-auth-shell .sentra-phase12-sidebar {
-  position: fixed !important;
-  top: 0 !important;
-  right: auto !important;
-  bottom: auto !important;
-  left: 0 !important;
-  display: grid !important;
-  grid-template-rows: auto auto minmax(0, 1fr) auto;
-  width: var(--sentra-sidebar-width, 260px) !important;
-  height: 100vh !important;
-  max-height: 100vh !important;
-  min-height: 0 !important;
-  overflow: hidden !important;
-  gap: 0 !important;
-  border-radius: 0 !important;
-  padding: 1rem !important;
-  border-right: 1px solid var(--border, #e2e8f0) !important;
-  border-left: none !important;
-  border-top: none !important;
-  border-bottom: none !important;
-  background: var(--surface, #ffffff) !important;
-  box-shadow: none !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
+/* SIDEBAR - Mobile Drawer Only */
+@media (min-width: 1025px) {
+  .sentra-auth-shell .sentra-app-sidebar,
+  .sentra-auth-shell .sentra-luxury-sidebar,
+  .sentra-auth-shell .sentra-phase12-sidebar {
+    display: none !important;
+  }
 }
 
-.dark .sentra-auth-shell .sentra-app-sidebar,
-.dark .sentra-auth-shell .sentra-luxury-sidebar,
-.dark .sentra-auth-shell .sentra-phase12-sidebar {
-  border-color: rgba(255, 255, 255, 0.08) !important;
-  background: #090d16 !important;
-}
-
-.sentra-auth-shell .sentra-app-sidebar.is-collapsed,
-.sentra-auth-shell .sentra-luxury-sidebar.is-collapsed,
-.sentra-auth-shell .sentra-phase12-sidebar.is-collapsed {
-  width: 76px !important;
-  padding-inline: 0.65rem !important;
+@media (max-width: 1024px) {
+  .sentra-auth-shell .sentra-app-sidebar,
+  .sentra-auth-shell .sentra-luxury-sidebar,
+  .sentra-auth-shell .sentra-phase12-sidebar {
+    position: fixed !important;
+    top: 0 !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: 0 !important;
+    z-index: 99 !important;
+    display: grid !important;
+    grid-template-rows: auto auto minmax(0, 1fr) auto;
+    width: min(300px, 85vw) !important;
+    height: 100vh !important;
+    max-height: 100vh !important;
+    min-height: 0 !important;
+    overflow: hidden !important;
+    gap: 0 !important;
+    border-radius: 0 !important;
+    padding: 1rem !important;
+    border-right: 1px solid var(--border, #e2e8f0) !important;
+    border-left: none !important;
+    border-top: none !important;
+    border-bottom: none !important;
+    background: var(--surface, #ffffff) !important;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
+  }
 }
 
 .sentra-auth-shell .sentra-sidebar-brand {

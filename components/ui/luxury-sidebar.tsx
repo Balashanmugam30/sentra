@@ -611,8 +611,8 @@ export function LuxurySidebar({
       <aside
         aria-label="Sentra primary navigation"
         className={`sentra-app-sidebar sentra-luxury-sidebar sentra-phase12-sidebar glass-nav ${collapsed ? "is-collapsed" : ""} ${
-          mobileOpen ? "is-mobile-open" : ""
-        }`}
+          mobileOpen ? "is-mobile-open" : "hidden"
+        } lg:hidden`}
         data-lenis-prevent
         data-native-scroll
       >

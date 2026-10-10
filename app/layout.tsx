@@ -70,16 +70,16 @@ export default function RootLayout({
 }>) {
   const themeScript = `
     (() => {
-      const saved = localStorage.getItem("sentra-theme");
-      const theme = saved === "dark" ? "dark" : "light";
-      document.documentElement.dataset.theme = theme;
-      document.documentElement.dataset.themeMode = theme;
-      document.documentElement.style.colorScheme = theme;
-      if (theme === "dark") {
-        document.documentElement.classList.add("dark");
-      } else {
+      try {
+        const saved = localStorage.getItem("sentra-theme");
+        if (saved === "dark") {
+          localStorage.setItem("sentra-theme", "light");
+        }
+        document.documentElement.dataset.theme = "light";
+        document.documentElement.dataset.themeMode = "light";
+        document.documentElement.style.colorScheme = "light";
         document.documentElement.classList.remove("dark");
-      }
+      } catch (e) {}
     })();
   `;
 

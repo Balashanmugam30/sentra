@@ -1,62 +1,36 @@
-# SENTRA — UI MIGRATION & LIQUID GLASS 3.0 REDESIGN AUDIT
+# Sentra — UI Migration Audit
 
-## 1. Executive Summary
-This audit documents the visual recovery and active-UI redesign of Sentra OS to **Liquid Glass 3.0**. The previous interface was inspected and identified as appearing like a conventional dark dashboard with opaque navy cards, flat backgrounds, colliding command headers, and missing typographic hierarchy.
-
-Through systematic de-glassification cleanup, typography realignment with `Manrope` and `Geist`, restructuring of the Command Cockpit topbar, and glass depth illumination, the live interface has been restored to premium operator-grade Liquid Glass.
+## Overview
+This audit tracks all modified, retired, and modernized components across the Sentra web application codebase during the Phase 9 Final Design Reset.
 
 ---
 
-## 2. Root Cause Analysis of Legacy Visual Symptoms
+## 1. Component Migration Inventory
 
-1. **Destructive CSS Overrides in `app/globals.css`:**
-   - Over 1,100 lines of conflicting historical rules forcefully applied `backdrop-filter: none !important`, stripped vibrant status accents down to grayscale (`var(--sentra-app-muted) !important`), forced gradients into `#111111`, and hid ambient background glows (`.cursor-glow, .depth-glow, .grid-layer { display: none !important }`).
-   - Purged all destructive de-glassification rules, restoring true Obsidian Midnight base (`#030712`) and full `backdrop-blur-2xl` depth.
-
-2. **Breadcrumb & Header Text Collisions in `modules/dashboard/components/top-bar.tsx`:**
-   - On desktop, the breadcrumb was crammed with duplicate "CURRENT WORKSPACE" and mode badges within a rigid width container, resulting in text overlapping ("CommCommand").
-   - On mobile, `.sentra-command-search` was forcefully styled with `display: flex; flex: 1 1 100%` in media queries without container wrapping, colliding with the breadcrumb.
-   - Restructured into a streamlined breadcrumb hierarchy: `[Workspace Mode Chip] / [Dashboard / Section Title]`.
-   - On mobile screens (< 768px), command search collapses into an icon button, status chips hide text labels, and breadcrumbs preserve clean spacing without collisions.
-
-3. **Typography & Material Tier Realignment:**
-   - Configured `Manrope` (`--font-display`) for high-impact titles with gradient shimmer (`from-white via-white/95 to-white/70`).
-   - Configured `Geist Sans` (`--font-sans`) for UI labels, badges, and body content.
-   - Configured `Geist Mono` (`--font-mono`) for live telemetry metrics, progress indicators, and technical IDs.
-   - Established 3 uniform Liquid Glass tiers in `components/ui/glass-panel.tsx`:
-     - **Glass 01 (Subtle):** Low opacity, delicate ambient backdrop for content groupings.
-     - **Glass 02 (Elevated):** Medium opacity with specular top hairline highlight (`via-white/30`) for cards, workspace modules, and metric pills.
-     - **Glass 03 (Floating):** High saturation and blur (`backdrop-blur-2xl`) for topbar cockpit, navigation docks, and dialogs.
-
----
-
-## 3. Visual Verification Evidence (Screenshot-Gated Acceptance)
-
-Screenshots were captured using Playwright against the local production build running in dark mode:
-- **`before-app-1440.png`**: Flat dark navy cards, text collisions in topbar, absence of material depth.
-- **`after-app-1440.png`**: 
-  - Topbar: Floating Obsidian Glass cockpit with streamlined breadcrumb `EXECUTIVE /` and mode tabs.
-  - Sidebar: Radiant active indicator on Dashboard, monospace telemetry badges (`RDY 77%`, `THR 71%`).
-  - Hero: Manrope display heading *"Leadership intelligence center."* with gradient text shimmer and ambient cyan/violet radial glows.
-  - KPI Metric Pills: Translucent Glass 02 cards with Geist Mono values (`$3.9M`, `71%`, `62%`, `21m`) and vibrant glowing status tracks.
-  - Dock: Translucent "Ask Sentra" floating pill.
-- **`after-app-390.png`**:
-  - Hamburger menu in glass pill, `COMMAND` chip, `/ D...` breadcrumb, search icon, role badge `ADMIN`, avatar `SA` with zero collision.
-  - Responsive KPI cards stacked cleanly with glowing progress tracks.
+| Component Path | Previous State | Migrated State | Status |
+| :--- | :--- | :--- | :--- |
+| `components/brand/sentra-logo.tsx` | Non-existent | Geometric vector wave SVG mark + Manrope wordmark | **New Component** |
+| `components/brand/wave-accent.tsx` | Non-existent | Light porcelain ambient wave gradient ribbons | **New Component** |
+| `components/landing/landing-experience.tsx` | Hardcoded `bg-black`, `bg-[#010101]`, dark sections | Porcelain `#f8fafc`, light sections, modern footer | **Modernized** |
+| `components/landing/navbar.tsx` | Fixed dark link | Glass porcelain navbar with `SentraLogo`, nav links, CTAs | **Modernized** |
+| `components/landing/hero-section.tsx` | `AuroraBackground`, `DotGrid`, `text-white` | Light hero with `WaveAccent`, Manrope typography, proof bar | **Modernized** |
+| `components/landing/feature-section.tsx` | `via-black/60 to-black`, `text-white/90` | Pure white cards with `#e2e8f0` borders, pastel tag badges | **Modernized** |
+| `components/landing/system-preview-section.tsx` | Dark terminal aesthetic | Light command console preview with status telemetry | **Modernized** |
+| `components/landing/ai-section.tsx` | Dark cards with glowing purple bars | Porcelain explainable AI card with progress confidence bars | **Modernized** |
+| `components/landing/cta-section.tsx` | Dark aurora section with dark buttons | Clean porcelain CTA with subtle wave background | **Modernized** |
+| `modules/auth/components/login-screen.tsx` | Dark aurora and dot grid overlay | Porcelain canvas with `WaveAccent` | **Modernized** |
+| `components/auth/PermissionGate.tsx` | Dark rounded-32px loading card | Light rounded-2xl white card with blue accents | **Modernized** |
+| `modules/dashboard/components/top-bar.tsx` | Dark linear-gradient, breadcrumb-only | Full-width GlobalHeader with logo, primary nav, More menu | **Modernized** |
+| `components/app/app-sidebar.tsx` | Pinned 280px desktop sidebar export | Responsive mobile-only slide-out drawer (`mobileOpen`) | **Modernized** |
+| `components/ui/luxury-sidebar.tsx` | Always rendered desktop sidebar | Pinned desktop hidden (`lg:hidden`), drawer mode enabled | **Modernized** |
+| `app/app/settings/page.tsx` | Exposed "Dark" option | Standardized to Enterprise Light & Adaptive System | **Modernized** |
+| `app/layout.tsx` | Read dark from localStorage | Deterministically migrates `"dark"` to `"light"` | **Hardened** |
+| `hooks/use-theme.ts` | Hydrated dark from localStorage | Normalizes saved theme to `"light"` | **Hardened** |
+| `app/globals.css` | `margin-left: 304px`, dark gradients | `margin-left: 0`, white surface tokens, light sidebar | **Modernized** |
 
 ---
 
-## 4. Verification & Quality Gates
-
-| Verification Gate | Command | Result |
-|---|---|---|
-| TypeScript Typecheck | `npm run typecheck` | Passed (0 errors) |
-| ESLint Rules | `npm run lint` (`eslint . --max-warnings=0`) | Passed (0 warnings, 0 errors) |
-| Python Backend Test Suite | `python -m pytest tests -q` | Passed (74/74 passed, 100%) |
-| Next.js Static Optimization | `npm run build` | Passed (163/163 routes compiled) |
-| Playwright Visual Capture | `node scripts/capture-screenshots.mjs` | Passed (1440px + 390px captured & verified) |
-
----
-
-## 5. Deployment Instructions
-All changes are implemented directly on `main` adhering to the single-branch policy. Pushing to GitHub triggers Vercel and Render CI/CD automated deployments.
+## 2. Legacy Cleanup and Deprecations
+* **DotGrid and AuroraBackground:** Removed from the active user paths on both Landing (`/`) and Login (`/login`).
+* **Fixed 280px Left Sidebar:** Retired from the desktop layout; desktop interface is 100% header-led.
+* **Hardcoded Dark Tokens:** Removed inline dark linear-gradients and radial overlays in shell containers.

@@ -30,11 +30,11 @@ export function PermissionGate({
   if (loading && (permission || anyPermissions?.length)) {
     return (
       <div className="mx-auto flex min-h-[60vh] w-full max-w-3xl items-center justify-center px-6">
-        <div className="w-full rounded-[32px] border border-white/10 bg-white/[0.055] p-6 text-center text-white shadow-[0_24px_80px_rgba(0,0,0,0.32)] backdrop-blur-2xl">
-          <p className="text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-cyan-100/52">
+        <div className="w-full rounded-2xl border border-slate-200 bg-white p-6 text-center text-slate-800 shadow-sm">
+          <p className="text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-blue-600">
             Verifying access
           </p>
-          <p className="mt-3 text-sm text-white/58">Checking your session permissions before loading this workspace.</p>
+          <p className="mt-3 text-sm text-slate-600">Checking your session permissions before loading this workspace.</p>
         </div>
       </div>
     );
