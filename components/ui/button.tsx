@@ -15,24 +15,24 @@ export type ButtonSize = "sm" | "md" | "lg" | "icon";
 
 const variantStyles: Record<ButtonVariant, string> = {
   primary:
-    "relative border border-cyan-400/40 bg-[linear-gradient(135deg,rgba(6,182,212,0.92)_0%,rgba(14,165,233,0.85)_100%)] text-stone-950 font-semibold shadow-[0_4px_20px_rgba(6,182,212,0.25)] hover:border-cyan-300 hover:shadow-[0_6px_28px_rgba(6,182,212,0.4)] active:brightness-95",
+    "relative border border-slate-900 bg-slate-900 text-white font-medium shadow-sm hover:bg-slate-800 active:scale-[0.99] dark:border-sky-500 dark:bg-sky-600 dark:hover:bg-sky-500",
   secondary:
-    "relative border border-white/12 bg-[linear-gradient(180deg,rgba(255,255,255,0.08)_0%,rgba(255,255,255,0.03)_100%)] text-white backdrop-blur-xl shadow-[0_4px_20px_rgba(0,0,0,0.3)] hover:border-white/20 hover:bg-white/10 active:bg-white/5",
+    "relative border border-slate-200 bg-white text-slate-700 shadow-sm hover:bg-slate-50 hover:text-slate-900 active:bg-slate-100 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700",
   ghost:
-    "border border-transparent bg-transparent text-slate-300 hover:border-white/10 hover:bg-white/5 hover:text-white active:bg-white/8",
+    "border border-transparent bg-transparent text-slate-600 hover:bg-slate-100 hover:text-slate-900 active:bg-slate-200 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-white",
   danger:
-    "relative border border-rose-500/40 bg-[linear-gradient(135deg,rgba(239,68,68,0.88)_0%,rgba(220,38,38,0.82)_100%)] text-white shadow-[0_4px_20px_rgba(239,68,68,0.25)] hover:border-rose-400 hover:shadow-[0_6px_28px_rgba(239,68,68,0.4)] active:brightness-95",
+    "relative border border-rose-600 bg-rose-600 text-white font-medium shadow-sm hover:bg-rose-700 active:bg-rose-800 dark:border-rose-500 dark:bg-rose-600",
   executive:
-    "relative border border-amber-300/40 bg-[linear-gradient(135deg,rgba(245,213,138,0.9)_0%,rgba(217,119,6,0.8)_100%)] text-stone-950 font-semibold shadow-[0_4px_20px_rgba(245,213,138,0.2)] hover:border-amber-200 hover:shadow-[0_6px_28px_rgba(245,213,138,0.35)] active:brightness-95",
+    "relative border border-amber-600/30 bg-amber-50 text-amber-900 font-medium shadow-sm hover:bg-amber-100 dark:border-amber-400/40 dark:bg-amber-500/20 dark:text-amber-200",
   intelligence:
-    "relative border border-cyan-500/35 bg-cyan-950/40 text-cyan-200 backdrop-blur-xl hover:border-cyan-400 hover:bg-cyan-900/40 active:bg-cyan-900/60",
+    "relative border border-sky-600/30 bg-sky-50 text-sky-900 font-medium shadow-sm hover:bg-sky-100 dark:border-cyan-500/35 dark:bg-cyan-950/40 dark:text-cyan-200",
 };
 
 const sizeStyles: Record<ButtonSize, string> = {
-  sm: "min-h-11 sm:min-h-9 px-3 py-1.5 text-xs rounded-xl touch-target-safe",
-  md: "min-h-11 px-4 py-2.5 text-sm rounded-2xl touch-target-safe",
-  lg: "min-h-12 px-6 py-3 text-base rounded-2xl touch-target-safe",
-  icon: "min-h-11 min-w-11 p-2.5 rounded-2xl touch-target-safe",
+  sm: "min-h-9 px-3 py-1.5 text-xs rounded-lg touch-target-safe",
+  md: "min-h-10 px-4 py-2 text-sm rounded-lg touch-target-safe",
+  lg: "min-h-11 px-5 py-2.5 text-base rounded-lg touch-target-safe",
+  icon: "min-h-9 min-w-9 p-2 rounded-lg touch-target-safe",
 };
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {

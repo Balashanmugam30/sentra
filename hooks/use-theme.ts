@@ -30,6 +30,11 @@ export function useTheme() {
     root.dataset.theme = resolvedTheme;
     root.dataset.themeMode = theme;
     root.style.colorScheme = resolvedTheme;
+    if (resolvedTheme === "dark") {
+      root.classList.add("dark");
+    } else {
+      root.classList.remove("dark");
+    }
     window.localStorage.setItem(STORAGE_KEY, theme);
   }, [theme]);
 
@@ -44,6 +49,11 @@ export function useTheme() {
       document.documentElement.dataset.theme = resolvedTheme;
       document.documentElement.dataset.themeMode = "system";
       document.documentElement.style.colorScheme = resolvedTheme;
+      if (resolvedTheme === "dark") {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
     };
 
     mediaQuery.addEventListener("change", onChange);

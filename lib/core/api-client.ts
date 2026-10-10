@@ -105,22 +105,25 @@ function resolveApiBaseUrl() {
 
   const legacyBase = process.env.NEXT_PUBLIC_API_BASE_URL?.trim();
   const backendBase = process.env.NEXT_PUBLIC_BACKEND_API_URL?.trim();
+  const configured = explicitBase || legacyBase || backendBase;
+  if (configured && !configured.includes("localhost:4000/api/v1")) {
+    return configured;
+  }
+
+  if (typeof window !== "undefined") {
+    if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
+      return "http://127.0.0.1:8000";
+    }
+  }
+
   const isProduction =
     process.env.NEXT_PUBLIC_APP_ENV === "production" || process.env.NODE_ENV === "production";
 
   if (!isProduction) {
-    if (backendBase) {
-      return backendBase;
-    }
-
-    if (legacyBase && !legacyBase.includes("localhost:4000/api/v1")) {
-      return legacyBase;
-    }
-
     return "http://127.0.0.1:8000";
   }
 
-  return explicitBase || legacyBase || backendBase || "/api";
+  return "https://sentra-li7c.onrender.com";
 }
 
 const API_BASE_URL = resolveApiBaseUrl();

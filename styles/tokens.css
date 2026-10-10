@@ -1,5 +1,5 @@
-:root,
-[data-theme="dark"] {
+[data-theme="dark"],
+.dark {
   color-scheme: dark;
   --bg: #0b0f14;
   --surface: rgba(255, 255, 255, 0.05);
@@ -116,14 +116,15 @@
   --sentra-input-readonly: rgba(255, 255, 255, 0.04);
 }
 
+:root,
 [data-theme="light"],
 .light {
   color-scheme: light;
-  --bg: #f5f7fb;
-  --surface: rgba(0, 0, 0, 0.04);
-  --surface-strong: rgba(0, 0, 0, 0.06);
-  --surface-soft: rgba(0, 0, 0, 0.03);
-  --border: rgba(0, 0, 0, 0.08);
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-strong: #f1f5f9;
+  --surface-soft: #f8fafc;
+  --border: #e2e8f0;
   --text: #0f172a;
   --text-muted: rgba(15, 23, 42, 0.6);
   --text-soft: rgba(15, 23, 42, 0.45);
@@ -187,10 +188,10 @@
   --sentra-shadow-medium: 0 24px 70px rgba(15, 23, 42, 0.12);
   --sentra-shadow-command: 0 34px 110px rgba(15, 23, 42, 0.18), 0 0 48px rgba(3, 105, 161, 0.08);
   --sentra-shadow-modal: 0 42px 140px rgba(15, 23, 42, 0.24);
-  --sentra-radius-12: 0.75rem;
-  --sentra-radius-18: 1.125rem;
-  --sentra-radius-24: 1.5rem;
-  --sentra-radius-32: 2rem;
+  --sentra-radius-12: 0.5rem;
+  --sentra-radius-18: 0.75rem;
+  --sentra-radius-24: 0.75rem;
+  --sentra-radius-32: 1rem;
   --sentra-space-4: 0.25rem;
   --sentra-space-8: 0.5rem;
   --sentra-space-12: 0.75rem;
@@ -214,7 +215,6 @@
  * theme blocks so existing modules inherit the new landing-page visual DNA
  * without touching feature logic or data flow.
  */
-:root,
 [data-theme="dark"],
 .dark {
   color-scheme: dark;
@@ -360,33 +360,31 @@
   --sentra-input-readonly: rgba(255, 255, 255, 0.04);
 }
 
+:root,
 [data-theme="light"],
 .light {
-  --bg-primary: #f6f8ff;
-  --bg-secondary: #eef3ff;
-  --bg-tertiary: rgba(15, 23, 42, 0.03);
-  --surface-glass: rgba(255, 255, 255, 0.76);
-  --surface-glass-strong: rgba(255, 255, 255, 0.92);
-  --border-soft: rgba(15, 23, 42, 0.1);
-  --border-strong: rgba(15, 23, 42, 0.18);
-  --text-primary: #08111f;
-  --text-secondary: rgba(8, 17, 31, 0.72);
-  --text-muted: rgba(8, 17, 31, 0.5);
+  --bg-primary: #f8fafc;
+  --bg-secondary: #f1f5f9;
+  --bg-tertiary: #f8fafc;
+  --surface-glass: rgba(255, 255, 255, 0.88);
+  --surface-glass-strong: #ffffff;
+  --border-soft: #e2e8f0;
+  --border-strong: #cbd5e1;
+  --text-primary: #0f172a;
+  --text-secondary: #64748b;
+  --text-muted: #94a3b8;
   --bg: var(--bg-primary);
-  --surface: var(--surface-glass);
-  --surface-strong: var(--surface-glass-strong);
+  --surface: var(--surface-glass-strong);
+  --surface-strong: #f1f5f9;
   --border: var(--border-soft);
   --text: var(--text-primary);
   --color-background: var(--bg-primary);
-  --color-surface: var(--surface-glass);
-  --color-surface-strong: var(--surface-glass-strong);
+  --color-surface: var(--surface-glass-strong);
+  --color-surface-strong: var(--surface-strong);
   --color-foreground: var(--text-primary);
   --color-muted-foreground: var(--text-secondary);
   --color-border: var(--border-soft);
-  --sentra-shell-gradient:
-    radial-gradient(circle at 18% 8%, rgba(139, 92, 246, 0.14), transparent 30rem),
-    radial-gradient(circle at 76% 6%, rgba(59, 130, 246, 0.12), transparent 28rem),
-    linear-gradient(180deg, #f6f8ff 0%, #eef3ff 100%);
+  --sentra-shell-gradient: none;
 }
 
 /*
@@ -394,7 +392,6 @@
  * Restrained enterprise theme: Apple-level dark materials, one blue accent,
  * semantic state colors, and quieter surfaces for dense command screens.
  */
-:root,
 [data-theme="dark"],
 .dark {
   color-scheme: dark;
@@ -516,7 +513,6 @@
 }
 
 /* Sentra authenticated product system: one final token layer for app workspaces. */
-:root,
 [data-theme="dark"],
 .dark {
   --sentra-os-bg: #030712;
@@ -536,23 +532,94 @@
   --sentra-os-indigo: #818cf8;
 }
 
+:root,
 [data-theme="light"],
 .light {
   --sentra-os-bg: #f8fafc;
   --sentra-os-panel: #ffffff;
-  --sentra-os-card: #f1f5f9;
-  --sentra-os-soft: #e2e8f0;
+  --sentra-os-card: #ffffff;
+  --sentra-os-soft: #f1f5f9;
   --sentra-os-hover: #e0f2fe;
   --sentra-os-active: #bae6fd;
-  --sentra-os-border: #cbd5e1;
+  --sentra-os-border: #e2e8f0;
   --sentra-os-border-strong: #0284c7;
   --sentra-os-text: #0f172a;
   --sentra-os-muted: #64748b;
-  --sentra-os-shadow: 0 12px 34px rgba(15, 23, 42, 0.08);
+  --sentra-os-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
   --sentra-os-cyan: #0891b2;
-  --sentra-os-cyan-glow: rgba(8, 145, 178, 0.2);
+  --sentra-os-cyan-glow: rgba(8, 145, 178, 0.15);
   --sentra-os-blue: #0284c7;
   --sentra-os-indigo: #4f46e5;
+
+  /* --- Liquid Glass Light Base --- */
+  --liquid-base: #f8fafc;
+  --liquid-base-elevated: #ffffff;
+  --liquid-base-surface: #ffffff;
+
+  /* --- Glass Material Tiers (Light) --- */
+  --glass-tier-1-bg: rgba(255, 255, 255, 0.8);
+  --glass-tier-1-border: #e2e8f0;
+  --glass-tier-1-blur: 12px;
+  --glass-tier-1-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+
+  --glass-tier-2-bg: #ffffff;
+  --glass-tier-2-border: #e2e8f0;
+  --glass-tier-2-blur: 16px;
+  --glass-tier-2-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05);
+
+  --glass-tier-3-bg: rgba(255, 255, 255, 0.94);
+  --glass-tier-3-border: #e2e8f0;
+  --glass-tier-3-blur: 24px;
+  --glass-tier-3-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+
+  /* --- Semantic Status Palette (Light) --- */
+  --status-safe: #059669;
+  --status-safe-bg: rgba(16, 185, 129, 0.1);
+  --status-safe-border: rgba(16, 185, 129, 0.25);
+  --status-safe-text: #065f46;
+  --status-safe-glow: transparent;
+
+  --status-warning: #d97706;
+  --status-warning-bg: rgba(245, 158, 11, 0.1);
+  --status-warning-border: rgba(245, 158, 11, 0.25);
+  --status-warning-text: #92400e;
+  --status-warning-glow: transparent;
+
+  --status-critical: #dc2626;
+  --status-critical-bg: rgba(239, 68, 68, 0.1);
+  --status-critical-border: rgba(239, 68, 68, 0.25);
+  --status-critical-text: #991b1b;
+  --status-critical-glow: transparent;
+
+  --status-intelligence: #0284c7;
+  --status-intelligence-bg: rgba(2, 132, 199, 0.1);
+  --status-intelligence-border: rgba(2, 132, 199, 0.25);
+  --status-intelligence-text: #075985;
+  --status-intelligence-glow: transparent;
+
+  --status-info: #0284c7;
+  --status-info-bg: rgba(2, 132, 199, 0.1);
+  --status-info-border: rgba(2, 132, 199, 0.25);
+  --status-info-text: #075985;
+  --status-info-glow: transparent;
+
+  --status-offline: #64748b;
+  --status-offline-bg: rgba(100, 116, 139, 0.1);
+  --status-offline-border: rgba(100, 116, 139, 0.2);
+  --status-offline-text: #475569;
+  --status-offline-glow: transparent;
+
+  --status-unknown: #94a3b8;
+  --status-unknown-bg: rgba(148, 163, 184, 0.1);
+  --status-unknown-border: rgba(148, 163, 184, 0.2);
+  --status-unknown-text: #64748b;
+  --status-unknown-glow: transparent;
+
+  --status-executive: #b45309;
+  --status-executive-bg: rgba(245, 213, 138, 0.15);
+  --status-executive-border: rgba(217, 119, 6, 0.25);
+  --status-executive-text: #78350f;
+  --status-executive-glow: transparent;
 }
 
 /* ==========================================================================
@@ -560,7 +627,6 @@
    Calm, authoritative, high-trust, operational, information-dense visual language.
    Apple Liquid Glass & visionOS material depth meets mission-critical aerospace density.
    ========================================================================== */
-:root,
 [data-theme="dark"],
 .dark {
   /* --- Obsidian Midnight Base --- */

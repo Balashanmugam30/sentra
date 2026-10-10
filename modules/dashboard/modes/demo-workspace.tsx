@@ -33,13 +33,13 @@ export function DemoWorkspace({ metrics, onModeChange }: ModeWorkspaceProps) {
       <GlassPanel as="section" className="min-h-[520px] p-7 md:p-10" tone="hero" data-section-id="demo-hero">
         <div className="grid gap-8 xl:grid-cols-[1fr_0.86fr] xl:items-center">
           <div>
-            <p className="text-[0.72rem] font-semibold uppercase tracking-[0.3em] text-cyan-100/56">
+            <p className="text-[0.72rem] font-semibold uppercase tracking-[0.3em] text-sky-600 dark:text-cyan-100/56">
               Investor showcase
             </p>
-            <h2 className="mt-4 max-w-4xl text-5xl font-semibold tracking-[-0.07em] text-white md:text-7xl">
+            <h2 className="mt-4 max-w-4xl text-5xl font-semibold tracking-[-0.07em] text-slate-900 dark:text-white md:text-7xl">
               Sentra turns chaos into command.
             </h2>
-            <p className="mt-5 max-w-2xl text-base leading-7 text-white/62">
+            <p className="mt-5 max-w-2xl text-base leading-7 text-slate-600 dark:text-white/62">
               A guided product story for judges, investors, clients, and government buyers. No raw
               dashboard clutter, only the narrative that proves why Sentra wins.
             </p>
@@ -50,7 +50,7 @@ export function DemoWorkspace({ metrics, onModeChange }: ModeWorkspaceProps) {
               </Link>
             </div>
           </div>
-          <div className="rounded-[34px] border border-white/10 bg-black/22 p-5">
+          <div className="rounded-[24px] border border-slate-200 bg-slate-50/70 p-5 dark:border-white/10 dark:bg-black/22">
             <div className="grid gap-3 sm:grid-cols-2">
               {[
                 ["Casualty risk", "-42%"],
@@ -58,9 +58,9 @@ export function DemoWorkspace({ metrics, onModeChange }: ModeWorkspaceProps) {
                 ["Downtime", "-55%"],
                 ["AI confidence", `${metrics.aiConfidence}%`],
               ].map(([label, value]) => (
-                <div className="rounded-[26px] border border-white/10 bg-white/[0.045] p-5" key={label}>
-                  <p className="text-[0.66rem] uppercase tracking-[0.22em] text-white/42">{label}</p>
-                  <p className="mt-3 text-4xl font-semibold tracking-[-0.05em] text-white">{value}</p>
+                <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm dark:border-white/10 dark:bg-white/[0.045] dark:shadow-none" key={label}>
+                  <p className="text-[0.66rem] uppercase tracking-[0.22em] text-slate-500 dark:text-white/42">{label}</p>
+                  <p className="mt-3 text-4xl font-semibold tracking-[-0.05em] text-slate-900 dark:text-white">{value}</p>
                 </div>
               ))}
             </div>
@@ -73,13 +73,13 @@ export function DemoWorkspace({ metrics, onModeChange }: ModeWorkspaceProps) {
           <SectionTitle eyebrow="Cinematic flow" title="Guided crisis scenario timeline" />
           <div className="mt-6 space-y-4">
             {demoFlow.map((scene, index) => (
-              <div className="flex gap-4 rounded-[24px] border border-white/10 bg-white/[0.04] p-4" key={scene.title}>
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl border border-cyan-200/18 bg-cyan-200/10 text-sm font-semibold text-cyan-50">
+              <div className="flex gap-4 rounded-xl border border-slate-200 bg-slate-50/80 p-4 dark:border-white/10 dark:bg-white/[0.04]" key={scene.title}>
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-sky-200 bg-sky-50 text-sm font-semibold text-sky-700 dark:border-cyan-200/18 dark:bg-cyan-200/10 dark:text-cyan-50">
                   {index + 1}
                 </span>
                 <div>
-                  <p className="text-sm font-semibold text-white">{scene.title}</p>
-                  <p className="mt-1 text-sm leading-6 text-white/54">{scene.detail}</p>
+                  <p className="text-sm font-semibold text-slate-900 dark:text-white">{scene.title}</p>
+                  <p className="mt-1 text-sm leading-6 text-slate-600 dark:text-white/54">{scene.detail}</p>
                 </div>
               </div>
             ))}
@@ -99,9 +99,9 @@ export function DemoWorkspace({ metrics, onModeChange }: ModeWorkspaceProps) {
               ["Execute", "Operations workflows dispatch teams, alerts, and recovery actions."],
               ["Prove", "Executive reporting turns the response into board-ready evidence."],
             ].map(([label, copy]) => (
-              <div className="rounded-[24px] border border-white/10 bg-black/18 p-5" key={label}>
-                <p className="text-lg font-semibold text-white">{label}</p>
-                <p className="mt-2 text-sm leading-6 text-white/56">{copy}</p>
+              <div className="rounded-xl border border-slate-200 bg-slate-50/80 p-5 dark:border-white/10 dark:bg-black/18" key={label}>
+                <p className="text-lg font-semibold text-slate-900 dark:text-white">{label}</p>
+                <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-white/56">{copy}</p>
               </div>
             ))}
           </div>

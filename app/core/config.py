@@ -83,7 +83,7 @@ class Settings:
     redis_url: str = os.getenv("REDIS_URL", "")
     allowed_origins: str = os.getenv(
         "ALLOWED_ORIGINS",
-        "http://localhost,http://localhost:3000,http://127.0.0.1:3000,https://sentra-01.vercel.app",
+        "http://localhost,http://localhost:3000,http://127.0.0.1:3000,http://localhost:3001,http://127.0.0.1:3001,http://localhost:3005,http://127.0.0.1:3005,https://sentra-01.vercel.app",
     )
     auth_jwt_secret: str = field(default_factory=lambda: resolve_jwt_secret()[0])
     auth_jwt_algorithm: str = os.getenv("SENTRA_JWT_ALGORITHM", "HS256")

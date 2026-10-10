@@ -18,8 +18,8 @@ body {
   overflow-x: hidden;
   overflow-y: auto;
   margin: 0;
-  background: #030712;
-  color: #ffffff;
+  background: var(--bg, #f8fafc);
+  color: var(--text, #0f172a);
   font-family: var(--font-sans), system-ui, sans-serif;
   letter-spacing: -0.011em;
   text-rendering: geometricPrecision;
@@ -608,25 +608,30 @@ body {
   place-items: center;
   overflow: hidden;
   padding: 20px;
-  color: #f7f8fb;
-  background: #010101;
+  color: var(--text, #0f172a);
+  background: var(--bg, #f8fafc);
 }
 
 .sentra-login-card {
-  width: min(420px, calc(100vw - 32px)) !important;
-  max-width: 420px !important;
+  width: min(440px, calc(100vw - 32px)) !important;
+  max-width: 440px !important;
   max-height: calc(100dvh - 40px);
   padding: clamp(24px, 3vh, 32px);
+  border: 1px solid var(--border, #e2e8f0);
+  border-radius: 16px;
+  background: var(--surface, #ffffff);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.06), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+}
+
+.dark .sentra-login-page {
+  color: #f7f8fb;
+  background: #05070b;
+}
+
+.dark .sentra-login-card {
   border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 28px;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.075), transparent 36%),
-    linear-gradient(145deg, rgba(22, 22, 27, 0.86), rgba(8, 9, 13, 0.76));
-  box-shadow:
-    0 34px 110px rgba(0, 0, 0, 0.58),
-    0 0 80px rgba(116, 96, 255, 0.08),
-    inset 0 1px 0 rgba(255, 255, 255, 0.14);
-  backdrop-filter: blur(26px);
+  background: linear-gradient(145deg, rgba(22, 22, 27, 0.94), rgba(8, 9, 13, 0.88));
+  box-shadow: 0 34px 110px rgba(0, 0, 0, 0.58), inset 0 1px 0 rgba(255, 255, 255, 0.14);
 }
 
 @media (max-height: 780px) and (min-width: 768px) {
@@ -635,10 +640,10 @@ body {
   }
 
   .sentra-login-card {
-    width: min(410px, calc(100vw - 32px)) !important;
-    max-width: 410px !important;
+    width: min(420px, calc(100vw - 32px)) !important;
+    max-width: 420px !important;
     padding: 20px;
-    border-radius: 26px;
+    border-radius: 16px;
   }
 }
 
@@ -2081,8 +2086,9 @@ select:focus {
   }
 }
 
-/* Sentra UI Phase 6: Apple-level minimal luxury restraint layer */
-:root {
+/* Sentra UI Phase 6: Apple-level minimal luxury restraint layer (Dark Mode) */
+.dark,
+[data-theme="dark"] {
   --bg-primary: #07090d;
   --bg-secondary: #0b1020;
   --bg-tertiary: #101522;
@@ -2351,18 +2357,37 @@ select:focus {
 
 .badge-live,
 .badge-success {
+  border-color: #86efac;
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.badge-warning {
+  border-color: #fde68a;
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.badge-danger {
+  border-color: #fecaca;
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.dark .badge-live,
+.dark .badge-success {
   border-color: rgba(124, 231, 178, 0.22);
   background: rgba(124, 231, 178, 0.09);
   color: #d9fbe8;
 }
 
-.badge-warning {
+.dark .badge-warning {
   border-color: rgba(244, 197, 106, 0.22);
   background: rgba(244, 197, 106, 0.09);
   color: #ffe8b0;
 }
 
-.badge-danger {
+.dark .badge-danger {
   border-color: rgba(255, 125, 125, 0.22);
   background: rgba(255, 125, 125, 0.09);
   color: #ffd1d1;
@@ -2420,8 +2445,9 @@ select:focus {
   }
 }
 
-/* Sentra UI Phase 7: luxury simplification, Apple motion, hero dashboard */
-:root {
+/* Sentra UI Phase 7: luxury simplification (Dark Mode) */
+.dark,
+[data-theme="dark"] {
   --bg-primary: #05070b;
   --background: #05070b;
   --background-canvas: #05070b;
@@ -2439,10 +2465,10 @@ select:focus {
   --sentra-sidebar-width: 288px;
 }
 
-.sentra-luxury-sidebar,
-.sentra-app-sidebar {
+.dark .sentra-luxury-sidebar,
+.dark .sentra-app-sidebar {
   width: 288px;
-  border-radius: 30px;
+  border-radius: 14px;
   background:
     radial-gradient(circle at 26% 0%, rgba(125, 211, 252, 0.09), transparent 18rem),
     linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.024)),
@@ -2452,12 +2478,12 @@ select:focus {
     inset 0 1px 0 rgba(255, 255, 255, 0.07);
 }
 
-.sentra-luxury-sidebar.is-collapsed,
-.sentra-app-sidebar.is-collapsed {
+.dark .sentra-luxury-sidebar.is-collapsed,
+.dark .sentra-app-sidebar.is-collapsed {
   width: 88px;
 }
 
-.sentra-phase7-hero {
+.dark .sentra-phase7-hero {
   isolation: isolate;
   min-height: 330px;
   background:
@@ -2812,8 +2838,7 @@ select:focus {
   }
 }
 
-/* Sentra UI Phase 11: unicorn-grade polish, quiet luxury, product motion */
-:root,
+/* Sentra UI Phase 11: unicorn-grade polish (Dark Mode) */
 [data-theme="dark"],
 .dark {
   --phase11-bg: #050812;
@@ -3024,8 +3049,7 @@ select:focus {
   }
 }
 
-/* Sentra UI Phase 12: premium demo readiness, quieter hierarchy, favicon-era polish */
-:root,
+/* Sentra UI Phase 12: premium demo readiness (Dark Mode) */
 [data-theme="dark"],
 .dark {
   --phase12-ink: #f8fbff;
@@ -3320,7 +3344,50 @@ select:focus {
    ========================================================================== */
 
 .sentra-auth-shell {
-  --sentra-sidebar-width: 280px;
+  --sentra-sidebar-width: 260px;
+  --sentra-app-bg: #f8fafc;
+  --sentra-app-bg-secondary: #f1f5f9;
+  --sentra-app-panel: #ffffff;
+  --sentra-app-panel-elevated: #ffffff;
+  --sentra-app-hover: #f1f5f9;
+  --sentra-app-active: #e2e8f0;
+  --sentra-app-border: #e2e8f0;
+  --sentra-app-border-strong: #cbd5e1;
+  --sentra-app-text: #0f172a;
+  --sentra-app-muted: #64748b;
+  --sentra-app-soft: #94a3b8;
+  --sentra-app-faint: #cbd5e1;
+  --sentra-app-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+  --sentra-app-shadow-lg: 0 4px 12px 0 rgba(0, 0, 0, 0.06);
+  --sentra-app-radius: 12px;
+  --sentra-app-radius-sm: 8px;
+  --sentra-app-ease: 220ms cubic-bezier(0.22, 1, 0.36, 1);
+  --sentra-app-danger: #ef4444;
+  --sentra-app-warning: #f59e0b;
+  --sentra-app-success: #10b981;
+  --text: #0f172a;
+  --foreground: #0f172a;
+  --surface: #ffffff;
+  --surface-strong: #f8fafc;
+  --border: #e2e8f0;
+  --sentra-text-muted: #64748b;
+  --sentra-shadow-panel: var(--sentra-app-shadow);
+  --sentra-shadow-floating: var(--sentra-app-shadow-lg);
+  background: var(--bg, #f8fafc) !important;
+  color: var(--text, #0f172a) !important;
+  height: 100vh;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.app-container.sentra-auth-shell {
+  min-height: 100vh;
+  background: var(--bg, #f8fafc) !important;
+  color: var(--text, #0f172a) !important;
+}
+
+.dark .sentra-auth-shell {
+  --sentra-sidebar-width: 260px;
   --sentra-app-bg: #030712;
   --sentra-app-bg-secondary: #050b18;
   --sentra-app-panel: rgba(15, 23, 42, 0.45);
@@ -3335,50 +3402,46 @@ select:focus {
   --sentra-app-faint: rgba(255, 255, 255, 0.18);
   --sentra-app-shadow: 0 16px 48px rgba(0, 0, 0, 0.45);
   --sentra-app-shadow-lg: 0 24px 64px rgba(0, 0, 0, 0.58);
-  --sentra-app-radius: 28px;
-  --sentra-app-radius-sm: 18px;
-  --sentra-app-ease: 220ms cubic-bezier(0.22, 1, 0.36, 1);
-  --sentra-app-danger: #f87171;
-  --sentra-app-warning: #fbbf24;
-  --sentra-app-success: #34d399;
   --text: var(--sentra-app-text);
   --foreground: var(--sentra-app-text);
   --surface: var(--sentra-app-panel);
   --surface-strong: var(--sentra-app-panel-elevated);
   --border: var(--sentra-app-border);
   --sentra-text-muted: var(--sentra-app-muted);
-  --sentra-shadow-panel: var(--sentra-app-shadow);
-  --sentra-shadow-floating: var(--sentra-app-shadow-lg);
-  background: var(--sentra-app-bg);
-  color: var(--sentra-app-text);
-  height: 100vh;
-  min-height: 0;
-  overflow: hidden;
+  background: var(--sentra-app-bg) !important;
+  color: var(--sentra-app-text) !important;
 }
 
-.app-container.sentra-auth-shell {
-  min-height: 100vh;
+.dark .app-container.sentra-auth-shell {
   background:
     radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.1), transparent 50rem),
     radial-gradient(circle at 85% 60%, rgba(147, 51, 234, 0.08), transparent 45rem),
     radial-gradient(circle at 10% 70%, rgba(59, 130, 246, 0.07), transparent 40rem),
-    #030712;
-  color: var(--sentra-app-text);
+    #030712 !important;
+  color: #ffffff !important;
 }
 
 .sentra-auth-shell .grid-layer {
   display: block !important;
-  opacity: 0.22 !important;
+  opacity: 0.12 !important;
   pointer-events: none !important;
 }
 
 .sentra-auth-shell .depth-glow {
+  display: none !important;
+}
+
+.sentra-auth-shell .cursor-glow {
+  display: none !important;
+}
+
+.dark .sentra-auth-shell .depth-glow {
   display: block !important;
   opacity: 0.65 !important;
   pointer-events: none !important;
 }
 
-.sentra-auth-shell .cursor-glow {
+.dark .sentra-auth-shell .cursor-glow {
   display: block !important;
   opacity: 0.45 !important;
   pointer-events: none !important;
@@ -3413,22 +3476,41 @@ select:focus {
   pointer-events: auto !important;
 }
 
+/* ==========================================================================
+   SENTRA AUTHENTICATED OS SHELL - PREMIUM ENTERPRISE RECONSTRUCTION
+   Light-First Enterprise Default + Restrained Liquid Glass + Crisp Hierarchy
+   ========================================================================== */
+
+.sentra-auth-shell {
+  background: var(--bg, #f8fafc) !important;
+  color: var(--text, #0f172a) !important;
+}
+
 /* TOPBAR */
 .sentra-auth-shell .sentra-topbar {
-  min-height: 76px;
+  min-height: 56px;
+  max-height: 64px;
   background: transparent !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
 }
 
 .sentra-auth-shell .sentra-topbar-inner {
-  min-height: 64px;
-  border: 1px solid rgba(255, 255, 255, 0.12) !important;
-  border-radius: 26px !important;
-  background: linear-gradient(145deg, rgba(16, 24, 44, 0.68) 0%, rgba(8, 13, 28, 0.78) 100%) !important;
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5), 0 0 24px rgba(56, 189, 248, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
-  backdrop-filter: blur(24px) saturate(180%) !important;
-  -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+  min-height: 52px;
+  border: 1px solid var(--border, #e2e8f0) !important;
+  border-radius: 12px !important;
+  background: rgba(255, 255, 255, 0.88) !important;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  color: var(--text, #0f172a) !important;
+}
+
+.dark .sentra-auth-shell .sentra-topbar-inner {
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  background: rgba(15, 23, 42, 0.85) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4) !important;
+  color: #f8fafc !important;
 }
 
 .sentra-auth-shell .sentra-topbar-breadcrumb {
@@ -3439,33 +3521,39 @@ select:focus {
   display: flex;
   width: 360px;
   max-width: 360px;
-  height: 44px;
+  height: 38px;
   flex: 0 1 360px;
   align-items: center;
   justify-content: space-between;
   gap: 0.75rem;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
-  border-radius: 999px !important;
-  background: rgba(255, 255, 255, 0.04) !important;
-  padding: 0 1rem;
-  color: rgba(255, 255, 255, 0.6) !important;
-  backdrop-filter: blur(16px) !important;
-  -webkit-backdrop-filter: blur(16px) !important;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
-  transition: all 0.2s ease;
+  border: 1px solid var(--border, #e2e8f0) !important;
+  border-radius: 8px !important;
+  background: var(--surface-strong, #f8fafc) !important;
+  padding: 0 0.85rem;
+  color: var(--text-muted, #64748b) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.03) !important;
+  transition: all 0.15s ease;
 }
 
 .sentra-auth-shell .sentra-command-search:hover {
-  border-color: rgba(56, 189, 248, 0.35) !important;
-  background: rgba(255, 255, 255, 0.07) !important;
-  color: #ffffff !important;
-  box-shadow: 0 0 20px rgba(56, 189, 248, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
-  transform: translateY(-1px);
+  border-color: var(--border-strong, #cbd5e1) !important;
+  background: #ffffff !important;
+  color: var(--text, #0f172a) !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06) !important;
+  transform: none;
+}
+
+.dark .sentra-auth-shell .sentra-command-search {
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+  color: rgba(255, 255, 255, 0.6) !important;
 }
 
 .sentra-auth-shell .sentra-search-icon {
   display: inline-flex;
-  color: rgba(56, 189, 248, 0.7);
+  color: var(--text-muted, #64748b);
 }
 
 .sentra-auth-shell .sentra-command-search-placeholder {
@@ -3474,23 +3562,30 @@ select:focus {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--text-muted, #64748b);
   font-size: 0.82rem;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .sentra-auth-shell .sentra-command-search kbd,
 .sentra-auth-shell kbd {
-  border: 1px solid rgba(255, 255, 255, 0.12) !important;
-  border-radius: 999px !important;
-  background: rgba(0, 0, 0, 0.35) !important;
-  color: rgba(255, 255, 255, 0.65) !important;
-  padding: 0.2rem 0.5rem;
+  border: 1px solid var(--border, #e2e8f0) !important;
+  border-radius: 4px !important;
+  background: #f1f5f9 !important;
+  color: var(--text-muted, #64748b) !important;
+  padding: 0.15rem 0.45rem;
   font-family: var(--font-mono), monospace;
-  font-size: 0.62rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
+}
+
+.dark .sentra-auth-shell .sentra-command-search kbd,
+.dark .sentra-auth-shell kbd {
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  background: rgba(0, 0, 0, 0.4) !important;
+  color: rgba(255, 255, 255, 0.7) !important;
 }
 
 @media (max-width: 768px) {
@@ -3503,43 +3598,124 @@ select:focus {
   align-items: center;
 }
 
+/* Mode Switcher */
 .sentra-auth-shell .sentra-topbar-mode-switcher,
 .sentra-auth-shell .sentra-phase12-mode-switcher,
 .sentra-auth-shell .sentra-mode-capsule {
-  min-height: 40px;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
-  border-radius: 999px !important;
-  background: rgba(255, 255, 255, 0.035) !important;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
-  backdrop-filter: blur(16px) !important;
-  -webkit-backdrop-filter: blur(16px) !important;
+  min-height: 36px;
+  border: 1px solid var(--border, #e2e8f0) !important;
+  border-radius: 8px !important;
+  background: #f1f5f9 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  padding: 2px !important;
+  gap: 2px !important;
+}
+
+.dark .sentra-auth-shell .sentra-topbar-mode-switcher,
+.dark .sentra-auth-shell .sentra-phase12-mode-switcher,
+.dark .sentra-auth-shell .sentra-mode-capsule {
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  background: rgba(255, 255, 255, 0.04) !important;
 }
 
 .sentra-auth-shell .sentra-topbar-mode-pill,
 .sentra-auth-shell .sentra-phase12-mode-button {
-  min-height: 32px;
-  border-radius: 999px !important;
-  padding-inline: 0.85rem;
-  color: rgba(255, 255, 255, 0.55) !important;
-  font-size: 0.78rem;
-  font-weight: 600;
-  transition: all 0.2s ease;
+  min-height: 30px;
+  border-radius: 6px !important;
+  padding-inline: 0.75rem;
+  color: #64748b !important;
+  font-size: 0.75rem;
+  font-weight: 500;
+  transition: all 0.15s ease;
+  border: none !important;
 }
 
 .sentra-auth-shell .sentra-topbar-mode-pill:hover,
 .sentra-auth-shell .sentra-phase12-mode-button:hover {
-  background: rgba(255, 255, 255, 0.08) !important;
-  color: #ffffff !important;
+  background: rgba(255, 255, 255, 0.6) !important;
+  color: #0f172a !important;
 }
 
 .sentra-auth-shell .sentra-topbar-mode-pill.is-active,
 .sentra-auth-shell .sentra-mode-active,
 .sentra-auth-shell .sentra-mode-active-pill,
 .sentra-auth-shell .sentra-phase12-mode-button.is-active {
+  color: #0f172a !important;
+  border: none !important;
+  background: #ffffff !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08) !important;
+  font-weight: 600 !important;
+}
+
+.dark .sentra-auth-shell .sentra-topbar-mode-pill.is-active,
+.dark .sentra-auth-shell .sentra-mode-active,
+.dark .sentra-auth-shell .sentra-mode-active-pill,
+.dark .sentra-auth-shell .sentra-phase12-mode-button.is-active {
   color: #ffffff !important;
-  border: 1px solid rgba(56, 189, 248, 0.4) !important;
-  background: linear-gradient(135deg, rgba(56, 189, 248, 0.22) 0%, rgba(99, 102, 241, 0.16) 100%) !important;
-  box-shadow: 0 0 16px rgba(56, 189, 248, 0.2) !important;
+  background: rgba(255, 255, 255, 0.15) !important;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Notification Button & Badge Overlay */
+.sentra-auth-shell .sentra-notification-button {
+  position: relative !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 36px !important;
+  height: 36px !important;
+  border-radius: 8px !important;
+  border: 1px solid var(--border, #e2e8f0) !important;
+  background: var(--surface, #ffffff) !important;
+  color: var(--text-muted, #64748b) !important;
+  transition: all 0.15s ease;
+}
+
+.sentra-auth-shell .sentra-notification-button:hover {
+  background: #f8fafc !important;
+  color: var(--text, #0f172a) !important;
+}
+
+.sentra-auth-shell .sentra-notification-count {
+  position: absolute !important;
+  top: -4px !important;
+  right: -4px !important;
+  min-width: 16px !important;
+  height: 16px !important;
+  padding: 0 4px !important;
+  border-radius: 9999px !important;
+  background: #ef4444 !important;
+  color: #ffffff !important;
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  line-height: 16px !important;
+  text-align: center !important;
+  border: 2px solid #ffffff !important;
+}
+
+.dark .sentra-auth-shell .sentra-notification-count {
+  border-color: #0f172a !important;
+}
+
+.sentra-auth-shell .sentra-notification-panel {
+  position: absolute !important;
+  right: 0 !important;
+  top: calc(100% + 8px) !important;
+  z-index: 50 !important;
+  width: 360px !important;
+  border: 1px solid var(--border, #e2e8f0) !important;
+  border-radius: 12px !important;
+  background: #ffffff !important;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1) !important;
+  padding: 1rem !important;
+}
+
+.dark .sentra-auth-shell .sentra-notification-panel {
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  background: #0f172a !important;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6) !important;
 }
 
 /* SIDEBAR */
@@ -3553,58 +3729,86 @@ select:focus {
   left: 0 !important;
   display: grid !important;
   grid-template-rows: auto auto minmax(0, 1fr) auto;
-  width: var(--sentra-sidebar-width) !important;
+  width: var(--sentra-sidebar-width, 260px) !important;
   height: 100vh !important;
   max-height: 100vh !important;
   min-height: 0 !important;
   overflow: hidden !important;
   gap: 0 !important;
-  border-radius: 0 28px 28px 0 !important;
-  padding: 1.15rem !important;
-  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-radius: 0 !important;
+  padding: 1rem !important;
+  border-right: 1px solid var(--border, #e2e8f0) !important;
   border-left: none !important;
-  background: linear-gradient(180deg, rgba(15, 23, 42, 0.68) 0%, rgba(3, 7, 18, 0.82) 100%) !important;
-  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
-  backdrop-filter: blur(28px) saturate(180%) !important;
-  -webkit-backdrop-filter: blur(28px) saturate(180%) !important;
+  border-top: none !important;
+  border-bottom: none !important;
+  background: var(--surface, #ffffff) !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.dark .sentra-auth-shell .sentra-app-sidebar,
+.dark .sentra-auth-shell .sentra-luxury-sidebar,
+.dark .sentra-auth-shell .sentra-phase12-sidebar {
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  background: #090d16 !important;
 }
 
 .sentra-auth-shell .sentra-app-sidebar.is-collapsed,
 .sentra-auth-shell .sentra-luxury-sidebar.is-collapsed,
 .sentra-auth-shell .sentra-phase12-sidebar.is-collapsed {
-  width: 88px !important;
-  padding-inline: 0.8rem !important;
+  width: 76px !important;
+  padding-inline: 0.65rem !important;
 }
 
 .sentra-auth-shell .sentra-sidebar-brand {
   position: sticky;
   top: 0;
   z-index: 4;
-  margin-bottom: 0.85rem;
-  padding-bottom: 0.85rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border, #f1f5f9);
   background: transparent !important;
 }
 
 .sentra-auth-shell .sentra-sidebar-mark {
-  border: 1px solid rgba(56, 189, 248, 0.4) !important;
-  background: linear-gradient(135deg, rgba(56, 189, 248, 0.25) 0%, rgba(99, 102, 241, 0.2) 100%) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 32px !important;
+  height: 32px !important;
+  border-radius: 8px !important;
+  border: 1px solid #0f172a !important;
+  background: #0f172a !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  font-size: 0.85rem !important;
+  box-shadow: none !important;
+}
+
+.dark .sentra-auth-shell .sentra-sidebar-mark {
+  border-color: rgba(56, 189, 248, 0.4) !important;
+  background: rgba(56, 189, 248, 0.2) !important;
   color: #38bdf8 !important;
-  box-shadow: 0 0 16px rgba(56, 189, 248, 0.25) !important;
 }
 
 .sentra-auth-shell .sentra-workspace-card {
   position: sticky;
-  top: 68px;
+  top: 60px;
   z-index: 3;
-  margin-bottom: 0.85rem;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
-  border-radius: 20px !important;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.015) 100%) !important;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
-  backdrop-filter: blur(16px) !important;
-  -webkit-backdrop-filter: blur(16px) !important;
-  padding: 0.95rem;
+  margin-bottom: 0.75rem;
+  border: 1px solid var(--border, #e2e8f0) !important;
+  border-radius: 10px !important;
+  background: #f8fafc !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  padding: 0.75rem !important;
+}
+
+.dark .sentra-auth-shell .sentra-workspace-card {
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  background: rgba(255, 255, 255, 0.04) !important;
 }
 
 .sentra-auth-shell .sentra-sidebar-nav-scroll {
@@ -3614,19 +3818,11 @@ select:focus {
   overflow-x: hidden !important;
   overflow-y: auto !important;
   overscroll-behavior: contain;
-  padding-right: 0.25rem;
+  padding-right: 0.2rem;
   padding-bottom: 1rem;
   scroll-behavior: smooth;
   scrollbar-width: thin;
-  scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
-}
-
-.sentra-auth-shell .sentra-sidebar-nav-scroll::-webkit-scrollbar {
-  width: 4px;
-}
-.sentra-auth-shell .sentra-sidebar-nav-scroll::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: 999px;
+  scrollbar-color: rgba(0, 0, 0, 0.15) transparent;
 }
 
 .sentra-auth-shell .sentra-sidebar-bottom {
@@ -3634,73 +3830,82 @@ select:focus {
   bottom: 0;
   z-index: 4;
   margin-top: 0;
-  padding-top: 0.85rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border, #f1f5f9);
   background: transparent !important;
 }
 
 .sentra-auth-shell .sentra-shell-collapse {
   display: flex !important;
-  min-height: 44px;
+  min-height: 38px;
   width: 100%;
   align-items: center;
   justify-content: flex-start;
-  gap: 0.7rem;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
-  border-radius: 999px !important;
-  background: rgba(255, 255, 255, 0.04) !important;
-  color: rgba(255, 255, 255, 0.7) !important;
-  backdrop-filter: blur(14px) !important;
-  padding: 0 0.9rem;
-  transition: all 0.2s ease;
+  gap: 0.6rem;
+  border: 1px solid var(--border, #e2e8f0) !important;
+  border-radius: 8px !important;
+  background: #f8fafc !important;
+  color: var(--text-muted, #64748b) !important;
+  backdrop-filter: none !important;
+  padding: 0 0.75rem;
+  font-size: 0.78rem;
+  transition: all 0.15s ease;
 }
 
 .sentra-auth-shell .sentra-shell-collapse:hover {
-  background: rgba(255, 255, 255, 0.08) !important;
-  border-color: rgba(255, 255, 255, 0.16) !important;
-  color: #ffffff !important;
-}
-
-.sentra-auth-shell .sentra-app-sidebar.is-collapsed .sentra-shell-collapse,
-.sentra-auth-shell .sentra-luxury-sidebar.is-collapsed .sentra-shell-collapse,
-.sentra-auth-shell .sentra-phase12-sidebar.is-collapsed .sentra-shell-collapse {
-  justify-content: center;
-  padding-inline: 0;
+  background: #f1f5f9 !important;
+  color: var(--text, #0f172a) !important;
 }
 
 .sentra-auth-shell .sentra-luxury-nav-item,
 .sentra-auth-shell .sentra-shell-nav-item {
-  min-height: 46px;
+  min-height: 38px;
   border: 1px solid transparent !important;
-  border-radius: 14px !important;
-  color: rgba(255, 255, 255, 0.6) !important;
-  transition: all 0.2s ease;
+  border-radius: 8px !important;
+  color: #475569 !important;
+  font-size: 0.82rem;
+  font-weight: 500;
+  padding: 0 0.65rem !important;
+  transition: all 0.15s ease;
 }
 
 .sentra-auth-shell .sentra-luxury-nav-item:hover,
 .sentra-auth-shell .sentra-shell-nav-item:hover {
-  transform: translateX(2px);
-  color: #ffffff !important;
-  border-color: rgba(255, 255, 255, 0.1) !important;
-  background: rgba(255, 255, 255, 0.06) !important;
+  transform: none;
+  color: #0f172a !important;
+  border-color: transparent !important;
+  background: #f8fafc !important;
 }
 
 .sentra-auth-shell .sentra-luxury-nav-item.is-active,
 .sentra-auth-shell .sentra-shell-nav-item.is-active {
+  color: #0f172a !important;
+  border-color: var(--border, #e2e8f0) !important;
+  background: #f1f5f9 !important;
+  box-shadow: none !important;
+  font-weight: 600 !important;
+}
+
+.dark .sentra-auth-shell .sentra-luxury-nav-item.is-active,
+.dark .sentra-auth-shell .sentra-shell-nav-item.is-active {
   color: #ffffff !important;
-  border-color: rgba(56, 189, 248, 0.35) !important;
-  background: linear-gradient(135deg, rgba(56, 189, 248, 0.16) 0%, rgba(99, 102, 241, 0.08) 100%) !important;
-  box-shadow: 0 0 20px rgba(56, 189, 248, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.18) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  background: rgba(255, 255, 255, 0.08) !important;
 }
 
 .sentra-auth-shell .sentra-shell-active-indicator {
   display: block !important;
   width: 3px;
-  height: 20px;
+  height: 16px;
   border-radius: 999px;
-  background: #38bdf8;
-  box-shadow: 0 0 12px #38bdf8;
+  background: #0f172a;
+  box-shadow: none;
   margin-left: auto;
+}
+
+.dark .sentra-auth-shell .sentra-shell-active-indicator {
+  background: #38bdf8;
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
 }
 
 /* CARDS AND GLASS SURFACES */
@@ -3716,141 +3921,241 @@ select:focus {
 .sentra-auth-shell .sentra-ai-recommendations-feed,
 .sentra-auth-shell .sentra-crisis-command-bar,
 .sentra-auth-shell .sentra-obsidian-command-bar {
-  border: 1px solid rgba(255, 255, 255, 0.12) !important;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.015) 100%) !important;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
-  backdrop-filter: blur(24px) saturate(180%) !important;
-  -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+  border: 1px solid var(--border, #e2e8f0) !important;
+  background: var(--surface, #ffffff) !important;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border-radius: 12px !important;
+  color: var(--text, #0f172a) !important;
+}
+
+.dark .sentra-auth-shell .glass-panel,
+.dark .sentra-auth-shell .sentra-phase12-hero,
+.dark .sentra-auth-shell .sentra-workspace-hero,
+.dark .sentra-auth-shell .sentra-phase12-panel,
+.dark .sentra-auth-shell .sentra-phase12-chart-panel,
+.dark .sentra-auth-shell .sentra-phase12-kpi-card,
+.dark .sentra-auth-shell .sentra-obsidian-panel {
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  background: rgba(15, 23, 42, 0.72) !important;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.35) !important;
+  color: #f8fafc !important;
 }
 
 .sentra-auth-shell .sentra-workspace-hero {
-  min-height: 360px;
-  border-radius: 32px;
-  padding: clamp(1.75rem, 3.2vw, 2.75rem) !important;
+  min-height: auto !important;
+  border-radius: 12px !important;
+  padding: 1.25rem 1.5rem !important;
+}
+
+.sentra-auth-shell .sentra-hero-action-button {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 8px !important;
+  padding: 0.45rem 0.95rem !important;
+  font-size: 0.78rem !important;
+  font-weight: 500 !important;
+  text-decoration: none !important;
+  transition: all 0.15s ease;
+}
+
+.sentra-auth-shell .sentra-hero-action-button.border-slate-900,
+.sentra-auth-shell .sentra-hero-action-button[class*="bg-slate-900"] {
+  border: 1px solid #0f172a !important;
+  background: #0f172a !important;
+  color: #ffffff !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+}
+
+.sentra-auth-shell .sentra-hero-action-button.border-slate-900:hover,
+.sentra-auth-shell .sentra-hero-action-button[class*="bg-slate-900"]:hover {
+  background: #1e293b !important;
+  color: #ffffff !important;
+}
+
+.sentra-auth-shell .sentra-hero-action-button.border-slate-200,
+.sentra-auth-shell .sentra-hero-action-button[class*="bg-slate-50"] {
+  border: 1px solid var(--border, #cbd5e1) !important;
+  background: #ffffff !important;
+  color: #334155 !important;
+}
+
+.sentra-auth-shell .sentra-hero-action-button.border-slate-200:hover,
+.sentra-auth-shell .sentra-hero-action-button[class*="bg-slate-50"]:hover {
+  border-color: #94a3b8 !important;
+  background: #f8fafc !important;
+  color: #0f172a !important;
+}
+
+.sentra-auth-shell .sentra-command-link {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 38px !important;
+  border-radius: 8px !important;
+  border: 1px solid var(--border, #cbd5e1) !important;
+  background: #ffffff !important;
+  padding: 0.45rem 0.9rem !important;
+  color: #0f172a !important;
+  font-size: 0.8rem !important;
+  font-weight: 500 !important;
+  text-decoration: none !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04) !important;
+  transition: all 0.15s ease;
+}
+
+.sentra-auth-shell .sentra-command-link:hover {
+  border-color: #0284c7 !important;
+  background: #f0f9ff !important;
+  color: #0284c7 !important;
+}
+
+.sentra-auth-shell .sentra-command-link-danger {
+  border-color: #fecaca !important;
+  background: #fef2f2 !important;
+  color: #dc2626 !important;
+}
+
+.sentra-auth-shell .sentra-command-link-danger:hover {
+  border-color: #f87171 !important;
+  background: #fee2e2 !important;
+  color: #b91c1c !important;
+}
+
+.dark .sentra-auth-shell .sentra-command-link {
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+  color: #f8fafc !important;
 }
 
 .sentra-auth-shell .sentra-phase12-hero-title {
   max-width: 780px;
   font-family: var(--font-display), sans-serif;
   font-weight: 700;
-  letter-spacing: -0.04em;
-  line-height: 1.05;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+  color: var(--text, #0f172a) !important;
 }
 
 .sentra-auth-shell .sentra-phase7-kpi-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 1rem;
 }
 
 .sentra-auth-shell .sentra-phase12-kpi-pill {
-  min-height: 108px;
-  border-radius: 22px;
-  padding: 1.1rem;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.015) 100%) !important;
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
-  backdrop-filter: blur(20px) saturate(180%) !important;
-  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
-  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  min-height: 90px;
+  border-radius: 12px;
+  padding: 1rem;
+  border: 1px solid var(--border, #e2e8f0) !important;
+  background: var(--surface, #ffffff) !important;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
 .sentra-auth-shell .sentra-phase12-kpi-pill:hover {
-  transform: translateY(-2px);
-  border-color: rgba(255, 255, 255, 0.18) !important;
-  box-shadow: 0 16px 44px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+  transform: translateY(-1px);
+  border-color: var(--border-strong, #cbd5e1) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06) !important;
 }
 
-/* ASK SENTRA */
+/* ASK SENTRA FLOATING DOCK (Selective Liquid Glass) */
 .sentra-auth-shell .sentra-ask-dock {
-  min-height: 52px;
-  border: 1px solid rgba(56, 189, 248, 0.3) !important;
-  border-radius: 999px;
-  background: linear-gradient(135deg, rgba(16, 24, 44, 0.8) 0%, rgba(8, 13, 28, 0.9) 100%) !important;
-  color: #ffffff;
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4), 0 0 24px rgba(56, 189, 248, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+  min-height: 44px;
+  border: 1px solid var(--border, #cbd5e1) !important;
+  border-radius: 9999px !important;
+  background: rgba(255, 255, 255, 0.92) !important;
+  color: #0f172a !important;
+  box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.1) !important;
   backdrop-filter: blur(20px) !important;
   -webkit-backdrop-filter: blur(20px) !important;
-  padding: 0.55rem 1rem;
+  padding: 0.5rem 1rem;
   transition: all 0.2s ease;
 }
 
 .sentra-auth-shell .sentra-ask-dock:hover {
-  transform: translateY(-2px);
-  border-color: rgba(56, 189, 248, 0.5) !important;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), 0 0 32px rgba(56, 189, 248, 0.3) !important;
+  transform: translateY(-1px);
+  border-color: #0284c7 !important;
+  box-shadow: 0 12px 30px rgba(2, 132, 199, 0.15) !important;
 }
 
 .sentra-auth-shell #ask-sentra-panel {
-  border: 1px solid rgba(255, 255, 255, 0.16) !important;
-  border-radius: 28px !important;
-  background: linear-gradient(145deg, rgba(16, 24, 44, 0.78) 0%, rgba(8, 13, 28, 0.88) 100%) !important;
-  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6), 0 0 36px rgba(56, 189, 248, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
-  backdrop-filter: blur(32px) saturate(180%) !important;
-  -webkit-backdrop-filter: blur(32px) saturate(180%) !important;
+  border: 1px solid var(--border, #cbd5e1) !important;
+  border-radius: 16px !important;
+  background: rgba(255, 255, 255, 0.98) !important;
+  box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.15) !important;
+  color: #0f172a !important;
+  backdrop-filter: blur(24px) !important;
+  -webkit-backdrop-filter: blur(24px) !important;
 }
 
 .sentra-auth-shell .sentra-ask-panel-header {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(255, 255, 255, 0.02);
+  border-bottom: 1px solid var(--border, #e2e8f0);
+  background: #f8fafc;
 }
 
 .sentra-auth-shell .sentra-ask-panel-footer {
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(255, 255, 255, 0.02);
+  border-top: 1px solid var(--border, #e2e8f0);
+  background: #f8fafc;
 }
 
 .sentra-auth-shell .sentra-ask-input {
   min-width: 0;
   flex: 1 1 auto;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid var(--border, #cbd5e1);
   border-radius: 999px;
-  background: rgba(0, 0, 0, 0.35);
-  color: #ffffff;
+  background: #ffffff;
+  color: #0f172a;
   outline: none;
-  padding: 0.75rem 1rem;
+  padding: 0.65rem 1rem;
   font-size: 0.88rem;
-  backdrop-filter: blur(12px);
   transition: border-color 0.2s ease;
 }
 
 .sentra-auth-shell .sentra-ask-input:focus {
-  border-color: rgba(56, 189, 248, 0.4);
+  border-color: #0284c7;
 }
 
 .sentra-auth-shell .sentra-ask-prompt {
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border, #e2e8f0);
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.04);
-  color: rgba(255, 255, 255, 0.7);
+  background: #f1f5f9;
+  color: #475569;
   font-size: 0.75rem;
-  padding: 0.4rem 0.75rem;
-  transition: all 0.2s ease;
+  padding: 0.35rem 0.75rem;
+  transition: all 0.15s ease;
 }
 
 .sentra-auth-shell .sentra-ask-prompt:hover {
-  background: rgba(255, 255, 255, 0.09);
-  color: #ffffff;
-  border-color: rgba(56, 189, 248, 0.3);
+  background: #e2e8f0;
+  color: #0f172a;
 }
 
 .sentra-auth-shell .sentra-ask-submit {
-  border: 1px solid rgba(56, 189, 248, 0.35);
+  border: 1px solid #0284c7;
   border-radius: 999px;
-  background: linear-gradient(135deg, rgba(56, 189, 248, 0.3) 0%, rgba(99, 102, 241, 0.25) 100%);
+  background: #0284c7;
   color: #ffffff;
   font-size: 0.82rem;
   font-weight: 600;
-  padding: 0.65rem 1.15rem;
-  transition: all 0.2s ease;
+  padding: 0.6rem 1.15rem;
+  transition: all 0.15s ease;
 }
 
 .sentra-auth-shell .sentra-ask-submit:hover:not(:disabled) {
-  background: linear-gradient(135deg, rgba(56, 189, 248, 0.45) 0%, rgba(99, 102, 241, 0.35) 100%);
-  box-shadow: 0 0 16px rgba(56, 189, 248, 0.3);
+  background: #0369a1;
 }
 
 /* RESPONSIVE */
+@media (max-width: 1200px) {
+  .sentra-auth-shell .sentra-phase7-kpi-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 @media (max-width: 1024px) {
   .sentra-auth-shell .sentra-app-sidebar,
   .sentra-auth-shell .sentra-luxury-sidebar,
@@ -3858,7 +4163,7 @@ select:focus {
   .sentra-auth-shell .sentra-app-sidebar.is-collapsed,
   .sentra-auth-shell .sentra-luxury-sidebar.is-collapsed,
   .sentra-auth-shell .sentra-phase12-sidebar.is-collapsed {
-    width: min(300px, 92vw) !important;
+    width: min(280px, 90vw) !important;
     transform: translateX(calc(-100% - 16px));
     transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
   }
@@ -3877,8 +4182,8 @@ select:focus {
 @media (max-width: 768px) {
   .sentra-auth-shell .sentra-workspace-hero {
     min-height: auto;
-    padding: 1.35rem !important;
-    border-radius: 26px;
+    padding: 1.15rem !important;
+    border-radius: 12px;
   }
 
   .sentra-auth-shell .sentra-phase7-kpi-grid {

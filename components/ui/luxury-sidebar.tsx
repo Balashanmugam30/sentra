@@ -410,8 +410,8 @@ function NavItemRow({
         <ShellIcon name={item.icon} />
       </span>
       <span className={`sentra-shell-nav-label min-w-0 ${collapsed ? "sr-only" : ""}`}>
-        <span className="block truncate">{item.label}</span>
-        <span className="block truncate text-[0.66rem] font-medium normal-case tracking-normal text-white/36">
+        <span className="block truncate text-slate-900 dark:text-slate-100">{item.label}</span>
+        <span className="block truncate text-[0.66rem] font-medium normal-case tracking-normal text-slate-500 dark:text-white/40">
           {item.description}
         </span>
       </span>
@@ -620,8 +620,8 @@ export function LuxurySidebar({
           <Link className="flex min-w-0 items-center gap-3" href="/app" onClick={closeMobile}>
             <span className="sentra-sidebar-mark">S</span>
             <span className={`min-w-0 ${collapsed ? "hidden" : "block"}`}>
-              <span className="block text-base font-semibold tracking-[-0.045em] text-white">Sentra</span>
-              <span className="block text-[0.62rem] font-bold uppercase tracking-[0.24em] text-cyan-100/42">
+              <span className="block text-base font-semibold tracking-[-0.045em] text-slate-900 dark:text-white">Sentra</span>
+              <span className="block text-[0.62rem] font-bold uppercase tracking-[0.24em] text-slate-500 dark:text-cyan-100/42">
                 Crisis Intelligence OS
               </span>
             </span>
@@ -631,11 +631,11 @@ export function LuxurySidebar({
         <div className={`sentra-workspace-card sentra-phase12-workspace-card ${collapsed ? "hidden" : "block"}`}>
           <div className="flex items-start justify-between gap-3">
             <div className="min-w-0">
-              <p className="text-[0.62rem] font-semibold uppercase tracking-[0.22em] text-white/36">
+              <p className="text-[0.62rem] font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-white/36">
                 Workspace
               </p>
-              <p className="mt-1 truncate text-sm font-semibold text-white">{workspaceLabel}</p>
-              <p className="mt-1 truncate text-xs text-white/42">{userLabel}</p>
+              <p className="mt-1 truncate text-sm font-semibold text-slate-900 dark:text-white">{workspaceLabel}</p>
+              <p className="mt-1 truncate text-xs text-slate-500 dark:text-white/42">{userLabel}</p>
               <div className="mt-3 flex flex-wrap items-center gap-1.5 font-mono text-[0.68rem]">
                 <span className="sentra-sidebar-live-chip font-sans">
                   <span className="sentra-sidebar-live-dot" />

@@ -513,17 +513,17 @@ export function LoginForm() {
 
         <div className="relative">
           <div className="text-center">
-            <h1 className="text-[clamp(1.65rem,3vh,2rem)] font-semibold tracking-[-0.055em] text-white">
+            <h1 className="text-[clamp(1.65rem,3vh,2rem)] font-semibold tracking-[-0.055em] text-slate-900 dark:text-white">
               {stepTitle}
             </h1>
-            <p className="mx-auto mt-3 max-w-[22rem] text-xs leading-5 text-white/58 sm:text-sm max-[780px]:mt-2">
+            <p className="mx-auto mt-3 max-w-[22rem] text-xs leading-5 text-slate-500 dark:text-white/58 sm:text-sm max-[780px]:mt-2">
               {stepSubtext}
             </p>
           </div>
 
           <div className="mt-[clamp(1.25rem,2.4vh,1.7rem)] space-y-3">
             <button
-              className="inline-flex h-12 w-full items-center justify-center gap-3 rounded-2xl border border-white/10 bg-white/[0.065] px-4 text-sm font-semibold text-white/86 transition hover:-translate-y-0.5 hover:border-white/18 hover:bg-white/[0.095] focus:outline-none focus:ring-2 focus:ring-[#8aa7ff]/45 max-[780px]:h-11"
+              className="inline-flex h-12 w-full items-center justify-center gap-3 rounded-xl border border-slate-200 bg-slate-50/80 px-4 text-sm font-semibold text-slate-700 transition hover:-translate-y-0.5 hover:border-slate-300 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-slate-400 dark:border-white/10 dark:bg-white/[0.065] dark:text-white/86 dark:hover:border-white/18 dark:hover:bg-white/[0.095] max-[780px]:h-11"
               disabled={isSubmitting}
               onClick={() => void submitGoogle()}
               type="button"
@@ -532,7 +532,7 @@ export function LoginForm() {
               Continue with Google
             </button>
             <button
-              className="inline-flex h-12 w-full items-center justify-center gap-3 rounded-2xl border border-white/10 bg-white/[0.065] px-4 text-sm font-semibold text-white/86 transition hover:-translate-y-0.5 hover:border-white/18 hover:bg-white/[0.095] focus:outline-none focus:ring-2 focus:ring-[#8aa7ff]/45 max-[780px]:h-11"
+              className="inline-flex h-12 w-full items-center justify-center gap-3 rounded-xl border border-slate-200 bg-slate-50/80 px-4 text-sm font-semibold text-slate-700 transition hover:-translate-y-0.5 hover:border-slate-300 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-slate-400 dark:border-white/10 dark:bg-white/[0.065] dark:text-white/86 dark:hover:border-white/18 dark:hover:bg-white/[0.095] max-[780px]:h-11"
               disabled={isSubmitting}
               onClick={() => {
                 resetMessages();
@@ -547,9 +547,9 @@ export function LoginForm() {
           </div>
 
           <div className="my-4 flex items-center gap-3 max-[780px]:my-3">
-            <span className="h-px flex-1 bg-white/10" />
-            <span className="text-[0.6rem] font-semibold uppercase tracking-[0.2em] text-white/34">or</span>
-            <span className="h-px flex-1 bg-white/10" />
+            <span className="h-px flex-1 bg-slate-200 dark:bg-white/10" />
+            <span className="text-[0.6rem] font-semibold uppercase tracking-[0.2em] text-slate-400 dark:text-white/34">or</span>
+            <span className="h-px flex-1 bg-slate-200 dark:bg-white/10" />
           </div>
 
           <form className="space-y-3 max-[780px]:space-y-2.5" onSubmit={(event) => void handleSubmit(event)}>
@@ -565,16 +565,16 @@ export function LoginForm() {
                 {authStep === "phone" ? (
                   <>
                     <label className="relative block">
-                      <span className="pointer-events-none absolute left-12 top-2 text-[0.58rem] font-semibold uppercase tracking-[0.18em] text-white/36">
+                      <span className="pointer-events-none absolute left-12 top-2 text-[0.58rem] font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-white/36">
                         Phone number
                       </span>
-                      <span className="absolute left-4 top-1/2 -translate-y-1/2 text-white/42">
+                      <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 dark:text-white/42">
                         <FieldIcon type="phone" />
                       </span>
-                      <div className="flex h-[3.18rem] rounded-2xl border border-white/10 bg-black/28 text-sm text-white transition focus-within:border-[#8aa7ff]/35 focus-within:shadow-[0_0_0_3px_rgba(138,167,255,0.10)] max-[780px]:h-[3rem]">
+                      <div className="flex h-[3.18rem] rounded-xl border border-slate-200 bg-slate-50/80 text-sm text-slate-900 transition focus-within:border-sky-500 focus-within:shadow-[0_0_0_3px_rgba(14,165,233,0.15)] dark:border-white/10 dark:bg-black/28 dark:text-white dark:focus-within:border-[#8aa7ff]/35 dark:focus-within:shadow-[0_0_0_3px_rgba(138,167,255,0.10)] max-[780px]:h-[3rem]">
                         <select
                           aria-label="Country code"
-                          className="ml-9 w-20 bg-transparent pl-3 pt-3 text-white outline-none"
+                          className="ml-9 w-20 bg-transparent pl-3 pt-3 text-slate-900 outline-none dark:text-white"
                           onChange={(event) => {
                             const nextCountry = event.target.value;
                             setPhoneCountry(nextCountry);
@@ -583,14 +583,14 @@ export function LoginForm() {
                           value={phoneCountry}
                         >
                           {countryCodes.map((code) => (
-                            <option className="bg-[#090a0f]" key={code} value={code}>
+                            <option className="bg-white text-slate-900 dark:bg-[#090a0f] dark:text-white" key={code} value={code}>
                               {code}
                             </option>
                           ))}
                         </select>
                         <input
                           autoComplete="tel-national"
-                          className="min-w-0 flex-1 bg-transparent px-3 pt-3 outline-none placeholder:text-white/42"
+                          className="min-w-0 flex-1 bg-transparent px-3 pt-3 outline-none placeholder:text-slate-400 dark:placeholder:text-white/42"
                           inputMode="tel"
                           onChange={(event) => {
                             const nextPhone = event.target.value.replace(/[^\d\s-]/g, "");
@@ -606,15 +606,15 @@ export function LoginForm() {
 
                     {verificationId ? (
                       <label className="relative block">
-                        <span className="pointer-events-none absolute left-12 top-2 text-[0.58rem] font-semibold uppercase tracking-[0.18em] text-white/36">
+                        <span className="pointer-events-none absolute left-12 top-2 text-[0.58rem] font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-white/36">
                           OTP code
                         </span>
-                        <span className="absolute left-4 top-1/2 -translate-y-1/2 text-white/42">
+                        <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 dark:text-white/42">
                           <FieldIcon type="lock" />
                         </span>
                         <input
                           autoComplete="one-time-code"
-                          className="h-[3.18rem] w-full rounded-2xl border border-white/10 bg-black/28 px-12 pt-3 text-sm text-white outline-none transition placeholder:text-white/42 focus:border-[#8aa7ff]/35 focus:shadow-[0_0_0_3px_rgba(138,167,255,0.10)] max-[780px]:h-[3rem]"
+                          className="h-[3.18rem] w-full rounded-xl border border-slate-200 bg-slate-50/80 px-12 pt-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-sky-500 focus:shadow-[0_0_0_3px_rgba(14,165,233,0.15)] dark:border-white/10 dark:bg-black/28 dark:text-white dark:placeholder:text-white/42 dark:focus:border-[#8aa7ff]/35 dark:focus:shadow-[0_0_0_3px_rgba(138,167,255,0.10)] max-[780px]:h-[3rem]"
                           inputMode="numeric"
                           onChange={(event) => setOtp(event.target.value)}
                           placeholder="Enter verification code"
@@ -628,15 +628,15 @@ export function LoginForm() {
                   <>
                     {authStep === "create" ? (
                       <label className="relative block">
-                        <span className="pointer-events-none absolute left-12 top-2 text-[0.58rem] font-semibold uppercase tracking-[0.18em] text-white/36">
+                        <span className="pointer-events-none absolute left-12 top-2 text-[0.58rem] font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-white/36">
                           Full name
                         </span>
-                        <span className="absolute left-4 top-1/2 -translate-y-1/2 text-white/42">
+                        <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 dark:text-white/42">
                           <FieldIcon type="user" />
                         </span>
                         <input
                           autoComplete="name"
-                          className="h-[3.18rem] w-full rounded-2xl border border-white/10 bg-black/28 px-12 pt-3 text-sm text-white outline-none transition placeholder:text-white/42 focus:border-[#8aa7ff]/35 focus:shadow-[0_0_0_3px_rgba(138,167,255,0.10)] max-[780px]:h-[3rem]"
+                          className="h-[3.18rem] w-full rounded-xl border border-slate-200 bg-slate-50/80 px-12 pt-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-sky-500 focus:shadow-[0_0_0_3px_rgba(14,165,233,0.15)] dark:border-white/10 dark:bg-black/28 dark:text-white dark:placeholder:text-white/42 dark:focus:border-[#8aa7ff]/35 dark:focus:shadow-[0_0_0_3px_rgba(138,167,255,0.10)] max-[780px]:h-[3rem]"
                           onChange={(event) => setDisplayName(event.target.value)}
                           placeholder="Operations lead"
                           type="text"
@@ -646,15 +646,15 @@ export function LoginForm() {
                     ) : null}
 
                     <label className="relative block">
-                      <span className="pointer-events-none absolute left-12 top-2 text-[0.58rem] font-semibold uppercase tracking-[0.18em] text-white/36">
+                      <span className="pointer-events-none absolute left-12 top-2 text-[0.58rem] font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-white/36">
                         Work email
                       </span>
-                      <span className="absolute left-4 top-1/2 -translate-y-1/2 text-white/42">
+                      <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 dark:text-white/42">
                         <FieldIcon type="email" />
                       </span>
                       <input
                         autoComplete="email"
-                        className="h-[3.18rem] w-full rounded-2xl border border-white/10 bg-black/28 px-12 pt-3 text-sm text-white outline-none transition placeholder:text-white/42 focus:border-[#8aa7ff]/35 focus:shadow-[0_0_0_3px_rgba(138,167,255,0.10)] max-[780px]:h-[3rem]"
+                        className="h-[3.18rem] w-full rounded-xl border border-slate-200 bg-slate-50/80 px-12 pt-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-sky-500 focus:shadow-[0_0_0_3px_rgba(14,165,233,0.15)] dark:border-white/10 dark:bg-black/28 dark:text-white dark:placeholder:text-white/42 dark:focus:border-[#8aa7ff]/35 dark:focus:shadow-[0_0_0_3px_rgba(138,167,255,0.10)] max-[780px]:h-[3rem]"
                         disabled={!isEmailStep}
                         onChange={(event) => {
                           setEmail(event.target.value);
@@ -668,27 +668,27 @@ export function LoginForm() {
 
                     {authStep === "password" || authStep === "create" ? (
                       accountIntent === "google" ? (
-                        <div className="rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3 text-center text-xs leading-5 text-white/58">
+                        <div className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-center text-xs leading-5 text-slate-600 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/58">
                           We found a Google-linked account. Continue with Google to keep this session protected.
                         </div>
                       ) : (
                         <label className="relative block">
-                          <span className="pointer-events-none absolute left-12 top-2 text-[0.58rem] font-semibold uppercase tracking-[0.18em] text-white/36">
+                          <span className="pointer-events-none absolute left-12 top-2 text-[0.58rem] font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-white/36">
                             Password
                           </span>
-                          <span className="absolute left-4 top-1/2 -translate-y-1/2 text-white/42">
+                          <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 dark:text-white/42">
                             <FieldIcon type="lock" />
                           </span>
                           <input
                             autoComplete={authStep === "create" ? "new-password" : "current-password"}
-                            className="h-[3.18rem] w-full rounded-2xl border border-white/10 bg-black/28 px-12 pr-20 pt-3 text-sm text-white outline-none transition placeholder:text-white/42 focus:border-[#8aa7ff]/35 focus:shadow-[0_0_0_3px_rgba(138,167,255,0.10)] max-[780px]:h-[3rem]"
+                            className="h-[3.18rem] w-full rounded-xl border border-slate-200 bg-slate-50/80 px-12 pr-20 pt-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-sky-500 focus:shadow-[0_0_0_3px_rgba(14,165,233,0.15)] dark:border-white/10 dark:bg-black/28 dark:text-white dark:placeholder:text-white/42 dark:focus:border-[#8aa7ff]/35 dark:focus:shadow-[0_0_0_3px_rgba(138,167,255,0.10)] max-[780px]:h-[3rem]"
                             onChange={(event) => setPassword(event.target.value)}
                             placeholder="Password"
                             type={showPassword ? "text" : "password"}
                             value={password}
                           />
                           <button
-                            className="absolute right-2 top-1/2 -translate-y-1/2 rounded-xl px-3 py-2 text-xs font-semibold text-white/52 transition hover:bg-white/10 hover:text-white"
+                            className="absolute right-2 top-1/2 -translate-y-1/2 rounded-lg px-3 py-2 text-xs font-semibold text-slate-500 transition hover:bg-slate-200/60 hover:text-slate-800 dark:text-white/52 dark:hover:bg-white/10 dark:hover:text-white"
                             onClick={() => setShowPassword((current) => !current)}
                             type="button"
                           >
@@ -703,10 +703,10 @@ export function LoginForm() {
             </AnimatePresence>
 
             <div className="flex items-center justify-between gap-4">
-              <label className="flex cursor-pointer items-center gap-2 text-xs text-white/54">
+              <label className="flex cursor-pointer items-center gap-2 text-xs text-slate-600 dark:text-white/54">
                 <input
                   checked={rememberDevice}
-                  className="h-4 w-4 accent-[#8aa7ff]"
+                  className="h-4 w-4 accent-slate-900 dark:accent-[#8aa7ff]"
                   onChange={(event) => setRememberDevice(event.target.checked)}
                   type="checkbox"
                 />
@@ -714,7 +714,7 @@ export function LoginForm() {
               </label>
               {authStep === "password" ? (
                 <button
-                  className="text-xs font-semibold text-white/58 transition hover:text-white"
+                  className="text-xs font-semibold text-slate-500 transition hover:text-slate-800 dark:text-white/58 dark:hover:text-white"
                   onClick={() => {
                     setForgotOpen((current) => !current);
                     setNotice("");
@@ -724,31 +724,31 @@ export function LoginForm() {
                   Forgot password?
                 </button>
               ) : authStep === "email" ? null : (
-                <button className="text-xs font-semibold text-white/58 transition hover:text-white" onClick={returnToEmailStep} type="button">
+                <button className="text-xs font-semibold text-slate-500 transition hover:text-slate-800 dark:text-white/58 dark:hover:text-white" onClick={returnToEmailStep} type="button">
                   Use email instead
                 </button>
               )}
             </div>
 
             {forgotOpen ? (
-              <div className="rounded-2xl border border-white/10 bg-white/[0.04] px-3 py-2 text-xs leading-5 text-white/58">
+              <div className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs leading-5 text-slate-600 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/58">
                 {forgotPasswordCopy}
               </div>
             ) : null}
 
             {notice ? (
-              <p className="rounded-2xl border border-white/10 bg-white/[0.045] px-3 py-2 text-xs text-white/68">
+              <p className="rounded-xl border border-sky-200 bg-sky-50 px-3 py-2 text-xs text-sky-800 dark:border-white/10 dark:bg-white/[0.045] dark:text-white/68">
                 {notice}
               </p>
             ) : null}
 
             {error ? (
               <div className="space-y-2">
-                <p className="rounded-2xl border border-[#ff7d7d]/22 bg-[#ff7d7d]/10 px-3 py-2 text-xs text-[#ffd0d0]">
+                <p className="rounded-xl border border-rose-200 bg-rose-50 px-3 py-2 text-xs text-rose-700 dark:border-[#ff7d7d]/22 dark:bg-[#ff7d7d]/10 dark:text-[#ffd0d0]">
                   {error}
                 </p>
                 {error.includes("Firebase authorized domains") || error.includes("authorized domains") ? (
-                  <div className="rounded-2xl border border-sky-400/25 bg-sky-950/40 p-3 text-xs text-sky-200">
+                  <div className="rounded-xl border border-sky-400/25 bg-sky-950/40 p-3 text-xs text-sky-200">
                     <p className="font-semibold text-white">To enable Google OAuth on Vercel:</p>
                     <p className="mt-1 text-white/70">
                       In Firebase Console &gt; Authentication &gt; Settings &gt; Authorized domains, add <code className="rounded bg-black/40 px-1 py-0.5 text-cyan-300">sentra-01.vercel.app</code>.
@@ -766,7 +766,7 @@ export function LoginForm() {
             ) : null}
 
             <button
-              className="sentra-auth-primary-button relative inline-flex h-[3.12rem] w-full items-center justify-center overflow-hidden rounded-full border border-white/14 bg-[linear-gradient(180deg,rgba(255,255,255,0.96),rgba(224,229,244,0.9))] px-4 text-sm font-semibold text-[#12131a] shadow-[0_18px_44px_rgba(124,124,255,0.14)] transition-all duration-150 hover:-translate-y-0.5 hover:border-white/30 hover:shadow-[0_22px_50px_rgba(138,167,255,0.18)] focus:outline-none focus:ring-2 focus:ring-[#8aa7ff]/55 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-75 max-[780px]:h-[3rem]"
+              className="sentra-auth-primary-button relative inline-flex h-[3.12rem] w-full items-center justify-center overflow-hidden rounded-xl border border-slate-900 bg-slate-900 px-4 text-sm font-semibold text-white shadow-sm transition-all duration-150 hover:-translate-y-0.5 hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-900/40 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-75 dark:border-white/14 dark:bg-[linear-gradient(180deg,rgba(255,255,255,0.96),rgba(224,229,244,0.9))] dark:text-[#12131a] dark:shadow-[0_18px_44px_rgba(124,124,255,0.14)] dark:hover:border-white/30 dark:hover:shadow-[0_22px_50px_rgba(138,167,255,0.18)] max-[780px]:h-[3rem]"
               disabled={!canSubmit}
               type="submit"
             >
@@ -783,7 +783,7 @@ export function LoginForm() {
 
           {authStep !== "email" && authStep !== "phone" ? (
             <button
-              className="mt-2 w-full rounded-full px-3 py-2 text-xs font-semibold text-white/46 transition hover:bg-white/[0.04] hover:text-white/72"
+              className="mt-2 w-full rounded-full px-3 py-2 text-xs font-semibold text-slate-500 transition hover:bg-slate-100 hover:text-slate-800 dark:text-white/46 dark:hover:bg-white/[0.04] dark:hover:text-white/72"
               onClick={returnToEmailStep}
               type="button"
             >
@@ -794,7 +794,7 @@ export function LoginForm() {
           <div className="mt-3 flex flex-wrap justify-center gap-1.5" aria-label="Demo role quick access">
             {roleQuickAccess.map(({ credential, label }) => (
               <button
-                className="whitespace-nowrap rounded-full border border-white/10 bg-white/[0.045] px-3 py-1.5 text-xs font-semibold text-white/58 transition hover:-translate-y-0.5 hover:border-[#8aa7ff]/28 hover:bg-white/[0.08] hover:text-white/86 focus:outline-none focus:ring-2 focus:ring-[#8aa7ff]/35"
+                className="whitespace-nowrap rounded-lg border border-slate-200 bg-slate-100/90 px-3 py-1.5 text-xs font-semibold text-slate-600 transition hover:-translate-y-0.5 hover:border-slate-300 hover:bg-slate-200/80 hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-slate-400 dark:border-white/10 dark:bg-white/[0.045] dark:text-white/58 dark:hover:border-[#8aa7ff]/28 dark:hover:bg-white/[0.08] dark:hover:text-white/86"
                 disabled={isSubmitting}
                 key={label}
                 onClick={() => fillDemoCredential(credential, label)}

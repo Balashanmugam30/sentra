@@ -16,9 +16,9 @@ const densityStyles = {
 };
 
 const tierStyles = {
-  subtle: "border-white/8 bg-white/[0.035] backdrop-blur-md shadow-[0_4px_20px_-2px_rgba(0,0,0,0.35)]",
-  elevated: "border-white/12 bg-[linear-gradient(180deg,rgba(255,255,255,0.07)_0%,rgba(255,255,255,0.03)_100%)] backdrop-blur-xl shadow-[0_16px_40px_-4px_rgba(0,0,0,0.5)]",
-  floating: "border-white/16 bg-[linear-gradient(180deg,rgba(15,23,42,0.85)_0%,rgba(7,13,27,0.92)_100%)] backdrop-blur-2xl shadow-[0_28px_70px_-8px_rgba(0,0,0,0.7)]",
+  subtle: "border-slate-200 bg-white/80 shadow-sm dark:border-white/[0.08] dark:bg-white/[0.035] dark:backdrop-blur-md dark:shadow-[0_4px_20px_-2px_rgba(0,0,0,0.35)]",
+  elevated: "border-slate-200 bg-white shadow-sm dark:border-white/[0.12] dark:bg-[linear-gradient(180deg,rgba(255,255,255,0.07)_0%,rgba(255,255,255,0.03)_100%)] dark:backdrop-blur-xl dark:shadow-[0_16px_40px_-4px_rgba(0,0,0,0.5)]",
+  floating: "border-slate-200 bg-white/95 shadow-md dark:border-white/[0.16] dark:bg-[linear-gradient(180deg,rgba(15,23,42,0.85)_0%,rgba(7,13,27,0.92)_100%)] dark:backdrop-blur-2xl dark:shadow-[0_28px_70px_-8px_rgba(0,0,0,0.7)]",
 };
 
 export function GlassCard({
@@ -32,12 +32,12 @@ export function GlassCard({
   return (
     <Component
       className={cn(
-        "relative overflow-hidden rounded-[20px] border transition-all duration-300",
-        "before:pointer-events-none before:absolute before:inset-x-5 before:top-0 before:h-px before:bg-gradient-to-r before:from-transparent before:via-white/24 before:to-transparent",
+        "relative overflow-hidden rounded-xl border transition-all duration-200",
+        "before:pointer-events-none before:absolute before:inset-x-5 before:top-0 before:h-px before:bg-gradient-to-r before:from-transparent before:via-slate-200 before:to-transparent dark:before:via-white/24",
         tierStyles[tier],
         densityStyles[density],
         interactive &&
-          "cursor-pointer hover:-translate-y-0.5 hover:border-cyan-400/30 hover:shadow-[0_20px_50px_-8px_rgba(6,182,212,0.18)] active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/50",
+          "cursor-pointer hover:-translate-y-0.5 hover:border-sky-300 hover:shadow-md dark:hover:border-cyan-400/30 dark:hover:shadow-[0_20px_50px_-8px_rgba(6,182,212,0.18)] active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500/50",
         className,
       )}
       {...props}

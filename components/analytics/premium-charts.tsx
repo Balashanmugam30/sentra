@@ -325,23 +325,23 @@ export function ExecutiveAnalyticsCommandCenter({
   return (
     <div className="sentra-analytics-command space-y-6">
       <motion.header
-        className="sentra-analytics-hero rounded-[38px] border border-white/10 bg-white/[0.045] p-6 shadow-[0_30px_90px_rgba(0,0,0,0.3)] backdrop-blur-2xl md:p-8"
+        className="sentra-analytics-hero rounded-xl border border-slate-200 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-white/[0.045] dark:shadow-[0_30px_90px_rgba(0,0,0,0.3)] dark:backdrop-blur-2xl md:p-8"
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.28, ease: "easeOut" }}
       >
         <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <p className="text-[0.72rem] font-semibold uppercase tracking-[0.28em] text-cyan-100/58">Executive Analytics Command Center</p>
-            <h1 className="mt-3 max-w-5xl text-4xl font-semibold tracking-[-0.055em] text-white md:text-6xl">
+            <p className="text-[0.72rem] font-semibold uppercase tracking-[0.28em] text-sky-600 dark:text-cyan-100/58">Executive Analytics Command Center</p>
+            <h1 className="mt-3 max-w-5xl text-3xl font-semibold tracking-tight text-slate-900 dark:text-white md:text-5xl">
               Boardroom-grade intelligence from every Sentra signal.
             </h1>
-            <p className="mt-4 max-w-3xl text-sm leading-6 text-white/58">
+            <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600 dark:text-white/58">
               Crisis performance, AI trust, security posture, revenue protection, and predictive risk stitched into one premium operating view.
             </p>
           </div>
           <button
-            className="sentra-phase7-hero-action is-primary"
+            className="inline-flex items-center rounded-lg border border-slate-900 bg-slate-900 px-4 py-2 text-xs font-semibold text-white shadow-sm hover:bg-slate-800 dark:border-cyan-400/40 dark:bg-cyan-500/20 dark:text-cyan-200"
             disabled={loading}
             onClick={onRefresh}
             type="button"
@@ -909,16 +909,16 @@ export function IncidentIntelligenceDashboard() {
   return (
     <div className="sentra-analytics-command space-y-6">
       <motion.header
-        className="sentra-analytics-hero rounded-[38px] border border-white/10 bg-white/[0.045] p-6 shadow-[0_30px_90px_rgba(0,0,0,0.3)] backdrop-blur-2xl md:p-8"
+        className="sentra-analytics-hero rounded-xl border border-slate-200 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-white/[0.045] dark:shadow-[0_30px_90px_rgba(0,0,0,0.3)] dark:backdrop-blur-2xl md:p-8"
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.28, ease: "easeOut" }}
       >
-        <p className="text-[0.72rem] font-semibold uppercase tracking-[0.28em] text-cyan-100/58">Incident intelligence</p>
-        <h1 className="mt-3 max-w-5xl text-4xl font-semibold tracking-[-0.055em] text-white md:text-6xl">
+        <p className="text-[0.72rem] font-semibold uppercase tracking-[0.28em] text-sky-600 dark:text-cyan-100/58">Incident intelligence</p>
+        <h1 className="mt-3 max-w-5xl text-3xl font-semibold tracking-tight text-slate-900 dark:text-white md:text-5xl">
           Incident command, redesigned for clarity under pressure.
         </h1>
-        <p className="mt-4 max-w-3xl text-sm leading-6 text-white/58">
+        <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600 dark:text-white/58">
           Triage, severity, response timeline, resource load, and geographic spread in a premium operator-ready layout.
         </p>
       </motion.header>

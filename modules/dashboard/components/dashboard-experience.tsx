@@ -66,57 +66,65 @@ function WorkspaceLoading({ label }: { label: string }) {
 }
 
 function HeroMetricPill({ stat }: { stat: HeroStat }) {
-  const progressValue =
-    stat.suffix === "%"
-      ? stat.value
-      : stat.suffix === "M"
-        ? stat.value * 28
-        : stat.suffix === "m"
-          ? 100 - stat.value * 4
-          : stat.value * 8;
-  const progress = Math.max(9, Math.min(100, progressValue));
-
-  const toneGlows = {
-    calm: "border-sky-400/20 bg-[linear-gradient(135deg,rgba(14,165,233,0.08)_0%,rgba(255,255,255,0.02)_100%)] shadow-[0_12px_36px_rgba(0,0,0,0.35),0_0_24px_rgba(56,189,248,0.06)]",
-    danger: "border-rose-400/25 bg-[linear-gradient(135deg,rgba(244,63,94,0.08)_0%,rgba(255,255,255,0.02)_100%)] shadow-[0_12px_36px_rgba(0,0,0,0.35),0_0_24px_rgba(244,63,94,0.06)]",
-    success: "border-emerald-400/20 bg-[linear-gradient(135deg,rgba(16,185,129,0.08)_0%,rgba(255,255,255,0.02)_100%)] shadow-[0_12px_36px_rgba(0,0,0,0.35),0_0_24px_rgba(16,185,129,0.06)]",
-    warning: "border-amber-400/20 bg-[linear-gradient(135deg,rgba(245,158,11,0.08)_0%,rgba(255,255,255,0.02)_100%)] shadow-[0_12px_36px_rgba(0,0,0,0.35),0_0_24px_rgba(245,158,11,0.06)]",
-  };
-
-  const toneBar = {
-    calm: "from-sky-500 to-cyan-300 shadow-[0_0_10px_rgba(56,189,248,0.5)]",
-    danger: "from-rose-500 to-rose-300 shadow-[0_0_10px_rgba(244,63,94,0.5)]",
-    success: "from-emerald-500 to-teal-300 shadow-[0_0_10px_rgba(16,185,129,0.5)]",
-    warning: "from-amber-500 to-yellow-300 shadow-[0_0_10px_rgba(245,158,11,0.5)]",
-  };
-
   const currentTone = stat.tone ?? "calm";
+
+  const toneBadges = {
+    calm: {
+      tag: "NOMINAL",
+      badgeClass: "bg-slate-100 text-slate-700 border-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:border-slate-700",
+      dotClass: "bg-slate-400 dark:bg-slate-500",
+    },
+    danger: {
+      tag: "ELEVATED",
+      badgeClass: "bg-rose-50 text-rose-700 border-rose-200 dark:bg-rose-950/40 dark:text-rose-400 dark:border-rose-800",
+      dotClass: "bg-rose-500",
+    },
+    success: {
+      tag: "OPTIMAL",
+      badgeClass: "bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-400 dark:border-emerald-800",
+      dotClass: "bg-emerald-500",
+    },
+    warning: {
+      tag: "CAUTION",
+      badgeClass: "bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-950/40 dark:text-amber-400 dark:border-amber-800",
+      dotClass: "bg-amber-500",
+    },
+  };
+
+  const badge = toneBadges[currentTone];
 
   return (
     <div
       aria-label={`${stat.label}: ${stat.prefix ?? ""}${stat.value}${stat.suffix ?? ""}`}
-      className={`sentra-phase7-kpi-pill sentra-phase12-kpi-pill relative overflow-hidden rounded-2xl border p-4 backdrop-blur-xl transition hover:translate-y-[-2px] ${toneGlows[currentTone]}`}
+      className="sentra-phase7-kpi-pill sentra-phase12-kpi-pill relative flex flex-col justify-between overflow-hidden rounded-xl border border-slate-200 bg-white p-4.5 shadow-sm transition-all hover:border-slate-300 hover:shadow dark:border-slate-800 dark:bg-slate-900 dark:hover:border-slate-700"
     >
-      <div className="flex items-start justify-between gap-3">
-        <p className="font-mono text-[0.66rem] font-bold uppercase tracking-[0.2em] text-white/50">{stat.label}</p>
-        <span className={`sentra-phase12-kpi-dot is-${currentTone}`} />
+      <div className="flex items-center justify-between gap-2">
+        <p className="font-sans text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+          {stat.label}
+        </p>
+        <span
+          className={`inline-flex items-center gap-1.5 rounded-md border px-2 py-0.5 text-[0.62rem] font-semibold tracking-wider ${badge.badgeClass}`}
+        >
+          <span className={`h-1.5 w-1.5 rounded-full ${badge.dotClass}`} />
+          {badge.tag}
+        </span>
       </div>
-      <p className="mt-2 font-mono text-2xl font-bold tracking-tight text-white tabular-nums">
-        {stat.prefix}
-        <CountUp
-          decimals={stat.decimals ?? 0}
-          duration={0.8}
-          end={stat.value}
-          preserveValue
-          separator=","
-        />
-        {stat.suffix}
-      </p>
-      <div className="mt-3.5 h-1 overflow-hidden rounded-full bg-white/[0.08]">
-        <div
-          className={`h-full rounded-full bg-gradient-to-r ${toneBar[currentTone]}`}
-          style={{ width: `${progress}%` }}
-        />
+      <div className="mt-3 flex items-baseline justify-between">
+        <p className="font-mono text-3xl font-bold tracking-tight text-slate-900 tabular-nums dark:text-white">
+          {stat.prefix}
+          <CountUp
+            decimals={stat.decimals ?? 0}
+            duration={0.8}
+            end={stat.value}
+            preserveValue
+            separator=","
+          />
+          {stat.suffix}
+        </p>
+      </div>
+      <div className="mt-2.5 flex items-center justify-between border-t border-slate-100 pt-2 text-[0.68rem] text-slate-500 dark:border-slate-800/80 dark:text-slate-400">
+        <span>Verified telemetry</span>
+        <span className="font-mono font-medium text-slate-600 dark:text-slate-300">Live sync</span>
       </div>
     </div>
   );

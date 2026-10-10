@@ -179,22 +179,22 @@ export function TopBar({ onOpenCommand, onOpenNav }: TopBarProps) {
           <div className="sentra-topbar-breadcrumb flex min-w-0 items-center gap-3">
             <button
               aria-label="Open navigation"
-              className="sentra-mobile-menu-button inline-flex h-10 w-10 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.06] text-white/78 transition hover:border-cyan-200/24 hover:bg-white/10 lg:hidden"
+              className="sentra-mobile-menu-button inline-flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-700 transition hover:bg-slate-50 dark:border-white/10 dark:bg-white/[0.06] dark:text-white lg:hidden"
               onClick={onOpenNav}
               type="button"
             >
-              <span className="h-4 w-4 border-y-2 border-current before:mt-[5px] before:block before:border-t-2 before:border-current" />
+              <span className="h-3.5 w-3.5 border-y-2 border-current before:mt-[4px] before:block before:border-t-2 before:border-current" />
             </button>
             <div className="min-w-0">
               <nav
                 aria-label="Breadcrumb"
-                className="flex min-w-0 items-center gap-2 text-xs font-semibold text-white/90"
+                className="flex min-w-0 items-center gap-2 text-xs font-medium text-slate-500 dark:text-slate-400"
               >
-                <span className="font-mono text-[0.66rem] font-bold uppercase tracking-wider text-cyan-300 bg-cyan-500/10 border border-cyan-400/25 px-2.5 py-0.5 rounded-full shadow-[0_0_12px_rgba(56,189,248,0.15)]">
+                <span className="font-mono text-[0.66rem] font-semibold uppercase tracking-wider text-slate-700 bg-slate-100 border border-slate-200 dark:text-cyan-300 dark:bg-cyan-500/10 dark:border-cyan-400/25 px-2 py-0.5 rounded">
                   {workspaceModeLabels[workspaceMode]}
                 </span>
-                <span className="text-white/25">/</span>
-                <span className="truncate font-display text-sm font-semibold tracking-tight text-white">
+                <span className="text-slate-300 dark:text-slate-600">/</span>
+                <span className="truncate font-display text-sm font-semibold tracking-tight text-slate-900 dark:text-white">
                   {breadcrumb[breadcrumb.length - 1] ?? "Dashboard"}
                 </span>
               </nav>
@@ -225,7 +225,7 @@ export function TopBar({ onOpenCommand, onOpenNav }: TopBarProps) {
           <div className="sentra-topbar-right relative flex shrink-0 items-center gap-2 md:gap-3">
               <button
                 aria-label="Search commands"
-                className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/[0.06] text-white/70 transition hover:bg-white/12 hover:text-white md:hidden"
+                className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-700 transition hover:bg-slate-50 dark:border-white/10 dark:bg-white/[0.06] dark:text-white md:hidden"
                 onClick={onOpenCommand}
                 type="button"
               >
@@ -276,7 +276,7 @@ export function TopBar({ onOpenCommand, onOpenNav }: TopBarProps) {
                 {realtimeBadge.label}
               </span>
               <Link
-                className="hidden sm:inline-flex items-center gap-1.5 rounded-full border border-sky-400/25 bg-sky-500/10 px-3 py-1.5 text-xs font-semibold text-sky-200 transition hover:border-sky-400/50 hover:bg-sky-500/20 shadow-[0_0_15px_rgba(56,189,248,0.15)]"
+                className="hidden sm:inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-semibold text-slate-700 transition hover:bg-slate-100 dark:border-sky-400/25 dark:bg-sky-500/10 dark:text-sky-200"
                 href={"/mobile" as Route}
                 title="Switch to Mobile Field Operations App"
               >
@@ -347,13 +347,8 @@ export function TopBar({ onOpenCommand, onOpenNav }: TopBarProps) {
               <button
                 aria-expanded={menuOpen}
                 aria-haspopup="menu"
-                className="relative inline-flex h-11 w-11 items-center justify-center overflow-hidden rounded-full border text-sm font-medium text-foreground backdrop-blur-xl transition-all duration-200 ease-out hover:-translate-y-0.5 active:scale-[0.98]"
+                className="relative inline-flex h-9 w-9 items-center justify-center overflow-hidden rounded-full border border-slate-200 bg-white text-xs font-semibold text-slate-800 shadow-sm transition hover:border-slate-300 dark:border-slate-700 dark:bg-slate-800 dark:text-white"
                 onClick={() => setMenuOpen((current) => !current)}
-                style={{
-                  borderColor: "var(--border)",
-                  background: "var(--surface)",
-                  boxShadow: "var(--sentra-shadow-floating)",
-                }}
                 type="button"
               >
                 {user?.photoURL ? (

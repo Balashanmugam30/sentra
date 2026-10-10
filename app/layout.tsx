@@ -71,15 +71,20 @@ export default function RootLayout({
   const themeScript = `
     (() => {
       const saved = localStorage.getItem("sentra-theme");
-      const theme = saved === "light" ? "light" : "dark";
+      const theme = saved === "dark" ? "dark" : "light";
       document.documentElement.dataset.theme = theme;
       document.documentElement.dataset.themeMode = theme;
       document.documentElement.style.colorScheme = theme;
+      if (theme === "dark") {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
     })();
   `;
 
   return (
-    <html lang="en" className="dark" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>

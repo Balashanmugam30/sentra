@@ -20,7 +20,7 @@ interface UiState {
 }
 
 export const useUiStore = create<UiState>((set) => ({
-  theme: "system",
+  theme: "light",
   isAppLoading: false,
   mapZoom: 1,
   realtimeConnection: "idle",

@@ -63,14 +63,14 @@ export function CrisisWorkspace({
               {activeIncidents.length ? (
                 activeIncidents.map((incident) => (
                   <div className="sentra-obsidian-list-card" key={incident.id}>
-                    <p className="text-sm font-semibold text-white">{getIncidentTitle(incident)}</p>
-                    <p className="mt-2 text-sm leading-6 text-white/54">
+                    <p className="text-sm font-semibold text-slate-900 dark:text-white">{getIncidentTitle(incident)}</p>
+                    <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-white/54">
                       {incident.recommended_action || "Verify signal, stage responders, and monitor route pressure."}
                     </p>
                   </div>
                 ))
               ) : (
-                <p className="text-sm leading-6 text-white/56">
+                <p className="text-sm leading-6 text-slate-500 dark:text-white/56">
                   No active incident zones. Crisis controls remain armed for rapid transition.
                 </p>
               )}
