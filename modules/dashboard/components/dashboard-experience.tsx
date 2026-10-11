@@ -183,7 +183,7 @@ export function DashboardExperience({ initialMode }: { initialMode?: WorkspaceMo
   const publicSafety = usePublicSafety({ enabled: publicSafetyEnabled });
   const osint = useOsint({ enabled: osintEnabled });
   const soc = useSoc({ enabled: socEnabled });
-  const incidents = liveIncidents.length ? liveIncidents : socketIncidents;
+  const incidents = socketIncidents.length > 0 ? socketIncidents : liveIncidents;
   const metrics = useMemo(() => buildWorkspaceMetrics({ geo, incidents, soc }), [geo, incidents, soc]);
   const activeIncidentCount = useMemo(
     () => incidents.filter((incident) => incident.status !== "resolved").length,

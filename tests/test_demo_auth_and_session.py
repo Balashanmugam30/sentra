@@ -186,4 +186,3 @@ def test_bootstrap_admin_secret_enforced(client: TestClient) -> None:
         assert valid.status_code in {200, 409}
     finally:
         object.__setattr__(settings, "auth_bootstrap_secret", orig)
-
