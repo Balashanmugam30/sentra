@@ -150,7 +150,7 @@ export function TopBar({ onOpenCommand, onOpenNav }: TopBarProps) {
             {/* Quick Mode Switcher Pills */}
             <div
               aria-label="Workspace Mode Switcher"
-              className="inline-flex items-center gap-1 rounded-lg border border-[#E4E9E1] bg-[#F1F5F0] p-1"
+              className="hidden md:inline-flex items-center gap-1 rounded-lg border border-[#E4E9E1] bg-[#F1F5F0] p-1"
               role="tablist"
             >
               {topBarModes.map((item) => {
@@ -179,11 +179,11 @@ export function TopBar({ onOpenCommand, onOpenNav }: TopBarProps) {
           </div>
 
           {/* Right: Search + Telemetry + Notifications + Profile */}
-          <div className="flex shrink-0 items-center gap-2.5 sm:gap-3">
+          <div className="flex shrink-0 items-center gap-2 sm:gap-3">
             {/* Command Search Trigger */}
             <button
               aria-label="Search commands"
-              className="inline-flex items-center gap-2 rounded-lg border border-[#E4E9E1] bg-[#F1F5F0] px-3 py-1.5 text-xs text-[#586579] transition hover:border-[#D3DBD0] hover:bg-white hover:text-[#1F2937]"
+              className="inline-flex h-9 w-9 sm:w-auto items-center justify-center gap-2 rounded-lg border border-[#E4E9E1] bg-[#F1F5F0] sm:px-3 sm:py-1.5 text-xs text-[#586579] transition hover:border-[#D3DBD0] hover:bg-white hover:text-[#1F2937]"
               onClick={onOpenCommand}
               type="button"
             >
@@ -255,7 +255,9 @@ export function TopBar({ onOpenCommand, onOpenNav }: TopBarProps) {
               )}
             </div>
 
-            <RoleBadge compact role={user?.role} />
+            <div className="hidden sm:block">
+              <RoleBadge compact role={user?.role} />
+            </div>
 
             {/* Profile Avatar */}
             <button
