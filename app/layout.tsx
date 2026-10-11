@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Manrope } from "next/font/google";
+import { Geist, Geist_Mono, Plus_Jakarta_Sans } from "next/font/google";
 
 import { AppProviders } from "@/app/providers";
 import { ErrorBoundary } from "@/components/system/ErrorBoundary";
@@ -9,7 +9,7 @@ import { SENTRA_POSITIONING } from "@/lib/product-positioning";
 
 import "./globals.css";
 
-const manrope = Manrope({
+const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-display",
@@ -88,7 +88,7 @@ export default function RootLayout({
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
-      <body className={`${manrope.variable} ${geist.variable} ${geistMono.variable} font-sans antialiased`}>
+      <body className={`${plusJakartaSans.variable} ${geist.variable} ${geistMono.variable} font-sans antialiased`}>
         <SmoothScroll />
         <AppProviders>
           <ErrorBoundary>{children}</ErrorBoundary>

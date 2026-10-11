@@ -63,7 +63,7 @@ export function MetricCard({
     >
       <div className="flex items-start justify-between gap-3">
         <div className="space-y-1">
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500 dark:text-slate-400">{label}</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#586579]">{label}</p>
           {status && (
             <StatusBadge size="sm" status={status}>
               {statusLabel}
@@ -71,7 +71,7 @@ export function MetricCard({
           )}
         </div>
         {icon && (
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl border border-slate-200 bg-slate-50 text-sky-600 dark:border-white/10 dark:bg-white/[0.04] dark:text-cyan-400">
+          <div className="flex h-9 w-9 items-center justify-center rounded-xl border border-[#E4E9E1] bg-[#F1F5F0] text-[#3F6212]">
             {icon}
           </div>
         )}
@@ -79,10 +79,10 @@ export function MetricCard({
 
       <div className="mt-1">
         <div className="flex items-baseline gap-2">
-          <span className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 dark:text-white tabular-nums">
+          <span className="font-mono text-3xl sm:text-4xl font-bold tracking-tight text-[#1F2937] tabular-nums">
             {value}
           </span>
-          {unit && <span className="text-sm font-medium text-slate-500 dark:text-slate-400">{unit}</span>}
+          {unit && <span className="text-sm font-medium text-[#738096]">{unit}</span>}
         </div>
 
         {(delta !== undefined || trend || hint) && (
@@ -100,7 +100,7 @@ export function MetricCard({
                 {trendLabel && <span>{trendLabel}</span>}
               </span>
             )}
-            {hint && <span className="text-slate-400 leading-relaxed">{hint}</span>}
+            {hint && <span className="text-[#738096] leading-relaxed">{hint}</span>}
           </div>
         )}
       </div>

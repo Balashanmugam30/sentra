@@ -12,14 +12,14 @@ import { cn } from "@/lib/utils";
 import type { AICouncilAgent, AICouncilSummary } from "@/lib/ai/types";
 import type { AnalyticsHubSummary } from "@/lib/analytics/types";
 
-const chartText = "rgba(245,247,250,0.72)";
-const chartMuted = "rgba(245,247,250,0.42)";
-const gridLine = "rgba(255,255,255,0.08)";
-const cyan = "#7dd3fc";
-const violet = "#8b5cf6";
-const success = "#22c55e";
-const warning = "#f4c56a";
-const danger = "#ef4444";
+const chartText = "#1F2937";
+const chartMuted = "#738096";
+const gridLine = "#E4E9E1";
+const cyan = "#0891b2";
+const violet = "#7c3aed";
+const success = "#16a34a";
+const warning = "#d97706";
+const danger = "#dc2626";
 
 type AnimatedKpiCardProps = {
   className?: string;
@@ -53,16 +53,16 @@ function baseGrid() {
 function tooltip() {
   return {
     appendToBody: true,
-    backgroundColor: "rgba(5,7,11,0.92)",
-    borderColor: "rgba(255,255,255,0.12)",
+    backgroundColor: "#FFFFFF",
+    borderColor: "#E4E9E1",
     borderWidth: 1,
     confine: true,
     extraCssText:
-      "border-radius: 16px; box-shadow: 0 18px 44px rgba(0,0,0,0.42); backdrop-filter: blur(18px);",
+      "border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08);",
     padding: 12,
     textStyle: {
-      color: "#f8fafc",
-      fontFamily: "Inter, Geist, ui-sans-serif, system-ui",
+      color: "#1F2937",
+      fontFamily: "Geist, system-ui, sans-serif",
       fontSize: 12,
     },
   };
@@ -70,7 +70,7 @@ function tooltip() {
 
 function axis() {
   return {
-    axisLabel: { color: chartMuted, fontFamily: "Inter, Geist, ui-sans-serif, system-ui", margin: 12 },
+    axisLabel: { color: chartMuted, fontFamily: "Geist, system-ui, sans-serif", margin: 12 },
     axisLine: { lineStyle: { color: gridLine } },
     axisTick: { show: false },
     splitLine: { lineStyle: { color: gridLine, type: "dashed" as const } },
@@ -86,18 +86,18 @@ function readMetric(summary: AnalyticsHubSummary, id: string, fallback: number) 
 
 function toneGradient(tone: AnimatedKpiCardProps["tone"]) {
   if (tone === "violet") {
-    return "from-violet-300/22 to-white/[0.02]";
+    return "from-purple-100/40 to-transparent";
   }
   if (tone === "green") {
-    return "from-emerald-300/18 to-white/[0.02]";
+    return "from-lime-100/50 to-transparent";
   }
   if (tone === "amber") {
-    return "from-amber-300/18 to-white/[0.02]";
+    return "from-amber-100/40 to-transparent";
   }
   if (tone === "red") {
-    return "from-red-300/18 to-white/[0.02]";
+    return "from-rose-100/40 to-transparent";
   }
-  return "from-sky-300/20 to-white/[0.02]";
+  return "from-sky-100/40 to-transparent";
 }
 
 export function AnimatedKpiCard({
@@ -119,8 +119,7 @@ export function AnimatedKpiCard({
   return (
     <motion.article
       className={cn(
-        "sentra-analytics-kpi group overflow-hidden rounded-[28px] border border-white/10 bg-white/[0.045] p-5 shadow-[0_20px_56px_rgba(0,0,0,0.22)] backdrop-blur-2xl",
-        "sentra-phase12-kpi-card",
+        "sentra-analytics-kpi group relative overflow-hidden rounded-xl border border-[#E4E9E1] bg-white p-5 shadow-xs transition-all hover:border-[#D3DBD0] hover:shadow-sm",
         className,
       )}
       initial={{ opacity: 0, y: 12 }}
@@ -128,28 +127,28 @@ export function AnimatedKpiCard({
       transition={{ duration: 0.26, ease: "easeOut" }}
       viewport={{ once: true, margin: "-40px" }}
     >
-      <div className={cn("pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b opacity-90", toneGradient(tone))} />
+      <div className={cn("pointer-events-none absolute inset-x-0 top-0 h-16 bg-gradient-to-b opacity-60", toneGradient(tone))} />
       <div className="relative">
-        <p className="text-[0.66rem] font-semibold uppercase tracking-[0.22em] text-white/42">{label}</p>
-        <p className="mt-3 text-3xl font-semibold tracking-[-0.05em] text-white">
+        <p className="font-sans text-xs font-semibold uppercase tracking-wider text-[#586579]">{label}</p>
+        <p className="mt-3 font-mono text-3xl font-bold tracking-tight text-[#1F2937]">
           {prefix}
           <CountUp decimals={decimals} duration={1.1} end={value} preserveValue separator="," />
           {suffix}
         </p>
-        <p className="mt-3 min-h-10 text-sm leading-5 text-white/56">{detail}</p>
-        <div className="mt-5 h-1.5 overflow-hidden rounded-full bg-white/8">
+        <p className="mt-2 min-h-10 text-xs leading-5 text-[#738096]">{detail}</p>
+        <div className="mt-4 h-1.5 overflow-hidden rounded-full bg-[#F1F5F0]">
           <animated.div
             className={cn(
               "h-full rounded-full",
               tone === "red"
-                ? "bg-red-300"
+                ? "bg-red-500"
                 : tone === "amber"
-                  ? "bg-amber-300"
+                  ? "bg-amber-500"
                   : tone === "green"
-                    ? "bg-emerald-300"
+                    ? "bg-[#84CC16]"
                     : tone === "violet"
-                      ? "bg-violet-300"
-                      : "bg-sky-300",
+                      ? "bg-purple-500"
+                      : "bg-[#84CC16]",
             )}
             style={spring}
           />
@@ -163,8 +162,7 @@ export function PremiumEChart({ action, className, height = 320, option, subtitl
   return (
     <motion.section
       className={cn(
-        "sentra-analytics-panel rounded-[30px] border border-white/10 bg-white/[0.045] p-5 shadow-[0_24px_70px_rgba(0,0,0,0.24)] backdrop-blur-2xl",
-        "sentra-phase12-chart-panel",
+        "sentra-analytics-panel rounded-xl border border-[#E4E9E1] bg-white p-5 shadow-xs transition-all hover:border-[#D3DBD0]",
         className,
       )}
       initial={{ opacity: 0, y: 14 }}
@@ -174,8 +172,8 @@ export function PremiumEChart({ action, className, height = 320, option, subtitl
     >
       <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
         <div>
-          <h3 className="text-lg font-semibold tracking-[-0.025em] text-white">{title}</h3>
-          {subtitle ? <p className="mt-1 max-w-2xl text-sm leading-6 text-white/54">{subtitle}</p> : null}
+          <h3 className="font-display text-base font-semibold tracking-tight text-[#1F2937]">{title}</h3>
+          {subtitle ? <p className="mt-1 max-w-2xl text-xs leading-5 text-[#586579]">{subtitle}</p> : null}
         </div>
         {action}
       </div>
@@ -302,7 +300,7 @@ export function ExecutiveAnalyticsCommandCenter({
             },
           },
           detail: {
-            color: "#fff",
+            color: "#1F2937",
             formatter: "{value}%",
             fontSize: 34,
             fontWeight: 700,
@@ -312,7 +310,7 @@ export function ExecutiveAnalyticsCommandCenter({
           min: 0,
           pointer: { itemStyle: { color: cyan }, width: 4 },
           progress: { show: true, width: 14 },
-          splitLine: { distance: -14, length: 14, lineStyle: { color: "rgba(255,255,255,0.18)" } },
+          splitLine: { distance: -14, length: 14, lineStyle: { color: "rgba(0,0,0,0.08)" } },
           title: { color: chartMuted, fontSize: 12, offsetCenter: [0, "36%"] },
           type: "gauge",
           data: [{ name: "Readiness", value: readiness }],
@@ -325,32 +323,32 @@ export function ExecutiveAnalyticsCommandCenter({
   return (
     <div className="sentra-analytics-command space-y-6">
       <motion.header
-        className="sentra-analytics-hero rounded-xl border border-slate-200 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-white/[0.045] dark:shadow-[0_30px_90px_rgba(0,0,0,0.3)] dark:backdrop-blur-2xl md:p-8"
+        className="sentra-analytics-hero rounded-xl border border-[#E4E9E1] bg-white p-6 shadow-xs md:p-8"
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.28, ease: "easeOut" }}
       >
         <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <p className="text-[0.72rem] font-semibold uppercase tracking-[0.28em] text-sky-600 dark:text-cyan-100/58">Executive Analytics Command Center</p>
-            <h1 className="mt-3 max-w-5xl text-3xl font-semibold tracking-tight text-slate-900 dark:text-white md:text-5xl">
+            <p className="font-mono text-xs font-bold uppercase tracking-wider text-[#65A30D]">Executive Analytics Command Center</p>
+            <h1 className="mt-3 max-w-5xl font-display text-3xl font-semibold tracking-tight text-[#1F2937] md:text-5xl">
               Boardroom-grade intelligence from every Sentra signal.
             </h1>
-            <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600 dark:text-white/58">
+            <p className="mt-3 max-w-3xl text-sm leading-6 text-[#586579]">
               Crisis performance, AI trust, security posture, revenue protection, and predictive risk stitched into one premium operating view.
             </p>
           </div>
           <button
-            className="inline-flex items-center rounded-lg border border-slate-900 bg-slate-900 px-4 py-2 text-xs font-semibold text-white shadow-sm hover:bg-slate-800 dark:border-cyan-400/40 dark:bg-cyan-500/20 dark:text-cyan-200"
+            className="inline-flex items-center rounded-lg border border-[#1F2937] bg-[#1F2937] px-4 py-2 text-xs font-semibold text-white shadow-xs hover:bg-[#374151]"
             disabled={loading}
             onClick={onRefresh}
             type="button"
           >
-            {loading ? "Refreshing" : "Refresh analytics"}
+            {loading ? "Refreshing..." : "Refresh analytics"}
           </button>
         </div>
         {error ? (
-          <div className="mt-5 rounded-2xl border border-amber-200/14 bg-amber-400/8 px-4 py-3 text-sm text-amber-100">
+          <div className="mt-5 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">
             Resilient mode: {error}
           </div>
         ) : null}
@@ -404,19 +402,19 @@ function ExecutiveBriefingMode({
   return (
     <motion.section
       animate={{ opacity: 1, y: 0 }}
-      className="overflow-hidden rounded-[34px] border border-cyan-100/12 bg-[linear-gradient(145deg,rgba(125,211,252,0.10),rgba(139,92,246,0.07),rgba(255,255,255,0.035))] p-6 shadow-[0_28px_86px_rgba(0,0,0,0.28)] backdrop-blur-2xl md:p-7"
+      className="overflow-hidden rounded-xl border border-[#E4E9E1] bg-white p-6 shadow-xs md:p-7"
       initial={{ opacity: 0, y: 14 }}
       transition={{ duration: 0.3, ease: "easeOut" }}
     >
       <div className="grid gap-6 xl:grid-cols-[0.95fr_1.05fr] xl:items-start">
         <div>
-          <p className="text-[0.72rem] font-semibold uppercase tracking-[0.26em] text-cyan-100/56">
+          <p className="font-mono text-xs font-bold uppercase tracking-wider text-[#65A30D]">
             Executive briefing mode
           </p>
-          <h2 className="mt-3 max-w-2xl text-3xl font-semibold tracking-[-0.045em] text-white md:text-4xl">
+          <h2 className="mt-3 max-w-2xl font-display text-2xl font-semibold tracking-tight text-[#1F2937] md:text-3xl">
             Current risk posture is controlled, but still requires active command attention.
           </h2>
-          <p className="mt-4 max-w-2xl text-sm leading-6 text-white/58">
+          <p className="mt-3 max-w-2xl text-sm leading-6 text-[#586579]">
             Sentra is holding a {readiness}% readiness posture with {activeThreats} executive-visible threat signals, {aiConfidence}% AI confidence, and {exposureSaved} in modeled continuity protection.
           </p>
         </div>
@@ -427,9 +425,9 @@ function ExecutiveBriefingMode({
             { label: "24h intelligence summary", value: `Forecast confidence ${forecast}% with board-ready continuity evidence available.` },
             { label: "Board note", value: "Maintain AI-assisted response, preserve reserve capacity, and keep executive updates on a 15-minute cadence." },
           ].map((item) => (
-            <article className="rounded-3xl border border-white/10 bg-black/20 p-4" key={item.label}>
-              <p className="text-[0.62rem] font-semibold uppercase tracking-[0.2em] text-white/36">{item.label}</p>
-              <p className="mt-3 text-sm leading-6 text-white/70">{item.value}</p>
+            <article className="rounded-xl border border-[#E4E9E1] bg-[#F1F5F0] p-4" key={item.label}>
+              <p className="font-mono text-[0.66rem] font-bold uppercase tracking-wider text-[#65A30D]">{item.label}</p>
+              <p className="mt-2 text-xs leading-5 text-[#1F2937]">{item.value}</p>
             </article>
           ))}
         </div>
@@ -562,8 +560,8 @@ export function CrisisIntelligenceVisuals() {
   return (
     <section className="space-y-5">
       <div>
-        <p className="text-[0.72rem] font-semibold uppercase tracking-[0.24em] text-cyan-100/46">Crisis intelligence visuals</p>
-        <h2 className="mt-2 text-2xl font-semibold tracking-[-0.035em] text-white">Readable pressure, movement, and response quality.</h2>
+        <p className="text-[0.72rem] font-semibold uppercase tracking-[0.24em] text-[#65A30D]">Crisis intelligence visuals</p>
+        <h2 className="mt-2 text-2xl font-semibold tracking-[-0.035em] text-[#1F2937]">Readable pressure, movement, and response quality.</h2>
       </div>
       <div className="grid gap-5 xl:grid-cols-[1fr_1fr]">
         <PremiumEChart option={heatmapOption} title="Incident zone heatmap" subtitle="Risk intensity by zone and forecast window." />
@@ -592,14 +590,14 @@ export function PremiumGeoSpreadMap() {
 
   return (
     <motion.section
-      className="sentra-analytics-panel rounded-[30px] border border-white/10 bg-white/[0.045] p-5 shadow-[0_24px_70px_rgba(0,0,0,0.24)] backdrop-blur-2xl"
+      className="sentra-analytics-panel rounded-xl border border-[#E4E9E1] bg-white p-5 shadow-xs transition-all hover:border-[#D3DBD0]"
       initial={{ opacity: 0, y: 14 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.28, ease: "easeOut" }}
       viewport={{ once: true, margin: "-40px" }}
     >
-      <h3 className="text-lg font-semibold tracking-[-0.025em] text-white">Geographic incident spread</h3>
-      <p className="mt-1 text-sm leading-6 text-white/54">Dark tactical map with readable incident markers, safe zones, routes, and hover context.</p>
+      <h3 className="font-display text-base font-semibold tracking-tight text-[#1F2937]">Geographic incident spread</h3>
+      <p className="mt-1 text-xs leading-5 text-[#586579]">Tactical operational map with readable incident markers, safe zones, routes, and hover context.</p>
       <div className="sentra-map-card sentra-premium-map relative mt-5">
         <svg aria-hidden="true" className="absolute inset-0 h-full w-full" viewBox="0 0 100 70">
           <path className="sentra-map-safe-zone" d="M8 46 C19 34 28 37 38 22 C50 5 60 17 72 12 C84 8 92 20 89 34 C86 52 70 56 58 60 C42 65 34 56 24 58 C13 60 2 56 8 46Z" strokeWidth="0.45" />
@@ -618,8 +616,8 @@ export function PremiumGeoSpreadMap() {
           >
             <span className="sentra-map-marker-dot" />
             <span className="sentra-map-tooltip">
-              <strong className="block truncate text-xs text-white">{item.label}</strong>
-              <span className="mt-1 block text-[0.68rem] uppercase tracking-[0.16em] text-white/42">
+              <strong className="block truncate text-xs text-[#1F2937]">{item.label}</strong>
+              <span className="mt-1 block text-[0.68rem] uppercase tracking-[0.16em] text-[#738096]">
                 {item.state} | Risk {item.risk}
               </span>
             </span>
@@ -627,16 +625,16 @@ export function PremiumGeoSpreadMap() {
         ))}
         <div className="absolute inset-x-5 bottom-5 grid gap-3 md:grid-cols-5">
           {locations.map((item) => (
-            <div className="rounded-2xl border border-white/10 bg-black/30 p-3" key={item.label}>
+            <div className="rounded-lg border border-[#E4E9E1] bg-white/90 p-3 shadow-xs backdrop-blur-sm" key={item.label}>
               <div className="flex items-center justify-between gap-2">
-                <p className="truncate text-xs font-semibold text-white">{item.label}</p>
+                <p className="truncate text-xs font-semibold text-[#1F2937]">{item.label}</p>
                 <span
                   className={`h-2 w-2 rounded-full ${
-                    item.state === "critical" ? "bg-red-300" : item.state === "elevated" ? "bg-amber-200" : "bg-white/70"
+                    item.state === "critical" ? "bg-red-500" : item.state === "elevated" ? "bg-amber-500" : "bg-[#84CC16]"
                   }`}
                 />
               </div>
-              <p className="mt-1 text-[0.68rem] uppercase tracking-[0.16em] text-white/42">Risk {item.risk}</p>
+              <p className="mt-1 text-[0.68rem] uppercase tracking-[0.16em] text-[#738096]">Risk {item.risk}</p>
             </div>
           ))}
         </div>
@@ -730,8 +728,8 @@ export function SecurityCommandAnalytics() {
   return (
     <section className="space-y-5">
       <div>
-        <p className="text-[0.72rem] font-semibold uppercase tracking-[0.24em] text-cyan-100/46">Security command analytics</p>
-        <h2 className="mt-2 text-2xl font-semibold tracking-[-0.035em] text-white">SOC posture that reads like an executive instrument panel.</h2>
+        <p className="text-[0.72rem] font-semibold uppercase tracking-[0.24em] text-[#65A30D]">Security command analytics</p>
+        <h2 className="mt-2 text-2xl font-semibold tracking-[-0.035em] text-[#1F2937]">SOC posture that reads like an executive instrument panel.</h2>
       </div>
       <div className="grid gap-5 xl:grid-cols-2">
         <PremiumEChart option={radarOption} title="Threat radar" subtitle="Attack pressure across identity, API, token, insider, network, and device surfaces." />
@@ -836,7 +834,7 @@ export function ExecutiveStoryboard({ summary }: { summary: AnalyticsHubSummary 
 
   return (
     <motion.section
-      className="rounded-[34px] border border-white/10 bg-white/[0.045] p-6 shadow-[0_24px_70px_rgba(0,0,0,0.24)] backdrop-blur-2xl"
+      className="rounded-xl border border-[#E4E9E1] bg-white p-6 shadow-xs"
       initial={{ opacity: 0, y: 14 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.28, ease: "easeOut" }}
@@ -844,11 +842,11 @@ export function ExecutiveStoryboard({ summary }: { summary: AnalyticsHubSummary 
     >
       <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
         <div>
-          <p className="text-[0.72rem] font-semibold uppercase tracking-[0.24em] text-cyan-100/46">Executive storyboard</p>
-          <h2 className="mt-2 text-2xl font-semibold tracking-[-0.035em] text-white">Continuity, reputation, saved cost, and next 7 days.</h2>
-          <p className="mt-2 max-w-3xl text-sm leading-6 text-white/54">{summary.scenario_simulator.recommended}</p>
+          <p className="text-[0.72rem] font-semibold uppercase tracking-[0.24em] text-[#65A30D]">Executive storyboard</p>
+          <h2 className="mt-2 text-2xl font-semibold tracking-[-0.035em] text-[#1F2937]">Continuity, reputation, saved cost, and next 7 days.</h2>
+          <p className="mt-2 max-w-3xl text-sm leading-6 text-[#586579]">{summary.scenario_simulator.recommended}</p>
         </div>
-        <div className="rounded-full border border-cyan-200/18 bg-cyan-300/10 px-4 py-2 text-sm font-semibold text-cyan-50">
+        <div className="rounded-full border border-[#CBD5C0] bg-[#F1F8E5] px-4 py-2 text-sm font-semibold text-[#3F6212]">
           PDF-ready board styling
         </div>
       </div>
@@ -860,7 +858,7 @@ export function ExecutiveStoryboard({ summary }: { summary: AnalyticsHubSummary 
       </div>
       <div className="mt-5 grid gap-3 md:grid-cols-4">
         {forecastOptions.map((option) => (
-          <div className="rounded-2xl border border-white/10 bg-black/20 p-4 text-sm leading-6 text-white/62" key={option}>
+          <div className="rounded-xl border border-[#E4E9E1] bg-[#F7F9F5] p-4 text-sm leading-6 text-[#1F2937]" key={option}>
             {option}
           </div>
         ))}
@@ -909,16 +907,16 @@ export function IncidentIntelligenceDashboard() {
   return (
     <div className="sentra-analytics-command space-y-6">
       <motion.header
-        className="sentra-analytics-hero rounded-xl border border-slate-200 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-white/[0.045] dark:shadow-[0_30px_90px_rgba(0,0,0,0.3)] dark:backdrop-blur-2xl md:p-8"
+        className="sentra-analytics-hero rounded-xl border border-[#E4E9E1] bg-white p-6 shadow-xs md:p-8"
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.28, ease: "easeOut" }}
       >
-        <p className="text-[0.72rem] font-semibold uppercase tracking-[0.28em] text-sky-600 dark:text-cyan-100/58">Incident intelligence</p>
-        <h1 className="mt-3 max-w-5xl text-3xl font-semibold tracking-tight text-slate-900 dark:text-white md:text-5xl">
+        <p className="text-[0.72rem] font-semibold uppercase tracking-[0.28em] text-[#65A30D]">Incident intelligence</p>
+        <h1 className="font-display mt-3 max-w-5xl text-3xl font-semibold tracking-tight text-[#1F2937] md:text-5xl">
           Incident command, redesigned for clarity under pressure.
         </h1>
-        <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600 dark:text-white/58">
+        <p className="mt-3 max-w-3xl text-sm leading-6 text-[#586579]">
           Triage, severity, response timeline, resource load, and geographic spread in a premium operator-ready layout.
         </p>
       </motion.header>

@@ -30,26 +30,16 @@ function scoreFromIncidents(incidents: Incident[]) {
 
 function ExecutiveMetric({
   label,
-  tone = "cyan",
   value,
 }: {
   label: string;
   tone?: "cyan" | "frost" | "gold" | "rose";
   value: string;
 }) {
-  const toneClass =
-    tone === "gold"
-      ? "text-amber-100"
-      : tone === "frost"
-      ? "text-white"
-      : tone === "rose"
-      ? "text-rose-100"
-      : "text-cyan-100";
-
   return (
-    <div className="sentra-premium-card rounded-[28px] p-5">
-      <p className="text-xs uppercase tracking-[0.22em] text-white/45">{label}</p>
-      <p className={`mt-3 text-4xl font-semibold tracking-[-0.04em] ${toneClass}`}>{value}</p>
+    <div className="rounded-xl border border-[#E4E9E1] bg-[#F1F5F0] p-4 shadow-xs">
+      <p className="font-mono text-xs uppercase tracking-[0.16em] text-[#586579]">{label}</p>
+      <p className="mt-2 font-mono text-3xl font-bold tracking-tight text-[#1F2937]">{value}</p>
     </div>
   );
 }
@@ -81,7 +71,7 @@ export function ExecutiveFocusMode({ canExportReports, incidents }: ExecutiveFoc
             title: "External reputation pressure stable",
             action: "Prepare holding statement for public communications",
           },
-    ];
+        ];
   }, [incidents]);
 
   useEffect(
@@ -134,22 +124,22 @@ export function ExecutiveFocusMode({ canExportReports, incidents }: ExecutiveFoc
   }
 
   return (
-    <section className="sentra-premium-card rounded-[36px] p-5 shadow-[var(--sentra-shadow-command)]">
+    <section className="rounded-xl border border-[#E4E9E1] bg-white p-6 shadow-xs">
       <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
         <div className="max-w-2xl">
-          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--executive-gold)]">
+          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#65A30D]">
             Executive Mode
           </p>
-          <h1 className="mt-3 text-4xl font-semibold tracking-[-0.055em] text-white md:text-6xl">
+          <h2 className="font-display mt-2 text-2xl font-bold tracking-tight text-[#1F2937] md:text-3xl">
             One-screen decision posture.
-          </h1>
-          <p className="mt-3 text-sm leading-6 text-white/58">
+          </h2>
+          <p className="mt-2 text-sm leading-6 text-[#586579]">
             Technical clutter is suppressed. Leadership sees readiness, exposure, reputation, top
             threats, ETA to stability, and the next actions that matter.
           </p>
         </div>
         <button
-          className="rounded-full border border-amber-200/20 bg-amber-200/12 px-5 py-3 text-sm font-semibold text-amber-50 transition hover:bg-amber-200/20 disabled:cursor-not-allowed disabled:opacity-55"
+          className="rounded-xl border border-[#CBD5C0] bg-[#F1F8E5] px-4 py-2.5 text-xs font-semibold text-[#3F6212] transition hover:bg-[#ECF7D9] disabled:cursor-not-allowed disabled:opacity-55"
           disabled={!canExportReports || reportState === "exporting"}
           onClick={exportReport}
           type="button"
@@ -165,43 +155,43 @@ export function ExecutiveFocusMode({ canExportReports, incidents }: ExecutiveFoc
       </div>
 
       <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-5">
-        <ExecutiveMetric label="Readiness" tone="cyan" value={`${metrics.readiness}%`} />
-        <ExecutiveMetric label="Financial exposure" tone="gold" value={metrics.exposure} />
-        <ExecutiveMetric label="Reputation risk" tone={metrics.reputation > 45 ? "rose" : "cyan"} value={`${metrics.reputation}%`} />
+        <ExecutiveMetric label="Readiness" value={`${metrics.readiness}%`} />
+        <ExecutiveMetric label="Financial exposure" value={metrics.exposure} />
+        <ExecutiveMetric label="Reputation risk" value={`${metrics.reputation}%`} />
         <ExecutiveMetric label="ETA to stability" value={metrics.eta} />
-        <ExecutiveMetric label="Critical threats" tone={metrics.critical ? "rose" : "frost"} value={`${metrics.critical}`} />
+        <ExecutiveMetric label="Critical threats" value={`${metrics.critical}`} />
       </div>
 
       <div className="mt-5 grid gap-4 xl:grid-cols-[1fr_0.78fr]">
-        <div className="rounded-[30px] border border-white/10 bg-black/18 p-5">
-          <p className="text-xs uppercase tracking-[0.22em] text-white/45">Top threats and recommended actions</p>
+        <div className="rounded-xl border border-[#E4E9E1] bg-[#F7F9F5] p-5">
+          <p className="text-xs uppercase tracking-[0.16em] text-[#586579]">Top threats and recommended actions</p>
           <div className="mt-4 space-y-3">
             {topThreats.map((threat, index) => (
-              <div className="rounded-3xl border border-white/8 bg-white/6 p-4" key={`${threat.id}-${threat.title}`}>
+              <div className="rounded-xl border border-[#E4E9E1] bg-white p-4 shadow-xs" key={`${threat.id}-${threat.title}`}>
                 <div className="flex items-center justify-between gap-3">
-                  <p className="text-sm font-semibold text-white">{threat.title}</p>
-                  <span className="rounded-full bg-cyan-300/12 px-3 py-1 text-xs text-cyan-100">
+                  <p className="text-sm font-semibold text-[#1F2937]">{threat.title}</p>
+                  <span className="rounded-full border border-[#CBD5C0] bg-[#F1F8E5] px-2.5 py-0.5 text-xs font-medium text-[#3F6212]">
                     action {index + 1}
                   </span>
                 </div>
-                <p className="mt-2 text-sm leading-6 text-white/58">{threat.action}</p>
+                <p className="mt-2 text-xs leading-5 text-[#586579]">{threat.action}</p>
               </div>
             ))}
           </div>
         </div>
 
-        <div className="rounded-[30px] border border-white/10 bg-black/18 p-5">
-          <p className="text-xs uppercase tracking-[0.22em] text-white/45">Live map mini</p>
-          <div className="mt-4 overflow-hidden rounded-[28px] border border-cyan-200/12 bg-[radial-gradient(circle_at_30%_35%,rgba(34,211,238,0.24),transparent_18%),radial-gradient(circle_at_68%_62%,rgba(244,63,94,0.18),transparent_16%),rgba(255,255,255,0.045)] p-5">
+        <div className="rounded-xl border border-[#E4E9E1] bg-[#F7F9F5] p-5">
+          <p className="text-xs uppercase tracking-[0.16em] text-[#586579]">Live map mini</p>
+          <div className="mt-4 overflow-hidden rounded-xl border border-[#E4E9E1] bg-white p-4 shadow-xs">
             <div className="grid grid-cols-3 gap-3">
               {["HQ", "Zone 2", "Gate A", "Zone 4", "Safe North", "Med Corridor"].map((zone, index) => (
                 <div
-                  className={`rounded-2xl border px-3 py-5 text-center text-xs font-semibold ${
+                  className={`rounded-lg border px-3 py-3 text-center text-xs font-semibold ${
                     index === 1
-                      ? "sentra-status-critical border-rose-300/20 bg-rose-400/12 text-rose-100"
+                      ? "border-rose-300 bg-rose-50 text-rose-800"
                       : index === 5
-                      ? "border-cyan-200/20 bg-cyan-300/12 text-cyan-100"
-                      : "border-white/8 bg-black/14 text-white/60"
+                      ? "border-sky-300 bg-sky-50 text-sky-800"
+                      : "border-[#E4E9E1] bg-[#F7F9F5] text-[#1F2937]"
                   }`}
                   key={zone}
                 >
@@ -210,9 +200,9 @@ export function ExecutiveFocusMode({ canExportReports, incidents }: ExecutiveFoc
               ))}
             </div>
           </div>
-          <div className="mt-4 rounded-3xl border border-amber-200/12 bg-amber-200/8 p-4">
-            <p className="text-sm font-semibold text-amber-50">Approval queue</p>
-            <p className="mt-2 text-sm text-white/55">
+          <div className="mt-4 rounded-xl border border-[#E4E9E1] bg-white p-4 shadow-xs">
+            <p className="text-sm font-semibold text-[#1F2937]">Approval queue</p>
+            <p className="mt-1 text-xs text-[#586579]">
               No blocking executive approvals. Governance queue is ready for exception review.
             </p>
           </div>

@@ -130,8 +130,16 @@ function HeroMetricPill({ stat }: { stat: HeroStat }) {
   );
 }
 
-export function DashboardExperience() {
-  const { mode, setMode } = useWorkspaceController();
+export function DashboardExperience({ initialMode }: { initialMode?: WorkspaceMode } = {}) {
+  const { mode: controllerMode, setMode } = useWorkspaceController();
+  const mode = initialMode ?? controllerMode;
+
+  useEffect(() => {
+    if (initialMode && controllerMode !== initialMode) {
+      setMode(initialMode);
+    }
+  }, [initialMode, controllerMode, setMode]);
+
   useLiveDataEngine();
   const liveIncidents = useLiveDataStore((state) => state.incidents);
   const createIncident = useLiveDataStore((state) => state.createIncident);

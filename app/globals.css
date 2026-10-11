@@ -2754,12 +2754,10 @@ select:focus {
   }
 }
 
-/* Sentra UI Phase 8: premium analytics, maps, and data storytelling */
+/* Sentra UI Phase 8: premium analytics, maps, and data storytelling (Light-first Alabaster + Lime) */
 .sentra-analytics-shell {
-  background:
-    radial-gradient(circle at 14% -10%, rgba(125, 211, 252, 0.12), transparent 34rem),
-    radial-gradient(circle at 82% 0%, rgba(139, 92, 246, 0.1), transparent 30rem),
-    linear-gradient(180deg, #05070b 0%, #080d16 54%, #05070b 100%);
+  background: var(--app-background, #F7F9F5);
+  color: var(--app-foreground, #1F2937);
 }
 
 .sentra-analytics-hero,
@@ -2767,6 +2765,10 @@ select:focus {
 .sentra-analytics-kpi {
   position: relative;
   overflow: hidden;
+  background: var(--app-surface, #FFFFFF);
+  border: 1px solid var(--app-border, #E4E9E1);
+  color: var(--app-foreground, #1F2937);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04);
 }
 
 .sentra-analytics-hero::after,
@@ -2777,25 +2779,19 @@ select:focus {
   inset: 0;
   pointer-events: none;
   border-radius: inherit;
-  background:
-    linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.075), transparent) top / 100% 1px no-repeat,
-    radial-gradient(circle at var(--x, 50%) var(--y, 0%), rgba(125, 211, 252, 0.055), transparent 18rem);
+  background: none;
 }
 
 .sentra-analytics-hero {
   isolation: isolate;
-  background:
-    radial-gradient(circle at 12% 0%, rgba(125, 211, 252, 0.13), transparent 28rem),
-    radial-gradient(circle at 82% 4%, rgba(139, 92, 246, 0.11), transparent 26rem),
-    linear-gradient(145deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.024)),
-    rgba(18, 22, 32, 0.72);
+  background: var(--app-surface, #FFFFFF);
+  border: 1px solid var(--app-border, #E4E9E1);
 }
 
 .sentra-analytics-panel,
 .sentra-analytics-kpi {
-  background:
-    linear-gradient(145deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.022)),
-    rgba(18, 22, 32, 0.72);
+  background: var(--app-surface, #FFFFFF);
+  border: 1px solid var(--app-border, #E4E9E1);
   transition:
     transform 180ms ease,
     border-color 180ms ease,
@@ -2805,10 +2801,8 @@ select:focus {
 .sentra-analytics-panel:hover,
 .sentra-analytics-kpi:hover {
   transform: translateY(-1px);
-  border-color: rgba(255, 255, 255, 0.12);
-  box-shadow:
-    0 26px 76px rgba(0, 0, 0, 0.28),
-    inset 0 1px 0 rgba(255, 255, 255, 0.072);
+  border-color: var(--app-border-strong, #CBD5C0);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
 }
 
 .sentra-analytics-command canvas {
@@ -3259,10 +3253,8 @@ select:focus {
 }
 
 .sentra-analytics-shell {
-  background:
-    radial-gradient(circle at 12% -8%, rgba(125, 211, 252, 0.12), transparent 34rem),
-    radial-gradient(circle at 84% 0%, rgba(246, 198, 103, 0.075), transparent 30rem),
-    linear-gradient(180deg, #03050a 0%, #070b14 100%);
+  background: var(--app-background, #F7F9F5);
+  color: var(--app-foreground, #1F2937);
 }
 
 @keyframes sentra-phase12-scan {

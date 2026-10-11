@@ -404,29 +404,29 @@ export function OperationsCommandCenter() {
       )}
 
       {/* HEADER & GOVERNANCE BAR */}
-      <div className="flex flex-col gap-4 rounded-3xl border border-white/10 bg-slate-900/60 p-6 backdrop-blur-2xl lg:flex-row lg:items-center lg:justify-between">
+      <div className="flex flex-col gap-4 rounded-xl border border-[#E4E9E1] bg-white p-6 shadow-xs lg:flex-row lg:items-center lg:justify-between">
         <div>
           <div className="flex items-center gap-3">
-            <span className="rounded-full border border-cyan-400/40 bg-cyan-500/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-cyan-300">
+            <span className="rounded-full border border-[#CBD5C0] bg-[#F1F8E5] px-3 py-1 text-xs font-semibold uppercase tracking-wider text-[#3F6212]">
               Phase 6 • Autonomous Crisis Operations
             </span>
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-400/30 bg-emerald-500/10 px-3 py-1 text-xs font-medium text-emerald-300">
-              <span className="h-2 w-2 rounded-full bg-emerald-400 animate-ping" />
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-300 bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-800">
+              <span className="h-2 w-2 rounded-full bg-emerald-500 animate-ping" />
               Safety Gate Enforced
             </span>
           </div>
-          <h1 className="mt-2 text-2xl font-black tracking-tight text-white sm:text-3xl">
+          <h1 className="mt-2 font-display text-2xl font-bold tracking-tight text-[#1F2937] sm:text-3xl">
             Crisis Operations Command Center
           </h1>
-          <p className="text-sm text-slate-400">
+          <p className="text-sm text-[#586579]">
             Safety-governed action orchestration, DAG playbooks, and uncertainty-aware digital twin.
           </p>
         </div>
 
         <div className="flex flex-wrap items-center gap-3">
           {/* Autonomy Mode Selector */}
-          <div className="flex items-center gap-2 rounded-2xl border border-white/10 bg-slate-950/70 p-2">
-            <span className="text-xs font-medium uppercase tracking-wider text-slate-400 pl-2">Mode:</span>
+          <div className="flex items-center gap-2 rounded-xl border border-[#E4E9E1] bg-[#F7F9F5] p-2">
+            <span className="text-xs font-medium uppercase tracking-wider text-[#586579] pl-2">Mode:</span>
             <select
               value={autonomy.mode}
               onChange={async (e) => {
@@ -440,7 +440,7 @@ export function OperationsCommandCenter() {
                   setActionNotice(`Error: ${msg}`);
                 }
               }}
-              className="rounded-xl border border-white/10 bg-slate-900 px-3 py-1.5 text-xs font-semibold text-cyan-300 focus:outline-none focus:ring-2 focus:ring-cyan-500"
+              className="rounded-lg border border-[#E4E9E1] bg-white px-3 py-1.5 text-xs font-semibold text-[#1F2937] focus:outline-none focus:ring-2 focus:ring-[#84CC16]"
             >
               <option value="MODE_0_OBSERVE">Mode 0 • OBSERVE (Read-Only)</option>
               <option value="MODE_1_RECOMMEND">Mode 1 • RECOMMEND (Plans Only)</option>
@@ -452,10 +452,10 @@ export function OperationsCommandCenter() {
           {/* Kill Switch Button */}
           <button
             onClick={() => setKillSwitchModalOpen(true)}
-            className={`rounded-2xl border px-4 py-2 text-xs font-bold uppercase tracking-wider shadow-md transition ${
+            className={`rounded-xl border px-4 py-2 text-xs font-bold uppercase tracking-wider shadow-xs transition ${
               autonomy.kill_switch_engaged
-                ? "border-emerald-500 bg-emerald-600/30 text-emerald-300 hover:bg-emerald-600/40"
-                : "border-red-500 bg-red-600/20 text-red-300 hover:bg-red-600/30"
+                ? "border-emerald-300 bg-emerald-100 text-emerald-800 hover:bg-emerald-200"
+                : "border-red-300 bg-red-50 text-red-700 hover:bg-red-100"
             }`}
           >
             {autonomy.kill_switch_engaged ? "Reset Kill Switch" : "Emergency Stop (Kill Switch)"}
@@ -465,7 +465,7 @@ export function OperationsCommandCenter() {
           <button
             onClick={handleOrchestrateCycle}
             disabled={loading}
-            className="rounded-2xl border border-cyan-400 bg-cyan-600/30 px-4 py-2 text-xs font-bold uppercase tracking-wider text-cyan-200 transition hover:bg-cyan-600/50"
+            className="rounded-xl border border-[#CBD5C0] bg-[#F1F8E5] px-4 py-2 text-xs font-bold uppercase tracking-wider text-[#3F6212] transition hover:bg-[#ECF7D9]"
           >
             Orchestrate Plan
           </button>
@@ -474,39 +474,39 @@ export function OperationsCommandCenter() {
 
       {/* TOP KPI COUNTERS */}
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
-        <div className="rounded-2xl border border-white/10 bg-slate-900/40 p-4 backdrop-blur-xl">
-          <p className="text-xs uppercase tracking-wider text-slate-400">Autonomy Status</p>
-          <p className="mt-1 text-lg font-bold text-cyan-300">{autonomy.mode.replace("MODE_", "M-")}</p>
-          <p className="text-[11px] text-slate-500">Mode 2 Active Default</p>
+        <div className="rounded-xl border border-[#E4E9E1] bg-white p-4 shadow-xs">
+          <p className="text-xs uppercase tracking-wider text-[#586579]">Autonomy Status</p>
+          <p className="mt-1 font-mono text-lg font-bold text-[#1F2937]">{autonomy.mode.replace("MODE_", "M-")}</p>
+          <p className="text-[11px] text-[#738096]">Mode 2 Active Default</p>
         </div>
 
-        <div className="rounded-2xl border border-white/10 bg-slate-900/40 p-4 backdrop-blur-xl">
-          <p className="text-xs uppercase tracking-wider text-slate-400">Active Playbooks</p>
-          <p className="mt-1 text-lg font-bold text-indigo-300">{playbooks.length || 5} Defined</p>
-          <p className="text-[11px] text-slate-500">NFPA / OSHA / ISO Aligned</p>
+        <div className="rounded-xl border border-[#E4E9E1] bg-white p-4 shadow-xs">
+          <p className="text-xs uppercase tracking-wider text-[#586579]">Active Playbooks</p>
+          <p className="mt-1 font-mono text-lg font-bold text-[#1F2937]">{playbooks.length || 5} Defined</p>
+          <p className="text-[11px] text-[#738096]">NFPA / OSHA / ISO Aligned</p>
         </div>
 
-        <div className="rounded-2xl border border-white/10 bg-slate-900/40 p-4 backdrop-blur-xl">
-          <p className="text-xs uppercase tracking-wider text-slate-400">Pending Approvals</p>
-          <p className="mt-1 text-lg font-bold text-amber-300">
+        <div className="rounded-xl border border-[#E4E9E1] bg-white p-4 shadow-xs">
+          <p className="text-xs uppercase tracking-wider text-[#586579]">Pending Approvals</p>
+          <p className="mt-1 font-mono text-lg font-bold text-[#1F2937]">
             {proposals.filter((p) => p.status === "AWAITING_APPROVAL").length} Action(s)
           </p>
-          <p className="text-[11px] text-slate-500">Two-Person Integrity Enforced</p>
+          <p className="text-[11px] text-[#738096]">Two-Person Integrity Enforced</p>
         </div>
 
-        <div className="rounded-2xl border border-white/10 bg-slate-900/40 p-4 backdrop-blur-xl">
-          <p className="text-xs uppercase tracking-wider text-slate-400">Execution Adapters</p>
-          <p className="mt-1 text-lg font-bold text-emerald-300">{adapters.length || 4} Registered</p>
-          <p className="text-[11px] text-slate-500">Idempotency Ledger Active</p>
+        <div className="rounded-xl border border-[#E4E9E1] bg-white p-4 shadow-xs">
+          <p className="text-xs uppercase tracking-wider text-[#586579]">Execution Adapters</p>
+          <p className="mt-1 font-mono text-lg font-bold text-[#1F2937]">{adapters.length || 4} Registered</p>
+          <p className="text-[11px] text-[#738096]">Idempotency Ledger Active</p>
         </div>
       </div>
 
       {/* MAIN NAVIGATION TABS */}
-      <div className="flex border-b border-white/10 space-x-2 overflow-x-auto pb-2">
+      <div className="flex border-b border-[#E4E9E1] space-x-2 overflow-x-auto pb-2">
         <button
           onClick={() => setActiveTab("plan")}
           className={`rounded-xl px-4 py-2 text-sm font-semibold transition ${
-            activeTab === "plan" ? "border-b-2 border-cyan-400 bg-white/10 text-white" : "text-slate-400 hover:text-white"
+            activeTab === "plan" ? "border-b-2 border-[#84CC16] bg-[#F1F8E5] text-[#3F6212]" : "text-[#586579] hover:text-[#1F2937] hover:bg-[#F7F9F5]"
           }`}
         >
           Response Plan & Playbooks
@@ -514,7 +514,7 @@ export function OperationsCommandCenter() {
         <button
           onClick={() => setActiveTab("proposals")}
           className={`rounded-xl px-4 py-2 text-sm font-semibold transition ${
-            activeTab === "proposals" ? "border-b-2 border-cyan-400 bg-white/10 text-white" : "text-slate-400 hover:text-white"
+            activeTab === "proposals" ? "border-b-2 border-[#84CC16] bg-[#F1F8E5] text-[#3F6212]" : "text-[#586579] hover:text-[#1F2937] hover:bg-[#F7F9F5]"
           }`}
         >
           Action Governance & Approvals ({proposals.filter((p) => p.status === "AWAITING_APPROVAL").length})
@@ -522,7 +522,7 @@ export function OperationsCommandCenter() {
         <button
           onClick={() => setActiveTab("timeline")}
           className={`rounded-xl px-4 py-2 text-sm font-semibold transition ${
-            activeTab === "timeline" ? "border-b-2 border-cyan-400 bg-white/10 text-white" : "text-slate-400 hover:text-white"
+            activeTab === "timeline" ? "border-b-2 border-[#84CC16] bg-[#F1F8E5] text-[#3F6212]" : "text-[#586579] hover:text-[#1F2937] hover:bg-[#F7F9F5]"
           }`}
         >
           Unified Operations Timeline
@@ -530,7 +530,7 @@ export function OperationsCommandCenter() {
         <button
           onClick={() => setActiveTab("simulator")}
           className={`rounded-xl px-4 py-2 text-sm font-semibold transition ${
-            activeTab === "simulator" ? "border-b-2 border-cyan-400 bg-white/10 text-white" : "text-slate-400 hover:text-white"
+            activeTab === "simulator" ? "border-b-2 border-[#84CC16] bg-[#F1F8E5] text-[#3F6212]" : "text-[#586579] hover:text-[#1F2937] hover:bg-[#F7F9F5]"
           }`}
         >
           Digital Twin & What-If Simulator
@@ -538,7 +538,7 @@ export function OperationsCommandCenter() {
         <button
           onClick={() => setActiveTab("adapters")}
           className={`rounded-xl px-4 py-2 text-sm font-semibold transition ${
-            activeTab === "adapters" ? "border-b-2 border-cyan-400 bg-white/10 text-white" : "text-slate-400 hover:text-white"
+            activeTab === "adapters" ? "border-b-2 border-[#84CC16] bg-[#F1F8E5] text-[#3F6212]" : "text-[#586579] hover:text-[#1F2937] hover:bg-[#F7F9F5]"
           }`}
         >
           Execution Adapters
@@ -547,7 +547,7 @@ export function OperationsCommandCenter() {
           onClick={() => setActiveTab("demo")}
           data-testid="tab-demo"
           className={`rounded-xl px-4 py-2 text-sm font-semibold transition ${
-            activeTab === "demo" ? "border-b-2 border-cyan-400 bg-white/10 text-white" : "text-slate-400 hover:text-white"
+            activeTab === "demo" ? "border-b-2 border-[#84CC16] bg-[#F1F8E5] text-[#3F6212]" : "text-[#586579] hover:text-[#1F2937] hover:bg-[#F7F9F5]"
           }`}
         >
           Deterministic Demo Suite ({demoScenarios.length})

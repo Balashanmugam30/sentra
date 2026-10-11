@@ -7,20 +7,20 @@ import { motion } from "framer-motion";
 
 import { useLiveDataStore } from "@/lib/realtime/live-data-store";
 
-const axisText = "rgba(245,247,250,0.46)";
-const gridLine = "rgba(255,255,255,0.08)";
+const axisText = "#738096";
+const gridLine = "#E4E9E1";
 
 function chartShell(title: string, subtitle: string, option: EChartsOption) {
   return (
     <motion.section
-      className="sentra-phase11-chart-panel rounded-[28px] border border-white/10 bg-white/[0.045] p-5 shadow-[0_24px_70px_rgba(0,0,0,0.24)] backdrop-blur-2xl"
+      className="rounded-xl border border-[#E4E9E1] bg-white p-5 shadow-xs"
       initial={{ opacity: 0, y: 12 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.28 }}
       viewport={{ once: true, margin: "-40px" }}
     >
-      <h3 className="text-lg font-semibold tracking-[-0.03em] text-white">{title}</h3>
-      <p className="mt-1 text-sm leading-6 text-white/54">{subtitle}</p>
+      <h3 className="font-display text-base font-semibold tracking-tight text-[#1F2937]">{title}</h3>
+      <p className="mt-1 text-xs leading-5 text-[#586579]">{subtitle}</p>
       <ReactECharts
         lazyUpdate
         notMerge
@@ -50,9 +50,9 @@ export function LiveOperationsCharts() {
         textStyle: { color: axisText },
       },
       tooltip: {
-        backgroundColor: "rgba(5,7,11,0.94)",
-        borderColor: "rgba(255,255,255,0.12)",
-        textStyle: { color: "#fff" },
+        backgroundColor: "#FFFFFF",
+        borderColor: "#E4E9E1",
+        textStyle: { color: "#1F2937" },
         trigger: "axis",
       },
       xAxis: {
@@ -90,9 +90,9 @@ export function LiveOperationsCharts() {
         textStyle: { color: axisText },
       },
       tooltip: {
-        backgroundColor: "rgba(5,7,11,0.94)",
-        borderColor: "rgba(255,255,255,0.12)",
-        textStyle: { color: "#fff" },
+        backgroundColor: "#FFFFFF",
+        borderColor: "#E4E9E1",
+        textStyle: { color: "#1F2937" },
         trigger: "axis",
       },
       xAxis: {

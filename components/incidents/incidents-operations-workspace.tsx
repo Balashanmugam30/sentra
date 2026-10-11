@@ -472,28 +472,28 @@ export function IncidentsOperationsWorkspace() {
                       </div>
                     </div>
 
-                    <div className="rounded-2xl border border-white/8 bg-white/[0.03] p-3.5">
-                      <p className="text-[10px] uppercase tracking-wider text-white/45">Response ETA</p>
-                      <p className="mt-1 font-mono text-lg font-semibold text-cyan-300">
+                    <div className="rounded-xl border border-[#E4E9E1] bg-[#F7F9F5] p-3.5">
+                      <p className="text-[10px] uppercase tracking-wider text-[#738096]">Response ETA</p>
+                      <p className="mt-1 font-mono text-lg font-semibold text-[#0891b2]">
                         {selectedIncident.eta_minutes} min
                       </p>
-                      <p className="mt-1 text-[11px] text-white/40">Transit underway</p>
+                      <p className="mt-1 text-[11px] text-[#738096]">Transit underway</p>
                     </div>
 
-                    <div className="rounded-2xl border border-white/8 bg-white/[0.03] p-3.5">
-                      <p className="text-[10px] uppercase tracking-wider text-white/45">Team Assigned</p>
-                      <p className="mt-1 truncate font-medium text-sm text-white">
+                    <div className="rounded-xl border border-[#E4E9E1] bg-[#F7F9F5] p-3.5">
+                      <p className="text-[10px] uppercase tracking-wider text-[#738096]">Team Assigned</p>
+                      <p className="mt-1 truncate font-medium text-sm text-[#1F2937]">
                         {selectedIncident.assigned_team || "Team Alpha"}
                       </p>
-                      <p className="mt-1 text-[11px] text-white/40">
+                      <p className="mt-1 text-[11px] text-[#738096]">
                         {selectedIncident.responders_assigned?.length || 2} specialists en route
                       </p>
                     </div>
 
-                    <div className="rounded-2xl border border-white/8 bg-white/[0.03] p-3.5">
-                      <p className="text-[10px] uppercase tracking-wider text-white/45">Audit Status</p>
-                      <p className="mt-1 font-medium text-sm text-emerald-300">Compliant</p>
-                      <p className="mt-1 text-[11px] text-white/40">Tamper-evident log</p>
+                    <div className="rounded-xl border border-[#E4E9E1] bg-[#F7F9F5] p-3.5">
+                      <p className="text-[10px] uppercase tracking-wider text-[#738096]">Audit Status</p>
+                      <p className="mt-1 font-medium text-sm text-[#16a34a]">Compliant</p>
+                      <p className="mt-1 text-[11px] text-[#738096]">Tamper-evident log</p>
                     </div>
                   </div>
                 </GlassPanel>
@@ -515,11 +515,11 @@ export function IncidentsOperationsWorkspace() {
 
                 {/* Continuous Chronological Timeline */}
                 <GlassPanel tier="subtle" className="flex flex-col gap-4 p-6">
-                  <div className="flex items-center justify-between border-b border-white/10 pb-3">
-                    <h3 className="text-base font-semibold text-white tracking-tight">
+                  <div className="flex items-center justify-between border-b border-[#E4E9E1] pb-3">
+                    <h3 className="text-base font-semibold text-[#1F2937] tracking-tight">
                       Continuous Operational Timeline
                     </h3>
-                    <span className="text-xs text-white/45">
+                    <span className="text-xs text-[#738096]">
                       {selectedIncident.timeline_logs?.length || 3} verified events recorded
                     </span>
                   </div>

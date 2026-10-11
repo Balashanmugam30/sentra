@@ -534,19 +534,44 @@
 
 :root,
 [data-theme="light"],
-.light {
-  --sentra-os-bg: #f8fafc;
-  --sentra-os-panel: #ffffff;
-  --sentra-os-card: #ffffff;
-  --sentra-os-soft: #f1f5f9;
-  --sentra-os-hover: #e0f2fe;
-  --sentra-os-active: #bae6fd;
-  --sentra-os-border: #e2e8f0;
-  --sentra-os-border-strong: #0284c7;
-  --sentra-os-text: #0f172a;
-  --sentra-os-muted: #64748b;
-  --sentra-os-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
-  --sentra-os-cyan: #0891b2;
+.light,
+.sentra-auth-shell {
+  /* --- Authoritative Application Semantic Tokens (Section 4) --- */
+  --app-background: #F7F9F5;
+  --app-foreground: #1F2937;
+  --app-surface: #FFFFFF;
+  --app-surface-muted: #F1F5F0;
+  --app-surface-elevated: #FFFFFF;
+  --app-border: #E2E8DE;
+  --app-border-strong: #CBD5C0;
+  --app-foreground-muted: #586579;
+  --app-foreground-subtle: #738096;
+  --app-primary: #1F2937;
+  --app-primary-foreground: #FFFFFF;
+  --app-accent: #84CC16;
+  --app-accent-foreground: #3F6212;
+  --app-success: #16A34A;
+  --app-warning: #D97706;
+  --app-critical: #DC2626;
+  --app-info: #0284C7;
+  --app-focus-ring: #84CC16;
+  --app-wave-blue: #E8F1FF;
+  --app-wave-cyan: #E1F5F4;
+  --app-wave-lilac: #F0EAFF;
+  --app-wave-periwinkle: #E9ECFF;
+
+  --sentra-os-bg: #F7F9F5;
+  --sentra-os-panel: #FFFFFF;
+  --sentra-os-card: #FFFFFF;
+  --sentra-os-soft: #F1F5F0;
+  --sentra-os-hover: #F1F8E5;
+  --sentra-os-active: #ECF7D9;
+  --sentra-os-border: #E2E8DE;
+  --sentra-os-border-strong: #CBD5C0;
+  --sentra-os-text: #1F2937;
+  --sentra-os-muted: #586579;
+  --sentra-os-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04);
+  --sentra-os-cyan: #84CC16;
   --sentra-os-cyan-glow: rgba(8, 145, 178, 0.15);
   --sentra-os-blue: #0284c7;
   --sentra-os-indigo: #4f46e5;

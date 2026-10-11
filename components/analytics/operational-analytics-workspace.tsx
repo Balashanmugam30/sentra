@@ -40,7 +40,7 @@ export function OperationalAnalyticsWorkspace() {
         <div className="flex flex-col justify-between gap-4 lg:flex-row lg:items-end">
           <div className="space-y-2">
             <div className="flex flex-wrap items-center gap-3">
-              <span className="text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-cyan-300">
+              <span className="text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-[#65A30D]">
                 Executive & Operational Analytics
               </span>
               <StatusBadge status="safe" size="sm" pulse variant="glass">
@@ -50,10 +50,10 @@ export function OperationalAnalyticsWorkspace() {
                 Demo / Simulation
               </StatusBadge>
             </div>
-            <h1 className="text-3xl font-semibold tracking-[-0.04em] text-white md:text-5xl">
+            <h1 className="font-display text-3xl font-semibold tracking-tight text-[#1F2937] md:text-5xl">
               Operations & Risk Telemetry
             </h1>
-            <p className="max-w-2xl text-sm leading-6 text-white/60 md:text-base">
+            <p className="max-w-2xl text-sm leading-6 text-[#586579] md:text-base">
               Predictive risk indexing, avoided downtime metrics, multi-hazard trend lines, and scenario planning models.
             </p>
           </div>
