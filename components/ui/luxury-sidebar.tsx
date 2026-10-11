@@ -401,26 +401,33 @@ function NavItemRow({
 }) {
   const active = isActive(pathname, item, currentMode);
   const label = locked ? `${item.label} locked` : item.label;
-  const className = `sentra-shell-nav-item sentra-luxury-nav-item group ${active ? "is-active" : ""} ${
-    locked ? "is-locked" : ""
-  } ${collapsed ? "is-collapsed justify-center" : ""}`;
+  const className = `sentra-shell-nav-item sentra-luxury-nav-item group relative flex items-center gap-2.5 rounded-lg px-2.5 py-2 text-xs font-medium transition-all ${
+    active
+      ? "is-active bg-[#ECF7D9] text-[#3F6212] font-semibold"
+      : "text-[#586579] hover:bg-[#F1F5F0] hover:text-[#1F2937]"
+  } ${locked ? "is-locked opacity-60" : ""} ${collapsed ? "is-collapsed justify-center px-2" : ""}`;
   const content = (
     <>
-      <span className="sentra-shell-nav-icon">
+      <span className={`sentra-shell-nav-icon shrink-0 transition-colors ${active ? "text-[#3F6212]" : "text-[#738096] group-hover:text-[#1F2937]"}`}>
         <ShellIcon name={item.icon} />
       </span>
-      <span className={`sentra-shell-nav-label min-w-0 ${collapsed ? "sr-only" : ""}`}>
-        <span className="block truncate text-slate-900 dark:text-slate-100">{item.label}</span>
-        <span className="block truncate text-[0.66rem] font-medium normal-case tracking-normal text-slate-500 dark:text-white/40">
+      <span className={`sentra-shell-nav-label min-w-0 flex-1 text-left ${collapsed ? "sr-only" : "block"}`}>
+        <span className="block truncate text-xs font-semibold">{item.label}</span>
+        <span className={`block truncate text-[0.66rem] font-normal ${active ? "text-[#4D7C0F]" : "text-[#738096]"}`}>
           {item.description}
         </span>
       </span>
       {locked ? (
-        <span className={`sentra-nav-lock ${collapsed ? "sr-only" : ""}`} aria-hidden="true">
+        <span className={`sentra-nav-lock shrink-0 text-[#738096] ${collapsed ? "sr-only" : ""}`} aria-hidden="true">
           <ShellIcon name="lock" />
         </span>
       ) : null}
-      {active ? <span className="sentra-shell-active-indicator" /> : null}
+      {active ? (
+        <span
+          className="sentra-shell-active-indicator absolute left-0 top-1.5 bottom-1.5 w-1 rounded-r-full bg-[#84CC16]"
+          aria-hidden="true"
+        />
+      ) : null}
     </>
   );
 
@@ -603,46 +610,51 @@ export function LuxurySidebar({
 
   return (
     <>
-      <div
-        aria-hidden="true"
-        className={`sentra-mobile-nav-backdrop ${mobileOpen ? "is-open" : ""}`}
-        onClick={closeMobile}
-      />
+      {mobileOpen && (
+        <div
+          aria-hidden="true"
+          className="fixed inset-0 z-40 bg-black/40 backdrop-blur-xs lg:hidden"
+          onClick={closeMobile}
+        />
+      )}
       <aside
         aria-label="Sentra primary navigation"
-        className={`sentra-app-sidebar sentra-luxury-sidebar sentra-phase12-sidebar glass-nav ${collapsed ? "is-collapsed" : ""} ${
-          mobileOpen ? "is-mobile-open" : "hidden"
-        } lg:hidden`}
+        className={`sentra-app-sidebar sentra-luxury-sidebar flex flex-col h-full bg-white border-r border-[#E4E9E1] z-30 transition-[width] duration-200 shrink-0 ${
+          collapsed ? "is-collapsed w-[72px]" : "w-[240px]"
+        } ${mobileOpen ? "fixed inset-y-0 left-0 z-50 w-[280px] shadow-2xl flex" : "hidden lg:flex"}`}
         data-lenis-prevent
         data-native-scroll
       >
-        <div className="sentra-sidebar-brand sentra-luxury-brand">
+        <div className="sentra-sidebar-brand shrink-0 px-4 py-3.5 border-b border-[#E4E9E1] bg-white">
           <Link className="flex min-w-0 items-center gap-3" href="/app" onClick={closeMobile}>
-            <span className="sentra-sidebar-mark">S</span>
+            <div className="relative flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[#1F2937] text-white font-bold text-sm shadow-xs">
+              <span>S</span>
+              <span className="absolute -bottom-0.5 -right-0.5 h-2 w-2 rounded-full bg-[#84CC16] ring-2 ring-white" />
+            </div>
             <span className={`min-w-0 ${collapsed ? "hidden" : "block"}`}>
-              <span className="block text-base font-semibold tracking-[-0.045em] text-slate-900 dark:text-white">Sentra</span>
-              <span className="block text-[0.62rem] font-bold uppercase tracking-[0.24em] text-slate-500 dark:text-cyan-100/42">
+              <span className="block text-sm font-bold tracking-tight text-[#1F2937]">Sentra</span>
+              <span className="block text-[0.6rem] font-bold uppercase tracking-[0.18em] text-[#738096]">
                 Crisis Intelligence OS
               </span>
             </span>
           </Link>
         </div>
 
-        <div className={`sentra-workspace-card sentra-phase12-workspace-card ${collapsed ? "hidden" : "block"}`}>
-          <div className="flex items-start justify-between gap-3">
+        <div className={`sentra-workspace-card mx-3 my-2.5 p-2.5 rounded-xl border border-[#E4E9E1] bg-[#F1F5F0] shrink-0 ${collapsed ? "hidden" : "block"}`}>
+          <div className="flex items-start justify-between gap-2">
             <div className="min-w-0">
-              <p className="text-[0.62rem] font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-white/36">
+              <p className="text-[0.6rem] font-semibold uppercase tracking-[0.18em] text-[#738096]">
                 Workspace
               </p>
-              <p className="mt-1 truncate text-sm font-semibold text-slate-900 dark:text-white">{workspaceLabel}</p>
-              <p className="mt-1 truncate text-xs text-slate-500 dark:text-white/42">{userLabel}</p>
-              <div className="mt-3 flex flex-wrap items-center gap-1.5 font-mono text-[0.68rem]">
-                <span className="sentra-sidebar-live-chip font-sans">
-                  <span className="sentra-sidebar-live-dot" />
+              <p className="mt-0.5 truncate text-xs font-bold text-[#1F2937]">{workspaceLabel}</p>
+              <p className="truncate text-[0.65rem] text-[#586579]">{userLabel}</p>
+              <div className="mt-2 flex flex-wrap items-center gap-1.5 font-mono text-[0.62rem]">
+                <span className="inline-flex items-center gap-1 rounded-full bg-[#ECF7D9] px-2 py-0.5 font-sans font-semibold text-[#3F6212]">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#84CC16] animate-pulse" />
                   Live
                 </span>
-                <span className="sentra-sidebar-micro-stat">RDY {executiveReadiness}%</span>
-                <span className="sentra-sidebar-micro-stat">THR {threatScore}%</span>
+                <span className="rounded bg-white/90 border border-[#E4E9E1] px-1.5 py-0.5 font-medium text-[#586579]">RDY {executiveReadiness}%</span>
+                <span className="rounded bg-white/90 border border-[#E4E9E1] px-1.5 py-0.5 font-medium text-[#586579]">THR {threatScore}%</span>
               </div>
             </div>
             <RoleBadge compact role={user?.role} />
@@ -651,7 +663,7 @@ export function LuxurySidebar({
 
         <nav
           aria-label="Sentra modules"
-          className="sentra-sidebar-nav-scroll"
+          className="sentra-sidebar-nav-scroll flex-1 overflow-y-auto px-2.5 py-2 space-y-3"
           data-lenis-prevent
           data-native-scroll
           onKeyDown={handleSidebarNavKeyDown}
@@ -667,8 +679,8 @@ export function LuxurySidebar({
 
             return (
               <div className="sentra-sidebar-section sentra-luxury-nav-group" key={group.label}>
-                <p className={`sentra-sidebar-section-label ${collapsed ? "sr-only" : ""}`}>{group.label}</p>
-                <div className="space-y-1.5">
+                <p className={`px-2 text-[0.62rem] font-bold uppercase tracking-wider text-[#738096] mb-1 ${collapsed ? "sr-only" : ""}`}>{group.label}</p>
+                <div className="space-y-1">
                   {visibleItems.map((item) => (
                     <NavItemRow
                       collapsed={collapsed}
@@ -688,8 +700,8 @@ export function LuxurySidebar({
 
           {pinnedNav.length ? (
             <div className="sentra-sidebar-section sentra-luxury-nav-group">
-              <p className={`sentra-sidebar-section-label ${collapsed ? "sr-only" : ""}`}>Pinned tools</p>
-              <div className="space-y-1.5">
+              <p className={`px-2 text-[0.62rem] font-bold uppercase tracking-wider text-[#738096] mb-1 ${collapsed ? "sr-only" : ""}`}>Pinned tools</p>
+              <div className="space-y-1">
                 {pinnedNav.filter(canAccess).map((item) => (
                   <NavItemRow
                     collapsed={collapsed}
@@ -707,15 +719,15 @@ export function LuxurySidebar({
           ) : null}
         </nav>
 
-        <div className="sentra-sidebar-bottom sentra-luxury-bottom">
+        <div className="sentra-sidebar-bottom shrink-0 p-2.5 border-t border-[#E4E9E1] bg-white">
           <button
-            className={`sentra-shell-collapse sentra-luxury-collapse ${collapsed ? "justify-center" : ""}`}
+            className={`sentra-shell-collapse flex w-full items-center gap-2 rounded-lg border border-[#E4E9E1] bg-[#F1F5F0] p-2 text-xs font-medium text-[#586579] hover:bg-[#E4E9E1] hover:text-[#1F2937] transition-colors ${collapsed ? "justify-center" : ""}`}
             onClick={() => onCollapsedChange(!collapsed)}
             title={collapsed ? "Expand sidebar" : "Collapse sidebar"}
             type="button"
           >
             <ShellIcon name="collapse" />
-            <span className={collapsed ? "sr-only" : ""}>
+            <span className={collapsed ? "sr-only" : "inline"}>
               {collapsed ? "Expand sidebar" : "Collapse"}
             </span>
           </button>

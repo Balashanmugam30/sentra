@@ -57,7 +57,7 @@ export function WorkspaceShell({
       <motion.section
         aria-labelledby={`sentra-${mode}-workspace-title`}
         className={cn(
-          "sentra-workspace-hero relative overflow-hidden rounded-xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900 md:p-6",
+          "sentra-workspace-hero relative overflow-hidden rounded-xl border border-[#E4E9E1] bg-white p-5 shadow-xs md:p-6",
           `sentra-phase7-hero-${mode}`,
         )}
         data-mode={mode}
@@ -66,18 +66,19 @@ export function WorkspaceShell({
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.25, ease: "easeOut" }}
       >
+        <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#84CC16] via-[#06B6D4] to-[#A855F7]" />
         <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
           <div className="min-w-0">
-            <p className="sentra-phase12-eyebrow font-mono text-[0.68rem] font-semibold uppercase tracking-wider text-slate-500 dark:text-cyan-400">
+            <p className="sentra-phase12-eyebrow font-mono text-[0.68rem] font-semibold uppercase tracking-wider text-[#65A30D]">
               {eyebrow}
             </p>
             <h1
-              className="sentra-phase12-hero-title font-display mt-1 text-2xl font-bold tracking-tight text-slate-900 dark:text-white md:text-3xl"
+              className="sentra-phase12-hero-title font-display mt-1 text-2xl font-bold tracking-tight text-[#1F2937] md:text-3xl"
               id={`sentra-${mode}-workspace-title`}
             >
               {title}
             </h1>
-            <p className="sentra-phase12-hero-copy font-sans mt-1 max-w-2xl text-xs leading-relaxed text-slate-600 dark:text-slate-400 md:text-sm">
+            <p className="sentra-phase12-hero-copy font-sans mt-1 max-w-2xl text-xs leading-relaxed text-[#586579] md:text-sm">
               {description}
             </p>
           </div>
@@ -87,8 +88,8 @@ export function WorkspaceShell({
                 className={cn(
                   "sentra-hero-action-button inline-flex items-center rounded-lg border px-3.5 py-1.5 text-xs font-medium transition",
                   action.tone === "primary"
-                    ? "border-slate-900 bg-slate-900 text-white shadow-sm hover:bg-slate-800 dark:border-sky-500 dark:bg-sky-600 dark:hover:bg-sky-500"
-                    : "border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700",
+                    ? "border-[#1F2937] bg-[#1F2937] text-white shadow-xs hover:bg-black"
+                    : "border-[#E4E9E1] bg-[#F1F5F0] text-[#1F2937] hover:bg-[#E4E9E1]",
                 )}
                 href={action.href}
                 key={action.href}

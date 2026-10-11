@@ -34,27 +34,6 @@ const topBarModes = [
   { label: "Crisis", mode: "crisis" },
 ] as const;
 
-const primaryNav = [
-  { label: "Dashboard", href: "/app" as Route, match: ["/app"] },
-  { label: "Incidents", href: "/app/incidents" as Route, match: ["/app/incidents", "/incidents"] },
-  { label: "Operations", href: "/operations/execution" as Route, match: ["/operations"] },
-  { label: "Analytics", href: "/app/analytics" as Route, match: ["/app/analytics", "/analytics"] },
-  { label: "AI Council", href: "/app/ai-council" as Route, match: ["/app/ai-council", "/ai-council"] },
-  { label: "Live Twin", href: "/twin/live" as Route, match: ["/twin", "/live-twin"] },
-] as const;
-
-const moreNav = [
-  { label: "SOC Console", href: "/soc" as Route, desc: "Security operations center" },
-  { label: "Predictive AI", href: "/twin/predictive" as Route, desc: "Hazard & risk spread models" },
-  { label: "Resources", href: "/operations/resources" as Route, desc: "Equipment & staging capacity" },
-  { label: "Recovery", href: "/operations/recovery" as Route, desc: "Continuity & post-crisis plans" },
-  { label: "Field Mobile App", href: "/mobile/home" as Route, desc: "Responder field companion" },
-  { label: "Cloud Tenants", href: "/cloud/tenants" as Route, desc: "Multi-tenant orchestration" },
-  { label: "Board Reports", href: "/board/executive" as Route, desc: "Audit-ready boardroom evidence" },
-  { label: "Team & Access", href: "/security/users" as Route, desc: "RBAC & organization directory" },
-  { label: "Settings", href: "/app/settings" as Route, desc: "Appearance & session preferences" },
-] as const;
-
 type TopBarProps = {
   onOpenCommand?: () => void;
   onOpenNav?: () => void;
@@ -75,8 +54,6 @@ export function TopBar({ onOpenCommand, onOpenNav }: TopBarProps) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [notificationsOpen, setNotificationsOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
-  const [moreOpen, setMoreOpen] = useState(false);
-  const moreRef = useRef<HTMLDivElement | null>(null);
 
   const [profileName, setProfileName] = useState(() => {
     if (typeof window === "undefined") return "";
@@ -133,17 +110,6 @@ export function TopBar({ onOpenCommand, onOpenNav }: TopBarProps) {
     return unsubscribe;
   }, []);
 
-  // Close "More" dropdown when clicking outside
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (moreRef.current && !moreRef.current.contains(event.target as Node)) {
-        setMoreOpen(false);
-      }
-    }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
   const realtimeBadge = useMemo(() => {
     const snapshot = liveSnapshot;
     if (!snapshot || !snapshot.online || snapshot.status === "offline") {
@@ -160,22 +126,15 @@ export function TopBar({ onOpenCommand, onOpenNav }: TopBarProps) {
     router.replace("/login");
   };
 
-  const isNavActive = (item: (typeof primaryNav)[number]) => {
-    if (item.href === "/app") {
-      return pathname === "/app";
-    }
-    return item.match.some((prefix) => pathname.startsWith(prefix));
-  };
-
   return (
     <>
-      <header className="sticky top-0 z-40 w-full border-b border-slate-200/80 bg-white/95 backdrop-blur-xl transition-all shadow-[0_1px_3px_rgba(0,0,0,0.03)]">
-        <div className="mx-auto flex h-16 w-full max-w-[1600px] items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
-          {/* Left: Brand + Hamburger + Mode Pills */}
-          <div className="flex items-center gap-4 min-w-0">
+      <header className="sticky top-0 z-20 w-full border-b border-[#E4E9E1] bg-white/95 backdrop-blur-md">
+        <div className="flex h-14 w-full items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
+          {/* Left: Hamburger (mobile) + Mode Switcher Pills */}
+          <div className="flex items-center gap-3 min-w-0">
             <button
               aria-label="Open navigation menu"
-              className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-700 transition hover:bg-slate-50 lg:hidden"
+              className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-[#E4E9E1] bg-white text-[#1F2937] transition hover:bg-[#F1F5F0] lg:hidden"
               onClick={onOpenNav}
               type="button"
             >
@@ -184,12 +143,14 @@ export function TopBar({ onOpenCommand, onOpenNav }: TopBarProps) {
               </svg>
             </button>
 
-            <SentraLogo size="sm" href="/app" className="shrink-0" />
+            <div className="lg:hidden">
+              <SentraLogo size="sm" href="/app" className="shrink-0" />
+            </div>
 
             {/* Quick Mode Switcher Pills */}
             <div
               aria-label="Workspace Mode Switcher"
-              className="hidden xl:inline-flex items-center gap-1 rounded-xl border border-slate-200 bg-slate-100/70 p-1"
+              className="inline-flex items-center gap-1 rounded-lg border border-[#E4E9E1] bg-[#F1F5F0] p-1"
               role="tablist"
             >
               {topBarModes.map((item) => {
@@ -197,10 +158,10 @@ export function TopBar({ onOpenCommand, onOpenNav }: TopBarProps) {
                 return (
                   <button
                     aria-selected={selected}
-                    className={`px-2.5 py-1 text-xs font-semibold rounded-lg transition-all ${
+                    className={`px-3 py-1 text-xs font-semibold rounded-md transition-all ${
                       selected
-                        ? "bg-white text-blue-600 shadow-xs"
-                        : "text-slate-600 hover:text-slate-900 hover:bg-slate-200/50"
+                        ? "bg-white text-[#1F2937] shadow-xs font-bold"
+                        : "text-[#586579] hover:text-[#1F2937] hover:bg-white/50"
                     }`}
                     key={item.mode}
                     onClick={() => {
@@ -217,99 +178,34 @@ export function TopBar({ onOpenCommand, onOpenNav }: TopBarProps) {
             </div>
           </div>
 
-          {/* Center: Horizontal Primary Navigation Bar (Desktop) */}
-          <nav
-            aria-label="Primary Application Navigation"
-            className="hidden lg:flex items-center gap-1 text-sm font-medium text-slate-600"
-          >
-            {primaryNav.map((item) => {
-              const active = isNavActive(item);
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
-                    active
-                      ? "bg-blue-50 text-blue-600 shadow-xs"
-                      : "text-slate-600 hover:text-slate-900 hover:bg-slate-100/80"
-                  }`}
-                >
-                  {item.label}
-                </Link>
-              );
-            })}
-
-            {/* "More" Dropdown Menu */}
-            <div className="relative" ref={moreRef}>
-              <button
-                type="button"
-                onClick={() => setMoreOpen((prev) => !prev)}
-                className={`inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
-                  moreOpen ? "bg-slate-100 text-slate-900" : "text-slate-600 hover:text-slate-900 hover:bg-slate-100/80"
-                }`}
-              >
-                <span>More</span>
-                <svg
-                  className={`h-3.5 w-3.5 transition-transform ${moreOpen ? "rotate-180" : ""}`}
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-                </svg>
-              </button>
-
-              {moreOpen && (
-                <div className="absolute left-0 mt-2 w-64 rounded-2xl border border-slate-200 bg-white p-2 shadow-xl ring-1 ring-black/5 z-50">
-                  <div className="px-3 py-1.5 text-[0.65rem] font-bold uppercase tracking-wider text-slate-600 border-b border-slate-100 mb-1">
-                    Extended Modules
-                  </div>
-                  <div className="space-y-0.5">
-                    {moreNav.map((item) => (
-                      <Link
-                        key={item.href}
-                        href={item.href}
-                        onClick={() => setMoreOpen(false)}
-                        className="flex flex-col px-3 py-2 rounded-xl text-left hover:bg-slate-50 transition-colors"
-                      >
-                        <span className="text-xs font-semibold text-slate-800">{item.label}</span>
-                        <span className="text-[0.65rem] text-slate-600 mt-0.5">{item.desc}</span>
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
-          </nav>
-
           {/* Right: Search + Telemetry + Notifications + Profile */}
           <div className="flex shrink-0 items-center gap-2.5 sm:gap-3">
             {/* Command Search Trigger */}
             <button
               aria-label="Search commands"
-              className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50/80 px-3 py-1.5 text-xs text-slate-600 transition hover:border-slate-300 hover:bg-white"
+              className="inline-flex items-center gap-2 rounded-lg border border-[#E4E9E1] bg-[#F1F5F0] px-3 py-1.5 text-xs text-[#586579] transition hover:border-[#D3DBD0] hover:bg-white hover:text-[#1F2937]"
               onClick={onOpenCommand}
               type="button"
             >
-              <svg className="h-4 w-4 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="h-4 w-4 text-[#738096]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <circle cx="11" cy="11" r="7" strokeWidth="2" />
                 <path d="m16 16 4 4" strokeWidth="2" strokeLinecap="round" />
               </svg>
               <span className="hidden sm:inline">Search...</span>
-              <kbd className="hidden sm:inline-flex px-1.5 py-0.5 text-[0.65rem] font-semibold bg-white border border-slate-200 rounded text-slate-500">
+              <kbd className="hidden sm:inline-flex px-1.5 py-0.5 text-[0.62rem] font-semibold bg-white border border-[#E4E9E1] rounded text-[#738096]">
                 ⌘K
               </kbd>
             </button>
 
             {/* Realtime Telemetry Badge */}
             <div
-              className={`hidden md:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold border ${
+              className={`hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold border ${
                 realtimeBadge.tone === "live"
-                  ? "bg-emerald-50 text-emerald-700 border-emerald-200"
-                  : "bg-slate-100 text-slate-600 border-slate-200"
+                  ? "bg-[#F1F8E5] text-[#3F6212] border-[#D3DBD0]"
+                  : "bg-[#F1F5F0] text-[#586579] border-[#E4E9E1]"
               }`}
             >
-              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="h-1.5 w-1.5 rounded-full bg-[#84CC16] animate-pulse" />
               <span>{realtimeBadge.label}</span>
             </div>
 
@@ -318,7 +214,7 @@ export function TopBar({ onOpenCommand, onOpenNav }: TopBarProps) {
               <button
                 aria-label="Notifications"
                 aria-expanded={notificationsOpen}
-                className="relative inline-flex h-9 w-9 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-600 transition hover:bg-slate-50 hover:text-slate-900"
+                className="relative inline-flex h-9 w-9 items-center justify-center rounded-lg border border-[#E4E9E1] bg-white text-[#586579] transition hover:bg-[#F1F5F0] hover:text-[#1F2937]"
                 onClick={() => {
                   setNotificationsOpen((prev) => !prev);
                   markNotificationsRead();
@@ -336,23 +232,23 @@ export function TopBar({ onOpenCommand, onOpenNav }: TopBarProps) {
               </button>
 
               {notificationsOpen && (
-                <div className="absolute right-0 mt-2 w-80 rounded-2xl border border-slate-200 bg-white p-3 shadow-xl z-50">
-                  <div className="flex items-center justify-between pb-2 mb-2 border-b border-slate-100">
-                    <span className="text-xs font-bold text-slate-800">Notification Center</span>
-                    <span className="text-[0.65rem] text-slate-600">{notifications.length} events</span>
+                <div className="absolute right-0 mt-2 w-80 rounded-xl border border-[#E4E9E1] bg-white p-3 shadow-xl z-50">
+                  <div className="flex items-center justify-between pb-2 mb-2 border-b border-[#E4E9E1]">
+                    <span className="text-xs font-bold text-[#1F2937]">Notification Center</span>
+                    <span className="text-[0.65rem] text-[#738096]">{notifications.length} events</span>
                   </div>
                   <div className="max-h-64 overflow-y-auto space-y-2">
                     {notifications.slice(0, 6).map((notif) => (
-                      <div key={notif.id} className="p-2.5 rounded-xl bg-slate-50 border border-slate-100 text-xs">
-                        <div className="flex items-center justify-between font-semibold text-slate-900">
+                      <div key={notif.id} className="p-2.5 rounded-lg bg-[#F1F5F0] border border-[#E4E9E1] text-xs">
+                        <div className="flex items-center justify-between font-semibold text-[#1F2937]">
                           <span>{notif.title}</span>
-                          <span className="text-[0.65rem] text-slate-600">{notif.severity}</span>
+                          <span className="text-[0.65rem] text-[#738096]">{notif.severity}</span>
                         </div>
-                        <p className="text-slate-600 text-[0.7rem] mt-0.5">{notif.message}</p>
+                        <p className="text-[#586579] text-[0.7rem] mt-0.5">{notif.message}</p>
                       </div>
                     ))}
                     {notifications.length === 0 && (
-                      <p className="text-xs text-slate-600 text-center py-4">No active notifications</p>
+                      <p className="text-xs text-[#738096] text-center py-4">No active notifications</p>
                     )}
                   </div>
                 </div>
@@ -365,7 +261,7 @@ export function TopBar({ onOpenCommand, onOpenNav }: TopBarProps) {
             <button
               aria-expanded={menuOpen}
               aria-haspopup="menu"
-              className="relative inline-flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full border border-slate-200 bg-slate-100 text-xs font-bold text-slate-700 shadow-xs transition hover:border-slate-300"
+              className="relative inline-flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full border border-[#E4E9E1] bg-[#F1F5F0] text-xs font-bold text-[#1F2937] shadow-xs transition hover:border-[#D3DBD0]"
               onClick={() => setMenuOpen((prev) => !prev)}
               type="button"
             >

@@ -27,7 +27,7 @@ export function ExecutiveWorkspace({
   return (
     <div className="space-y-6" data-section-id="executive-workspace">
       <div className="grid gap-5 xl:grid-cols-[1.18fr_0.82fr]">
-        <GlassPanel as="section" tone="gold" data-section-id="executive-summary">
+        <GlassPanel as="section" data-section-id="executive-summary">
           <SectionTitle
             description="Executive mode suppresses telemetry spam and surfaces decisions, exposure, compliance, and continuity."
             eyebrow="Boardroom intelligence"
@@ -45,27 +45,27 @@ export function ExecutiveWorkspace({
               ["Compliance score", `${soc.live?.health_score ?? metrics.systemHealth}% security posture with audit-ready SOC telemetry.`],
               ["Resilience score", `${resilience}% resilience posture across security, response, and digital twin signals.`],
             ].map(([label, value]) => (
-              <div className="rounded-xl border border-slate-200 bg-slate-50/60 p-4 shadow-sm dark:border-white/[0.08] dark:bg-white/[0.03]" key={label}>
-                <p className="font-mono text-[0.66rem] font-bold uppercase tracking-[0.2em] text-slate-500 dark:text-amber-200/60">{label}</p>
-                <p className="mt-2 text-sm leading-6 text-slate-700 dark:text-white/70">{value}</p>
+              <div className="rounded-xl border border-[#E4E9E1] bg-[#F1F5F0] p-4 shadow-xs" key={label}>
+                <p className="font-mono text-[0.66rem] font-bold uppercase tracking-[0.18em] text-[#65A30D]">{label}</p>
+                <p className="mt-2 text-sm leading-6 text-[#1F2937]">{value}</p>
               </div>
             ))}
           </div>
         </GlassPanel>
 
-        <GlassPanel as="aside" tone="quiet" data-section-id="executive-actions">
+        <GlassPanel as="aside" data-section-id="executive-actions">
           <SectionTitle eyebrow="Strategic recommendations" title="Next board actions" />
           <div className="mt-5 space-y-3">
             {(activeIncidents.length ? activeIncidents : incidents.slice(0, 2)).map((incident, index) => (
-              <div className="rounded-xl border border-slate-200 bg-slate-50/60 p-4 shadow-sm dark:border-white/[0.08] dark:bg-white/[0.02]" key={`${incident.id}-${index}`}>
-                <p className="font-display text-sm font-semibold tracking-tight text-slate-900 dark:text-white">{getIncidentTitle(incident)}</p>
-                <p className="mt-1.5 text-xs leading-5 text-slate-600 dark:text-white/60">
+              <div className="rounded-xl border border-[#E4E9E1] bg-[#F1F5F0] p-4 shadow-xs" key={`${incident.id}-${index}`}>
+                <p className="font-display text-sm font-semibold tracking-tight text-[#1F2937]">{getIncidentTitle(incident)}</p>
+                <p className="mt-1.5 text-xs leading-5 text-[#586579]">
                   {incident.recommended_action || incident.ai_summary || "Maintain executive monitoring and keep response reserves staged."}
                 </p>
               </div>
             ))}
             {!incidents.length ? (
-              <div className="rounded-xl border border-slate-200 bg-slate-50/60 p-4 text-xs leading-5 text-slate-500 dark:border-white/[0.08] dark:bg-white/[0.03] dark:text-white/54">
+              <div className="rounded-xl border border-[#E4E9E1] bg-[#F1F5F0] p-4 text-xs leading-5 text-[#586579]">
                 No incident-driven executive actions. Continue readiness monitoring.
               </div>
             ) : null}
@@ -90,13 +90,13 @@ export function ExecutiveWorkspace({
             ["Downtime prevented", `$${(executiveLive.downtimePrevented / 1_000_000).toFixed(1)}M`, 82],
             ["Recovery ETA", `${executiveLive.nextRecoveryEta}m`, 74],
           ].map(([label, value, score]) => (
-            <div className="rounded-xl border border-slate-200 bg-slate-50/60 p-4 shadow-sm dark:border-white/[0.08] dark:bg-white/[0.03]" key={label}>
+            <div className="rounded-xl border border-[#E4E9E1] bg-[#F1F5F0] p-4 shadow-xs" key={label}>
               <div className="flex items-center justify-between">
-                <p className="font-display text-sm font-semibold text-slate-800 dark:text-white">{label}</p>
-                <p className="font-mono text-sm font-bold text-slate-900 dark:text-cyan-200">{String(value)}</p>
+                <p className="font-display text-sm font-semibold text-[#1F2937]">{label}</p>
+                <p className="font-mono text-sm font-bold text-[#1F2937]">{String(value)}</p>
               </div>
-              <div className="mt-3.5 h-1.5 overflow-hidden rounded-full bg-slate-200 dark:bg-white/10">
-                <div className="h-full rounded-full bg-slate-800 dark:bg-gradient-to-r dark:from-blue-400 dark:via-cyan-300 dark:to-emerald-300" style={{ width: `${Number(score)}%` }} />
+              <div className="mt-3.5 h-1.5 overflow-hidden rounded-full bg-[#E4E9E1]">
+                <div className="h-full rounded-full bg-[#84CC16]" style={{ width: `${Number(score)}%` }} />
               </div>
             </div>
           ))}

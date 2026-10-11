@@ -55,19 +55,15 @@ export const AppShell = memo(function AppShell({ children }: { children: React.R
   }, [sidebarCollapsed]);
 
   const shellStyle = {
-    "--sentra-sidebar-width": sidebarCollapsed ? "88px" : "280px",
+    "--sentra-sidebar-width": sidebarCollapsed ? "72px" : "240px",
   } as CSSProperties;
 
   return (
     <div
-      className="app-container sentra-auth-shell relative isolate h-screen overflow-hidden text-[var(--text)]"
+      className="app-container sentra-auth-shell relative isolate flex h-screen w-full overflow-hidden bg-[#F7F9F5] text-[#1F2937]"
       data-sidebar={sidebarCollapsed ? "collapsed" : "expanded"}
       style={shellStyle}
     >
-      <div className="grid-layer" ref={gridRef} />
-      <div className="depth-glow" />
-      <div className="cursor-glow" />
-
       <AppSidebar
         collapsed={sidebarCollapsed}
         mobileOpen={mobileNavOpen}
@@ -76,7 +72,7 @@ export const AppShell = memo(function AppShell({ children }: { children: React.R
         onOpenCommand={dispatchCommandPaletteOpen}
       />
 
-      <div className="sentra-shell-main relative z-10 flex h-full min-w-0 flex-col">
+      <div className="sentra-shell-main relative z-10 flex h-full min-w-0 flex-1 flex-col overflow-hidden bg-[#F7F9F5]">
         <TopBar
           onOpenCommand={dispatchCommandPaletteOpen}
           onOpenNav={() => setMobileNavOpen(true)}

@@ -71,23 +71,23 @@ function HeroMetricPill({ stat }: { stat: HeroStat }) {
   const toneBadges = {
     calm: {
       tag: "NOMINAL",
-      badgeClass: "bg-slate-100 text-slate-700 border-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:border-slate-700",
-      dotClass: "bg-slate-400 dark:bg-slate-500",
+      badgeClass: "bg-[#F1F5F0] text-[#3F6212] border-[#E4E9E1]",
+      dotClass: "bg-[#84CC16]",
     },
     danger: {
       tag: "ELEVATED",
-      badgeClass: "bg-rose-50 text-rose-700 border-rose-200 dark:bg-rose-950/40 dark:text-rose-400 dark:border-rose-800",
-      dotClass: "bg-rose-500",
+      badgeClass: "bg-[#FEF2F2] text-[#991B1B] border-[#FEE2E2]",
+      dotClass: "bg-[#EF4444]",
     },
     success: {
       tag: "OPTIMAL",
-      badgeClass: "bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-400 dark:border-emerald-800",
-      dotClass: "bg-emerald-500",
+      badgeClass: "bg-[#F1F8E5] text-[#3F6212] border-[#DCFCE7]",
+      dotClass: "bg-[#84CC16]",
     },
     warning: {
       tag: "CAUTION",
-      badgeClass: "bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-950/40 dark:text-amber-400 dark:border-amber-800",
-      dotClass: "bg-amber-500",
+      badgeClass: "bg-[#FFFBEB] text-[#92400E] border-[#FEF3C7]",
+      dotClass: "bg-[#F59E0B]",
     },
   };
 
@@ -96,10 +96,10 @@ function HeroMetricPill({ stat }: { stat: HeroStat }) {
   return (
     <div
       aria-label={`${stat.label}: ${stat.prefix ?? ""}${stat.value}${stat.suffix ?? ""}`}
-      className="sentra-phase7-kpi-pill sentra-phase12-kpi-pill relative flex flex-col justify-between overflow-hidden rounded-xl border border-slate-200 bg-white p-4.5 shadow-sm transition-all hover:border-slate-300 hover:shadow dark:border-slate-800 dark:bg-slate-900 dark:hover:border-slate-700"
+      className="sentra-phase7-kpi-pill sentra-phase12-kpi-pill relative flex flex-col justify-between overflow-hidden rounded-xl border border-[#E4E9E1] bg-white p-5 shadow-xs transition-all hover:border-[#D3DBD0] hover:shadow-sm"
     >
       <div className="flex items-center justify-between gap-2">
-        <p className="font-sans text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+        <p className="font-sans text-xs font-semibold uppercase tracking-wider text-[#586579]">
           {stat.label}
         </p>
         <span
@@ -110,7 +110,7 @@ function HeroMetricPill({ stat }: { stat: HeroStat }) {
         </span>
       </div>
       <div className="mt-3 flex items-baseline justify-between">
-        <p className="font-mono text-3xl font-bold tracking-tight text-slate-900 tabular-nums dark:text-white">
+        <p className="font-mono text-3xl font-bold tracking-tight text-[#1F2937] tabular-nums">
           {stat.prefix}
           <CountUp
             decimals={stat.decimals ?? 0}
@@ -122,9 +122,9 @@ function HeroMetricPill({ stat }: { stat: HeroStat }) {
           {stat.suffix}
         </p>
       </div>
-      <div className="mt-2.5 flex items-center justify-between border-t border-slate-100 pt-2 text-[0.68rem] text-slate-500 dark:border-slate-800/80 dark:text-slate-400">
+      <div className="mt-3 flex items-center justify-between border-t border-[#F1F5F0] pt-2 text-[0.68rem] text-[#738096]">
         <span>Verified telemetry</span>
-        <span className="font-mono font-medium text-slate-600 dark:text-slate-300">Live sync</span>
+        <span className="font-mono font-medium text-[#586579]">Live sync</span>
       </div>
     </div>
   );
