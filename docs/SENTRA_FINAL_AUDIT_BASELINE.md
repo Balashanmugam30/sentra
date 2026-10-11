@@ -46,13 +46,12 @@
   2. `tests/test_enterprise_platform.py::test_incident_creation_and_logout` (assert 401 == 200)
 - **Root Cause Analysis:**
   - In `test_enterprise_platform.py`, helper `_auth_headers()` calls `client.post("/auth/bootstrap-admin", ...)` with password `"StrongPass123!"` followed by `client.post("/auth/login", ...)`.
-  - On the Linux CI runner, test discovery executed `tests/test_operational_e2e_path.py` prior to `test_enterprise_platform.py`.
-  - In `test_operational_e2e_path.py` (and `test_evidence_prediction_contracts.py`), the fixture seeded `admin@sentra.local` with `"AdminPass123!"`.
-  - Consequently, in `test_enterprise_platform.py`, `/auth/bootstrap-admin` returned `409 Conflict` (user already existed).
-  - The subsequent login request attempted password `"StrongPass123!"`, which conflicted with the seeded hash `"AdminPass123!"`, resulting in HTTP 401 Unauthorized.
+  - When running in full test suites, earlier tests (such as `test_demo_auth_and_session.py::test_bootstrap_admin_secret_enforced`) create a `super_admin` account.
+  - Under Sentra's zero-trust security rules, `/auth/bootstrap-admin` enforces singleton super_admin creation and returns `409 Conflict`.
+  - Because `bootstrap-admin` was rejected, `admin@sentra.local` was never created in `auth_store`, causing subsequent login requests to fail with HTTP 401 Unauthorized.
 - **Remediation Applied:**
-  1. Harmonized password in `test_operational_e2e_path.py` and `test_evidence_prediction_contracts.py` to use `"StrongPass123!"`.
-  2. Enhanced `_auth_headers()` in `test_enterprise_platform.py` to gracefully fallback to `"AdminPass123!"` if an existing fixture seeded it, guaranteeing deterministic execution regardless of pytest file ordering.
+  1. Harmonized passwords in `test_operational_e2e_path.py` and `test_evidence_prediction_contracts.py` to use `"StrongPass123!"`.
+  2. Hardened `_auth_headers()` in `test_enterprise_platform.py` to guarantee `admin@sentra.local` exists in `auth_store` with role `super_admin` and verified password hash if `/auth/bootstrap-admin` returns 409.
   3. Verified locally with `python -m pytest tests -q` — **75 passed, 0 failed (100%)**.
 
 ---

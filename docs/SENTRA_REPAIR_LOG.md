@@ -59,11 +59,11 @@ During the functional audit and data integrity verification, all identified bugs
   - `tests/test_enterprise_platform.py`
   - `tests/test_operational_e2e_path.py`
   - `tests/test_evidence_prediction_contracts.py`
-- **Issue Discovered:** GitHub Actions CI run `38137291619` failed in `tests/test_enterprise_platform.py` with `assert 401 == 200` on `/auth/login`.
-- **Root Cause:** When running on Linux CI runners, `test_operational_e2e_path.py` executed prior to `test_enterprise_platform.py`, creating `admin@sentra.local` with password `"AdminPass123!"`. In `test_enterprise_platform.py`, `/auth/bootstrap-admin` returned `409 Conflict`, and subsequent login using `"StrongPass123!"` failed with HTTP 401.
+- **Issue Discovered:** GitHub Actions CI run `38137291619` and `38142421706` failed in `tests/test_enterprise_platform.py` with `assert 401 == 200` on `/auth/login`.
+- **Root Cause:** When running in pytest suite discovery, prior tests (such as `test_demo_auth_and_session.py::test_bootstrap_admin_secret_enforced`) created a user with role `super_admin`. Under zero-trust security rules, `/auth/bootstrap-admin` enforces singleton super_admin creation and returns `409 Conflict`. Because `bootstrap-admin` was rejected, `admin@sentra.local` was never created in `auth_store`, causing `/auth/login` to fail with HTTP 401.
 - **Action Taken:**
   1. Harmonized fixture passwords in `test_operational_e2e_path.py` and `test_evidence_prediction_contracts.py` to use `"StrongPass123!"`.
-  2. Enhanced `_auth_headers()` in `test_enterprise_platform.py` with automatic fallback to `"AdminPass123!"` if previously seeded by other tests.
+  2. Hardened `_auth_headers()` in `test_enterprise_platform.py` to guarantee `admin@sentra.local` exists in `auth_store` with role `super_admin` and verified password hash if `/auth/bootstrap-admin` returns 409 due to prior test execution.
 - **Verification:** Ran `python -m pytest tests -q` — **75 passed, 0 failed (100%)**.
 - **Status:** **RESOLVED**
 

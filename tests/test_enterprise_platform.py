@@ -15,6 +15,9 @@ client = TestClient(app)
 
 
 def _auth_headers() -> dict[str, str]:
+    from app.auth.security import hash_password
+    from app.auth.store import auth_store
+
     bootstrap = client.post(
         "/auth/bootstrap-admin",
         json={
@@ -24,15 +27,24 @@ def _auth_headers() -> dict[str, str]:
         },
     )
     assert bootstrap.status_code in {200, 409}
+    user = auth_store.get_user_by_email("admin@sentra.local")
+    if not user:
+        auth_store.create_user(
+            name="Sentra Admin",
+            email="admin@sentra.local",
+            password_hash=hash_password("StrongPass123!"),
+            role="super_admin",
+        )
+    else:
+        auth_store.update_user(
+            str(user["user_id"]),
+            password_hash=hash_password("StrongPass123!"),
+            role="super_admin",
+        )
     login = client.post(
         "/auth/login",
         json={"email": "admin@sentra.local", "password": "StrongPass123!"},
     )
-    if login.status_code == 401:
-        login = client.post(
-            "/auth/login",
-            json={"email": "admin@sentra.local", "password": "AdminPass123!"},
-        )
     assert login.status_code == 200
     token = login.json()["access_token"]
     return {"Authorization": f"Bearer {token}"}
