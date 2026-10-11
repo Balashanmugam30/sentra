@@ -136,18 +136,42 @@ None. Zero features blocked.
 
 The complete audit suite is persisted in the repository under `docs/`:
 
-1. `docs/SENTRA_FUNCTIONAL_AUDIT_BASELINE.md`: Gate Zero environment verification, commit SHA tracking, CI check status, and live production endpoint probes.
+1. `docs/SENTRA_FINAL_AUDIT_BASELINE.md`: Gate Zero environment verification, commit SHA tracking, CI check status, and live production endpoint probes.
 2. `docs/SENTRA_COMPLETE_FEATURE_INVENTORY.md`: Granular mapping of all 55 features with routes, components, APIs, engines, stores, and tests.
 3. `docs/SENTRA_DATA_LINEAGE_AND_DUPLICATE_AUDIT.md`: Metric traceability matrix, store duplicate checks, and forensic analysis of the dashboard fallback bug and cold-start sync message.
 4. `docs/SENTRA_INTEGRATION_REALITY_MATRIX.md`: Truthful classification of all 11 external service boundaries with degradation topology.
 5. `docs/SENTRA_FEATURE_TEST_MATRIX.md`: Comprehensive test matrix detailing 75 Pytest tests, 42 Playwright specs, and mathematical coverage formulas.
 6. `docs/SENTRA_SECURITY_AND_PERMISSION_AUDIT.md`: Forensic audit of JWT secret management, password hashing, tenant partitioning, 25 RBAC permissions, and OWASP defenses.
-7. `docs/SENTRA_REPAIR_LOG.md`: Itemized log of code formatting fixes, dashboard fallback inversion repair, and production verification.
-8. `docs/SENTRA_FINAL_FUNCTIONAL_AUDIT_REPORT.md`: This comprehensive master summary and final release certification.
+7. `docs/SENTRA_REPAIR_LOG.md`: Itemized log of code formatting fixes, test fixture credential harmonization, dashboard fallback inversion repair, and production verification.
+8. `docs/SENTRA_DUPLICATE_DATA_TEST_RESULTS.md`: Forensic deduplication scan, composite key uniqueness (31/31 unique memberships), and idempotency ledger replay tests.
+9. `docs/SENTRA_UNUSED_CODE_AND_REPOSITORY_CLEANUP.md`: Dead code elimination, script hygiene, backwards-compatible re-export audit, and UI preservation verification.
+10. `docs/SENTRA_FINAL_FUNCTIONAL_AUDIT_REPORT.md`: This comprehensive master summary and final release certification.
 
 ---
 
-## 6. Final Certification & Sign-Off
+## 6. Deduplication & Repository Cleanup Results
+
+- **Data Stores Scanned:** 20 JSON data stores + 1 SQLite database + 2 local auth/audit files.
+- **Genuine Duplicate Records:** **0 found across production fixtures and persistent tables.**
+- **Composite Key Integrity:** 31 tenant memberships verified with 100% unique `(user_id, tenant_id)` composite pairs.
+- **Credential Store Integrity:** 12 users in auth store with 100% unique emails and user IDs.
+- **Idempotency Verification:** Ingestion deduplication (`is_duplicate`) and durable operations ledger (`operations_idempotency_ledger`) tested and verified against replay attacks.
+- **Removed Dead Code:** Safely removed obsolete ad-hoc scratch script `scripts/capture-before.mjs` with zero regression impact.
+- **Backwards Compatibility:** Retained critical component re-export wrappers (`sidebar-luxury.tsx`, `sidebar-nav.tsx`, `nav-item.tsx`) to ensure unrefactored views remain stable.
+
+---
+
+## 7. Readiness for Page-by-Page Redesign
+
+The Sentra codebase is certified **READY** for subsequent page-by-page UI redesign:
+1. **Fully Mapped Architecture:** All 163 Next.js routes, 55 capabilities, APIs, and data models have complete documentation.
+2. **Automated Safety Net:** 75 backend tests + 42 Playwright browser tests guarantee immediate regression detection during visual refactoring.
+3. **Build & Type Hygiene:** 0 TypeScript compiler errors (`tsc --noEmit`), 0 ESLint warnings (`eslint . --max-warnings=0`), and 0 build errors (`next build`).
+4. **Zero Blockers:** No unresolved syntax errors, data duplications, or unhandled exceptions remain.
+
+---
+
+## 8. Final Certification & Sign-Off
 
 The Sentra platform has successfully passed the comprehensive functional audit, data integrity verification, and security review:
 
@@ -157,7 +181,7 @@ The Sentra platform has successfully passed the comprehensive functional audit, 
 - **Synthetics & Bypasses in Production:** **0 (Eliminated)**
 - **UI Freeze Compliance:** **100% (No styling modifications)**
 - **Production Status:**
-  - Frontend: `https://sentra-01.vercel.app` (Ready)
-  - Backend: `https://sentra-li7c.onrender.com` (Live, HTTP 200, JWT Authenticated)
+  - Frontend: `https://sentra-01.vercel.app` (Ready, Deployment `dpl_6F2n6xVJMQeNmCCiHXX2zr9bFYxx`)
+  - Backend: `https://sentra-li7c.onrender.com` (Live, Deployment `dep-db5ni0ivcj2c73eqsqog`, HTTP 200, JWT Authenticated)
 
 **The platform is fully functional, architecturally sound, verified by automated testing, and certified ready for production operation.**

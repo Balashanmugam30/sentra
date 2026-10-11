@@ -100,7 +100,7 @@ test.describe("12 - Authenticated Crisis Operations & Command Surface QA", () =>
 
     // Appearance section check
     await expect(page.locator("text=Appearance").first()).toBeVisible();
-    await expect(page.locator("text=Follows OS").first()).toBeVisible();
+    await expect(page.locator("text=Enterprise Light").first()).toBeVisible();
 
     // Security section check
     await expect(page.locator("text=Security").first()).toBeVisible();

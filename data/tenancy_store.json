@@ -430,6 +430,83 @@
       "invited_by": "system",
       "joined_at": "2026-10-09T13:25:37.845640+00:00",
       "active": true
+    },
+    {
+      "user_id": "USR-5d0036e49b",
+      "tenant_id": "TEN-BALA-UNI",
+      "email": "admin@sentra.demo",
+      "name": "Sentra Admin",
+      "role": "owner",
+      "department": "Command",
+      "invited_by": "system",
+      "joined_at": "2026-10-11T13:11:44.889767+00:00",
+      "active": true
+    },
+    {
+      "user_id": "USR-5d0036e49b",
+      "tenant_id": "TEN-BALA-MFG",
+      "email": "admin@sentra.demo",
+      "name": "Sentra Admin",
+      "role": "owner",
+      "department": "Command",
+      "invited_by": "system",
+      "joined_at": "2026-10-11T13:11:44.889804+00:00",
+      "active": true
+    },
+    {
+      "user_id": "USR-5d0036e49b",
+      "tenant_id": "TEN-BALA-HOSP",
+      "email": "admin@sentra.demo",
+      "name": "Sentra Admin",
+      "role": "owner",
+      "department": "Command",
+      "invited_by": "system",
+      "joined_at": "2026-10-11T13:11:44.889816+00:00",
+      "active": true
+    },
+    {
+      "user_id": "USR-2e83ff26b0",
+      "tenant_id": "TEN-BALA-HOSP",
+      "email": "manager@sentra.demo",
+      "name": "Security Manager",
+      "role": "security_admin",
+      "department": "Security",
+      "invited_by": "system",
+      "joined_at": "2026-10-11T13:11:45.606790+00:00",
+      "active": true
+    },
+    {
+      "user_id": "USR-3d896ab12e",
+      "tenant_id": "TEN-BALA-UNI",
+      "email": "staff@sentra.demo",
+      "name": "Zone Staff",
+      "role": "operator",
+      "department": "Zone 3",
+      "invited_by": "system",
+      "joined_at": "2026-10-11T13:11:46.133449+00:00",
+      "active": true
+    },
+    {
+      "user_id": "USR-b6b7aae903",
+      "tenant_id": "TEN-BALA-UNI",
+      "email": "responder@sentra.demo",
+      "name": "Responder Team",
+      "role": "operator",
+      "department": "Field",
+      "invited_by": "system",
+      "joined_at": "2026-10-11T13:11:46.818339+00:00",
+      "active": true
+    },
+    {
+      "user_id": "USR-985cd3b5c8",
+      "tenant_id": "TEN-BALA-UNI",
+      "email": "analyst@sentra.demo",
+      "name": "Analytics Specialist",
+      "role": "analyst",
+      "department": "Analytics",
+      "invited_by": "system",
+      "joined_at": "2026-10-11T13:11:47.330245+00:00",
+      "active": true
     }
   ],
   "usage": [
@@ -476,7 +553,12 @@
     "USR-6e226092c1": "TEN-BALA-UNI",
     "USR-8e2412a2f7": "TEN-BALA-UNI",
     "USR-01afe5b285": "TEN-BALA-UNI",
-    "USR-03fd8a004d": "TEN-BALA-UNI"
+    "USR-03fd8a004d": "TEN-BALA-UNI",
+    "USR-5d0036e49b": "TEN-BALA-UNI",
+    "USR-2e83ff26b0": "TEN-BALA-HOSP",
+    "USR-3d896ab12e": "TEN-BALA-UNI",
+    "USR-b6b7aae903": "TEN-BALA-UNI",
+    "USR-985cd3b5c8": "TEN-BALA-UNI"
   },
   "invites": [],
   "events": []

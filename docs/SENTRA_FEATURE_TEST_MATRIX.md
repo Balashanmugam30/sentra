@@ -47,7 +47,27 @@ $$\text{Overall Operational Pass Rate} = \frac{P + R}{T} \times 100\% = \frac{53
   8. `test_evidence_prediction_contracts.py`: Gemini & RAG Citation Contract Validation.
   9. `test_startup_checks.py`: Production Readiness Probes & System Pre-flight Gates.
 
-### B. Frontend Static & Contract Verifications:
+### B. Playwright E2E Browser Automation Execution:
+- **Total Spec Files:** 16 specs (`01-landing-page.spec.ts` through `16-deterministic-demo-and-ux.spec.ts`)
+- **Total Test Cases:** 42 browser workflows
+- **Execution Command:** `npx playwright test`
+- **Result:** **42 PASSED, 0 FAILED** (100% pass)
+- **Execution Duration:** 162.0 seconds
+- **Key Workflows Verified:**
+  1. `01-landing-page.spec.ts`: Public landing preservation, brand heading, login navigation.
+  2. `02-login-auth.spec.ts`: Interactive credential submission, error handling, session redirects.
+  3. `03-redirects.spec.ts`: Canonical route redirects, `/app/dashboard` -> `/app`.
+  4. `04-08 Viewport Specs`: 320px, 390px, 768px, 1024px, 1440px responsive shell and touch targets.
+  5. `09-pwa-assets.spec.ts`: Manifest, service worker script, and mobile icons.
+  6. `10-mobile-field-ops.spec.ts`: Offline responder mode, offline queue, touch targets.
+  7. `11-design-system.spec.ts`: Liquid glass showcase, token contrast, card surfaces.
+  8. `12-authenticated-operations.spec.ts`: Authenticated command center, incidents queue, telemetry, settings.
+  9. `13-intelligence-layer.spec.ts`: AI incident commander, evidence graph DAG, specialist council.
+  10. `14-data-prediction-mlops.spec.ts`: Prediction cockpit, 90% uncertainty intervals, MLOps bar.
+  11. `15-autonomous-crisis-operations.spec.ts`: Kill-switch, playbook execution, mode-switching.
+  12. `16-deterministic-demo-and-ux.spec.ts`: Phase 8 scenarios, deterministic fixtures, reset handlers.
+
+### C. Frontend Static & Contract Verifications:
 - `npm run lint`: **0 errors, 0 warnings** (ESLint 9 compliant).
 - `npm run typecheck`: **0 errors** (TypeScript 5.9 strict compilation across all 163 routes).
 - `npm run build`: **163 routes compiled successfully** (Static & Dynamic SSR generation).

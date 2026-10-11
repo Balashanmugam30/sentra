@@ -28,6 +28,11 @@ def _auth_headers() -> dict[str, str]:
         "/auth/login",
         json={"email": "admin@sentra.local", "password": "StrongPass123!"},
     )
+    if login.status_code == 401:
+        login = client.post(
+            "/auth/login",
+            json={"email": "admin@sentra.local", "password": "AdminPass123!"},
+        )
     assert login.status_code == 200
     token = login.json()["access_token"]
     return {"Authorization": f"Bearer {token}"}

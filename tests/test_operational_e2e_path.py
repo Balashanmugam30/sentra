@@ -49,7 +49,7 @@ def initiator_headers():
         admin = auth_store.create_user(
             name="Sentra Admin",
             email="admin@sentra.local",
-            password_hash=hash_password("AdminPass123!"),
+            password_hash=hash_password("StrongPass123!"),
             role="super_admin",
         )
     token, _ = create_access_token(
